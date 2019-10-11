@@ -11,11 +11,15 @@ import com.vitaliimalone.simpletodo.domain.models.Note
 class NoteRepository(
         private val noteLocalDataSource: NoteLocalDataSource
 ) {
+    fun getAllNotes(): LiveData<PagedList<Note>> {
+        return noteLocalDataSource.getAllNotes().map(NoteMapper::map).toLiveData(50)
+    }
+
     suspend fun addNote(note: Note) {
         noteLocalDataSource.addNote(NoteEntityMapper.map(note))
     }
 
-    fun getAllNotes(): LiveData<PagedList<Note>> {
-        return noteLocalDataSource.getAllNotes().map(NoteMapper::map).toLiveData(50)
+    suspend fun updateNote(note: Note) {
+        noteLocalDataSource.updateNote(NoteEntityMapper.map(note))
     }
 }

@@ -4,33 +4,44 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="60dp"
     >
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/checkImageView"
-        android:layout_width="0dp"
+    <FrameLayout
+        android:id="@+id/checkContainer"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:background="@drawable/ic_circle_black"
-        android:padding="8dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_done_black"
-        />
+        >
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/checkImageView"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_circle_black"
+            app:srcCompat="@drawable/ic_check_circle"
+            />
+
+    </FrameLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/titleTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/s_spacing"
         android:ellipsize="end"
         android:maxLines="2"
-        android:paddingEnd="8dp"
         android:text="@{note.title}"
-        android:textSize="20dp"
+        android:textColor="@color/dark_text_color"
+        android:textSize="@dimen/m_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/checkImageView"
+        app:layout_constraintStart_toEndOf="@id/checkContainer"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@tools:sample/lorem/random"
         />

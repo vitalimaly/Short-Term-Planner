@@ -8,11 +8,15 @@ import com.vitaliimalone.simpletodo.domain.models.Note
 class NoteInteractor(
         private val noteRepository: NoteRepository
 ) {
+    fun getAllNotes(): LiveData<PagedList<Note>> {
+        return noteRepository.getAllNotes()
+    }
+
     suspend fun addNote(note: Note) {
         noteRepository.addNote(note)
     }
 
-    fun getAllNotes(): LiveData<PagedList<Note>> {
-        return noteRepository.getAllNotes()
+    suspend fun updateNote(note: Note) {
+        noteRepository.updateNote(note)
     }
 }

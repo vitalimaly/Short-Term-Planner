@@ -8,20 +8,18 @@ import com.vitaliimalone.simpletodo.data.repository.local.database.NoteDatabase
 import com.vitaliimalone.simpletodo.domain.interactors.NoteInteractor
 import com.vitaliimalone.simpletodo.presentation.home.HomeViewModel
 import org.koin.android.ext.koin.androidContext
-import org.koin.androidx.viewmodel.ext.koin.viewModel
-import org.koin.dsl.module.module
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.dsl.module
 
-val presentationModule = module {
+private val presentation = module {
     viewModel { HomeViewModel(get()) }
 }
-val domainModule = module {
+private val domain = module {
     single { NoteInteractor(get()) }
 }
-val data = module {
+private val data = module {
     single { NoteRepository(get()) }
     single { Notificator(androidContext()) }
-}
-val localDataSourceModule = module {
     single { NoteLocalDataSource(get()) }
     single { get<NoteDatabase>().noteDao() }
     single {
@@ -30,4 +28,4 @@ val localDataSourceModule = module {
                 .build()
     }
 }
-val appModule = listOf(localDataSourceModule, data, domainModule, presentationModule)
+val appModule = listOf(presentation, data, domain)
