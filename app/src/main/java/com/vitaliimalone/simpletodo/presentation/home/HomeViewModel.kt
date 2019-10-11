@@ -1,9 +1,8 @@
 package com.vitaliimalone.simpletodo.presentation.home
 
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.PagedList
 import com.vitaliimalone.simpletodo.domain.interactors.NoteInteractor
 import com.vitaliimalone.simpletodo.domain.models.Note
 import kotlinx.coroutines.launch
@@ -12,8 +11,12 @@ import java.util.*
 class HomeViewModel(
         private val noteInteractor: NoteInteractor
 ) : ViewModel() {
-    fun getAllNotes(): LiveData<PagedList<Note>> {
-        return noteInteractor.getAllNotes()
+    val notes by lazy { MutableLiveData<List<Note>>() }
+
+    fun getAllNotes() {
+        viewModelScope.launch {
+            notes.value = noteInteractor.getAllNotes()
+        }
     }
 
     fun addNote(title: String) {

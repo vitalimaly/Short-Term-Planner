@@ -1,9 +1,8 @@
 package com.vitaliimalone.simpletodo.presentation.home
 
 import android.os.Bundle
-import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
-import androidx.paging.PagedList
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.vitaliimalone.simpletodo.R
@@ -13,7 +12,6 @@ import com.vitaliimalone.simpletodo.presentation.home.common.NotesAdapter
 import com.vitaliimalone.simpletodo.presentation.utils.DateUtils
 import com.vitaliimalone.simpletodo.presentation.utils.forceShowKeyboard
 import kotlinx.android.synthetic.main.home_fragment.*
-import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment(R.layout.home_fragment) {
@@ -25,11 +23,12 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
         setupObservers()
         setupClickListeners()
         setupViews()
+        viewModel.getAllNotes()
     }
 
     private fun setupObservers() {
-        viewModel.getAllNotes().observe(viewLifecycleOwner, Observer<PagedList<Note>?> {
-            notesAdapter.submitList(it)
+        viewModel.notes.observe(viewLifecycleOwner, Observer {
+            notesAdapter.notes = it
         })
     }
 
@@ -39,15 +38,12 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
             titleEditText.postDelayed({ titleEditText?.requestFocus() }, 1000)
         }
         sendButton.setOnClickListener { viewModel.addNote(titleEditText.text.toString()) }
-        KeyboardVisibilityEvent.setEventListener(requireActivity()) {
-            if (it) addFab.hide() else addFab.show()
-            addNoteContainer.isVisible = it
-        }
     }
 
     private fun setupViews() {
         notesRecyclerView.adapter = notesAdapter
-        notesRecyclerView.addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
+        notesRecyclerView.addItemDecoration(DividerItemDecoration(requireContext(),
+                RecyclerView.VERTICAL))
         dateTextView.text = DateUtils.getFullCurrentDate()
     }
 
