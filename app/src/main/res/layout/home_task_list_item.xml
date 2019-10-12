@@ -36,7 +36,7 @@
         android:layout_marginEnd="@dimen/s_spacing"
         android:ellipsize="end"
         android:maxLines="2"
-        android:text="@{note.title}"
+        android:text="@{task.title}"
         android:textColor="@color/dark_text_color"
         android:textSize="@dimen/m_text_size"
         app:layout_constraintBottom_toBottomOf="parent"

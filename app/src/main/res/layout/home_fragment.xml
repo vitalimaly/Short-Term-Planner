@@ -19,9 +19,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/m_spacing"
-            android:text="Today"
             android:textColor="@color/white"
             android:textSize="@dimen/day_title_text_size"
+            tools:text="Today"
             />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -37,13 +37,13 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/notesRecyclerView"
+        android:id="@+id/tasksRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@id/addNoteContainer"
+        app:layout_constraintBottom_toTopOf="@id/addTaskContainer"
         app:layout_constraintTop_toBottomOf="@id/appbar"
-        tools:listitem="@layout/home_note_list_item"
+        tools:listitem="@layout/home_task_list_item"
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -57,14 +57,14 @@
         />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/addNoteContainer"
+        android:id="@+id/addTaskContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/add_note_dialog_bg"
+        android:background="@drawable/add_task_dialog_bg"
+        android:elevation="8dp"
         android:paddingTop="30dp"
         android:paddingBottom="10dp"
         android:visibility="gone"
-        android:elevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         >
 
@@ -84,12 +84,12 @@
             style="@style/Base.Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add"
             android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0"
+            tools:text="Add"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

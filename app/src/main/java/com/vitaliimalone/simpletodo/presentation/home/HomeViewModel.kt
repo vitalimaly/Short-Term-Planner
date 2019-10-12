@@ -3,41 +3,42 @@ package com.vitaliimalone.simpletodo.presentation.home
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vitaliimalone.simpletodo.domain.interactors.NoteInteractor
-import com.vitaliimalone.simpletodo.domain.models.Note
+import com.vitaliimalone.simpletodo.domain.models.Task
+import com.vitaliimalone.simpletodo.domain.usecases.AddTaskUseCase
+import com.vitaliimalone.simpletodo.domain.usecases.GetTasksUseCase
+import com.vitaliimalone.simpletodo.domain.usecases.UpdateTaskUseCase
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
 import java.util.*
 
 class HomeViewModel(
-        private val noteInteractor: NoteInteractor
+        private val getTasksUseCase: GetTasksUseCase,
+        private val addTaskUseCase: AddTaskUseCase,
+        private val updateTaskUseCase: UpdateTaskUseCase
 ) : ViewModel() {
-    val notes by lazy { MutableLiveData<List<Note>>() }
+    val task by lazy { MutableLiveData<List<Task>>() }
 
-    fun getAllNotes() {
+    fun getAllTasks() {
         viewModelScope.launch {
-            notes.value = noteInteractor.getAllNotes()
+            task.value = getTasksUseCase.getAllTasks()
         }
     }
 
-    fun addNote(title: String) {
+    fun addTask(title: String) {
         viewModelScope.launch {
-            val note = createNote(title)
-            noteInteractor.addNote(note)
+            val task = createTask(title)
+            addTaskUseCase.addTask(task)
         }
     }
 
-    fun onDoneClick(note: Note) {
+    fun onDoneClick(task: Task) {
         viewModelScope.launch {
-            note.isDone = !note.isDone
-            noteInteractor.updateNote(note)
+            task.isDone = !task.isDone
+            updateTaskUseCase.updateTask(task)
         }
     }
 
-    private fun createNote(title: String): Note {
-        val calendar = Calendar.getInstance()
-        calendar.time = Date()
-        calendar.add(Calendar.DAY_OF_MONTH, 1)
-        val dueDate = calendar.time.time
-        return Note(title = title, dueTo = dueDate)
+    private fun createTask(title: String): Task {
+        return Task(title = title)
     }
 }

@@ -78,4 +78,7 @@ dependencies {
 
     // di
     implementation "org.koin:koin-androidx-viewmodel:2.0.1"
+
+    // time
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
 }

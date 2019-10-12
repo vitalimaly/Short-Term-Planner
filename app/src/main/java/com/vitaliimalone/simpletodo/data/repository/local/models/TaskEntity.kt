@@ -4,14 +4,14 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class NoteEntity(
+data class TaskEntity(
         @PrimaryKey
         var id: String,
         var title: String,
         var description: String,
-        var color: Int,
-        var createdAt: Long,
-        var dueTo: Long,
+        var createdAt: String,
+        var modifiedAt: String,
+        var dueTo: String,
         var isDone: Boolean,
         var isArchived: Boolean
 )

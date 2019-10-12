@@ -1,4 +1,4 @@
-package com.vitaliimalone.simpletodo.data.notifications
+package com.vitaliimalone.simpletodo.notifications
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -31,7 +31,8 @@ class Notificator(private val context: Context) {
     }
 
     fun showMessageNotification() {
-        val notification = NotificationCompat.Builder(context, MESSAGES_CHANNEL_ID)
+        val notification = NotificationCompat.Builder(context,
+                MESSAGES_CHANNEL_ID)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setContentTitle("Title")
                 .setContentText("Text")
