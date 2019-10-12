@@ -9,8 +9,8 @@ import com.vitaliimalone.simpletodo.presentation.utils.hideKeyboard
 
 abstract class BaseFragment(private val layoutResId: Int) : Fragment() {
     override fun onCreateView(inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?): View? {
+                              container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
         return LayoutInflater.from(activity).inflate(layoutResId, container, false)
     }
 

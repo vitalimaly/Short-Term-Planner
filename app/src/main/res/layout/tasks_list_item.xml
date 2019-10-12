@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/home_tasks_vertical_spacing">
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/doneCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/home_done_checkbox_margin"
+        android:button="@drawable/selector_done"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/titleTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/home_done_checkbox_margin"
+        android:layout_marginTop="@dimen/home_tasks_vertical_spacing"
+        android:layout_marginEnd="@dimen/s_spacing"
+        android:ellipsize="end"
+        android:maxLines="4"
+        android:textSize="@dimen/l_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/doneCheckBox"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@tools:sample/lorem/random" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/dueDateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/xs_spacing"
+        android:drawablePadding="@dimen/xs_spacing"
+        android:textColor="@color/gray_text_color"
+        android:textSize="@dimen/m_text_size"
+        app:drawableStartCompat="@drawable/ic_access_time"
+        app:layout_constraintStart_toStartOf="@id/titleTextView"
+        app:layout_constraintTop_toBottomOf="@id/titleTextView"
+        tools:text="Fri, Feb 27" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tagsTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/s_spacing"
+        android:drawablePadding="2dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/gray_text_color"
+        android:textSize="@dimen/m_text_size"
+        app:drawableStartCompat="@drawable/ic_tag"
+        app:layout_constraintBottom_toBottomOf="@id/dueDateTextView"
+        app:layout_constraintEnd_toEndOf="@id/titleTextView"
+        app:layout_constraintStart_toEndOf="@id/dueDateTextView"
+        app:layout_constraintTop_toTopOf="@id/dueDateTextView"
+        tools:text="Lorem, Ipsum, Dolor, Ipsum, Dolor" />
+</androidx.constraintlayout.widget.ConstraintLayout>

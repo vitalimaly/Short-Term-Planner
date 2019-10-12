@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <size
+                android:width="@dimen/home_done_checkbox_size"
+                android:height="@dimen/home_done_checkbox_size" />
+            <solid android:color="@color/done_checkbox_green" />
+            <stroke
+                android:width="@dimen/home_done_checkbox_stroke_width"
+                android:color="@color/slightly_transparent_black" />
+        </shape>
+    </item>
+    <item
+        android:bottom="@dimen/home_done_checkbox_done_icon_padding"
+        android:drawable="@drawable/ic_done"
+        android:left="@dimen/home_done_checkbox_done_icon_padding"
+        android:right="@dimen/home_done_checkbox_done_icon_padding"
+        android:top="@dimen/home_done_checkbox_done_icon_padding" />
+</layer-list>
