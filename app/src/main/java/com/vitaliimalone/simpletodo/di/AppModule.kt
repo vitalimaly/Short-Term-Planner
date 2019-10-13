@@ -14,7 +14,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 private val presentation = module {
-    viewModel { HomeViewModel(get(), get(), get()) }
+    viewModel { HomeViewModel() }
 }
 private val domain = module {
     single { GetTasksUseCase(get()) }

@@ -1,1 +1,6 @@
-<resources></resources>
+<resources>
+    <string name="home_tab_today">Today</string>
+    <string name="home_tab_week">Week</string>
+    <string name="home_tab_month">Month</string>
+    <string name="home_tab_todo">To Do</string>
+</resources>
