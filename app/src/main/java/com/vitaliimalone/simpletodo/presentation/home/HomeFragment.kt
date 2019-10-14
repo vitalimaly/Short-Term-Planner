@@ -27,6 +27,7 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
     }
 
     private fun setupViews() {
+        tasksViewPager.isUserInputEnabled = false
         tasksViewPager.adapter = TasksPagerAdapter()
         TabLayoutMediator(tabsTabLayout, tasksViewPager) { tab, position ->
             tab.text = getString(HomeTabs.values()[position].title)
