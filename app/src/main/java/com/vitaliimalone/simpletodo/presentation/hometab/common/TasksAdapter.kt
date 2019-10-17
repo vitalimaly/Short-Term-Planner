@@ -1,4 +1,4 @@
-package com.vitaliimalone.simpletodo.presentation.home.common
+package com.vitaliimalone.simpletodo.presentation.hometab.common
 
 import android.view.LayoutInflater
 import android.view.View

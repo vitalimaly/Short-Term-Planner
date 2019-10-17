@@ -4,9 +4,21 @@ import org.threeten.bp.LocalDateTime
 import org.threeten.bp.format.DateTimeFormatter
 
 object DateTimeUtils {
-    const val DAY_OF_WEEK_AND_MONTH_AND_DAY_FULL = "EEEE, MMMM d"
+    const val TODAY_HOME_DATE_FORMAT = "EEEE, MMMM d"
 
-    fun getTodayDayOfWeekAndMonthAndDayFull(): String {
-        return LocalDateTime.now().format(DateTimeFormatter.ofPattern(DAY_OF_WEEK_AND_MONTH_AND_DAY_FULL))
+    fun getTodayHomeDate(): String {
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern(TODAY_HOME_DATE_FORMAT))
+    }
+
+    fun getWeekRangeHomeDate(): String {
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern(TODAY_HOME_DATE_FORMAT))
+    }
+
+    fun getMonthRangeHomeDate(): String {
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern(TODAY_HOME_DATE_FORMAT))
+    }
+
+    fun getTodoRangeHomeDate(): String {
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern(TODAY_HOME_DATE_FORMAT))
     }
 }
