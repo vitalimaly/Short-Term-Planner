@@ -7,6 +7,7 @@ import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.presentation.base.BaseFragment
 import com.vitaliimalone.simpletodo.presentation.hometab.common.TasksAdapter
 import com.vitaliimalone.simpletodo.presentation.models.HomeTab
+import com.vitaliimalone.simpletodo.presentation.views.DefaultDividerItemDecoration
 import kotlinx.android.synthetic.main.tasks_pager_item.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -39,6 +40,9 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
 
     private fun setupViews() {
         tasksPagerRecyclerView.adapter = tasksAdapter
+        tasksPagerRecyclerView.addItemDecoration(DefaultDividerItemDecoration(requireContext(),
+            marginLeft = resources.getDimensionPixelOffset(R.dimen.home_divider_margin),
+            marginRight = resources.getDimensionPixelOffset(R.dimen.home_divider_margin)))
     }
 
     private fun setupObservers() {
