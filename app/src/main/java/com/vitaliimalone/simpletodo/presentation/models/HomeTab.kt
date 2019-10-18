@@ -1,11 +1,11 @@
 package com.vitaliimalone.simpletodo.presentation.models
 
-import androidx.annotation.StringRes
 import com.vitaliimalone.simpletodo.R
+import com.vitaliimalone.simpletodo.presentation.utils.Strings
 
-enum class HomeTab(@StringRes val title: Int) {
-    TODAY(R.string.home_tab_today),
-    WEEK(R.string.home_tab_week),
-    MONTH(R.string.home_tab_month),
-    TODO(R.string.home_tab_todo)
+enum class HomeTab(val title: String) {
+    TODAY(Strings.get(R.string.home_tab_today)),
+    WEEK(Strings.get(R.string.home_tab_week)),
+    MONTH(Strings.get(R.string.home_tab_month)),
+    TODO(Strings.get(R.string.home_tab_todo))
 }

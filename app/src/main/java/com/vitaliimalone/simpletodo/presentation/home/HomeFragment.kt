@@ -36,7 +36,7 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
         tasksViewPager.isUserInputEnabled = false
         tasksViewPager.adapter = tasksPagerAdapter
         TabLayoutMediator(tabsTabLayout, tasksViewPager) { tab, position ->
-            tab.text = getString(HomeTab.values()[position].title)
+            tab.text = HomeTab.values()[position].title
         }.attach()
         dateRangeTextView.text = DateTimeUtils.getTodayHomeDate()
     }

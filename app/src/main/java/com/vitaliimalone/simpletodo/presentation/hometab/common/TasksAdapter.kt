@@ -3,12 +3,13 @@ package com.vitaliimalone.simpletodo.presentation.hometab.common
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.domain.models.Task
+import com.vitaliimalone.simpletodo.presentation.utils.DateTimeUtils
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.tasks_list_item.*
-import org.threeten.bp.format.DateTimeFormatter
 
 class TasksAdapter : RecyclerView.Adapter<TasksAdapter.TaskViewHolder>() {
     var tasks = listOf<Task>()
@@ -35,7 +36,8 @@ class TasksAdapter : RecyclerView.Adapter<TasksAdapter.TaskViewHolder>() {
         fun bind(task: Task) {
             titleTextView.text = task.title
             doneCheckBox.isChecked = task.isDone
-            dueDateTextView.text = task.dueTo.format(DateTimeFormatter.ISO_LOCAL_DATE)
+            dueDateTextView.text = DateTimeUtils.getTaskDueDate(task.dueTo)
+            tagsTextView.isVisible = task.tags.isNotEmpty()
             tagsTextView.text = task.tags.joinToString()
         }
     }

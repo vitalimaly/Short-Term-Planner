@@ -3,4 +3,6 @@
     <string name="home_tab_week">Week</string>
     <string name="home_tab_month">Month</string>
     <string name="home_tab_todo">To Do</string>
+    <string name="today_date">Today</string>
+    <string name="tomorrow_date">Tomorrow</string>
 </resources>
