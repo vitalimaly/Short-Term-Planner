@@ -41,8 +41,8 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
     private fun setupViews() {
         tasksPagerRecyclerView.adapter = tasksAdapter
         tasksPagerRecyclerView.addItemDecoration(DefaultDividerItemDecoration(requireContext(),
-            marginLeft = resources.getDimensionPixelOffset(R.dimen.home_divider_margin),
-            marginRight = resources.getDimensionPixelOffset(R.dimen.home_divider_margin)))
+            marginLeft = resources.getDimension(R.dimen.home_divider_margin),
+            marginRight = resources.getDimension(R.dimen.home_divider_margin)))
     }
 
     private fun setupObservers() {

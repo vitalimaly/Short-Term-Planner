@@ -7,17 +7,18 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.vitaliimalone.simpletodo.R
 
 class DefaultDividerItemDecoration(
-    context: Context,
-    drawableResourceId: Int? = null,
-    marginLeft: Int = 0,
-    marginTop: Int = 0,
-    marginRight: Int = 0,
-    marginBottom: Int = 0
+        context: Context,
+        drawableResourceId: Int? = null,
+        marginLeft: Float = 0f,
+        marginTop: Float = 0f,
+        marginRight: Float = 0f,
+        marginBottom: Float = 0f
 ) : DividerItemDecoration(context, VERTICAL) {
 
     init {
         val drawable = ContextCompat.getDrawable(context, drawableResourceId ?: R.drawable.divider_default)!!
-        val insetDivider = InsetDrawable(drawable, marginLeft, marginTop, marginRight, marginBottom)
+        val insetDivider = InsetDrawable(drawable, marginLeft.toInt(), marginTop.toInt(), marginRight.toInt(),
+                marginBottom.toInt())
         setDrawable(insetDivider)
     }
 }

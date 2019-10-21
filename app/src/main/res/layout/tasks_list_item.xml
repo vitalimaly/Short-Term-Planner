@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingBottom="@dimen/home_tasks_vertical_spacing">
+    android:layout_height="wrap_content">
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/doneCheckBox"
@@ -12,8 +11,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/home_done_checkbox_margin"
         android:button="@drawable/selector_done"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/titleTextView"
