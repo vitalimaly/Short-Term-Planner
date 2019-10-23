@@ -1,6 +1,7 @@
 package com.vitaliimalone.simpletodo.presentation.home
 
 import android.os.Bundle
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.presentation.base.BaseFragment
@@ -38,7 +39,12 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
         TabLayoutMediator(tabsTabLayout, tasksViewPager) { tab, position ->
             tab.text = HomeTab.values()[position].title
         }.attach()
-        dateRangeTextView.text = DateTimeUtils.getTodayHomeDate()
+        tasksViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                dateRangeTextView.text = DateTimeUtils.getDateForTab(HomeTab.values()[position]) // todo: add animation
+            }
+        })
     }
 
     private fun setupObservers() {
