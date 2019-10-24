@@ -18,6 +18,8 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
         HomeTabFragmentAdapter(listOf(
                 HomeTab.TODAY, HomeTab.WEEK, HomeTab.MONTH, HomeTab.TODO), this)
     }
+    private var oldPagePosition = 0
+    private val animationTime = 100L
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -42,9 +44,30 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
         tasksViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                dateRangeTextView.text = DateTimeUtils.getDateForTab(HomeTab.values()[position]) // todo: add animation
+                animatePageChange(position)
+                oldPagePosition = position
             }
         })
+    }
+
+    private fun animatePageChange(position: Int) {
+        val height = dateRangeTextView.height.toFloat()
+        val moveUp = oldPagePosition < position
+        val endAction = {
+            dateRangeTextView.text = DateTimeUtils.getDateForTab(HomeTab.values()[position])
+            dateRangeTextView.translationY = if (moveUp) height else -height
+            dateRangeTextView.animate()
+                    .setDuration(animationTime / 2)
+                    .translationY(0f)
+                    .alpha(1f)
+                    .start()
+        }
+        dateRangeTextView.animate()
+                .setDuration(animationTime / 2)
+                .translationY(if (moveUp) -height else height)
+                .alpha(0f)
+                .withEndAction(endAction)
+                .start()
     }
 
     private fun setupObservers() {
