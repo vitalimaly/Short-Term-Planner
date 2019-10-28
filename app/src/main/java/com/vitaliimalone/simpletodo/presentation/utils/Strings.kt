@@ -8,7 +8,7 @@ import org.koin.core.inject
 object Strings : KoinComponent {
     private val context: Context by inject()
 
-    fun get(@StringRes stringRes: Int): String {
-        return context.getString(stringRes)
+    fun get(@StringRes stringRes: Int, vararg formatArgs: Any = emptyArray()): String {
+        return context.getString(stringRes, *formatArgs)
     }
 }

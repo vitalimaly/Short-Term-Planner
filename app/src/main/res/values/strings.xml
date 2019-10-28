@@ -6,4 +6,6 @@
     <string name="today_date">Today</string>
     <string name="tomorrow_date">Tomorrow</string>
     <string name="from_date">From</string>
+    <string name="add_task_dialog_title_hint">Add task</string>
+    <string name="due_to_date">Due to %s</string>
 </resources>
