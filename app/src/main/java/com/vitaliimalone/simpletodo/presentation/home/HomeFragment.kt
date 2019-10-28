@@ -8,9 +8,12 @@ import com.vitaliimalone.simpletodo.presentation.base.BaseFragment
 import com.vitaliimalone.simpletodo.presentation.home.common.HomeTabFragmentAdapter
 import com.vitaliimalone.simpletodo.presentation.models.HomeTab
 import com.vitaliimalone.simpletodo.presentation.utils.DateTimeUtils
-import com.vitaliimalone.simpletodo.presentation.utils.forceShowKeyboard
+import com.vitaliimalone.simpletodo.presentation.utils.Dialogs
+import com.vitaliimalone.simpletodo.presentation.utils.hideKeyboard
+import com.vitaliimalone.simpletodo.presentation.utils.showKeyboard
 import kotlinx.android.synthetic.main.home_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.threeten.bp.OffsetDateTime
 
 class HomeFragment : BaseFragment(R.layout.home_fragment) {
     private val viewModel: HomeViewModel by viewModel()
@@ -29,9 +32,12 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
     }
 
     private fun setupClickListeners() {
-        addFab.setOnClickListener {
-            forceShowKeyboard()
-            viewModel.addNewTestTask()
+        addFab.setOnClickListener { view ->
+            showKeyboard(view)
+            Dialogs.showAddNewTaskDialog(requireContext(), OffsetDateTime.now()) {
+                viewModel.addNewTask(it)
+                hideKeyboard()
+            }
         }
     }
 

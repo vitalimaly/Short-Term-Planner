@@ -27,4 +27,8 @@
 
     <dimen name="default_divider_height">1dp</dimen>
     <dimen name="home_divider_margin">60dp</dimen>
+
+    <dimen name="add_new_task_dialog_add_image_size">60dp</dimen>
+    <dimen name="add_new_task_dialog_add_image_padding">10dp</dimen>
+    <dimen name="add_new_task_dialog_background_corner_radius">12dp</dimen>
 </resources>
