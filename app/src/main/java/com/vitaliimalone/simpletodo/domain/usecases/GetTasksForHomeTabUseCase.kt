@@ -8,10 +8,8 @@ import com.vitaliimalone.simpletodo.presentation.utils.Constants
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import org.threeten.bp.DayOfWeek
-import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalTime
 import org.threeten.bp.OffsetDateTime
-import org.threeten.bp.OffsetTime
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.temporal.TemporalAdjusters
 
@@ -19,77 +17,59 @@ class GetTasksForHomeTabUseCase(
         private val taskRepository: TaskRepository
 ) {
     suspend fun getTasksForTab(tab: HomeTab): Flow<List<Task>> {
-        val startDate: String
-        val endDate: String
+        val startDate: OffsetDateTime
+        val endDate: OffsetDateTime
+        val now = OffsetDateTime.now()
+        val nextMondayAdjuster = TemporalAdjusters.next(DayOfWeek.MONDAY)
         when (tab) {
             HomeTab.TODAY -> {
-                startDate = OffsetDateTime.now()
-                        .with(LocalTime.MIN)
-                        .format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
-                endDate = OffsetDateTime.now()
-                        .with(LocalTime.MAX)
-                        .format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+                startDate = now.with(LocalTime.MIN)
+                endDate = now.with(LocalTime.MAX)
             }
             HomeTab.WEEK -> {
-                val todayDayOfWeek = LocalDate.now().dayOfWeek
-                if (todayDayOfWeek < DayOfWeek.SUNDAY) {
-                    startDate = OffsetDateTime.now()
-                            .plusDays(1)
+                if (now.dayOfWeek < DayOfWeek.SUNDAY) {
+                    startDate = now.plusDays(1)
                             .with(LocalTime.MIN)
-                            .format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
-                    endDate = OffsetDateTime.now()
-                            .with(DayOfWeek.SUNDAY)
+                    endDate = now.with(DayOfWeek.SUNDAY)
                             .with(LocalTime.MAX)
-                            .format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
                 } else {
-                    // next week
-                    startDate = OffsetDateTime.now()
-                            .plusWeeks(1)
+                    startDate = now.plusWeeks(1)
                             .with(DayOfWeek.MONDAY)
                             .with(LocalTime.MIN)
-                            .format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
-                    endDate = OffsetDateTime.now()
-                            .plusWeeks(1)
+                    endDate = now.plusWeeks(1)
                             .with(DayOfWeek.SUNDAY)
-                            .with(LocalTime.MIN)
-                            .format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+                            .with(LocalTime.MAX)
                 }
             }
             HomeTab.MONTH -> {
-                if (true) { // todo fix
-                    startDate = OffsetDateTime.now()
-                            .plusDays(7) // todo fix
+                if (now.dayOfWeek < DayOfWeek.SATURDAY) {
+                    startDate = now.with(nextMondayAdjuster)
                             .with(LocalTime.MIN)
-                            .format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
-                    endDate = OffsetDateTime.now()
-                            .plusDays(23) // todo fix
-                            .with(LocalTime.MAX)
-                            .format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
-                } else {
-                    // next month
-                    startDate = OffsetDateTime.now()
-                            .plusMonths(1)
-                            .with(TemporalAdjusters.firstDayOfMonth())
-                            .with(LocalTime.MIN)
-                            .format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
-                    endDate = OffsetDateTime.now()
-                            .plusMonths(1)
+                    endDate = now.with(nextMondayAdjuster)
                             .with(TemporalAdjusters.lastDayOfMonth())
+                            .with(LocalTime.MAX)
+                } else {
+                    startDate = now.plusWeeks(1)
+                            .with(nextMondayAdjuster)
                             .with(LocalTime.MIN)
-                            .format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+                    endDate = now.plusWeeks(1)
+                            .with(nextMondayAdjuster)
+                            .with(TemporalAdjusters.lastDayOfMonth())
+                            .with(LocalTime.MAX)
                 }
             }
-            HomeTab.TODO -> { // todo fix
-                startDate = OffsetDateTime.now()
-                        .plusDays(23) // todo fix
+            HomeTab.TODO -> {
+                startDate = now.plusWeeks(1)
+                        .with(nextMondayAdjuster)
+                        .with(TemporalAdjusters.lastDayOfMonth())
+                        .plusDays(1)
                         .with(LocalTime.MIN)
-                        .format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
-                endDate = OffsetDateTime.now()
-                        .withYear(Constants.MAX_YEAR)
-                        .with(OffsetTime.MAX)
-                        .format(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+                endDate = now.withYear(Constants.MAX_YEAR)
+                        .with(LocalTime.MAX)
             }
         }
-        return taskRepository.getUnarchivedTasksForPeriod(startDate, endDate).map { it.map(TaskMapper::map) }
+        val startDateString = startDate.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+        val endDateString = endDate.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
+        return taskRepository.getUnarchivedTasksForPeriod(startDateString, endDateString).map { it.map(TaskMapper::map) }
     }
 }
