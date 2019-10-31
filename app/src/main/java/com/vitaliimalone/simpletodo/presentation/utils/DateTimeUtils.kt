@@ -31,6 +31,19 @@ object DateTimeUtils {
         }
     }
 
+    fun getDateForAddNewTask(homeTab: HomeTab): OffsetDateTime {
+        val (startDate, endDate) = getStartEndDateForTab(homeTab)
+        val currentTime = LocalTime.now()
+        return when (homeTab) {
+            HomeTab.TODAY, HomeTab.WEEK, HomeTab.MONTH -> {
+                endDate.with(currentTime)
+            }
+            HomeTab.TODO -> {
+                startDate.with(TemporalAdjusters.lastDayOfYear()).with(currentTime)
+            }
+        }
+    }
+
     fun getTaskDueDate(dueDate: OffsetDateTime): String {
         val today = LocalDate.now()
         val localDueDate = dueDate.toLocalDate()

@@ -13,7 +13,6 @@ import com.vitaliimalone.simpletodo.presentation.utils.hideKeyboard
 import com.vitaliimalone.simpletodo.presentation.utils.showKeyboard
 import kotlinx.android.synthetic.main.home_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.threeten.bp.OffsetDateTime
 
 class HomeFragment : BaseFragment(R.layout.home_fragment) {
     private val viewModel: HomeViewModel by viewModel()
@@ -34,7 +33,9 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
     private fun setupClickListeners() {
         addFab.setOnClickListener { view ->
             showKeyboard(view)
-            Dialogs.showAddNewTaskDialog(requireContext(), OffsetDateTime.now()) {
+            val currentTab = HomeTab.values()[tasksViewPager.currentItem]
+            val defaultDate = DateTimeUtils.getDateForAddNewTask(currentTab)
+            Dialogs.showAddNewTaskDialog(requireContext(), defaultDate) {
                 viewModel.addNewTask(it)
                 hideKeyboard()
             }
