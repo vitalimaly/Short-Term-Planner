@@ -16,6 +16,8 @@ class GetTasksForHomeTabUseCase(
         val (startDate, endDate) = DateTimeUtils.getStartEndDateForTab(homeTab)
         val startDateString = startDate.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
         val endDateString = endDate.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
-        return taskRepository.getUnarchivedTasksForPeriod(startDateString, endDateString).map { it.map(TaskMapper::map) }
+        return taskRepository.getUnarchivedTasksForPeriod(startDateString, endDateString)
+                .map { it.map(TaskMapper::map) }
+                .map { it.sortedBy(Task::dueTo) }
     }
 }
