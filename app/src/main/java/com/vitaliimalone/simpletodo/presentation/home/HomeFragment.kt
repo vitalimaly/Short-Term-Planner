@@ -20,7 +20,7 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
         HomeTabFragmentAdapter(listOf(
                 HomeTab.TODAY, HomeTab.WEEK, HomeTab.MONTH, HomeTab.TODO), this)
     }
-    private var oldPagePosition = 0
+    private var oldPagePosition = -1
     private val animationTime = 100L
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -51,8 +51,10 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
         tasksViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                animatePageChange(position)
-                oldPagePosition = position
+                if (oldPagePosition != position) {
+                    animatePageChange(position)
+                    oldPagePosition = position
+                }
             }
         })
     }
