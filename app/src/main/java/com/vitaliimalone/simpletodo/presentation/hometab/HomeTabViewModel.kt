@@ -40,9 +40,7 @@ class HomeTabViewModel(
                 task.dueTo = DateTimeUtils.getDateForAddNewTask(HomeTab.MONTH)
             }
         }
-        viewModelScope.launch {
-            updateTaskUseCase.updateTask(task)
-        }
+        updateTask(task)
     }
 
     fun onSwipeRight(homeTab: HomeTab, task: Task) {
@@ -60,6 +58,10 @@ class HomeTabViewModel(
                 task.isArchived = true
             }
         }
+        updateTask(task)
+    }
+
+    fun updateTask(task: Task) {
         viewModelScope.launch {
             updateTaskUseCase.updateTask(task)
         }
