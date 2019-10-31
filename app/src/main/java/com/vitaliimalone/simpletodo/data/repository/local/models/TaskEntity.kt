@@ -13,5 +13,7 @@ data class TaskEntity(
         var modifiedAt: String,
         var dueTo: String,
         var isDone: Boolean,
-        var isArchived: Boolean
+        var isArchived: Boolean,
+        var tags: String,
+        var subtasks: String
 )

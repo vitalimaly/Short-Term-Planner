@@ -18,7 +18,17 @@
         android:id="@+id/tabsTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:clipToPadding="false"
+        android:paddingStart="@dimen/home_tab_layout_padding"
+        android:paddingTop="@dimen/home_tab_layout_padding"
+        android:paddingEnd="@dimen/home_tab_layout_padding"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabIndicatorColor="@color/transparent"
+        app:tabIndicatorFullWidth="false"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/primary_text_color"
+        app:tabTextAppearance="@style/HomeTabTextAppearance"
+        app:tabTextColor="@color/light_gray_text_color" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/dateRangeTextView"
@@ -37,6 +47,9 @@
         android:id="@+id/settingsImageView"
         android:layout_width="@dimen/home_settings_icon_size"
         android:layout_height="@dimen/home_settings_icon_size"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
         android:padding="@dimen/home_settings_icon_padding"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tabsTabLayout"

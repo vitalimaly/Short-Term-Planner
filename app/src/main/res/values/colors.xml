@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">@color/pale_background_color</color>
     <color name="colorPrimaryDark">@color/pale_green</color>
-    <color name="colorAccent">@color/pale_purple</color>
+    <color name="colorAccent">@color/pale_orange</color>
 
     <color name="transparent">#00000000</color>
     <color name="white">#FFFFFF</color>
@@ -10,12 +10,21 @@
 
     <color name="slightly_transparent_black">#BF000000</color>
     <color name="half_transparent_black">#80000000</color>
+    <color name="highly_transparent_black">#40000000</color>
     <color name="slightly_transparent_white">#BFFFFFFF</color>
     <color name="half_transparent_white">#80FFFFFF</color>
+    <color name="highly_transparent_white">#40FFFFFF</color>
+
     <color name="pale_background_color">#fff2ed</color>
     <color name="pale_green">#d8e2dc</color>
+    <color name="pale_dark_green">#B9CAC0</color>
     <color name="pale_purple">#CE93D8</color>
+    <color name="pale_orange">#FFAB91</color>
+
     <color name="primary_text_color">@color/slightly_transparent_black</color>
     <color name="gray_text_color">@color/half_transparent_black</color>
+    <color name="light_gray_text_color">@color/highly_transparent_black</color>
+
     <color name="done_checkbox_green">#a3d39c</color>
+    <color name="default_divider_color">@color/half_transparent_black</color>
 </resources>

@@ -6,14 +6,18 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.vitaliimalone.simpletodo.data.repository.local.models.TaskEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TaskDao {
     @Query("SELECT * FROM taskentity")
-    suspend fun getAllTasks(): List<TaskEntity>
+    fun getAllTasks(): Flow<List<TaskEntity>>
 
     @Query("SELECT * FROM taskentity WHERE isArchived = :isArchived")
-    suspend fun getAllTasks(isArchived: Boolean): List<TaskEntity>
+    fun getTasks(isArchived: Boolean): Flow<List<TaskEntity>>
+
+    @Query("SELECT * FROM taskentity WHERE isArchived = 0 AND dueTo BETWEEN :startDate AND :endDate")
+    fun getUnarchivedTasksForPeriod(startDate: String, endDate: String): Flow<List<TaskEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addTask(taskEntity: TaskEntity)
