@@ -3,6 +3,7 @@ package com.vitaliimalone.simpletodo.presentation.utils
 import android.app.DatePickerDialog
 import android.content.Context
 import android.view.LayoutInflater
+import androidx.core.widget.addTextChangedListener
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.domain.models.Task
@@ -24,6 +25,10 @@ object Dialogs {
             onAddClick.invoke(task)
             dialog.dismiss()
         }
+        dialogView.addImageView.isEnabled(false)
+        dialogView.titleEditText.addTextChangedListener(onTextChanged = { text, _, _, _ ->
+            dialogView.addImageView.isEnabled(text?.trim().toString().isNotEmpty())
+        })
         dialogView.dueDateTextView.text = Strings.get(R.string.due_to_date, DateTimeUtils.getTaskDueDate(dueDate))
         dialogView.dueDateTextView.setOnClickListener {
             showDatePickerDialog(context, dueDate) {
