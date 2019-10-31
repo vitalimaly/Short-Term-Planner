@@ -17,7 +17,7 @@ import org.koin.dsl.module
 
 private val presentation = module {
     viewModel { HomeViewModel(get()) }
-    viewModel { HomeTabViewModel(get()) }
+    viewModel { HomeTabViewModel(get(), get()) }
 }
 private val domain = module {
     single { GetTasksUseCase(get()) }

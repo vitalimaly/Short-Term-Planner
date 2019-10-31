@@ -3,8 +3,10 @@ package com.vitaliimalone.simpletodo.presentation.hometab
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.ItemTouchHelper
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.presentation.base.BaseFragment
+import com.vitaliimalone.simpletodo.presentation.hometab.common.TaskTouchHelperCallback
 import com.vitaliimalone.simpletodo.presentation.hometab.common.TasksAdapter
 import com.vitaliimalone.simpletodo.presentation.models.HomeTab
 import com.vitaliimalone.simpletodo.presentation.views.DefaultDividerItemDecoration
@@ -24,10 +26,12 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
 
     private val viewModel: HomeTabViewModel by viewModel()
     private val tasksAdapter by lazy { TasksAdapter() }
+    private val homeTab by lazy {
+        HomeTab.valueOf(requireArguments().getString(ARG_HOME_TAB)!!)
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val homeTab = HomeTab.valueOf(requireArguments().getString(ARG_HOME_TAB)!!)
         viewModel.fetchTasksForHomeTab(homeTab)
         setupClickListeners()
         setupViews()
@@ -41,8 +45,14 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
     private fun setupViews() {
         tasksPagerRecyclerView.adapter = tasksAdapter
         tasksPagerRecyclerView.addItemDecoration(DefaultDividerItemDecoration(requireContext(),
-            marginLeft = resources.getDimension(R.dimen.home_divider_margin),
-            marginRight = resources.getDimension(R.dimen.home_divider_margin)))
+                marginLeft = resources.getDimension(R.dimen.home_divider_margin),
+                marginRight = resources.getDimension(R.dimen.home_divider_margin)))
+        val itemTouchHelper = ItemTouchHelper(TaskTouchHelperCallback({
+            viewModel.onSwipeLeft(homeTab, tasksAdapter.tasks[it])
+        }, {
+            viewModel.onSwipeRight(homeTab, tasksAdapter.tasks[it])
+        }))
+        itemTouchHelper.attachToRecyclerView(tasksPagerRecyclerView)
     }
 
     private fun setupObservers() {
