@@ -10,8 +10,7 @@ import com.vitaliimalone.simpletodo.presentation.base.BaseFragment
 import com.vitaliimalone.simpletodo.presentation.hometab.common.TaskTouchHelperCallback
 import com.vitaliimalone.simpletodo.presentation.hometab.common.TasksAdapter
 import com.vitaliimalone.simpletodo.presentation.models.HomeTab
-import com.vitaliimalone.simpletodo.presentation.utils.Colors
-import com.vitaliimalone.simpletodo.presentation.utils.Strings
+import com.vitaliimalone.simpletodo.presentation.utils.Res
 import com.vitaliimalone.simpletodo.presentation.utils.setTextColor
 import com.vitaliimalone.simpletodo.presentation.views.DefaultDividerItemDecoration
 import kotlinx.android.synthetic.main.tasks_pager_item.*
@@ -49,8 +48,8 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
     private fun setupViews() {
         tasksPagerRecyclerView.adapter = tasksAdapter
         tasksPagerRecyclerView.addItemDecoration(DefaultDividerItemDecoration(requireContext(),
-                marginLeft = resources.getDimension(R.dimen.home_divider_margin),
-                marginRight = resources.getDimension(R.dimen.home_divider_margin)))
+                marginLeft = Res.dimen(R.dimen.home_divider_margin),
+                marginRight = Res.dimen(R.dimen.home_divider_margin)))
         val itemTouchHelper = ItemTouchHelper(TaskTouchHelperCallback { position, direction ->
             val swipedTask = tasksAdapter.tasks[position]
             if (direction == ItemTouchHelper.LEFT) {
@@ -58,14 +57,14 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
             } else if (direction == ItemTouchHelper.RIGHT) {
                 viewModel.onSwipeRight(homeTab, swipedTask)
             }
-            val snackbarTitleColor = Colors.get(R.color.primary_white_text_color)
-            val snackbarTitle = Strings.get(R.string.snackbar_task_swiped, getSwipedToTab(homeTab, direction))
+            val snackbarTitleColor = Res.color(R.color.primary_white_text_color)
+            val snackbarTitle = Res.string(R.string.snackbar_task_swiped, getSwipedToTab(homeTab, direction))
                     .setTextColor(snackbarTitleColor)
             val swipedSnackbar = Snackbar.make(
                     tasksPagerRecyclerView,
                     snackbarTitle,
                     Snackbar.LENGTH_LONG)
-            swipedSnackbar.setAction(Strings.get(R.string.snackbar_undo)) {
+            swipedSnackbar.setAction(Res.string(R.string.snackbar_undo)) {
                 viewModel.undoSwipe()
             }
             swipedSnackbar.show()
@@ -76,13 +75,13 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
     private fun getSwipedToTab(currentTab: HomeTab, direction: Int): String {
         return if (direction == ItemTouchHelper.LEFT) {
             if (currentTab == HomeTab.values().first()) {
-                Strings.get(R.string.archive)
+                Res.string(R.string.archive)
             } else {
                 HomeTab.values()[currentTab.ordinal - 1].title
             }
         } else if (direction == ItemTouchHelper.RIGHT) {
             if (currentTab == HomeTab.values().last()) {
-                Strings.get(R.string.archive)
+                Res.string(R.string.archive)
             } else {
                 HomeTab.values()[currentTab.ordinal + 1].title
             }
