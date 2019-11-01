@@ -24,6 +24,7 @@
     <dimen name="home_tab_layout_padding">20dp</dimen>
     <dimen name="home_tab_text_size">60sp</dimen>
     <dimen name="home_task_item_min_height">64dp</dimen>
+    <dimen name="home_task_item_swipe_icon_margin">40dp</dimen>
 
     <dimen name="default_divider_height">1dp</dimen>
     <dimen name="home_divider_margin">60dp</dimen>

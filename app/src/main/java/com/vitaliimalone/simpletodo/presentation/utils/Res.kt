@@ -1,12 +1,11 @@
 package com.vitaliimalone.simpletodo.presentation.utils
 
 import android.content.Context
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
-import androidx.annotation.ColorRes
-import androidx.annotation.DimenRes
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
+import androidx.annotation.*
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -27,5 +26,9 @@ object Res : KoinComponent {
 
     fun dimen(@DimenRes dimenRes: Int): Float {
         return context.resources.getDimension(dimenRes)
+    }
+
+    fun font(@FontRes fontRes: Int): Typeface {
+        return ResourcesCompat.getFont(context, fontRes)!!
     }
 }

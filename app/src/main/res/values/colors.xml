@@ -16,6 +16,7 @@
     <color name="highly_transparent_white">#40FFFFFF</color>
 
     <color name="pale_background_color">#fff2ed</color>
+    <color name="pale_background_dark_color">#C7BCBA</color>
     <color name="pale_green">#d8e2dc</color>
     <color name="pale_dark_green">#B9CAC0</color>
     <color name="pale_purple">#CE93D8</color>
