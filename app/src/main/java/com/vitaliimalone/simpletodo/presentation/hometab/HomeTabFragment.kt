@@ -10,11 +10,12 @@ import com.vitaliimalone.simpletodo.presentation.base.BaseFragment
 import com.vitaliimalone.simpletodo.presentation.hometab.common.TaskTouchHelperCallback
 import com.vitaliimalone.simpletodo.presentation.hometab.common.TasksAdapter
 import com.vitaliimalone.simpletodo.presentation.models.HomeTab
+import com.vitaliimalone.simpletodo.presentation.utils.Colors
 import com.vitaliimalone.simpletodo.presentation.utils.Strings
+import com.vitaliimalone.simpletodo.presentation.utils.setTextColor
 import com.vitaliimalone.simpletodo.presentation.views.DefaultDividerItemDecoration
 import kotlinx.android.synthetic.main.tasks_pager_item.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.threeten.bp.OffsetDateTime
 
 class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
     companion object {
@@ -32,7 +33,6 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
     private val homeTab by lazy {
         HomeTab.valueOf(requireArguments().getString(ARG_HOME_TAB)!!)
     }
-    private var lastSwipedTaskDueDate: OffsetDateTime? = null
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -52,22 +52,21 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
                 marginLeft = resources.getDimension(R.dimen.home_divider_margin),
                 marginRight = resources.getDimension(R.dimen.home_divider_margin)))
         val itemTouchHelper = ItemTouchHelper(TaskTouchHelperCallback { position, direction ->
-            val swipedTask = tasksAdapter.tasks[position] // todo maybe move logic to viewmodel?
-            lastSwipedTaskDueDate = swipedTask.dueTo
+            val swipedTask = tasksAdapter.tasks[position]
             if (direction == ItemTouchHelper.LEFT) {
                 viewModel.onSwipeLeft(homeTab, swipedTask)
             } else if (direction == ItemTouchHelper.RIGHT) {
                 viewModel.onSwipeRight(homeTab, swipedTask)
             }
-            val swipedSnackbar = Snackbar.make( // todo fix snackbar title color to white
+            val snackbarTitleColor = Colors.get(R.color.primary_white_text_color)
+            val snackbarTitle = Strings.get(R.string.snackbar_task_swiped, getSwipedToTab(homeTab, direction))
+                    .setTextColor(snackbarTitleColor)
+            val swipedSnackbar = Snackbar.make(
                     tasksPagerRecyclerView,
-                    Strings.get(R.string.snackbar_task_swiped, getSwipedToTab(homeTab, direction)),
+                    snackbarTitle,
                     Snackbar.LENGTH_LONG)
             swipedSnackbar.setAction(Strings.get(R.string.snackbar_undo)) {
-                lastSwipedTaskDueDate?.let {
-                    swipedTask.dueTo = it
-                    viewModel.updateTask(swipedTask)
-                }
+                viewModel.undoSwipe()
             }
             swipedSnackbar.show()
         })
@@ -85,7 +84,7 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
             if (currentTab == HomeTab.values().last()) {
                 Strings.get(R.string.archive)
             } else {
-                HomeTab.values()[currentTab.ordinal - 1].title
+                HomeTab.values()[currentTab.ordinal + 1].title
             }
         } else {
             throw IllegalArgumentException("Should be LEFT or RIGHT")

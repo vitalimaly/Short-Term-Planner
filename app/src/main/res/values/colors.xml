@@ -24,6 +24,7 @@
     <color name="primary_text_color">@color/slightly_transparent_black</color>
     <color name="gray_text_color">@color/half_transparent_black</color>
     <color name="light_gray_text_color">@color/highly_transparent_black</color>
+    <color name="primary_white_text_color">@color/slightly_transparent_white</color>
 
     <color name="done_checkbox_green">#a3d39c</color>
     <color name="default_divider_color">@color/half_transparent_black</color>

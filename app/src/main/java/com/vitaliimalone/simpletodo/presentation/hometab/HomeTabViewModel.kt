@@ -15,6 +15,7 @@ class HomeTabViewModel(
         private val getTasksForHomeTabUseCase: GetTasksForHomeTabUseCase,
         private val updateTaskUseCase: UpdateTaskUseCase
 ) : ViewModel() {
+    private var lastSwipedTask: Task? = null
     val tasksForHomeTab = MutableLiveData<List<Task>>()
 
     fun fetchTasksForHomeTab(homeTab: HomeTab) {
@@ -26,6 +27,7 @@ class HomeTabViewModel(
     }
 
     fun onSwipeLeft(homeTab: HomeTab, task: Task) {
+        lastSwipedTask = task.copy()
         when (homeTab) {
             HomeTab.TODAY -> {
                 task.isArchived = true
@@ -44,6 +46,7 @@ class HomeTabViewModel(
     }
 
     fun onSwipeRight(homeTab: HomeTab, task: Task) {
+        lastSwipedTask = task.copy()
         when (homeTab) {
             HomeTab.TODAY -> {
                 task.dueTo = DateTimeUtils.getDateForAddNewTask(HomeTab.WEEK)
@@ -64,6 +67,12 @@ class HomeTabViewModel(
     fun updateTask(task: Task) {
         viewModelScope.launch {
             updateTaskUseCase.updateTask(task)
+        }
+    }
+
+    fun undoSwipe() {
+        lastSwipedTask?.let {
+            updateTask(it)
         }
     }
 }
