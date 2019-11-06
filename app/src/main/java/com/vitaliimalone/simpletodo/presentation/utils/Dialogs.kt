@@ -29,11 +29,11 @@ object Dialogs {
         dialogView.titleEditText.addTextChangedListener(onTextChanged = { text, _, _, _ ->
             dialogView.addImageView.isEnabled(text?.trim().toString().isNotEmpty())
         })
-        dialogView.dueDateTextView.text = Strings.get(R.string.due_to_date, DateTimeUtils.getTaskDueDate(dueDate))
+        dialogView.dueDateTextView.text = Res.string(R.string.due_to_date, DateTimeUtils.getTaskDueDate(dueDate))
         dialogView.dueDateTextView.setOnClickListener {
             showDatePickerDialog(context, dueDate) {
                 dueDate = it
-                dialogView.dueDateTextView.text = Strings.get(R.string.due_to_date, DateTimeUtils.getTaskDueDate(dueDate))
+                dialogView.dueDateTextView.text = Res.string(R.string.due_to_date, DateTimeUtils.getTaskDueDate(dueDate))
             }
         }
         dialog.behavior.isHideable = false

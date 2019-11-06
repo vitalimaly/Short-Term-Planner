@@ -8,4 +8,7 @@
     <string name="from_date">From</string>
     <string name="add_task_dialog_title_hint">Add task</string>
     <string name="due_to_date">Due to %s</string>
+    <string name="snackbar_undo">Undo</string>
+    <string name="snackbar_task_swiped">Moved to %s</string>
+    <string name="archive">Archive</string>
 </resources>

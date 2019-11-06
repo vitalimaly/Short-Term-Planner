@@ -26,7 +26,7 @@ object DateTimeUtils {
             }
             HomeTab.TODO -> {
                 val start = startDate.format(DateTimeFormatter.ofPattern(SHORT_DAY_MONTH_FORMAT))
-                "${Strings.get(R.string.from_date)} $start"
+                "${Res.string(R.string.from_date)} $start"
             }
         }
     }
@@ -48,8 +48,8 @@ object DateTimeUtils {
         val today = LocalDate.now()
         val localDueDate = dueDate.toLocalDate()
         return when {
-            today == localDueDate -> Strings.get(R.string.today_date)
-            today.plusDays(1) == localDueDate -> Strings.get(R.string.tomorrow_date)
+            today == localDueDate -> Res.string(R.string.today_date)
+            today.plusDays(1) == localDueDate -> Res.string(R.string.tomorrow_date)
             else -> dueDate.format(DateTimeFormatter.ofPattern(SHORT_DAY_MONTH_FORMAT))
         }
     }

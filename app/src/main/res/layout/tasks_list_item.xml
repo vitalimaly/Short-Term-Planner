@@ -5,9 +5,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground"
+    android:background="@color/pale_background_color"
     android:clickable="true"
     android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
     android:minHeight="@dimen/home_task_item_min_height"
     android:paddingTop="@dimen/home_tasks_vertical_spacing"
     android:paddingBottom="@dimen/home_tasks_vertical_spacing">
