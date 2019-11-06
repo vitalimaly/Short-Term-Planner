@@ -47,32 +47,46 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
 
     private fun setupViews() {
         tasksPagerRecyclerView.adapter = tasksAdapter
-        tasksPagerRecyclerView.addItemDecoration(DefaultDividerItemDecoration(requireContext(),
+        tasksPagerRecyclerView.addItemDecoration(
+            DefaultDividerItemDecoration(
+                requireContext(),
                 marginLeft = Res.dimen(R.dimen.home_divider_margin),
                 marginRight = Res.dimen(R.dimen.home_divider_margin)))
-        val itemTouchHelper = ItemTouchHelper(TaskTouchHelperCallback { position, direction ->
-            val swipedTask = tasksAdapter.tasks[position]
-            if (direction == ItemTouchHelper.LEFT) {
-                viewModel.onSwipeLeft(homeTab, swipedTask)
-            } else if (direction == ItemTouchHelper.RIGHT) {
-                viewModel.onSwipeRight(homeTab, swipedTask)
-            }
-            val snackbarTitleColor = Res.color(R.color.primary_white_text_color)
-            val snackbarTitle = Res.string(R.string.snackbar_task_swiped, getSwipedToTab(homeTab, direction))
-                    .setTextColor(snackbarTitleColor)
-            val swipedSnackbar = Snackbar.make(
-                    tasksPagerRecyclerView,
-                    snackbarTitle,
-                    Snackbar.LENGTH_LONG)
-            swipedSnackbar.setAction(Res.string(R.string.snackbar_undo)) {
-                viewModel.undoSwipe()
-            }
-            swipedSnackbar.show()
-        })
+        val itemTouchHelper = ItemTouchHelper(
+            TaskTouchHelperCallback(
+                this::onTabSwipe,
+                getSwipedToTabText(homeTab, ItemTouchHelper.LEFT),
+                getSwipedToTabText(homeTab, ItemTouchHelper.RIGHT),
+                getSwipedToTabColor(homeTab, ItemTouchHelper.LEFT),
+                getSwipedToTabColor(homeTab, ItemTouchHelper.RIGHT)
+            )
+        )
         itemTouchHelper.attachToRecyclerView(tasksPagerRecyclerView)
     }
 
-    private fun getSwipedToTab(currentTab: HomeTab, direction: Int): String {
+    private fun onTabSwipe(position: Int, direction: Int) {
+        val swipedTask = tasksAdapter.tasks[position]
+        if (direction == ItemTouchHelper.LEFT) {
+            viewModel.onSwipeLeft(homeTab, swipedTask)
+        } else if (direction == ItemTouchHelper.RIGHT) {
+            viewModel.onSwipeRight(homeTab, swipedTask)
+        }
+        val snackbarTitleColor = Res.color(R.color.primary_white_text_color)
+        val snackbarTitle =
+            Res.string(R.string.snackbar_task_swiped, getSwipedToTabText(homeTab, direction))
+                .setTextColor(snackbarTitleColor)
+        val swipedSnackbar = Snackbar.make(
+            tasksPagerRecyclerView,
+            snackbarTitle,
+            Snackbar.LENGTH_LONG
+        )
+        swipedSnackbar.setAction(Res.string(R.string.snackbar_undo)) {
+            viewModel.undoSwipe()
+        }
+        swipedSnackbar.show()
+    }
+
+    private fun getSwipedToTabText(currentTab: HomeTab, direction: Int): String {
         return if (direction == ItemTouchHelper.LEFT) {
             if (currentTab == HomeTab.values().first()) {
                 Res.string(R.string.archive)
@@ -84,6 +98,24 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
                 Res.string(R.string.archive)
             } else {
                 HomeTab.values()[currentTab.ordinal + 1].title
+            }
+        } else {
+            throw IllegalArgumentException("Should be LEFT or RIGHT")
+        }
+    }
+
+    private fun getSwipedToTabColor(currentTab: HomeTab, direction: Int): Int {
+        return if (direction == ItemTouchHelper.LEFT) {
+            if (currentTab == HomeTab.values().first()) {
+                Res.color(R.color.pale_red)
+            } else {
+                Res.color(R.color.pale_background_dark_color)
+            }
+        } else if (direction == ItemTouchHelper.RIGHT) {
+            if (currentTab == HomeTab.values().last()) {
+                Res.color(R.color.pale_red)
+            } else {
+                Res.color(R.color.pale_background_dark_color)
             }
         } else {
             throw IllegalArgumentException("Should be LEFT or RIGHT")

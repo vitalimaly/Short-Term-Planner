@@ -2,8 +2,8 @@ package com.vitaliimalone.simpletodo.presentation.hometab.common
 
 import android.graphics.Canvas
 import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.Drawable
 import android.text.TextPaint
+import androidx.annotation.ColorInt
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.vitaliimalone.simpletodo.R
@@ -11,10 +11,22 @@ import com.vitaliimalone.simpletodo.presentation.utils.Res
 
 
 class TaskTouchHelperCallback(
-        private val onSwipe: ((position: Int, direction: Int) -> Unit)
+        private val onSwipe: ((position: Int, direction: Int) -> Unit),
+        private val swipeLeftText: String,
+        private val swipeRightText: String,
+        @ColorInt private val swipeLeftBackgroundColor: Int,
+        @ColorInt private val swipeRightBackgroundColor: Int
 ) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
-    private val icon: Drawable = Res.drawable(R.drawable.ic_access_time)
-    private val background: ColorDrawable = ColorDrawable(Res.color(R.color.pale_background_dark_color))
+    private val swipeLeftIconId = Res.drawable(R.drawable.ic_chevron_left)
+    private val swipeRightIconId = Res.drawable(R.drawable.ic_chevron_right)
+    private val iconHorizontalMargin = Res.dimen(R.dimen.home_task_item_min_height).toInt() / 4
+    private val iconTint = Res.color(R.color.gray_text_color)
+    private val textSize = Res.dimen(R.dimen.l_text_size)
+    private val textColor = Res.color(R.color.gray_text_color)
+    private val textFont = Res.font(R.font.red_hat_display_regular)
+    private val textPaint = TextPaint()
+    private val swipeLeftBackgroundColorDrawable = ColorDrawable(swipeLeftBackgroundColor)
+    private val swipeRightBackgroundColorDrawable = ColorDrawable(swipeRightBackgroundColor)
 
     override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,
                         target: RecyclerView.ViewHolder): Boolean {
@@ -28,42 +40,71 @@ class TaskTouchHelperCallback(
     override fun onChildDraw(c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, dX: Float,
                              dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-        val itemView = viewHolder.itemView
-        val iconMargin = Res.dimen(R.dimen.home_task_item_min_height).toInt() / 2
-        val iconTop = itemView.top + (itemView.height - icon.intrinsicHeight) / 2
-        val iconBottom = iconTop + icon.intrinsicHeight
-        when {
-            dX > 0 -> { // Swiping to the right
-                val iconLeft = itemView.left + iconMargin + icon.intrinsicWidth
-                val iconRight = itemView.left + iconMargin
-                icon.setBounds(iconRight, iconTop, iconLeft, iconBottom)
-                background.setBounds(itemView.left, itemView.top, itemView.left + dX.toInt(), itemView.bottom)
-            }
-            dX < 0 -> { // Swiping to the left
-                val iconLeft = itemView.right - iconMargin - icon.intrinsicWidth
-                val iconRight = itemView.right - iconMargin
-                icon.setBounds(iconLeft, iconTop, iconRight, iconBottom)
-                background.setBounds(itemView.right + dX.toInt(), itemView.top, itemView.right, itemView.bottom)
-            }
-            else -> { // view is unSwiped
-                background.setBounds(0, 0, 0, 0)
-            }
+        if (dX > 0) {
+            // background
+            swipeRightBackgroundColorDrawable.setBounds(viewHolder.itemView.left, viewHolder.itemView.top,
+                                                        viewHolder.itemView.left + dX.toInt(),
+                                                        viewHolder.itemView.bottom)
+            swipeRightBackgroundColorDrawable.draw(c)
+            // background
+
+            // icon
+            val icon = swipeRightIconId
+            val iconSize = icon.intrinsicHeight
+            val halfIcon = iconSize / 2
+            val top = viewHolder.itemView.top + ((viewHolder.itemView.bottom - viewHolder.itemView.top) / 2 - halfIcon)
+            icon.setBounds(viewHolder.itemView.left + iconHorizontalMargin, top,
+                           viewHolder.itemView.left + iconHorizontalMargin + icon.intrinsicWidth,
+                           top + icon.intrinsicHeight)
+            icon.setTint(iconTint)
+            icon.draw(c)
+            // icon
+
+            // text
+            textPaint.isAntiAlias = true
+            textPaint.textSize = textSize
+            textPaint.color = textColor
+            textPaint.typeface = textFont
+            val textTop = (viewHolder.itemView.top.toDouble()
+                    + (viewHolder.itemView.bottom - viewHolder.itemView.top) / 2.0
+                    + (textPaint.textSize / 2).toDouble()).toInt() - iconHorizontalMargin / 5
+            c.drawText(swipeRightText,
+                       (viewHolder.itemView.left + iconHorizontalMargin + iconSize
+                               + if (iconSize > 0) iconHorizontalMargin / 2 else 0).toFloat(),
+                       textTop.toFloat(), textPaint)
+            // text
+
+        } else if (dX < 0) {
+            // background
+            swipeLeftBackgroundColorDrawable.setBounds(viewHolder.itemView.right + dX.toInt(), viewHolder.itemView.top,
+                                                       viewHolder.itemView.right, viewHolder.itemView.bottom)
+            swipeLeftBackgroundColorDrawable.draw(c)
+            // background
+
+            // icon
+            val icon = swipeLeftIconId
+            val iconSize = icon.intrinsicHeight
+            val halfIcon = iconSize / 2
+            val top = viewHolder.itemView.top + ((viewHolder.itemView.bottom - viewHolder.itemView.top) / 2 - halfIcon)
+            val imgLeft = viewHolder.itemView.right - iconHorizontalMargin - halfIcon * 2
+            icon.setBounds(imgLeft, top, viewHolder.itemView.right - iconHorizontalMargin, top + icon.intrinsicHeight)
+            icon.setTint(iconTint)
+            icon.draw(c)
+            // icon
+
+            // text
+            textPaint.isAntiAlias = true
+            textPaint.textSize = textSize
+            textPaint.color = textColor
+            textPaint.typeface = textFont
+            val width = textPaint.measureText(swipeLeftText)
+            val textTop = (viewHolder.itemView.top.toDouble()
+                    + (viewHolder.itemView.bottom - viewHolder.itemView.top) / 2.0
+                    + (textPaint.textSize / 2).toDouble()).toInt() - iconHorizontalMargin / 5
+            c.drawText(swipeLeftText, imgLeft.toFloat() - width
+                    - (if (imgLeft == viewHolder.itemView.right) iconHorizontalMargin else iconHorizontalMargin / 2).toFloat(),
+                       textTop.toFloat(), textPaint)
+            // text
         }
-
-        val textPaint = TextPaint()
-        textPaint.isAntiAlias = true
-        textPaint.textSize = Res.dimen(R.dimen.l_text_size)
-        textPaint.color = Res.color(R.color.primary_white_text_color)
-//        textPaint.typeface =
-
-
-        val testText = "Tost toxt O"
-        val width = textPaint.measureText(testText)
-        val textTop = (viewHolder.itemView.top + (viewHolder.itemView.bottom - viewHolder.itemView.top) / 2.0 + textPaint.textSize / 2).toFloat()
-
-
-        background.draw(c)
-        icon.draw(c)
-        c.drawText(testText, viewHolder.itemView.right - width - iconMargin, textTop, textPaint)
     }
 }

@@ -21,6 +21,7 @@
     <color name="pale_dark_green">#B9CAC0</color>
     <color name="pale_purple">#CE93D8</color>
     <color name="pale_orange">#FFAB91</color>
+    <color name="pale_red">#E57373</color>
 
     <color name="primary_text_color">@color/slightly_transparent_black</color>
     <color name="gray_text_color">@color/half_transparent_black</color>
