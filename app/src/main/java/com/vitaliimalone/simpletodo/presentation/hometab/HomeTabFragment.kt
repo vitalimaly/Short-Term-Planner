@@ -3,10 +3,13 @@ package com.vitaliimalone.simpletodo.presentation.hometab
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.google.android.material.snackbar.Snackbar
 import com.vitaliimalone.simpletodo.R
+import com.vitaliimalone.simpletodo.domain.models.Task
 import com.vitaliimalone.simpletodo.presentation.base.BaseFragment
+import com.vitaliimalone.simpletodo.presentation.home.HomeFragmentDirections
 import com.vitaliimalone.simpletodo.presentation.hometab.common.TaskTouchHelperCallback
 import com.vitaliimalone.simpletodo.presentation.hometab.common.TasksAdapter
 import com.vitaliimalone.simpletodo.presentation.models.HomeTab
@@ -28,7 +31,7 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
     }
 
     private val viewModel: HomeTabViewModel by viewModel()
-    private val tasksAdapter by lazy { TasksAdapter() }
+    private val tasksAdapter by lazy { TasksAdapter(::onTaskClicked) }
     private val homeTab by lazy {
         HomeTab.valueOf(requireArguments().getString(ARG_HOME_TAB)!!)
     }
@@ -45,21 +48,26 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
 
     }
 
+    private fun onTaskClicked(task: Task) {
+        val action = HomeFragmentDirections.actionHomeFragmentToTaskDetailsFragment(task)
+        findNavController().navigate(action)
+    }
+
     private fun setupViews() {
         tasksPagerRecyclerView.adapter = tasksAdapter
         tasksPagerRecyclerView.addItemDecoration(
-            DefaultDividerItemDecoration(
-                requireContext(),
-                marginLeft = Res.dimen(R.dimen.home_divider_margin),
-                marginRight = Res.dimen(R.dimen.home_divider_margin)))
+                DefaultDividerItemDecoration(
+                        requireContext(),
+                        marginLeft = Res.dimen(R.dimen.home_divider_margin),
+                        marginRight = Res.dimen(R.dimen.home_divider_margin)))
         val itemTouchHelper = ItemTouchHelper(
-            TaskTouchHelperCallback(
-                this::onTabSwipe,
-                getSwipedToTabText(homeTab, ItemTouchHelper.LEFT),
-                getSwipedToTabText(homeTab, ItemTouchHelper.RIGHT),
-                getSwipedToTabColor(homeTab, ItemTouchHelper.LEFT),
-                getSwipedToTabColor(homeTab, ItemTouchHelper.RIGHT)
-            )
+                TaskTouchHelperCallback(
+                        this::onTabSwipe,
+                        getSwipedToTabText(homeTab, ItemTouchHelper.LEFT),
+                        getSwipedToTabText(homeTab, ItemTouchHelper.RIGHT),
+                        getSwipedToTabColor(homeTab, ItemTouchHelper.LEFT),
+                        getSwipedToTabColor(homeTab, ItemTouchHelper.RIGHT)
+                )
         )
         itemTouchHelper.attachToRecyclerView(tasksPagerRecyclerView)
     }
@@ -73,12 +81,12 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
         }
         val snackbarTitleColor = Res.color(R.color.primary_white_text_color)
         val snackbarTitle =
-            Res.string(R.string.snackbar_task_swiped, getSwipedToTabText(homeTab, direction))
-                .setTextColor(snackbarTitleColor)
+                Res.string(R.string.snackbar_task_swiped, getSwipedToTabText(homeTab, direction))
+                        .setTextColor(snackbarTitleColor)
         val swipedSnackbar = Snackbar.make(
-            tasksPagerRecyclerView,
-            snackbarTitle,
-            Snackbar.LENGTH_LONG
+                tasksPagerRecyclerView,
+                snackbarTitle,
+                Snackbar.LENGTH_LONG
         )
         swipedSnackbar.setAction(Res.string(R.string.snackbar_undo)) {
             viewModel.undoSwipe()
