@@ -48,7 +48,7 @@
         android:drawablePadding="@dimen/xs_spacing"
         android:textColor="@color/gray_text_color"
         android:textSize="@dimen/m_text_size"
-        app:drawableStartCompat="@drawable/ic_access_time"
+        app:drawableStartCompat="@drawable/ic_time"
         app:layout_constraintStart_toStartOf="@id/titleTextView"
         app:layout_constraintTop_toBottomOf="@id/titleTextView"
         tools:text="Fri, Feb 27" />

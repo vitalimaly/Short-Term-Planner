@@ -44,6 +44,12 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
         setupObservers()
     }
 
+    private fun setupObservers() {
+        viewModel.tasksForHomeTab.observe(viewLifecycleOwner, Observer {
+            tasksAdapter.tasks = it
+        })
+    }
+
     private fun setupClickListeners() {
 
     }
@@ -128,11 +134,5 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
         } else {
             throw IllegalArgumentException("Should be LEFT or RIGHT")
         }
-    }
-
-    private fun setupObservers() {
-        viewModel.tasksForHomeTab.observe(viewLifecycleOwner, Observer {
-            tasksAdapter.tasks = it
-        })
     }
 }

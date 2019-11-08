@@ -32,4 +32,11 @@
     <dimen name="add_new_task_dialog_add_image_size">60dp</dimen>
     <dimen name="add_new_task_dialog_add_image_padding">10dp</dimen>
     <dimen name="add_new_task_dialog_background_corner_radius">12dp</dimen>
+
+    <dimen name="toolbar_icon_padding">16dp</dimen>
+
+    <dimen name="details_footer_text_padding">10dp</dimen>
+    <dimen name="details_title_margin_top">12dp</dimen>
+    <dimen name="details_icon_size">35dp</dimen>
+    <dimen name="details_icon_margin_top">4dp</dimen>
 </resources>

@@ -10,6 +10,20 @@ class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        setupClickListeners()
+        setupViews()
+        setupObservers()
+    }
+
+    private fun setupClickListeners() {
+
+    }
+
+    private fun setupViews() {
+
+    }
+
+    private fun setupObservers() {
 
     }
 }

@@ -1,13 +1,193 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:text="Hello 2" />
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/pale_green"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:title="Edit Task"
+            app:titleTextColor="@color/primary_text_color">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/deleteIv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="@dimen/toolbar_icon_padding"
+                app:srcCompat="@drawable/ic_delete" />
+        </com.google.android.material.appbar.MaterialToolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/doneCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/m_spacing"
+                android:layout_marginTop="@dimen/m_spacing"
+                android:button="@drawable/selector_done"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/taskTitleEt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/m_spacing"
+                android:layout_marginTop="@dimen/details_title_margin_top"
+                android:layout_marginEnd="@dimen/s_spacing"
+                android:background="@color/transparent"
+                android:hint="@string/add_task_dialog_title_hint"
+                android:paddingStart="@dimen/xs_spacing"
+                android:paddingTop="@dimen/s_spacing"
+                android:paddingEnd="@dimen/xs_spacing"
+                android:paddingBottom="@dimen/s_spacing"
+                android:textSize="@dimen/l_text_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/doneCheckBox"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/subtasksRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/taskTitleEt" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/dueIv"
+                android:layout_width="@dimen/details_icon_size"
+                android:layout_height="@dimen/details_icon_size"
+                android:layout_marginTop="@dimen/m_spacing"
+                app:layout_constraintEnd_toEndOf="@id/doneCheckBox"
+                app:layout_constraintStart_toStartOf="@id/doneCheckBox"
+                app:layout_constraintTop_toBottomOf="@id/subtasksRv"
+                app:srcCompat="@drawable/ic_time"
+                app:tint="@color/slightly_transparent_black" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/dueTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/m_spacing"
+                android:layout_marginTop="@dimen/m_spacing"
+                android:layout_marginEnd="@dimen/s_spacing"
+                android:textSize="@dimen/l_text_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/dueIv"
+                app:layout_constraintTop_toBottomOf="@id/subtasksRv"
+                tools:text="Due Friday, October 11" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/tagIv"
+                android:layout_width="@dimen/details_icon_size"
+                android:layout_height="@dimen/details_icon_size"
+                android:layout_marginTop="@dimen/l_spacing"
+                app:layout_constraintEnd_toEndOf="@id/doneCheckBox"
+                app:layout_constraintStart_toStartOf="@id/doneCheckBox"
+                app:layout_constraintTop_toBottomOf="@id/dueIv"
+                app:srcCompat="@drawable/ic_tag"
+                app:tint="@color/slightly_transparent_black" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/tagEt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/m_spacing"
+                android:layout_marginTop="@dimen/m_spacing"
+                android:layout_marginEnd="@dimen/s_spacing"
+                android:background="@color/transparent"
+                android:hint="Add tags"
+                android:paddingStart="@dimen/xs_spacing"
+                android:paddingTop="@dimen/s_spacing"
+                android:paddingEnd="@dimen/xs_spacing"
+                android:paddingBottom="@dimen/s_spacing"
+                android:textSize="@dimen/l_text_size"
+                app:layout_constraintBottom_toTopOf="@id/createdOnTv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/noteIv"
+                app:layout_constraintTop_toBottomOf="@+id/dueTv"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/noteIv"
+                android:layout_width="@dimen/details_icon_size"
+                android:layout_height="@dimen/details_icon_size"
+                android:layout_marginTop="@dimen/l_spacing"
+                app:layout_constraintEnd_toEndOf="@id/doneCheckBox"
+                app:layout_constraintStart_toStartOf="@id/doneCheckBox"
+                app:layout_constraintTop_toBottomOf="@id/tagEt"
+                app:srcCompat="@drawable/ic_note"
+                app:tint="@color/slightly_transparent_black" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/noteEt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/m_spacing"
+                android:layout_marginTop="@dimen/m_spacing"
+                android:layout_marginEnd="@dimen/s_spacing"
+                android:background="@color/transparent"
+                android:hint="Add note"
+                android:paddingStart="@dimen/xs_spacing"
+                android:paddingTop="@dimen/s_spacing"
+                android:paddingEnd="@dimen/xs_spacing"
+                android:paddingBottom="@dimen/s_spacing"
+                android:textSize="@dimen/l_text_size"
+                app:layout_constraintBottom_toTopOf="@id/createdOnTv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/noteIv"
+                app:layout_constraintTop_toBottomOf="@+id/tagEt"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/createdOnTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/pale_dark_green"
+                android:padding="@dimen/details_footer_text_padding"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/modifiedOnTv"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="Created on Oct 11, 2019" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/modifiedOnTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/pale_dark_green"
+                android:padding="@dimen/details_footer_text_padding"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/createdOnTv"
+                tools:text="Last modified on Oct 11, 2019" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
