@@ -29,6 +29,13 @@ android {
             resValue("string", "app_name", "Simple To-Do")
         }
     }
+    compileOptions {
+        sourceCompatibility = "1.8"
+        targetCompatibility = "1.8"
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
     android.applicationVariants.all { variant ->
         variant.outputs.all {
             outputFileName = "${variant.name}-${variant.versionName}-${buildTime()}.apk"

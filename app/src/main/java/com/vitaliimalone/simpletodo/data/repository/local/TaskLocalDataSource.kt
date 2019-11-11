@@ -26,4 +26,8 @@ class TaskLocalDataSource(
     suspend fun updateTask(taskEntity: TaskEntity) {
         taskDao.updateTask(taskEntity)
     }
+
+    suspend fun deleteTask(taskEntity: TaskEntity) {
+        taskDao.deleteTask(taskEntity)
+    }
 }

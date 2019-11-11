@@ -26,4 +26,8 @@ class TaskRepository(
     suspend fun updateTask(task: TaskEntity) {
         taskLocalDataSource.updateTask(task)
     }
+
+    suspend fun deleteTask(task: TaskEntity) {
+        taskLocalDataSource.deleteTask(task)
+    }
 }

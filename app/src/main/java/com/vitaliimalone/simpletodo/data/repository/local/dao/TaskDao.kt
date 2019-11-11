@@ -1,10 +1,6 @@
 package com.vitaliimalone.simpletodo.data.repository.local.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.vitaliimalone.simpletodo.data.repository.local.models.TaskEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -24,4 +20,7 @@ interface TaskDao {
 
     @Update
     suspend fun updateTask(task: TaskEntity)
+
+    @Delete
+    suspend fun deleteTask(task: TaskEntity)
 }

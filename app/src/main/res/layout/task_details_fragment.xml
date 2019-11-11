@@ -104,44 +104,13 @@
                 tools:text="Due Friday, October 11" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/tagIv"
-                android:layout_width="@dimen/details_icon_size"
-                android:layout_height="@dimen/details_icon_size"
-                android:layout_marginTop="@dimen/l_spacing"
-                app:layout_constraintEnd_toEndOf="@id/doneCheckBox"
-                app:layout_constraintStart_toStartOf="@id/doneCheckBox"
-                app:layout_constraintTop_toBottomOf="@id/dueIv"
-                app:srcCompat="@drawable/ic_tag"
-                app:tint="@color/slightly_transparent_black" />
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/tagEt"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/m_spacing"
-                android:layout_marginTop="@dimen/m_spacing"
-                android:layout_marginEnd="@dimen/s_spacing"
-                android:background="@color/transparent"
-                android:hint="Add tags"
-                android:paddingStart="@dimen/xs_spacing"
-                android:paddingTop="@dimen/s_spacing"
-                android:paddingEnd="@dimen/xs_spacing"
-                android:paddingBottom="@dimen/s_spacing"
-                android:textSize="@dimen/l_text_size"
-                app:layout_constraintBottom_toTopOf="@id/createdOnTv"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/noteIv"
-                app:layout_constraintTop_toBottomOf="@+id/dueTv"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/noteIv"
                 android:layout_width="@dimen/details_icon_size"
                 android:layout_height="@dimen/details_icon_size"
                 android:layout_marginTop="@dimen/l_spacing"
                 app:layout_constraintEnd_toEndOf="@id/doneCheckBox"
                 app:layout_constraintStart_toStartOf="@id/doneCheckBox"
-                app:layout_constraintTop_toBottomOf="@id/tagEt"
+                app:layout_constraintTop_toBottomOf="@id/dueTv"
                 app:srcCompat="@drawable/ic_note"
                 app:tint="@color/slightly_transparent_black" />
 
@@ -162,7 +131,7 @@
                 app:layout_constraintBottom_toTopOf="@id/createdOnTv"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/noteIv"
-                app:layout_constraintTop_toBottomOf="@+id/tagEt"
+                app:layout_constraintTop_toBottomOf="@+id/dueTv"
                 app:layout_constraintVertical_bias="0.0" />
 
             <com.google.android.material.textview.MaterialTextView
