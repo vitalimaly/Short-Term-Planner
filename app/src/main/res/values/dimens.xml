@@ -39,4 +39,5 @@
     <dimen name="details_title_margin_top">12dp</dimen>
     <dimen name="details_icon_size">35dp</dimen>
     <dimen name="details_icon_margin_top">4dp</dimen>
+    <dimen name="subtask_line_width">30dp</dimen>
 </resources>

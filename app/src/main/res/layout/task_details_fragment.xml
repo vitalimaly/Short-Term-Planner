@@ -57,18 +57,13 @@
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/taskTitleEt"
+                style="@style/BorderlessTaskEditText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/m_spacing"
                 android:layout_marginTop="@dimen/details_title_margin_top"
                 android:layout_marginEnd="@dimen/s_spacing"
-                android:background="@color/transparent"
                 android:hint="@string/add_task_dialog_title_hint"
-                android:paddingStart="@dimen/xs_spacing"
-                android:paddingTop="@dimen/s_spacing"
-                android:paddingEnd="@dimen/xs_spacing"
-                android:paddingBottom="@dimen/s_spacing"
-                android:textSize="@dimen/l_text_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/doneCheckBox"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -77,7 +72,12 @@
                 android:id="@+id/subtasksRv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/taskTitleEt" />
+                android:layout_marginStart="34dp"
+                android:descendantFocusability="beforeDescendants"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/taskTitleEt"
+                tools:itemCount="3"
+                tools:listitem="@layout/task_details_subtasks_list_item" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/dueIv"

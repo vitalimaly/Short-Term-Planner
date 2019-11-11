@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/topLineIv"
+        android:layout_width="@dimen/subtask_line_width"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/doneCheckBoxVerticalCenterStartHelperView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/shape_subtask_line_top" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/botLineIv"
+        android:layout_width="@dimen/subtask_line_width"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topLineIv"
+        app:srcCompat="@drawable/shape_subtask_line_bot" />
+
+    <View
+        android:id="@+id/doneCheckBoxVerticalCenterStartHelperView"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@id/doneCheckBox"
+        app:layout_constraintEnd_toStartOf="@id/doneCheckBox"
+        app:layout_constraintStart_toStartOf="@id/doneCheckBox"
+        app:layout_constraintTop_toTopOf="@id/doneCheckBox" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/doneCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:button="@drawable/selector_done"
+        app:layout_constraintStart_toEndOf="@id/topLineIv"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/taskTitleEt"
+        style="@style/BorderlessTaskEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/m_spacing"
+        android:layout_marginTop="@dimen/s_spacing"
+        android:layout_marginEnd="@dimen/s_spacing"
+        android:layout_marginBottom="@dimen/s_spacing"
+        android:hint="Add subtask"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/doneCheckBox"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

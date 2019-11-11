@@ -28,4 +28,13 @@
         <item name="textAllCaps">false</item>
         <item name="fontFamily">@font/red_hat_display_medium</item>
     </style>
+
+    <style name="BorderlessTaskEditText">
+        <item name="android:background">@color/transparent</item>
+        <item name="android:paddingStart">@dimen/xs_spacing</item>
+        <item name="android:paddingTop">@dimen/s_spacing</item>
+        <item name="android:paddingEnd">@dimen/xs_spacing</item>
+        <item name="android:paddingBottom">@dimen/s_spacing</item>
+        <item name="android:textSize">@dimen/l_text_size</item>
+    </style>
 </resources>

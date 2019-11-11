@@ -11,4 +11,5 @@
     <string name="snackbar_undo">Undo</string>
     <string name="snackbar_task_swiped">Moved to %s</string>
     <string name="archive">Archive</string>
+    <string name="add_subtask_hint">Add subtask</string>
 </resources>
