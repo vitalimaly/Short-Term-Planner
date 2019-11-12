@@ -38,6 +38,7 @@
     <dimen name="details_footer_text_padding">10dp</dimen>
     <dimen name="details_title_margin_top">12dp</dimen>
     <dimen name="details_icon_size">35dp</dimen>
-    <dimen name="details_icon_margin_top">4dp</dimen>
-    <dimen name="subtask_line_width">30dp</dimen>
+    <dimen name="subtask_line_stroke_width">2dp</dimen>
+    <dimen name="subtask_line_horizontal_width">30dp</dimen>
+    <dimen name="subtask_checkbox_margin_top">11dp</dimen>
 </resources>

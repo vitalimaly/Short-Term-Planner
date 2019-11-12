@@ -5,43 +5,41 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/topLineIv"
-        android:layout_width="@dimen/subtask_line_width"
+    <View
+        android:id="@+id/topLineView"
+        android:layout_width="@dimen/subtask_line_stroke_width"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@id/doneCheckBoxVerticalCenterStartHelperView"
+        android:background="@color/slightly_transparent_black"
+        app:layout_constraintBottom_toTopOf="@id/horizontalLineView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/shape_subtask_line_top" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/botLineIv"
-        android:layout_width="@dimen/subtask_line_width"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topLineIv"
-        app:srcCompat="@drawable/shape_subtask_line_bot" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
-        android:id="@+id/doneCheckBoxVerticalCenterStartHelperView"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
-        android:visibility="invisible"
+        android:id="@+id/horizontalLineView"
+        android:layout_width="@dimen/subtask_line_horizontal_width"
+        android:layout_height="@dimen/subtask_line_stroke_width"
+        android:background="@color/slightly_transparent_black"
         app:layout_constraintBottom_toBottomOf="@id/doneCheckBox"
-        app:layout_constraintEnd_toStartOf="@id/doneCheckBox"
-        app:layout_constraintStart_toStartOf="@id/doneCheckBox"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/doneCheckBox" />
+
+    <View
+        android:id="@+id/botLineView"
+        android:layout_width="@dimen/subtask_line_stroke_width"
+        android:layout_height="0dp"
+        android:background="@color/slightly_transparent_black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/horizontalLineView" />
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/doneCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/subtask_checkbox_margin_top"
         android:button="@drawable/selector_done"
-        app:layout_constraintStart_toEndOf="@id/topLineIv"
+        app:layout_constraintStart_toEndOf="@id/horizontalLineView"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/taskTitleEt"
@@ -52,7 +50,7 @@
         android:layout_marginTop="@dimen/s_spacing"
         android:layout_marginEnd="@dimen/s_spacing"
         android:layout_marginBottom="@dimen/s_spacing"
-        android:hint="Add subtask"
+        android:hint="@string/add_subtask_hint"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/doneCheckBox"
