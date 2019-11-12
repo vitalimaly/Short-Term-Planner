@@ -30,8 +30,9 @@ class SubtasksAdapter : RecyclerView.Adapter<SubtasksAdapter.TaskViewHolder>() {
         return subtasks.size
     }
 
-    inner class TaskViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),
-            LayoutContainer {
+    inner class TaskViewHolder(
+            override val containerView: View
+    ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
         fun bind(subtask: Subtask, position: Int) {
             taskTitleEt.setText(subtask.title)
             doneCheckBox.isChecked = subtask.isDone

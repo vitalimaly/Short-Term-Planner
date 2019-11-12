@@ -54,6 +54,16 @@ object DateTimeUtils {
         }
     }
 
+    fun getTaskDueDateFull(dueDate: OffsetDateTime): String {
+        val today = LocalDate.now()
+        val localDueDate = dueDate.toLocalDate()
+        return when {
+            today == localDueDate -> Res.string(R.string.today_date)
+            today.plusDays(1) == localDueDate -> Res.string(R.string.tomorrow_date)
+            else -> dueDate.format(DateTimeFormatter.ofPattern(FULL_DAY_MONTH_FORMAT))
+        }
+    }
+
     fun getStartEndDateForTab(homeTab: HomeTab): Pair<OffsetDateTime, OffsetDateTime> {
         val now = OffsetDateTime.now()
         val startDate: OffsetDateTime

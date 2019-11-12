@@ -83,10 +83,10 @@
                 android:id="@+id/dueIv"
                 android:layout_width="@dimen/details_icon_size"
                 android:layout_height="@dimen/details_icon_size"
-                android:layout_marginTop="@dimen/m_spacing"
+                app:layout_constraintBottom_toBottomOf="@id/dueClickableView"
                 app:layout_constraintEnd_toEndOf="@id/doneCheckBox"
                 app:layout_constraintStart_toStartOf="@id/doneCheckBox"
-                app:layout_constraintTop_toBottomOf="@id/subtasksRv"
+                app:layout_constraintTop_toTopOf="@id/dueClickableView"
                 app:srcCompat="@drawable/ic_time"
                 app:tint="@color/slightly_transparent_black" />
 
@@ -102,6 +102,18 @@
                 app:layout_constraintStart_toEndOf="@id/dueIv"
                 app:layout_constraintTop_toBottomOf="@id/subtasksRv"
                 tools:text="Due Friday, October 11" />
+
+            <View
+                android:id="@+id/dueClickableView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/s_spacing"
+                android:layout_marginBottom="@dimen/s_spacing"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintBottom_toTopOf="@id/noteEt"
+                app:layout_constraintTop_toBottomOf="@id/subtasksRv" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/noteIv"
@@ -140,6 +152,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/pale_dark_green"
                 android:padding="@dimen/details_footer_text_padding"
+                android:textSize="@dimen/s_text_size"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/modifiedOnTv"
                 app:layout_constraintHorizontal_chainStyle="spread"
@@ -151,7 +164,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/pale_dark_green"
+                android:gravity="end"
                 android:padding="@dimen/details_footer_text_padding"
+                android:textSize="@dimen/s_text_size"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/createdOnTv"
