@@ -118,4 +118,8 @@ object DateTimeUtils {
         }
         return startDate to endDate
     }
+
+    fun getShortDayMonthDate(offsetDateTime: OffsetDateTime): String {
+        return offsetDateTime.format(DateTimeFormatter.ofPattern(SHORT_DAY_MONTH_FORMAT))
+    }
 }

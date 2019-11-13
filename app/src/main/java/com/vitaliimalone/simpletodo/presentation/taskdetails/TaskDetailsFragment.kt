@@ -48,8 +48,10 @@ class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
                 updateTaskDueDate(it)
             }
         }
-        createdOnTv.text = Res.string(R.string.task_details_created, DateTimeUtils.getTaskDueDate(task.createdAt))
-        modifiedOnTv.text = Res.string(R.string.task_details_modified, DateTimeUtils.getTaskDueDate(task.modifiedAt))
+        createdOnTv.text = Res.string(R.string.task_details_created,
+                DateTimeUtils.getShortDayMonthDate(task.createdAt))
+        modifiedOnTv.text = Res.string(R.string.task_details_modified,
+                DateTimeUtils.getShortDayMonthDate(task.modifiedAt))
     }
 
     private fun updateTaskDueDate(offsetDateTime: OffsetDateTime) {
