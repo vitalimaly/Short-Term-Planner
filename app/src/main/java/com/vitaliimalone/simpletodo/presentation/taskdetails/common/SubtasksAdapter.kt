@@ -13,7 +13,9 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.task_details_add_new_subtasks_list_item.*
 import kotlinx.android.synthetic.main.task_details_subtasks_list_item.*
 
-class SubtasksAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SubtasksAdapter(
+        private val subtaskListItemsSizeChanged: (isEmpty: Boolean) -> Unit
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var subtaskListItems = mutableListOf<SubtaskListItem>()
         set(value) {
             field = value
@@ -68,6 +70,7 @@ class SubtasksAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         if (subtaskListItems.lastIndex - 1 >= 0) {
             notifyItemChanged(subtaskListItems.lastIndex - 1)
         }
+        subtaskListItemsSizeChanged.invoke(subtaskListItems.isEmpty())
     }
 
     inner class TaskViewHolder(

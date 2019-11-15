@@ -1,6 +1,8 @@
 package com.vitaliimalone.simpletodo.presentation.taskdetails
 
 import android.os.Bundle
+import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.vitaliimalone.simpletodo.R
@@ -18,7 +20,7 @@ class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
     private val viewModel: TaskDetailsViewModel by viewModel()
     private val args: TaskDetailsFragmentArgs by navArgs()
     private val task: Task by lazy { args.task }
-    private val subtasksAdapter by lazy { SubtasksAdapter() }
+    private val subtasksAdapter by lazy { SubtasksAdapter { updateBotLine(it) } }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -52,6 +54,15 @@ class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
                 DateTimeUtils.getShortDayMonthDate(task.createdAt))
         modifiedOnTv.text = Res.string(R.string.task_details_modified,
                 DateTimeUtils.getShortDayMonthDate(task.modifiedAt))
+        updateBotLine(task.subtasks.isEmpty())
+    }
+
+    private fun updateBotLine(isEmpty: Boolean) {
+        if (isEmpty) {
+            botLineView.isInvisible = true
+        } else {
+            botLineView.isVisible = true
+        }
     }
 
     private fun updateTaskDueDate(offsetDateTime: OffsetDateTime) {
