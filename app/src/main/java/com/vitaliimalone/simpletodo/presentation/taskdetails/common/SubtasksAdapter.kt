@@ -3,65 +3,87 @@ package com.vitaliimalone.simpletodo.presentation.taskdetails.common
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.domain.models.Subtask
-import com.vitaliimalone.simpletodo.presentation.utils.Res
+import com.vitaliimalone.simpletodo.presentation.utils.showKeyboard
 import kotlinx.android.extensions.LayoutContainer
+import kotlinx.android.synthetic.main.task_details_add_new_subtasks_list_item.*
 import kotlinx.android.synthetic.main.task_details_subtasks_list_item.*
 
 class SubtasksAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private enum class SubtaskViewType { SUBTASK, ADDNEW }
-
-    var subtasks = mutableListOf<Subtask>()
+    var subtaskListItems = mutableListOf<SubtaskListItem>()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.task_details_subtasks_list_item, parent, false)
         return when (viewType) {
-            SubtaskViewType.SUBTASK.ordinal -> TaskViewHolder(view)
-            SubtaskViewType.ADDNEW.ordinal -> AddNewTaskViewHolder(view)
-            else -> throw IllegalArgumentException()
+            SubtaskViewType.SUBTASK.ordinal -> {
+                TaskViewHolder(inflateView(R.layout.task_details_subtasks_list_item, parent))
+            }
+            SubtaskViewType.ADDNEW.ordinal -> {
+                AddNewTaskViewHolder(inflateView(R.layout.task_details_add_new_subtasks_list_item, parent))
+            }
+            else -> {
+                throw IllegalArgumentException()
+            }
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is TaskViewHolder -> holder.bind(subtasks[position], position)
+            is TaskViewHolder -> holder.bind(subtaskListItems[position], position)
             is AddNewTaskViewHolder -> holder.bind()
             else -> throw IllegalArgumentException()
         }
     }
 
     override fun getItemCount(): Int {
-        return if (subtasks.isEmpty()) {
+        return if (subtaskListItems.isEmpty()) {
             1
         } else {
-            subtasks.size + 1
+            subtaskListItems.size + 1
         }
     }
 
     override fun getItemViewType(position: Int): Int {
         return when (position) {
-            subtasks.size -> SubtaskViewType.ADDNEW.ordinal
+            subtaskListItems.size -> SubtaskViewType.ADDNEW.ordinal
             else -> SubtaskViewType.SUBTASK.ordinal
+        }
+    }
+
+    private fun inflateView(@LayoutRes resource: Int, parent: ViewGroup): View {
+        return LayoutInflater.from(parent.context).inflate(resource, parent, false)
+    }
+
+    private fun addSubtask() {
+        subtaskListItems.forEach { it.isFocused = false }
+        subtaskListItems.add(SubtaskListItem(Subtask(), true))
+        notifyItemInserted(subtaskListItems.lastIndex)
+        if (subtaskListItems.lastIndex - 1 >= 0) {
+            notifyItemChanged(subtaskListItems.lastIndex - 1)
         }
     }
 
     inner class TaskViewHolder(
             override val containerView: View
     ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
-        fun bind(subtask: Subtask, position: Int) {
-            taskTitleEt.setText(subtask.title)
-            doneCheckBox.isChecked = subtask.isDone
+        fun bind(subtaskListItem: SubtaskListItem, position: Int) {
+            taskTitleEt.setText(subtaskListItem.subtask.title)
+            if (subtaskListItem.isFocused) {
+                taskTitleEt.post {
+                    taskTitleEt.requestFocus()
+                    taskTitleEt.showKeyboard()
+                }
+            }
+            doneCheckBox.isChecked = subtaskListItem.subtask.isDone
+            botLineView.isVisible = subtaskListItems.lastIndex != position
 
-            topLineView.isVisible = true
-            horizontalLineView.isVisible = true
-            botLineView.isVisible = subtasks.lastIndex != position
         }
     }
 
@@ -69,19 +91,8 @@ class SubtasksAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             override val containerView: View
     ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
         fun bind() {
-            doneCheckBox.buttonDrawable = Res.drawable(R.drawable.ic_add_checkbox)
-            taskTitleEt.text?.clear()
-            taskTitleEt.isFocusable = false
-            taskTitleEt.isFocusableInTouchMode = false
-            doneCheckBox.isChecked = false
-
-            topLineView.isVisible = false
-            horizontalLineView.isVisible = false
-            botLineView.isVisible = false
-
-            taskTitleEt.setOnClickListener {
-                subtasks.add(Subtask())
-                notifyDataSetChanged()
+            addSubtaskContainer.setOnClickListener {
+                addSubtask()
             }
         }
     }
