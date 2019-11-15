@@ -42,7 +42,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/taskTitleEt"
+        android:id="@+id/subtaskTitleEditText"
         style="@style/BorderlessTaskEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -51,6 +51,8 @@
         android:layout_marginEnd="@dimen/s_spacing"
         android:layout_marginBottom="@dimen/s_spacing"
         android:hint="@string/add_subtask_hint"
+        android:imeOptions="actionDone"
+        android:inputType="textCapSentences"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/doneCheckBox"

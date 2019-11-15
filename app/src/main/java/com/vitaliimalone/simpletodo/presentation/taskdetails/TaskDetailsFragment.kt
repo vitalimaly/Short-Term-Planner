@@ -12,6 +12,7 @@ import com.vitaliimalone.simpletodo.presentation.taskdetails.common.SubtasksAdap
 import com.vitaliimalone.simpletodo.presentation.utils.DateTimeUtils
 import com.vitaliimalone.simpletodo.presentation.utils.Dialogs
 import com.vitaliimalone.simpletodo.presentation.utils.Res
+import com.vitaliimalone.simpletodo.presentation.utils.clearFocusOnDoneClick
 import kotlinx.android.synthetic.main.task_details_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.threeten.bp.OffsetDateTime
@@ -41,7 +42,7 @@ class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
 
     private fun setupViews() {
         subtasksRv.adapter = subtasksAdapter
-        taskTitleEt.setText(task.title)
+        taskTitleEditText.setText(task.title)
         noteEt.setText(task.description)
         updateTaskDueDate(task.dueTo)
         dueClickableView.setOnClickListener {
@@ -55,6 +56,7 @@ class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
         modifiedOnTv.text = Res.string(R.string.task_details_modified,
                 DateTimeUtils.getShortDayMonthDate(task.modifiedAt))
         updateBotLine(task.subtasks.isEmpty())
+        taskTitleEditText.clearFocusOnDoneClick()
     }
 
     private fun updateBotLine(isEmpty: Boolean) {

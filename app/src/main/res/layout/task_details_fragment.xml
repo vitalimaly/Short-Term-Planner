@@ -4,7 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
@@ -56,7 +58,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/taskTitleEt"
+                android:id="@+id/taskTitleEditText"
                 style="@style/BorderlessTaskEditText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -64,6 +66,8 @@
                 android:layout_marginTop="@dimen/details_title_margin_top"
                 android:layout_marginEnd="@dimen/s_spacing"
                 android:hint="@string/add_task_dialog_title_hint"
+                android:imeOptions="actionDone"
+                android:inputType="textCapSentences"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/doneCheckBox"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -87,7 +91,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/botLineView"
-                app:layout_constraintTop_toBottomOf="@id/taskTitleEt"
+                app:layout_constraintTop_toBottomOf="@id/taskTitleEditText"
                 tools:itemCount="3"
                 tools:listitem="@layout/task_details_subtasks_list_item" />
 

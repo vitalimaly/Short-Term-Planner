@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.domain.models.Subtask
+import com.vitaliimalone.simpletodo.presentation.utils.clearFocusOnDoneClick
 import com.vitaliimalone.simpletodo.presentation.utils.showKeyboard
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.task_details_add_new_subtasks_list_item.*
@@ -77,13 +78,14 @@ class SubtasksAdapter(
             override val containerView: View
     ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
         fun bind(subtaskListItem: SubtaskListItem, position: Int) {
-            taskTitleEt.setText(subtaskListItem.subtask.title)
+            subtaskTitleEditText.setText(subtaskListItem.subtask.title)
             if (subtaskListItem.isFocused) {
-                taskTitleEt.post {
-                    taskTitleEt.requestFocus()
-                    taskTitleEt.showKeyboard()
+                subtaskTitleEditText.post {
+                    subtaskTitleEditText.requestFocus()
+                    subtaskTitleEditText.showKeyboard()
                 }
             }
+            subtaskTitleEditText.clearFocusOnDoneClick()
             doneCheckBox.isChecked = subtaskListItem.subtask.isDone
             botLineView.isVisible = subtaskListItems.lastIndex != position
 
