@@ -23,12 +23,12 @@ object Dialogs {
         }
         dialogView.addImageView.setEnabledWithAlpha(false)
         dialogView.titleEditText.addTextChangedListener(onTextChanged = { text, _, _, _ ->
-            dialogView.addImageView.setEnabledWithAlpha(text.trimmedText.isNotEmpty())
-            task.title = text.trimmedText
+            dialogView.addImageView.setEnabledWithAlpha(text.trimmed.isNotEmpty())
+            task.title = text.trimmed
         })
         dialogView.titleEditText.setOnEditorActionListener { v, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                if (dialogView.titleEditText.text.trimmedText.isNotEmpty()) {
+                if (dialogView.titleEditText.text.trimmed.isNotEmpty()) {
                     v.clearFocus()
                     v.hideKeyboard()
                     onAddClick.invoke(task)

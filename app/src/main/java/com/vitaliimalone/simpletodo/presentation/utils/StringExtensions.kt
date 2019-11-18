@@ -12,12 +12,12 @@ fun String.setTextColor(@ColorInt color: Int): SpannableString {
     }
 }
 
-val CharSequence?.trimmedText: String
+val CharSequence?.trimmed: String
     get() {
         return this?.trim()?.toString() ?: ""
     }
 
-val Editable?.trimmedText: String
+val Editable?.trimmed: String
     get() {
         return this?.trim()?.toString() ?: ""
     }
