@@ -4,16 +4,14 @@ import android.os.Bundle
 import android.view.MotionEvent
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.domain.models.Task
 import com.vitaliimalone.simpletodo.presentation.base.BaseFragment
 import com.vitaliimalone.simpletodo.presentation.taskdetails.common.SubtasksAdapter
-import com.vitaliimalone.simpletodo.presentation.utils.DateTimeUtils
-import com.vitaliimalone.simpletodo.presentation.utils.Dialogs
-import com.vitaliimalone.simpletodo.presentation.utils.Res
-import com.vitaliimalone.simpletodo.presentation.utils.clearFocusOnDoneClick
+import com.vitaliimalone.simpletodo.presentation.utils.*
 import kotlinx.android.synthetic.main.task_details_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.threeten.bp.OffsetDateTime
@@ -22,7 +20,6 @@ class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
     private val viewModel: TaskDetailsViewModel by viewModel()
     private val args: TaskDetailsFragmentArgs by navArgs()
     private val task: Task by lazy { args.task }
-    private val subtasksAdapter by lazy { SubtasksAdapter { updateBotLine(it) } }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -34,29 +31,30 @@ class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
     private fun setupClickListeners() {
         deleteIv.setOnClickListener {
             viewModel.deleteTask(task)
-            findNavController().popBackStack()
+            saveAndFinish()
         }
         toolbar.setNavigationOnClickListener {
-            findNavController().popBackStack()
+            saveAndFinish()
         }
     }
 
+    private fun saveAndFinish() {
+        viewModel.updateTask(task)
+        findNavController().popBackStack()
+    }
+
     private fun setupViews() {
-        subtasksRv.adapter = subtasksAdapter
+        subtasksRv.adapter = SubtasksAdapter(task) {
+            drawSubtasksBotLine()
+            viewModel.updateTask(task)
+        }
         taskTitleEditText.setText(task.title)
         noteEt.setText(task.description)
         updateTaskDueDate(task.dueTo)
-        dueClickableView.setOnClickListener {
-            Dialogs.showDatePickerDialog(requireContext(), task.dueTo) {
-                task.dueTo = it
-                updateTaskDueDate(it)
-            }
-        }
         createdOnTv.text = Res.string(R.string.task_details_created,
                 DateTimeUtils.getShortDayMonthDate(task.createdAt))
         modifiedOnTv.text = Res.string(R.string.task_details_modified,
                 DateTimeUtils.getShortDayMonthDate(task.modifiedAt))
-        updateBotLine(task.subtasks.isEmpty())
         taskTitleEditText.clearFocusOnDoneClick()
         noteEt.setOnTouchListener { v, event ->
             if (v.hasFocus()) {
@@ -67,10 +65,23 @@ class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
             }
             false
         }
+        taskTitleEditText.addTextChangedListener {
+            task.title = it.trimmed
+        }
+        noteEt.addTextChangedListener {
+            task.description = it.trimmed
+        }
+        dueClickableView.setOnClickListener {
+            Dialogs.showDatePickerDialog(requireContext(), task.dueTo) {
+                task.dueTo = it
+                updateTaskDueDate(it)
+            }
+        }
+        drawSubtasksBotLine()
     }
 
-    private fun updateBotLine(isEmpty: Boolean) {
-        if (isEmpty) {
+    private fun drawSubtasksBotLine() {
+        if (task.subtasks.isEmpty()) {
             botLineView.isInvisible = true
         } else {
             botLineView.isVisible = true

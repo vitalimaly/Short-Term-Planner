@@ -5,19 +5,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.domain.models.Subtask
+import com.vitaliimalone.simpletodo.domain.models.Task
 import com.vitaliimalone.simpletodo.presentation.utils.clearFocusOnDoneClick
 import com.vitaliimalone.simpletodo.presentation.utils.showKeyboard
+import com.vitaliimalone.simpletodo.presentation.utils.trimmed
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.task_details_add_new_subtasks_list_item.*
 import kotlinx.android.synthetic.main.task_details_subtasks_list_item.*
 
 class SubtasksAdapter(
-        private val subtaskListItemsSizeChanged: (isEmpty: Boolean) -> Unit
+        private val task: Task,
+        private val updateTask: () -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    var subtaskListItems = mutableListOf<SubtaskListItem>()
+    private var subtaskListItems = task.subtasks.map { SubtaskListItem(it) }.toMutableList()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -66,12 +70,18 @@ class SubtasksAdapter(
 
     private fun addSubtask() {
         subtaskListItems.forEach { it.isFocused = false }
-        subtaskListItems.add(SubtaskListItem(Subtask(), true))
+        val subtask = Subtask()
+        task.subtasks.add(subtask)
+        subtaskListItems.add(SubtaskListItem(subtask, true))
         notifyItemInserted(subtaskListItems.lastIndex)
+        updateSubtasks()
+    }
+
+    private fun updateSubtasks() {
         if (subtaskListItems.lastIndex - 1 >= 0) {
             notifyItemChanged(subtaskListItems.lastIndex - 1)
         }
-        subtaskListItemsSizeChanged.invoke(subtaskListItems.isEmpty())
+        updateTask.invoke()
     }
 
     inner class TaskViewHolder(
@@ -88,7 +98,9 @@ class SubtasksAdapter(
             subtaskTitleEditText.clearFocusOnDoneClick()
             doneCheckBox.isChecked = subtaskListItem.subtask.isDone
             botLineView.isVisible = subtaskListItems.lastIndex != position
-
+            subtaskTitleEditText.addTextChangedListener {
+                subtaskListItem.subtask.title = it.trimmed
+            }
         }
     }
 
