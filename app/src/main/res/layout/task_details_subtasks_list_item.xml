@@ -52,7 +52,7 @@
         android:layout_marginBottom="@dimen/s_spacing"
         android:hint="@string/add_subtask_hint"
         android:imeOptions="actionDone"
-        android:inputType="textCapSentences"
+        android:inputType="textMultiLine|textCapSentences"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/doneCheckBox"

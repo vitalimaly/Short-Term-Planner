@@ -1,6 +1,7 @@
 package com.vitaliimalone.simpletodo.presentation.taskdetails
 
 import android.os.Bundle
+import android.view.MotionEvent
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
@@ -57,6 +58,15 @@ class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
                 DateTimeUtils.getShortDayMonthDate(task.modifiedAt))
         updateBotLine(task.subtasks.isEmpty())
         taskTitleEditText.clearFocusOnDoneClick()
+        noteEt.setOnTouchListener { v, event ->
+            if (v.hasFocus()) {
+                v.parent.requestDisallowInterceptTouchEvent(true)
+                when (event.action and MotionEvent.ACTION_MASK) {
+                    MotionEvent.ACTION_UP -> v.parent.requestDisallowInterceptTouchEvent(false)
+                }
+            }
+            false
+        }
     }
 
     private fun updateBotLine(isEmpty: Boolean) {
