@@ -48,15 +48,25 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/m_spacing"
         android:layout_marginTop="@dimen/s_spacing"
-        android:layout_marginEnd="@dimen/s_spacing"
         android:layout_marginBottom="@dimen/s_spacing"
         android:hint="@string/add_subtask_hint"
         android:imeOptions="actionDone"
         android:inputType="textMultiLine|textCapSentences"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/deleteImageView"
         app:layout_constraintStart_toEndOf="@id/doneCheckBox"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/deleteImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="@dimen/task_details_delete_image_padding"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_clear" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

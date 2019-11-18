@@ -1,5 +1,6 @@
 package com.vitaliimalone.simpletodo.presentation.taskdetails.common
 
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -74,12 +75,20 @@ class SubtasksAdapter(
         task.subtasks.add(subtask)
         subtaskListItems.add(SubtaskListItem(subtask, true))
         notifyItemInserted(subtaskListItems.lastIndex)
-        updateSubtasks()
-    }
-
-    private fun updateSubtasks() {
         if (subtaskListItems.lastIndex - 1 >= 0) {
             notifyItemChanged(subtaskListItems.lastIndex - 1)
+        }
+        updateTask.invoke()
+    }
+
+    private fun deleteSubtask(subtaskListItem: SubtaskListItem) {
+        val deletedIndex = subtaskListItems.indexOf(subtaskListItem)
+        subtaskListItems.removeAll { it.subtask.id == subtaskListItem.subtask.id }
+        task.subtasks.removeAll { it.id == subtaskListItem.subtask.id }
+        subtaskListItems.forEach { it.isFocused = false }
+        notifyItemRemoved(deletedIndex)
+        if (deletedIndex == subtaskListItems.lastIndex + 1) {
+            notifyItemChanged(subtaskListItems.lastIndex)
         }
         updateTask.invoke()
     }
@@ -88,6 +97,7 @@ class SubtasksAdapter(
             override val containerView: View
     ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
         fun bind(subtaskListItem: SubtaskListItem, position: Int) {
+            subtaskTitleEditText.setRawInputType(InputType.TYPE_CLASS_TEXT)
             subtaskTitleEditText.setText(subtaskListItem.subtask.title)
             if (subtaskListItem.isFocused) {
                 subtaskTitleEditText.post {
@@ -96,10 +106,17 @@ class SubtasksAdapter(
                 }
             }
             subtaskTitleEditText.clearFocusOnDoneClick()
-            doneCheckBox.isChecked = subtaskListItem.subtask.isDone
-            botLineView.isVisible = subtaskListItems.lastIndex != position
             subtaskTitleEditText.addTextChangedListener {
                 subtaskListItem.subtask.title = it.trimmed
+            }
+            doneCheckBox.isChecked = subtaskListItem.subtask.isDone
+            doneCheckBox.setOnCheckedChangeListener { _, isChecked ->
+                subtaskListItem.subtask.isDone = isChecked
+            }
+            botLineView.isVisible = subtaskListItems.lastIndex != position
+            deleteImageView.setOnClickListener {
+                subtaskTitleEditText.clearFocus()
+                deleteSubtask(subtaskListItem)
             }
         }
     }

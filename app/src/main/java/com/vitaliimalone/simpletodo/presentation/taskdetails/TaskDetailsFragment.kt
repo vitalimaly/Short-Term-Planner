@@ -1,6 +1,7 @@
 package com.vitaliimalone.simpletodo.presentation.taskdetails
 
 import android.os.Bundle
+import android.text.InputType
 import android.view.MotionEvent
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
@@ -48,6 +49,7 @@ class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
             drawSubtasksBotLine()
             viewModel.updateTask(task)
         }
+        taskTitleEditText.setRawInputType(InputType.TYPE_CLASS_TEXT)
         taskTitleEditText.setText(task.title)
         noteEt.setText(task.description)
         updateTaskDueDate(task.dueTo)
