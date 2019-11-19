@@ -21,7 +21,7 @@ object TaskMapper {
                 formatter.parse(input.dueTo, OffsetDateTime::from),
                 input.isDone,
                 input.isArchived,
-                gson.fromJson<List<String>>(input.tags, object : TypeToken<Collection<String>>() {}.type),
-                gson.fromJson<List<Subtask>>(input.subtasks, object : TypeToken<Collection<Subtask>>() {}.type))
+                gson.fromJson<MutableList<String>>(input.tags, object : TypeToken<Collection<String>>() {}.type),
+                gson.fromJson<MutableList<Subtask>>(input.subtasks, object : TypeToken<Collection<Subtask>>() {}.type))
     }
 }

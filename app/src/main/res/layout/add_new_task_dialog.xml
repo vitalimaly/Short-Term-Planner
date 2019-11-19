@@ -9,19 +9,16 @@
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/titleEditText"
+        style="@style/BorderlessTaskEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/m_spacing"
         android:layout_marginTop="@dimen/s_spacing"
-        android:background="@color/transparent"
         android:hint="@string/add_task_dialog_title_hint"
+        android:imeOptions="actionDone"
+        android:inputType="textCapSentences"
         android:maxLines="4"
-        android:paddingStart="@dimen/xs_spacing"
-        android:paddingTop="@dimen/s_spacing"
-        android:paddingEnd="@dimen/xs_spacing"
-        android:paddingBottom="@dimen/s_spacing"
         android:scrollbars="vertical"
-        android:textSize="@dimen/l_text_size"
         app:layout_constraintEnd_toStartOf="@id/addImageView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -49,7 +46,7 @@
         android:padding="@dimen/m_spacing"
         android:textColor="@color/gray_text_color"
         android:textSize="@dimen/m_text_size"
-        app:drawableStartCompat="@drawable/ic_access_time"
+        app:drawableStartCompat="@drawable/ic_time"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/titleEditText"
         tools:text="Due Fri, Feb 27" />

@@ -16,10 +16,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment(R.layout.home_fragment) {
     private val viewModel: HomeViewModel by viewModel()
-    private val tasksPagerAdapter by lazy {
-        HomeTabFragmentAdapter(listOf(
-                HomeTab.TODAY, HomeTab.WEEK, HomeTab.MONTH, HomeTab.TODO), this)
-    }
     private var oldPagePosition = -1
     private val animationTime = 100L
 
@@ -44,7 +40,8 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
 
     private fun setupViews() {
         tasksViewPager.isUserInputEnabled = false
-        tasksViewPager.adapter = tasksPagerAdapter
+        tasksViewPager.adapter = HomeTabFragmentAdapter(listOf(
+                HomeTab.TODAY, HomeTab.WEEK, HomeTab.MONTH, HomeTab.TODO), this)
         TabLayoutMediator(tabsTabLayout, tasksViewPager) { tab, position ->
             tab.text = HomeTab.values()[position].title
         }.attach()

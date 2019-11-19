@@ -10,5 +10,18 @@
         android:id="@+id/homeFragment"
         android:name="com.vitaliimalone.simpletodo.presentation.home.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/home_fragment" />
+        tools:layout="@layout/home_fragment">
+        <action
+            android:id="@+id/action_homeFragment_to_taskDetailsFragment"
+            app:destination="@id/taskDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskDetailsFragment"
+        android:name="com.vitaliimalone.simpletodo.presentation.taskdetails.TaskDetailsFragment"
+        android:label="TaskDetailsFragment"
+        tools:layout="@layout/task_details_fragment">
+        <argument
+            android:name="task"
+            app:argType="com.vitaliimalone.simpletodo.domain.models.Task" />
+    </fragment>
 </navigation>

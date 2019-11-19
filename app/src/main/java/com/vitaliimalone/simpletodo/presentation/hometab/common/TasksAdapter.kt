@@ -11,7 +11,7 @@ import com.vitaliimalone.simpletodo.presentation.utils.DateTimeUtils
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.tasks_list_item.*
 
-class TasksAdapter : RecyclerView.Adapter<TasksAdapter.TaskViewHolder>() {
+class TasksAdapter(private val onTaskClicked: ((Task) -> Unit)) : RecyclerView.Adapter<TasksAdapter.TaskViewHolder>() {
     var tasks = listOf<Task>()
         set(value) {
             field = value
@@ -39,6 +39,9 @@ class TasksAdapter : RecyclerView.Adapter<TasksAdapter.TaskViewHolder>() {
             dueDateTextView.text = DateTimeUtils.getTaskDueDate(task.dueTo)
             tagsTextView.isVisible = task.tags.isNotEmpty()
             tagsTextView.text = task.tags.joinToString()
+            containerView.setOnClickListener {
+                onTaskClicked.invoke(task)
+            }
         }
     }
 }

@@ -16,6 +16,6 @@ data class Task(
         var dueTo: OffsetDateTime = OffsetDateTime.now().with(LocalTime.MAX),
         var isDone: Boolean = false,
         var isArchived: Boolean = false,
-        var tags: List<String> = listOf(),
-        var subtasks: List<Subtask> = listOf()
+        var tags: MutableList<String> = mutableListOf(),
+        var subtasks: MutableList<Subtask> = mutableListOf()
 ) : Parcelable

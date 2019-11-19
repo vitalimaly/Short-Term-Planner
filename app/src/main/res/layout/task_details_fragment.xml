@@ -1,13 +1,203 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
-    <TextView
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:text="Hello 2" />
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/pale_green"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:title="Edit Task"
+            app:titleTextColor="@color/primary_text_color">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/deleteIv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="@dimen/toolbar_icon_padding"
+                app:srcCompat="@drawable/ic_delete" />
+        </com.google.android.material.appbar.MaterialToolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appbar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/doneCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/m_spacing"
+                android:layout_marginTop="@dimen/m_spacing"
+                android:button="@drawable/selector_done"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/taskTitleEditText"
+                style="@style/BorderlessTaskEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/m_spacing"
+                android:layout_marginTop="@dimen/details_title_margin_top"
+                android:layout_marginEnd="@dimen/s_spacing"
+                android:hint="@string/add_task_dialog_title_hint"
+                android:imeOptions="actionDone"
+                android:inputType="textMultiLine|textCapSentences"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/doneCheckBox"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/botLineView"
+                android:layout_width="@dimen/subtask_line_stroke_width"
+                android:layout_height="0dp"
+                android:background="@color/slightly_transparent_black"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toTopOf="@id/subtasksRv"
+                app:layout_constraintEnd_toEndOf="@id/doneCheckBox"
+                app:layout_constraintStart_toStartOf="@id/doneCheckBox"
+                app:layout_constraintTop_toBottomOf="@id/doneCheckBox" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/subtasksRv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="beforeDescendants"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/botLineView"
+                app:layout_constraintTop_toBottomOf="@id/taskTitleEditText"
+                tools:itemCount="3"
+                tools:listitem="@layout/task_details_subtasks_list_item" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/dueIv"
+                android:layout_width="@dimen/details_icon_size"
+                android:layout_height="@dimen/details_icon_size"
+                app:layout_constraintBottom_toBottomOf="@id/dueClickableView"
+                app:layout_constraintEnd_toEndOf="@id/doneCheckBox"
+                app:layout_constraintStart_toStartOf="@id/doneCheckBox"
+                app:layout_constraintTop_toTopOf="@id/dueClickableView"
+                app:srcCompat="@drawable/ic_time"
+                app:tint="@color/slightly_transparent_black" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/dueTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/m_spacing"
+                android:layout_marginTop="@dimen/m_spacing"
+                android:layout_marginEnd="@dimen/s_spacing"
+                android:textSize="@dimen/l_text_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/dueIv"
+                app:layout_constraintTop_toBottomOf="@id/subtasksRv"
+                tools:text="Due Friday, October 11" />
+
+            <View
+                android:id="@+id/dueClickableView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/s_spacing"
+                android:layout_marginBottom="@dimen/s_spacing"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintBottom_toTopOf="@id/noteEt"
+                app:layout_constraintTop_toBottomOf="@id/subtasksRv" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/noteIv"
+                android:layout_width="@dimen/details_icon_size"
+                android:layout_height="@dimen/details_icon_size"
+                android:layout_marginTop="@dimen/l_spacing"
+                app:layout_constraintEnd_toEndOf="@id/doneCheckBox"
+                app:layout_constraintStart_toStartOf="@id/doneCheckBox"
+                app:layout_constraintTop_toBottomOf="@id/dueTv"
+                app:srcCompat="@drawable/ic_note"
+                app:tint="@color/slightly_transparent_black" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/noteEt"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/m_spacing"
+                android:layout_marginTop="@dimen/m_spacing"
+                android:layout_marginEnd="@dimen/s_spacing"
+                android:background="@color/transparent"
+                android:gravity="top"
+                android:hint="@string/task_details_note_hint"
+                android:overScrollMode="always"
+                android:paddingStart="@dimen/xs_spacing"
+                android:paddingTop="@dimen/s_spacing"
+                android:paddingEnd="@dimen/xs_spacing"
+                android:paddingBottom="@dimen/s_spacing"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars="vertical"
+                android:textSize="@dimen/l_text_size"
+                app:layout_constraintHeight_min="200dp"
+                app:layout_constraintBottom_toTopOf="@id/createdOnTv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/noteIv"
+                app:layout_constraintTop_toBottomOf="@+id/dueTv"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/createdOnTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/pale_dark_green"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:padding="@dimen/details_footer_text_padding"
+                android:textSize="@dimen/s_text_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/modifiedOnTv"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/noteEt"
+                tools:text="Created on Oct 11, 2019" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/modifiedOnTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/pale_dark_green"
+                android:ellipsize="end"
+                android:gravity="end"
+                android:maxLines="1"
+                android:padding="@dimen/details_footer_text_padding"
+                android:textSize="@dimen/s_text_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/createdOnTv"
+                tools:text="Last modified on Oct 11, 2019" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
