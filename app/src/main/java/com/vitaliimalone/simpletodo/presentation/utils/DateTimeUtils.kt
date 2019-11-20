@@ -122,4 +122,12 @@ object DateTimeUtils {
     fun getShortDayMonthDate(offsetDateTime: OffsetDateTime): String {
         return offsetDateTime.format(DateTimeFormatter.ofPattern(SHORT_DAY_MONTH_FORMAT))
     }
+
+    fun getDueDatePopupEndOfWeekDate(): String {
+        return if (OffsetDateTime.now().dayOfWeek < DayOfWeek.SATURDAY) {
+            Res.string(R.string.due_date_popup_this_saturday)
+        } else {
+            Res.string(R.string.due_date_popup_next_saturday)
+        }
+    }
 }
