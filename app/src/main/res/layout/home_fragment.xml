@@ -1,73 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <View
-        android:id="@+id/backgroundColorView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/pale_green"
-        app:layout_constraintBottom_toBottomOf="@id/settingsImageView"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabsTabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        android:paddingStart="@dimen/home_tab_layout_padding"
-        android:paddingTop="@dimen/home_tab_layout_padding"
-        android:paddingEnd="@dimen/home_tab_layout_padding"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tabIndicatorColor="@color/transparent"
-        app:tabIndicatorFullWidth="false"
-        app:tabMode="scrollable"
-        app:tabSelectedTextColor="@color/primary_text_color"
-        app:tabTextAppearance="@style/HomeTabTextAppearance"
-        app:tabTextColor="@color/light_gray_text_color" />
+        <View
+            android:id="@+id/backgroundColorView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/pale_green"
+            app:layout_constraintBottom_toBottomOf="@id/settingsImageView"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/dateRangeTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/home_date_range_text_view_margin_start"
-        android:textSize="@dimen/xl_text_size"
-        app:layout_constraintBottom_toBottomOf="@id/settingsImageView"
-        app:layout_constraintEnd_toStartOf="@id/settingsImageView"
-        app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/settingsImageView"
-        tools:text="Monday, February 24" />
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabsTabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingStart="@dimen/home_tab_layout_padding"
+            android:paddingTop="@dimen/home_tab_layout_padding"
+            android:paddingEnd="@dimen/home_tab_layout_padding"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tabIndicatorColor="@color/transparent"
+            app:tabIndicatorFullWidth="false"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/primary_text_color"
+            app:tabTextAppearance="@style/HomeTabTextAppearance"
+            app:tabTextColor="@color/light_gray_text_color" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/settingsImageView"
-        android:layout_width="@dimen/home_settings_icon_size"
-        android:layout_height="@dimen/home_settings_icon_size"
-        android:clickable="true"
-        android:focusable="true"
-        android:foreground="?attr/selectableItemBackgroundBorderless"
-        android:padding="@dimen/home_settings_icon_padding"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tabsTabLayout"
-        app:srcCompat="@drawable/ic_settings" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/dateRangeTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/home_date_range_text_view_margin_start"
+            android:textSize="@dimen/xl_text_size"
+            app:layout_constraintBottom_toBottomOf="@id/settingsImageView"
+            app:layout_constraintEnd_toStartOf="@id/settingsImageView"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/settingsImageView"
+            tools:text="Monday, February 24" />
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/tasksViewPager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/backgroundColorView" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/settingsImageView"
+            android:layout_width="@dimen/home_settings_icon_size"
+            android:layout_height="@dimen/home_settings_icon_size"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:padding="@dimen/home_settings_icon_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tabsTabLayout"
+            app:srcCompat="@drawable/ic_settings" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/tasksViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/backgroundColorView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addFab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/home_fab_margin"
         android:src="@drawable/ic_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
