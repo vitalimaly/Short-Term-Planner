@@ -9,6 +9,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.domain.models.Task
 import kotlinx.android.synthetic.main.add_new_task_dialog.view.*
+import kotlinx.android.synthetic.main.delete_task_dialog.view.*
 import org.threeten.bp.OffsetDateTime
 
 object Dialogs {
@@ -17,33 +18,36 @@ object Dialogs {
         val dialogView = LayoutInflater.from(context).inflate(R.layout.add_new_task_dialog, null, false)
         val dialog = BottomSheetDialog(context, R.style.TransparentBottomSheet)
         dialog.setContentView(dialogView)
-        dialogView.addImageView.setOnClickListener {
-            onAddClick.invoke(task)
-            dialog.dismiss()
-        }
-        dialogView.addImageView.setEnabledWithAlpha(false)
-        dialogView.titleEditText.addTextChangedListener(onTextChanged = { text, _, _, _ ->
-            dialogView.addImageView.setEnabledWithAlpha(text.trimmed.isNotEmpty())
-            task.title = text.trimmed
-        })
-        dialogView.titleEditText.setOnEditorActionListener { v, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                if (dialogView.titleEditText.text.trimmed.isNotEmpty()) {
-                    v.clearFocus()
-                    v.hideKeyboard()
-                    onAddClick.invoke(task)
-                    dialog.dismiss()
-                }
-                true
-            } else {
-                false
+        dialogView.apply {
+            addImageView.setOnClickListener {
+                onAddClick.invoke(task)
+                dialog.dismiss()
             }
-        }
-        dialogView.dueDateTextView.text = Res.string(R.string.due_to_date, DateTimeUtils.getTaskDueDate(task.dueTo))
-        dialogView.dueDateTextView.setOnClickListener {
-            showDatePickerDialog(context, task.dueTo) {
-                task.dueTo = it
-                dialogView.dueDateTextView.text = Res.string(R.string.due_to_date, DateTimeUtils.getTaskDueDate(task.dueTo))
+            addImageView.setEnabledWithAlpha(false)
+            titleEditText.addTextChangedListener(onTextChanged = { text, _, _, _ ->
+                addImageView.setEnabledWithAlpha(text.trimmed.isNotEmpty())
+                task.title = text.trimmed
+            })
+            titleEditText.setOnEditorActionListener { v, actionId, _ ->
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    if (titleEditText.text.trimmed.isNotEmpty()) {
+                        v.clearFocus()
+                        v.hideKeyboard()
+                        onAddClick.invoke(task)
+                        dialog.dismiss()
+                    }
+                    true
+                } else {
+                    false
+                }
+            }
+            dueDateTextView.text = Res.string(R.string.due_to_date, DateTimeUtils.getTaskDueDate(task.dueTo))
+            dueDateTextView.setOnClickListener {
+                showDatePickerDialog(context, task.dueTo) {
+                    task.dueTo = it
+                    dueDateTextView.text = Res.string(R.string.due_to_date,
+                            DateTimeUtils.getTaskDueDate(task.dueTo))
+                }
             }
         }
         dialog.behavior.isHideable = false
@@ -57,5 +61,22 @@ object Dialogs {
                     .withDayOfMonth(dayOfMonth)
             onDateSet.invoke(pickedDate)
         }, currentDate.year, currentDate.monthValue - 1, currentDate.dayOfMonth).show()
+    }
+
+    fun showDeleteTaskDialog(context: Context, onPositiveClick: (() -> Unit)) {
+        val dialogView = LayoutInflater.from(context).inflate(R.layout.delete_task_dialog, null, false)
+        val dialog = BottomSheetDialog(context, R.style.TransparentBottomSheet)
+        dialog.setContentView(dialogView)
+        dialogView.apply {
+            positiveButton.setOnClickListener {
+                onPositiveClick.invoke()
+                dialog.dismiss()
+            }
+            negativeButton.setOnClickListener {
+                dialog.dismiss()
+            }
+        }
+        dialog.behavior.isHideable = false
+        dialog.show()
     }
 }
