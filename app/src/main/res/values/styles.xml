@@ -37,4 +37,9 @@
         <item name="android:paddingBottom">@dimen/s_spacing</item>
         <item name="android:textSize">@dimen/l_text_size</item>
     </style>
+
+    <style name="BorderlessDialogButton" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/m_text_size</item>
+    </style>
 </resources>

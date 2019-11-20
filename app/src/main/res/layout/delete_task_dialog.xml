@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/add_new_task_dialog_background">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/titleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/l_spacing"
+        android:text="@string/delete_task_dialog_title"
+        android:textSize="@dimen/l_text_size"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/negativeButton"
+        style="@style/BorderlessDialogButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel"
+        app:layout_constraintEnd_toStartOf="@id/positiveButton"
+        app:layout_constraintTop_toBottomOf="@id/titleTextView" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/positiveButton"
+        style="@style/BorderlessDialogButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/yes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleTextView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
