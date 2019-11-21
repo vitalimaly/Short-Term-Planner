@@ -9,7 +9,7 @@
     android:focusableInTouchMode="true">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar"
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent">
@@ -24,7 +24,7 @@
             app:titleTextColor="@color/primary_text_color">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/deleteIv"
+                android:id="@+id/deleteImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
@@ -41,7 +41,7 @@
         android:layout_height="0dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appbar">
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -78,13 +78,13 @@
                 android:layout_height="0dp"
                 android:background="@color/slightly_transparent_black"
                 android:visibility="invisible"
-                app:layout_constraintBottom_toTopOf="@id/subtasksRv"
+                app:layout_constraintBottom_toTopOf="@id/subtasksRecyclerView"
                 app:layout_constraintEnd_toEndOf="@id/doneCheckBox"
                 app:layout_constraintStart_toStartOf="@id/doneCheckBox"
                 app:layout_constraintTop_toBottomOf="@id/doneCheckBox" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/subtasksRv"
+                android:id="@+id/subtasksRecyclerView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:descendantFocusability="beforeDescendants"
@@ -96,7 +96,7 @@
                 tools:listitem="@layout/task_details_subtasks_list_item" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/dueIv"
+                android:id="@+id/dueImageView"
                 android:layout_width="@dimen/details_icon_size"
                 android:layout_height="@dimen/details_icon_size"
                 app:layout_constraintBottom_toBottomOf="@id/dueClickableView"
@@ -107,7 +107,7 @@
                 app:tint="@color/slightly_transparent_black" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/dueTv"
+                android:id="@+id/dueTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/m_spacing"
@@ -115,8 +115,8 @@
                 android:layout_marginEnd="@dimen/s_spacing"
                 android:textSize="@dimen/l_text_size"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/dueIv"
-                app:layout_constraintTop_toBottomOf="@id/subtasksRv"
+                app:layout_constraintStart_toEndOf="@id/dueImageView"
+                app:layout_constraintTop_toBottomOf="@id/subtasksRecyclerView"
                 tools:text="Due Friday, October 11" />
 
             <View
@@ -128,22 +128,22 @@
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
-                app:layout_constraintBottom_toTopOf="@id/noteEt"
-                app:layout_constraintTop_toBottomOf="@id/subtasksRv" />
+                app:layout_constraintBottom_toTopOf="@id/noteEditText"
+                app:layout_constraintTop_toBottomOf="@id/subtasksRecyclerView" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/noteIv"
+                android:id="@+id/noteImageView"
                 android:layout_width="@dimen/details_icon_size"
                 android:layout_height="@dimen/details_icon_size"
                 android:layout_marginTop="@dimen/l_spacing"
                 app:layout_constraintEnd_toEndOf="@id/doneCheckBox"
                 app:layout_constraintStart_toStartOf="@id/doneCheckBox"
-                app:layout_constraintTop_toBottomOf="@id/dueTv"
+                app:layout_constraintTop_toBottomOf="@id/dueTextView"
                 app:srcCompat="@drawable/ic_note"
                 app:tint="@color/slightly_transparent_black" />
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/noteEt"
+                android:id="@+id/noteEditText"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="@dimen/m_spacing"
@@ -161,14 +161,14 @@
                 android:scrollbars="vertical"
                 android:textSize="@dimen/l_text_size"
                 app:layout_constraintHeight_min="200dp"
-                app:layout_constraintBottom_toTopOf="@id/createdOnTv"
+                app:layout_constraintBottom_toTopOf="@id/createdOnTextView"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/noteIv"
-                app:layout_constraintTop_toBottomOf="@+id/dueTv"
+                app:layout_constraintStart_toEndOf="@id/noteImageView"
+                app:layout_constraintTop_toBottomOf="@+id/dueTextView"
                 app:layout_constraintVertical_bias="0.0" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/createdOnTv"
+                android:id="@+id/createdOnTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/pale_dark_green"
@@ -177,14 +177,14 @@
                 android:padding="@dimen/details_footer_text_padding"
                 android:textSize="@dimen/s_text_size"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/modifiedOnTv"
+                app:layout_constraintEnd_toStartOf="@id/modifiedOnTextView"
                 app:layout_constraintHorizontal_chainStyle="spread"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/noteEt"
+                app:layout_constraintTop_toBottomOf="@id/noteEditText"
                 tools:text="Created on Oct 11, 2019" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/modifiedOnTv"
+                android:id="@+id/modifiedOnTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/pale_dark_green"
@@ -195,7 +195,7 @@
                 android:textSize="@dimen/s_text_size"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/createdOnTv"
+                app:layout_constraintStart_toEndOf="@+id/createdOnTextView"
                 tools:text="Last modified on Oct 11, 2019" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
