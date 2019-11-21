@@ -20,7 +20,7 @@
     <string name="yes">Yes</string>
     <string name="due_date_popup_today">Today</string>
     <string name="due_date_popup_tomorrow">Tomorrow</string>
-    <string name="due_date_popup_this_saturday">This Saturday</string>
-    <string name="due_date_popup_next_saturday">Next Saturday</string>
+    <string name="due_date_popup_this_saturday">This Sunday</string>
+    <string name="due_date_popup_next_saturday">Next Sunday</string>
     <string name="due_date_popup_pick_date">Pick date</string>
 </resources>

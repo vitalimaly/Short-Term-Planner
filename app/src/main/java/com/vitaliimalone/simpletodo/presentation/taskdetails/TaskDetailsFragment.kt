@@ -12,11 +12,8 @@ import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.domain.models.Task
 import com.vitaliimalone.simpletodo.presentation.base.BaseFragment
 import com.vitaliimalone.simpletodo.presentation.taskdetails.common.SubtasksAdapter
-import com.vitaliimalone.simpletodo.presentation.utils.DateTimeUtils
-import com.vitaliimalone.simpletodo.presentation.utils.Dialogs
-import com.vitaliimalone.simpletodo.presentation.utils.Res
-import com.vitaliimalone.simpletodo.presentation.utils.clearFocusOnDoneClick
-import com.vitaliimalone.simpletodo.presentation.utils.trimmed
+import com.vitaliimalone.simpletodo.presentation.utils.*
+import com.vitaliimalone.simpletodo.presentation.utils.duedatepopup.DueDatePopup
 import kotlinx.android.synthetic.main.task_details_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.threeten.bp.OffsetDateTime
@@ -34,7 +31,7 @@ class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
     }
 
     private fun setupClickListeners() {
-        deleteIv.setOnClickListener {
+        deleteImageView.setOnClickListener {
             Dialogs.showDeleteTaskDialog(requireContext()) {
                 viewModel.deleteTask(task)
                 saveAndFinish()
@@ -51,20 +48,20 @@ class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
     }
 
     private fun setupViews() {
-        subtasksRv.adapter = SubtasksAdapter(task) {
+        subtasksRecyclerView.adapter = SubtasksAdapter(task) {
             drawSubtasksBotLine()
             viewModel.updateTask(task)
         }
         taskTitleEditText.setRawInputType(InputType.TYPE_CLASS_TEXT)
         taskTitleEditText.setText(task.title)
-        noteEt.setText(task.description)
+        noteEditText.setText(task.description)
         updateTaskDueDate(task.dueTo)
-        createdOnTv.text = Res.string(R.string.task_details_created,
+        createdOnTextView.text = Res.string(R.string.task_details_created,
                 DateTimeUtils.getShortDayMonthDate(task.createdAt))
-        modifiedOnTv.text = Res.string(R.string.task_details_modified,
+        modifiedOnTextView.text = Res.string(R.string.task_details_modified,
                 DateTimeUtils.getShortDayMonthDate(task.modifiedAt))
         taskTitleEditText.clearFocusOnDoneClick()
-        noteEt.setOnTouchListener { v, event ->
+        noteEditText.setOnTouchListener { v, event ->
             if (v.hasFocus()) {
                 v.parent.requestDisallowInterceptTouchEvent(true)
                 when (event.action and MotionEvent.ACTION_MASK) {
@@ -76,11 +73,11 @@ class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
         taskTitleEditText.addTextChangedListener {
             task.title = it.trimmed
         }
-        noteEt.addTextChangedListener {
+        noteEditText.addTextChangedListener {
             task.description = it.trimmed
         }
         dueClickableView.setOnClickListener {
-            Dialogs.showDatePickerDialog(requireContext(), task.dueTo) {
+            DueDatePopup(requireContext(), dueTextView) {
                 task.dueTo = it
                 updateTaskDueDate(it)
             }
@@ -97,7 +94,7 @@ class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
     }
 
     private fun updateTaskDueDate(offsetDateTime: OffsetDateTime) {
-        dueTv.text = Res.string(R.string.due_to_date, DateTimeUtils.getTaskDueDateFull(offsetDateTime))
+        dueTextView.text = Res.string(R.string.due_to_date, DateTimeUtils.getTaskDueDateFull(offsetDateTime))
     }
 
     private fun setupObservers() {

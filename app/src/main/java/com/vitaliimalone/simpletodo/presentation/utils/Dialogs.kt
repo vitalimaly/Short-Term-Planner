@@ -8,6 +8,7 @@ import androidx.core.widget.addTextChangedListener
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.domain.models.Task
+import com.vitaliimalone.simpletodo.presentation.utils.duedatepopup.DueDatePopup
 import kotlinx.android.synthetic.main.add_new_task_dialog.view.*
 import kotlinx.android.synthetic.main.delete_task_dialog.view.*
 import org.threeten.bp.OffsetDateTime
@@ -43,8 +44,8 @@ object Dialogs {
             }
             dueDateTextView.text = Res.string(R.string.due_to_date, DateTimeUtils.getTaskDueDate(task.dueTo))
             dueDateTextView.setOnClickListener {
-                showDatePickerDialog(context, task.dueTo) {
-                    task.dueTo = it
+                DueDatePopup(context, it) { pickedDate ->
+                    task.dueTo = pickedDate
                     dueDateTextView.text = Res.string(R.string.due_to_date,
                             DateTimeUtils.getTaskDueDate(task.dueTo))
                 }

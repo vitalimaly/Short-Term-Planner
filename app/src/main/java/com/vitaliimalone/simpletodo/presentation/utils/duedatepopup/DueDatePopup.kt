@@ -5,6 +5,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.PopupWindow
+import com.google.android.material.textview.MaterialTextView
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.presentation.models.HomeTab
 import com.vitaliimalone.simpletodo.presentation.utils.DateTimeUtils
@@ -21,6 +22,7 @@ class DueDatePopup(
 
     init {
         anchorView.getLocationOnScreen(screenPosition)
+        screenPosition[0] += getAdditionalStartPadding(anchorView)
         isFocusable = true
         isOutsideTouchable = false
         contentView = LayoutInflater.from(context).inflate(R.layout.pick_due_date_popup, null, false)
@@ -58,5 +60,13 @@ class DueDatePopup(
             }
         }
         showAtLocation(anchorView, Gravity.NO_GRAVITY, screenPosition[0], screenPosition[1])
+    }
+
+    private fun getAdditionalStartPadding(anchorView: View): Int {
+        var drawableWidth = 0
+        if (anchorView is MaterialTextView) {
+            drawableWidth = anchorView.compoundDrawables[0]?.intrinsicWidth ?: 0 + anchorView.compoundDrawablePadding
+        }
+        return drawableWidth + anchorView.paddingStart
     }
 }
