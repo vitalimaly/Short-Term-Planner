@@ -54,6 +54,7 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
                 }
             }
         })
+        dateRangeTextView.text = DateTimeUtils.getDateForTab(HomeTab.values()[tasksViewPager.currentItem])
     }
 
     private fun animatePageChange(position: Int) {
