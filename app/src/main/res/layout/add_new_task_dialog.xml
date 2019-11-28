@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/add_new_task_dialog_background">
 
-    <androidx.appcompat.widget.AppCompatEditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/titleEditText"
         style="@style/BorderlessTaskEditText"
         android:layout_width="0dp"
@@ -44,7 +44,7 @@
         android:drawablePadding="@dimen/xs_spacing"
         android:focusable="true"
         android:padding="@dimen/m_spacing"
-        android:textColor="@color/gray_text_color"
+        android:textColor="?themeTextColorSecondary"
         android:textSize="@dimen/m_text_size"
         app:drawableStartCompat="@drawable/ic_time"
         app:layout_constraintStart_toStartOf="parent"

@@ -14,7 +14,7 @@
             android:id="@+id/backgroundColorView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/pale_green"
+            android:background="?themeColorPrimary"
             app:layout_constraintBottom_toBottomOf="@id/settingsImageView"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,17 +22,18 @@
             android:id="@+id/tabsTabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="?themeColorPrimary"
             android:clipToPadding="false"
             android:paddingStart="@dimen/home_tab_layout_padding"
             android:paddingTop="@dimen/home_tab_layout_padding"
             android:paddingEnd="@dimen/home_tab_layout_padding"
             app:layout_constraintTop_toTopOf="parent"
-            app:tabIndicatorColor="@color/transparent"
+            app:tabIndicatorColor="@android:color/transparent"
             app:tabIndicatorFullWidth="false"
             app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/primary_text_color"
+            app:tabSelectedTextColor="?themeTextColorPrimary"
             app:tabTextAppearance="@style/HomeTabTextAppearance"
-            app:tabTextColor="@color/light_gray_text_color" />
+            app:tabTextColor="?themeTextColorTertiary" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/dateRangeTextView"

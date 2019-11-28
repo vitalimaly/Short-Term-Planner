@@ -6,7 +6,7 @@
     android:id="@+id/dueDatePopupRecyclerView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/pale_background_color"
+    android:background="?themeColorBackground"
     android:orientation="vertical"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
     tools:itemCount="4"

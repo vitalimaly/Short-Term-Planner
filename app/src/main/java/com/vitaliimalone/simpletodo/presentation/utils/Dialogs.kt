@@ -1,17 +1,20 @@
 package com.vitaliimalone.simpletodo.presentation.utils
 
-import android.app.DatePickerDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.inputmethod.EditorInfo
 import androidx.core.widget.addTextChangedListener
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.domain.models.Task
 import com.vitaliimalone.simpletodo.presentation.utils.duedatepopup.DueDatePopup
 import kotlinx.android.synthetic.main.add_new_task_dialog.view.*
 import kotlinx.android.synthetic.main.delete_task_dialog.view.*
+import org.threeten.bp.Instant
 import org.threeten.bp.OffsetDateTime
+import org.threeten.bp.ZoneOffset
 
 object Dialogs {
     fun showAddNewTaskDialog(context: Context, date: OffsetDateTime, onAddClick: ((Task) -> Unit)) {
@@ -55,13 +58,24 @@ object Dialogs {
         dialog.show()
     }
 
-    fun showDatePickerDialog(context: Context, currentDate: OffsetDateTime, onDateSet: ((OffsetDateTime) -> Unit)) {
-        DatePickerDialog(context, { _, year, month, dayOfMonth ->
-            val pickedDate = currentDate.withYear(year)
-                    .withMonth(month + 1) // Calendar months starts with 0
-                    .withDayOfMonth(dayOfMonth)
+    fun showDatePickerDialog(context: Context, currentDate: OffsetDateTime,
+                             onDateSet: ((OffsetDateTime) -> Unit)) {
+        val calendarConstraints = CalendarConstraints.Builder()
+                .setStart(OffsetDateTime.now().toInstant().toEpochMilli())
+                .setOpenAt(currentDate.toInstant().toEpochMilli())
+                .build()
+        val datePicker = MaterialDatePicker.Builder
+                .datePicker()
+                .setCalendarConstraints(calendarConstraints)
+                .setSelection(currentDate.toInstant().toEpochMilli())
+                .build()
+        datePicker.addOnPositiveButtonClickListener {
+            val pickedDate = OffsetDateTime.ofInstant(Instant.ofEpochMilli(it), ZoneOffset.UTC)
             onDateSet.invoke(pickedDate)
-        }, currentDate.year, currentDate.monthValue - 1, currentDate.dayOfMonth).show()
+        }
+        context.fragmentManager?.let {
+            datePicker.show(it, Constants.DATE_PICKER_TAG)
+        }
     }
 
     fun showDeleteTaskDialog(context: Context, onPositiveClick: (() -> Unit)) {

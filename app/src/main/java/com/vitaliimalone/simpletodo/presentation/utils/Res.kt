@@ -1,6 +1,7 @@
 package com.vitaliimalone.simpletodo.presentation.utils
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import androidx.annotation.*
@@ -16,8 +17,14 @@ object Res : KoinComponent {
         return context.getString(stringRes, *formatArgs)
     }
 
-    fun color(@ColorRes colorRes: Int): Int {
-        return ContextCompat.getColor(context, colorRes)
+    @ColorInt
+    fun color(context: Context, @AttrRes attrResId: Int): Int {
+        val a = context.obtainStyledAttributes(null, intArrayOf(attrResId))
+        return try {
+            a.getColor(0, Color.RED) // red to show errors
+        } finally {
+            a.recycle()
+        }
     }
 
     fun drawable(@DrawableRes drawableRes: Int): Drawable {

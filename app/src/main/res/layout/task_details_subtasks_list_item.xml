@@ -9,7 +9,7 @@
         android:id="@+id/topLineView"
         android:layout_width="@dimen/subtask_line_stroke_width"
         android:layout_height="0dp"
-        android:background="@color/slightly_transparent_black"
+        android:background="?themeColorOnPrimary"
         app:layout_constraintBottom_toTopOf="@id/horizontalLineView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -18,7 +18,7 @@
         android:id="@+id/horizontalLineView"
         android:layout_width="@dimen/subtask_line_horizontal_width"
         android:layout_height="@dimen/subtask_line_stroke_width"
-        android:background="@color/slightly_transparent_black"
+        android:background="?themeColorOnPrimary"
         app:layout_constraintBottom_toBottomOf="@id/doneCheckBox"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/doneCheckBox" />
@@ -27,7 +27,7 @@
         android:id="@+id/botLineView"
         android:layout_width="@dimen/subtask_line_stroke_width"
         android:layout_height="0dp"
-        android:background="@color/slightly_transparent_black"
+        android:background="?themeColorOnPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/horizontalLineView" />
@@ -41,7 +41,7 @@
         app:layout_constraintStart_toEndOf="@id/horizontalLineView"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatEditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/subtaskTitleEditText"
         style="@style/BorderlessTaskEditText"
         android:layout_width="0dp"

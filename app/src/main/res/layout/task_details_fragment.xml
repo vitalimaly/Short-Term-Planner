@@ -18,10 +18,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/pale_green"
             app:navigationIcon="@drawable/ic_arrow_back"
-            app:title="Edit Task"
-            app:titleTextColor="@color/primary_text_color">
+            app:title="Edit Task">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/deleteImageView"
@@ -57,7 +55,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatEditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/taskTitleEditText"
                 style="@style/BorderlessTaskEditText"
                 android:layout_width="0dp"
@@ -76,7 +74,7 @@
                 android:id="@+id/botLineView"
                 android:layout_width="@dimen/subtask_line_stroke_width"
                 android:layout_height="0dp"
-                android:background="@color/slightly_transparent_black"
+                android:background="?themeColorOnPrimary"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toTopOf="@id/subtasksRecyclerView"
                 app:layout_constraintEnd_toEndOf="@id/doneCheckBox"
@@ -104,7 +102,7 @@
                 app:layout_constraintStart_toStartOf="@id/doneCheckBox"
                 app:layout_constraintTop_toTopOf="@id/dueClickableView"
                 app:srcCompat="@drawable/ic_time"
-                app:tint="@color/slightly_transparent_black" />
+                app:tint="?themeColorOnPrimary" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/dueTextView"
@@ -118,7 +116,7 @@
                 app:layout_constraintStart_toEndOf="@id/dueImageView"
                 app:layout_constraintTop_toBottomOf="@id/subtasksRecyclerView"
                 tools:text="Due Friday, October 11" />
-
+            <!-- todo fix -->
             <View
                 android:id="@+id/dueClickableView"
                 android:layout_width="match_parent"
@@ -139,17 +137,16 @@
                 app:layout_constraintEnd_toEndOf="@id/doneCheckBox"
                 app:layout_constraintStart_toStartOf="@id/doneCheckBox"
                 app:layout_constraintTop_toBottomOf="@id/dueTextView"
-                app:srcCompat="@drawable/ic_note"
-                app:tint="@color/slightly_transparent_black" />
+                app:srcCompat="@drawable/ic_note" />
 
-            <androidx.appcompat.widget.AppCompatEditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/noteEditText"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="@dimen/m_spacing"
                 android:layout_marginTop="@dimen/m_spacing"
                 android:layout_marginEnd="@dimen/s_spacing"
-                android:background="@color/transparent"
+                android:background="@android:color/transparent"
                 android:gravity="top"
                 android:hint="@string/task_details_note_hint"
                 android:overScrollMode="always"
@@ -160,9 +157,9 @@
                 android:scrollbarStyle="insideInset"
                 android:scrollbars="vertical"
                 android:textSize="@dimen/l_text_size"
-                app:layout_constraintHeight_min="200dp"
                 app:layout_constraintBottom_toTopOf="@id/createdOnTextView"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_min="200dp"
                 app:layout_constraintStart_toEndOf="@id/noteImageView"
                 app:layout_constraintTop_toBottomOf="@+id/dueTextView"
                 app:layout_constraintVertical_bias="0.0" />
@@ -171,10 +168,11 @@
                 android:id="@+id/createdOnTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@color/pale_dark_green"
+                android:background="?themeColorPrimaryVariant"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:padding="@dimen/details_footer_text_padding"
+                android:textColor="?android:attr/textColorSecondary"
                 android:textSize="@dimen/s_text_size"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/modifiedOnTextView"
@@ -187,11 +185,12 @@
                 android:id="@+id/modifiedOnTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@color/pale_dark_green"
+                android:background="?themeColorPrimaryVariant"
                 android:ellipsize="end"
                 android:gravity="end"
                 android:maxLines="1"
                 android:padding="@dimen/details_footer_text_padding"
+                android:textColor="?themeTextColorSecondary"
                 android:textSize="@dimen/s_text_size"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
