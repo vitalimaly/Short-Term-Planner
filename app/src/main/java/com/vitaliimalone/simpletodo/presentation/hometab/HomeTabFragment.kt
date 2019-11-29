@@ -123,13 +123,13 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
             if (currentTab == HomeTab.values().first()) {
                 Res.color(requireContext(), R.attr.themeColorError)
             } else {
-                Res.color(requireContext(), R.attr.themeColorSurface)
+                Res.color(requireContext(), R.attr.themeColorBackgroundSecondary)
             }
         } else if (direction == ItemTouchHelper.RIGHT) {
             if (currentTab == HomeTab.values().last()) {
                 Res.color(requireContext(), R.attr.themeColorError)
             } else {
-                Res.color(requireContext(), R.attr.themeColorSurface)
+                Res.color(requireContext(), R.attr.themeColorBackgroundSecondary)
             }
         } else {
             throw IllegalArgumentException("Should be LEFT or RIGHT")

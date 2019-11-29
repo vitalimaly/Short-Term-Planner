@@ -7,6 +7,7 @@
     <attr name="themeColorSecondaryVariant" format="reference|color" />
     <attr name="themeColorOnSecondary" format="reference|color" />
     <attr name="themeColorBackground" format="reference|color" />
+    <attr name="themeColorBackgroundSecondary" format="reference|color" />
     <attr name="themeColorSurface" format="reference|color" />
     <attr name="themeColorError" format="reference|color" />
     <attr name="themeColorOnError" format="reference|color" />

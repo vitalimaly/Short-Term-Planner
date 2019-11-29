@@ -9,7 +9,8 @@
         <item name="themeColorSecondaryVariant">@color/pale_orange_dark</item>
         <item name="themeColorOnSecondary">?themeTextColorPrimaryInverse</item>
         <item name="themeColorBackground">@color/pale_background_color</item>
-        <item name="themeColorSurface">@color/pale_background_dark_color</item>
+        <item name="themeColorBackgroundSecondary">@color/pale_background_color_dark</item>
+        <item name="themeColorSurface">@color/pale_background_color_light</item>
         <item name="themeColorError">@color/pale_red</item>
         <item name="themeColorOnError">?themeTextColorPrimaryInverse</item>
         <item name="themeTextColorPrimary">@color/black_75</item>
@@ -42,6 +43,7 @@
         <item name="android:textColorPrimaryInverse">?themeTextColorPrimaryInverse</item>
         <item name="android:textColorSecondaryInverse">?themeTextColorSecondaryInverse</item>
         <item name="android:textColorTertiaryInverse">?themeTextColorTertiaryInverse</item>
+        <item name="materialCalendarTheme">@style/ThemeMaterialCalendar</item>
         <!-- Material theming -->
 
         <!-- System settings -->
@@ -79,5 +81,20 @@
     <style name="BorderlessDialogButton" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">@dimen/m_text_size</item>
+    </style>
+
+    <style name="ThemeMaterialCalendar" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="buttonBarPositiveButtonStyle">@style/ThemeMaterialCalendarButton</item>
+        <item name="buttonBarNegativeButtonStyle">@style/ThemeMaterialCalendarButton</item>
+        <item name="materialButtonStyle">@style/ThemeMaterialCalendarTextButton</item>
+    </style>
+
+    <style name="ThemeMaterialCalendarButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">?themeTextColorPrimary</item>
+    </style>
+
+    <style name="ThemeMaterialCalendarTextButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog.Flush">
+        <item name="android:textColor">?themeTextColorPrimary</item>
+        <item name="iconTint">?themeTextColorPrimary</item>
     </style>
 </resources>
