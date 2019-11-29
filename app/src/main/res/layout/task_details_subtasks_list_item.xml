@@ -39,7 +39,8 @@
         android:layout_marginTop="@dimen/subtask_checkbox_margin_top"
         android:button="@drawable/selector_done"
         app:layout_constraintStart_toEndOf="@id/horizontalLineView"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:useMaterialThemeColors="false" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/subtaskTitleEditText"
