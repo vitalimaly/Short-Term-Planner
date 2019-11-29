@@ -85,7 +85,7 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
         } else if (direction == ItemTouchHelper.RIGHT) {
             viewModel.onSwipeRight(homeTab, swipedTask)
         }
-        val snackbarTitleColor = Res.color(R.color.primary_white_text_color)
+        val snackbarTitleColor = Res.color(requireContext(), R.attr.themeTextColorPrimaryInverse)
         val snackbarTitle =
                 Res.string(R.string.snackbar_task_swiped, getSwipedToTabText(homeTab, direction))
                         .setTextColor(snackbarTitleColor)
@@ -121,15 +121,15 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
     private fun getSwipedToTabColor(currentTab: HomeTab, direction: Int): Int {
         return if (direction == ItemTouchHelper.LEFT) {
             if (currentTab == HomeTab.values().first()) {
-                Res.color(R.color.pale_red)
+                Res.color(requireContext(), R.attr.themeColorError)
             } else {
-                Res.color(R.color.pale_background_dark_color)
+                Res.color(requireContext(), R.attr.themeColorBackgroundSecondary)
             }
         } else if (direction == ItemTouchHelper.RIGHT) {
             if (currentTab == HomeTab.values().last()) {
-                Res.color(R.color.pale_red)
+                Res.color(requireContext(), R.attr.themeColorError)
             } else {
-                Res.color(R.color.pale_background_dark_color)
+                Res.color(requireContext(), R.attr.themeColorBackgroundSecondary)
             }
         } else {
             throw IllegalArgumentException("Should be LEFT or RIGHT")

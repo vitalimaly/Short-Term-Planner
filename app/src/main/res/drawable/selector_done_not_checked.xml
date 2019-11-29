@@ -8,5 +8,5 @@
 
     <stroke
         android:width="@dimen/home_done_checkbox_stroke_width"
-        android:color="@color/slightly_transparent_black" />
+        android:color="?themeTextColorPrimary" />
 </shape>

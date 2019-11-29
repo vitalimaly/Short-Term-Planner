@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="themeColorPrimary" format="reference|color" />
+    <attr name="themeColorPrimaryVariant" format="reference|color" />
+    <attr name="themeColorOnPrimary" format="reference|color" />
+    <attr name="themeColorSecondary" format="reference|color" />
+    <attr name="themeColorSecondaryVariant" format="reference|color" />
+    <attr name="themeColorOnSecondary" format="reference|color" />
+    <attr name="themeColorBackground" format="reference|color" />
+    <attr name="themeColorBackgroundSecondary" format="reference|color" />
+    <attr name="themeColorSurface" format="reference|color" />
+    <attr name="themeColorError" format="reference|color" />
+    <attr name="themeColorOnError" format="reference|color" />
+    <attr name="themeTextColorPrimary" format="reference|color" />
+    <attr name="themeTextColorSecondary" format="reference|color" />
+    <attr name="themeTextColorTertiary" format="reference|color" />
+    <attr name="themeTextColorPrimaryInverse" format="reference|color" />
+    <attr name="themeTextColorSecondaryInverse" format="reference|color" />
+    <attr name="themeTextColorTertiaryInverse" format="reference|color" />
+    <attr name="themeDoneCheckboxColor" format="reference|color" />
+    <attr name="themeDividerColor" format="reference|color" />
+</resources>

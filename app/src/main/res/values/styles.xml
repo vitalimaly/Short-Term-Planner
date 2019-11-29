@@ -1,22 +1,62 @@
 <resources>
-
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
+        <!-- Main colors used for runtime customization -->
+        <item name="themeColorPrimary">@color/pale_green</item>
+        <item name="themeColorPrimaryVariant">@color/pale_dark_green</item>
+        <item name="themeColorOnPrimary">?themeTextColorPrimary</item>
+        <item name="themeColorSecondary">@color/pale_orange</item>
+        <item name="themeColorSecondaryVariant">@color/pale_orange_dark</item>
+        <item name="themeColorOnSecondary">?themeTextColorPrimaryInverse</item>
+        <item name="themeColorBackground">@color/pale_background_color</item>
+        <item name="themeColorBackgroundSecondary">@color/pale_background_color_dark</item>
+        <item name="themeColorSurface">@color/pale_background_color_light</item>
+        <item name="themeColorError">@color/pale_red</item>
+        <item name="themeColorOnError">?themeTextColorPrimaryInverse</item>
+        <item name="themeTextColorPrimary">@color/black_75</item>
+        <item name="themeTextColorSecondary">@color/black_50</item>
+        <item name="themeTextColorTertiary">@color/black_25</item>
+        <item name="themeTextColorPrimaryInverse">@color/white_75</item>
+        <item name="themeTextColorSecondaryInverse">@color/white_50</item>
+        <item name="themeTextColorTertiaryInverse">@color/white_25</item>
+        <item name="themeDoneCheckboxColor">@color/done_checkbox_green</item>
+        <item name="themeDividerColor">@color/black_50</item>
+        <!-- Main colors used for runtime customization -->
+
+        <!-- Material theming -->
+        <item name="colorPrimary">?themeColorPrimary</item>
+        <item name="colorPrimaryVariant">?themeColorPrimaryVariant</item>
+        <item name="colorOnPrimary">?themeColorOnPrimary</item>
+        <item name="colorSecondary">?themeColorSecondary</item>
+        <item name="colorSecondaryVariant">?themeColorSecondaryVariant</item>
+        <item name="colorOnSecondary">?themeColorOnSecondary</item>
+        <item name="android:colorBackground">?themeColorBackground</item>
+        <item name="colorOnBackground">?themeTextColorPrimary</item>
+        <item name="colorSurface">?themeColorSurface</item>
+        <item name="colorOnSurface">?themeTextColorPrimary</item>
+        <item name="colorError">?themeColorError</item>
+        <item name="colorOnError">?themeTextColorPrimaryInverse</item>
+        <item name="android:textColor">?themeTextColorPrimary</item>
+        <item name="android:textColorPrimary">?themeTextColorPrimary</item>
+        <item name="android:textColorSecondary">?themeTextColorSecondary</item>
+        <item name="android:textColorTertiary">?themeTextColorTertiary</item>
+        <item name="android:textColorPrimaryInverse">?themeTextColorPrimaryInverse</item>
+        <item name="android:textColorSecondaryInverse">?themeTextColorSecondaryInverse</item>
+        <item name="android:textColorTertiaryInverse">?themeTextColorTertiaryInverse</item>
+        <item name="materialCalendarTheme">@style/ThemeMaterialCalendar</item>
+        <!-- Material theming -->
+
+        <!-- System settings -->
+        <item name="fontFamily">@font/red_hat_display_regular</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="fontFamily">@font/red_hat_display_regular</item>
-        <item name="android:textColor">@color/primary_text_color</item>
         <item name="android:windowLightStatusBar">true</item>
-        <item name="android:statusBarColor">@color/pale_dark_green</item>
-        <item name="android:windowBackground">@color/pale_background_color</item>
+        <item name="android:statusBarColor">?themeColorPrimaryVariant</item>
+        <item name="android:windowBackground">?themeColorBackground</item>
+        <!-- System settings -->
     </style>
 
-    <style name="TransparentBottomSheet" parent="Base.Theme.AppCompat.Dialog">
-        <item name="android:windowBackground">@color/transparent</item>
+    <style name="TransparentBottomSheet" parent="Theme.MaterialComponents.BottomSheetDialog">
         <item name="android:windowIsFloating">false</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowSoftInputMode">adjustResize</item>
@@ -30,7 +70,7 @@
     </style>
 
     <style name="BorderlessTaskEditText">
-        <item name="android:background">@color/transparent</item>
+        <item name="android:background">@android:color/transparent</item>
         <item name="android:paddingStart">@dimen/xs_spacing</item>
         <item name="android:paddingTop">@dimen/s_spacing</item>
         <item name="android:paddingEnd">@dimen/xs_spacing</item>
@@ -38,8 +78,23 @@
         <item name="android:textSize">@dimen/l_text_size</item>
     </style>
 
-    <style name="BorderlessDialogButton" parent="Widget.AppCompat.Button.Borderless">
+    <style name="BorderlessDialogButton" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">@dimen/m_text_size</item>
+    </style>
+
+    <style name="ThemeMaterialCalendar" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="buttonBarPositiveButtonStyle">@style/ThemeMaterialCalendarButton</item>
+        <item name="buttonBarNegativeButtonStyle">@style/ThemeMaterialCalendarButton</item>
+        <item name="materialButtonStyle">@style/ThemeMaterialCalendarTextButton</item>
+    </style>
+
+    <style name="ThemeMaterialCalendarButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">?themeTextColorPrimary</item>
+    </style>
+
+    <style name="ThemeMaterialCalendarTextButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog.Flush">
+        <item name="android:textColor">?themeTextColorPrimary</item>
+        <item name="iconTint">?themeTextColorPrimary</item>
     </style>
 </resources>
