@@ -47,10 +47,9 @@ object Dialogs {
             }
             dueDateTextView.text = Res.string(R.string.due_to_date, DateTimeUtils.getTaskDueDate(task.dueTo))
             dueDateTextView.setOnClickListener {
-                DueDatePopup(context, it) { pickedDate ->
+                DueDatePopup(context, it, task.dueTo) { pickedDate ->
                     task.dueTo = pickedDate
-                    dueDateTextView.text = Res.string(R.string.due_to_date,
-                            DateTimeUtils.getTaskDueDate(task.dueTo))
+                    dueDateTextView.text = Res.string(R.string.due_to_date, DateTimeUtils.getTaskDueDate(task.dueTo))
                 }
             }
         }
@@ -58,8 +57,7 @@ object Dialogs {
         dialog.show()
     }
 
-    fun showDatePickerDialog(context: Context, currentDate: OffsetDateTime,
-                             onDateSet: ((OffsetDateTime) -> Unit)) {
+    fun showDatePickerDialog(context: Context, currentDate: OffsetDateTime, onDateSet: ((OffsetDateTime) -> Unit)) {
         val calendarConstraints = CalendarConstraints.Builder()
                 .setStart(OffsetDateTime.now().toInstant().toEpochMilli())
                 .setOpenAt(currentDate.toInstant().toEpochMilli())
