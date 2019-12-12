@@ -1,6 +1,7 @@
 package com.vitaliimalone.simpletodo.presentation.home
 
 import android.os.Bundle
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.vitaliimalone.simpletodo.R
@@ -35,6 +36,10 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
                 viewModel.addNewTask(it)
                 hideKeyboard()
             }
+        }
+        settingsImageView.setOnClickListener {
+            val action = HomeFragmentDirections.actionHomeFragmentToSettingsFragment()
+            findNavController().navigate(action)
         }
     }
 

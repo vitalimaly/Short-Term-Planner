@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_homeFragment_to_taskDetailsFragment"
             app:destination="@id/taskDetailsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/taskDetailsFragment"
@@ -24,4 +27,9 @@
             android:name="task"
             app:argType="com.vitaliimalone.simpletodo.domain.models.Task" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.vitaliimalone.simpletodo.presentation.settings.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/task_details_fragment" />
 </navigation>

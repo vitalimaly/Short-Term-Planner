@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:navigationIcon="@drawable/ic_arrow_back"
-            app:title="Edit Task">
+            app:title="@string/task_details_toolbar_title">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/deleteImageView"
