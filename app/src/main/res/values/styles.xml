@@ -1,6 +1,28 @@
 <resources>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light">
+        <!-- Default theme -->
+        <item name="themeColorPrimary">@color/pale_green</item>
+        <item name="themeColorPrimaryVariant">@color/pale_dark_green</item>
+        <item name="themeColorOnPrimary">?themeTextColorPrimary</item>
+        <item name="themeColorSecondary">@color/pale_orange</item>
+        <item name="themeColorSecondaryVariant">@color/pale_orange_dark</item>
+        <item name="themeColorOnSecondary">?themeTextColorPrimaryInverse</item>
+        <item name="themeColorBackground">@color/pale_background_color</item>
+        <item name="themeColorBackgroundSecondary">@color/pale_background_color_dark</item>
+        <item name="themeColorSurface">@color/pale_background_color_light</item>
+        <item name="themeColorError">@color/pale_red</item>
+        <item name="themeColorOnError">?themeTextColorPrimaryInverse</item>
+        <item name="themeTextColorPrimary">@color/black_75</item>
+        <item name="themeTextColorSecondary">@color/black_50</item>
+        <item name="themeTextColorTertiary">@color/black_25</item>
+        <item name="themeTextColorPrimaryInverse">@color/white_75</item>
+        <item name="themeTextColorSecondaryInverse">@color/white_50</item>
+        <item name="themeTextColorTertiaryInverse">@color/white_25</item>
+        <item name="themeDoneCheckboxColor">@color/done_checkbox_green</item>
+        <item name="themeDividerColor">@color/black_50</item>
+        <!-- Default theme -->
+
         <!-- Material theming -->
         <item name="colorPrimary">?themeColorPrimary</item>
         <item name="colorPrimaryVariant">?themeColorPrimaryVariant</item>
@@ -74,5 +96,15 @@
     <style name="ThemeMaterialCalendarTextButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog.Flush">
         <item name="android:textColor">?themeTextColorPrimary</item>
         <item name="iconTint">?themeTextColorPrimary</item>
+    </style>
+
+    <style name="SettingsItemTextView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/m_spacing</item>
+        <item name="android:layout_marginEnd">@dimen/m_spacing</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:maxLines">1</item>
     </style>
 </resources>

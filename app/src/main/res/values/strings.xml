@@ -25,4 +25,11 @@
     <string name="due_date_popup_next_saturday">Next Sunday</string>
     <string name="due_date_popup_pick_date">Pick date</string>
     <string name="settings_toolbar_title">Settings</string>
+    <string name="settings_theme_title">Theme</string>
+    <string name="settings_theme_subtitle_default">Default theme</string>
+    <string name="settings_archive_title">Archive</string>
+    <string name="settings_archive_subtitle">%d archived tasks</string>
+    <string name="settings_rate_title">Rate</string>
+    <string name="settings_info_title">About</string>
+    <string name="theme_name_pale_green">Pale green</string>
 </resources>
