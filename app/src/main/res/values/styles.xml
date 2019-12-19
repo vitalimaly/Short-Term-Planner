@@ -57,6 +57,7 @@
     </style>
 
     <style name="TransparentBottomSheet" parent="Theme.MaterialComponents.BottomSheetDialog">
+        <item name="android:colorBackground">@android:color/transparent</item>
         <item name="android:windowIsFloating">false</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowSoftInputMode">adjustResize</item>
