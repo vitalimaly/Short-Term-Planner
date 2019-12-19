@@ -3,6 +3,7 @@ package com.vitaliimalone.simpletodo.presentation.settings
 import android.os.Bundle
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.presentation.base.BaseFragment
+import com.vitaliimalone.simpletodo.presentation.settings.common.Settings
 import com.vitaliimalone.simpletodo.presentation.settings.common.SettingsAdapter
 import kotlinx.android.synthetic.main.settings_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -32,15 +33,15 @@ class SettingsFragment : BaseFragment(R.layout.settings_fragment) {
 
     }
 
-    private fun onSettingsClick(settings: SettingsAdapter.Settings) {
+    private fun onSettingsClick(settings: Settings) {
         when (settings) {
-            SettingsAdapter.Settings.THEME -> {
+            Settings.THEME -> {
             }
-            SettingsAdapter.Settings.ARCHIVE -> {
+            Settings.ARCHIVE -> {
             }
-            SettingsAdapter.Settings.INFO -> {
+            Settings.INFO -> {
             }
-            SettingsAdapter.Settings.RATE -> {
+            Settings.RATE -> {
             }
         }
     }

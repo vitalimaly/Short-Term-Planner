@@ -12,6 +12,7 @@ import com.vitaliimalone.simpletodo.domain.models.Task
 import com.vitaliimalone.simpletodo.presentation.utils.duedatepopup.DueDatePopup
 import kotlinx.android.synthetic.main.add_new_task_dialog.view.*
 import kotlinx.android.synthetic.main.delete_task_dialog.view.*
+import kotlinx.android.synthetic.main.pick_theme_dialog.view.*
 import org.threeten.bp.Instant
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.ZoneOffset
@@ -89,6 +90,15 @@ object Dialogs {
                 dialog.dismiss()
             }
         }
+        dialog.behavior.isHideable = false
+        dialog.show()
+    }
+
+    fun showPickThemeDialog(context: Context, onPositiveClick: (() -> Unit)) {
+        val dialogView = LayoutInflater.from(context).inflate(R.layout.pick_theme_dialog, null, false)
+        val dialog = BottomSheetDialog(context, R.style.TransparentBottomSheet)
+        dialog.setContentView(dialogView)
+        dialogView.pickThemeRecyclerView.adapter
         dialog.behavior.isHideable = false
         dialog.show()
     }

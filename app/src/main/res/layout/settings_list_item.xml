@@ -23,7 +23,6 @@
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/settingTitleTextView"
         style="@style/SettingsItemTextView"
-        android:textColor="?themeTextColorPrimary"
         android:textSize="@dimen/l_text_size"
         app:layout_constraintBottom_toTopOf="@+id/settingSubtitleTextView"
         app:layout_constraintEnd_toEndOf="parent"

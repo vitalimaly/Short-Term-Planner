@@ -27,6 +27,8 @@
     <string name="settings_toolbar_title">Settings</string>
     <string name="settings_theme_title">Theme</string>
     <string name="settings_theme_subtitle_default">Default theme</string>
+    <string name="settings_overdue_title">Overdue</string>
+    <string name="settings_overdue_subtitle">%d overdue tasks</string>
     <string name="settings_archive_title">Archive</string>
     <string name="settings_archive_subtitle">%d archived tasks</string>
     <string name="settings_rate_title">Rate</string>
