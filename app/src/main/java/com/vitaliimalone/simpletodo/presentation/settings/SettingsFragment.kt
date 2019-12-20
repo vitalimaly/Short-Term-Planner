@@ -30,7 +30,6 @@ class SettingsFragment : BaseFragment(R.layout.settings_fragment) {
     }
 
     private fun setupObservers() {
-
     }
 
     private fun onSettingsClick(settings: Settings) {

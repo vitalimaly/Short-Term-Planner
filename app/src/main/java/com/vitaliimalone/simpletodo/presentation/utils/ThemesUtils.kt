@@ -4,7 +4,7 @@ import com.vitaliimalone.simpletodo.R
 
 object ThemesUtils {
     val themes = mapOf(
-            R.style.AppTheme_PaleGreen to Res.string(R.string.theme_name_pale_green)
+        R.style.AppTheme_PaleGreen to Res.string(R.string.theme_name_pale_green)
     )
 
     fun getCurrentThemeName(): String {

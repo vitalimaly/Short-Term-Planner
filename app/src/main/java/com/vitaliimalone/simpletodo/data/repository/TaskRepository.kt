@@ -5,7 +5,7 @@ import com.vitaliimalone.simpletodo.data.repository.local.models.TaskEntity
 import kotlinx.coroutines.flow.Flow
 
 class TaskRepository(
-        private val taskLocalDataSource: TaskLocalDataSource
+    private val taskLocalDataSource: TaskLocalDataSource
 ) {
     suspend fun getAllTasks(): Flow<List<TaskEntity>> {
         return taskLocalDataSource.getAllTasks()

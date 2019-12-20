@@ -11,7 +11,7 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.pick_due_date_popup_item.*
 
 class DueDatePopupAdapter(
-        private val onItemClicked: ((DueDatePopupItem) -> Unit)
+    private val onItemClicked: ((DueDatePopupItem) -> Unit)
 ) : RecyclerView.Adapter<DueDatePopupAdapter.PopupDueDateViewHolder>() {
     enum class DueDatePopupItem(val text: String) {
         TODAY(Res.string(R.string.due_date_popup_today)),
@@ -34,7 +34,7 @@ class DueDatePopupAdapter(
     }
 
     inner class PopupDueDateViewHolder(
-            override val containerView: View
+        override val containerView: View
     ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
         fun bind(item: DueDatePopupItem) {
             containerView.setOnClickListener {

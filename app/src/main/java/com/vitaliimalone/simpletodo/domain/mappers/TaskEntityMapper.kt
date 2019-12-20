@@ -10,15 +10,17 @@ object TaskEntityMapper {
     private val formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME
 
     fun map(input: Task): TaskEntity {
-        return TaskEntity(input.id,
-                input.title,
-                input.description,
-                input.createdAt.format(formatter),
-                input.modifiedAt.format(formatter),
-                input.dueTo.format(formatter),
-                input.isDone,
-                input.isArchived,
-                gson.toJson(input.tags),
-                gson.toJson(input.subtasks))
+        return TaskEntity(
+            input.id,
+            input.title,
+            input.description,
+            input.createdAt.format(formatter),
+            input.modifiedAt.format(formatter),
+            input.dueTo.format(formatter),
+            input.isDone,
+            input.isArchived,
+            gson.toJson(input.tags),
+            gson.toJson(input.subtasks)
+        )
     }
 }

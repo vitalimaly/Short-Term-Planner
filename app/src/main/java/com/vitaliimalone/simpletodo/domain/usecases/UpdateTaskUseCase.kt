@@ -6,7 +6,7 @@ import com.vitaliimalone.simpletodo.domain.models.Task
 import org.threeten.bp.OffsetDateTime
 
 class UpdateTaskUseCase(
-        private val taskRepository: TaskRepository
+    private val taskRepository: TaskRepository
 ) {
     suspend fun updateTask(task: Task) {
         task.modifiedAt = OffsetDateTime.now()

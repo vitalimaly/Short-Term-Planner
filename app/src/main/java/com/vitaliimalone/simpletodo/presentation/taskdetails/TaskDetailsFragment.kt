@@ -12,8 +12,12 @@ import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.domain.models.Task
 import com.vitaliimalone.simpletodo.presentation.base.BaseFragment
 import com.vitaliimalone.simpletodo.presentation.taskdetails.common.SubtasksAdapter
-import com.vitaliimalone.simpletodo.presentation.utils.*
+import com.vitaliimalone.simpletodo.presentation.utils.DateTimeUtils
+import com.vitaliimalone.simpletodo.presentation.utils.Dialogs
+import com.vitaliimalone.simpletodo.presentation.utils.Res
+import com.vitaliimalone.simpletodo.presentation.utils.clearFocusOnDoneClick
 import com.vitaliimalone.simpletodo.presentation.utils.duedatepopup.DueDatePopup
+import com.vitaliimalone.simpletodo.presentation.utils.trimmed
 import kotlinx.android.synthetic.main.task_details_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.threeten.bp.OffsetDateTime
@@ -56,10 +60,14 @@ class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
         taskTitleEditText.setText(task.title)
         noteEditText.setText(task.description)
         updateTaskDueDate(task.dueTo)
-        createdOnTextView.text = Res.string(R.string.task_details_created,
-                DateTimeUtils.getShortDayMonthDate(task.createdAt))
-        modifiedOnTextView.text = Res.string(R.string.task_details_modified,
-                DateTimeUtils.getShortDayMonthDate(task.modifiedAt))
+        createdOnTextView.text = Res.string(
+            R.string.task_details_created,
+            DateTimeUtils.getShortDayMonthDate(task.createdAt)
+        )
+        modifiedOnTextView.text = Res.string(
+            R.string.task_details_modified,
+            DateTimeUtils.getShortDayMonthDate(task.modifiedAt)
+        )
         taskTitleEditText.clearFocusOnDoneClick()
         noteEditText.setOnTouchListener { v, event ->
             if (v.hasFocus()) {
@@ -98,6 +106,5 @@ class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
     }
 
     private fun setupObservers() {
-
     }
 }

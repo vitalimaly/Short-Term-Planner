@@ -16,10 +16,10 @@ import kotlinx.android.synthetic.main.pick_due_date_popup.view.*
 import org.threeten.bp.OffsetDateTime
 
 class DueDatePopup(
-        context: Context,
-        private val anchorView: View,
-        private val currentDate: OffsetDateTime,
-        private val onDatePicked: ((OffsetDateTime) -> Unit)
+    context: Context,
+    private val anchorView: View,
+    private val currentDate: OffsetDateTime,
+    private val onDatePicked: ((OffsetDateTime) -> Unit)
 ) : PopupWindow(context) {
     private val screenPosition = IntArray(2)
 
@@ -37,10 +37,12 @@ class DueDatePopup(
             it.apply {
                 rootView.setOnClickListener { dismiss() }
                 dueDatePopupRecyclerView.addItemDecoration(
-                        DefaultDividerItemDecoration(
-                                context,
-                                marginLeft = Res.dimen(R.dimen.m_spacing),
-                                marginRight = Res.dimen(R.dimen.m_spacing)))
+                    DefaultDividerItemDecoration(
+                        context,
+                        marginLeft = Res.dimen(R.dimen.m_spacing),
+                        marginRight = Res.dimen(R.dimen.m_spacing)
+                    )
+                )
                 dueDatePopupRecyclerView.adapter = DueDatePopupAdapter { popupItem ->
                     when (popupItem) {
                         DueDatePopupAdapter.DueDatePopupItem.TODAY -> {

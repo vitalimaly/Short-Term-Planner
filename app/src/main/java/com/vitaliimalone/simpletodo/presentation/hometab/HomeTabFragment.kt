@@ -51,7 +51,6 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
     }
 
     private fun setupClickListeners() {
-
     }
 
     private fun onTaskClicked(task: Task) {
@@ -62,18 +61,20 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
     private fun setupViews() {
         tasksPagerRecyclerView.adapter = tasksAdapter
         tasksPagerRecyclerView.addItemDecoration(
-                DefaultDividerItemDecoration(
-                        requireContext(),
-                        marginLeft = Res.dimen(R.dimen.home_divider_margin),
-                        marginRight = Res.dimen(R.dimen.home_divider_margin)))
+            DefaultDividerItemDecoration(
+                requireContext(),
+                marginLeft = Res.dimen(R.dimen.home_divider_margin),
+                marginRight = Res.dimen(R.dimen.home_divider_margin)
+            )
+        )
         val itemTouchHelper = ItemTouchHelper(
-                TaskTouchHelperCallback(
-                        this::onTabSwipe,
-                        getSwipedToTabText(homeTab, ItemTouchHelper.LEFT),
-                        getSwipedToTabText(homeTab, ItemTouchHelper.RIGHT),
-                        getSwipedToTabColor(homeTab, ItemTouchHelper.LEFT),
-                        getSwipedToTabColor(homeTab, ItemTouchHelper.RIGHT)
-                )
+            TaskTouchHelperCallback(
+                this::onTabSwipe,
+                getSwipedToTabText(homeTab, ItemTouchHelper.LEFT),
+                getSwipedToTabText(homeTab, ItemTouchHelper.RIGHT),
+                getSwipedToTabColor(homeTab, ItemTouchHelper.LEFT),
+                getSwipedToTabColor(homeTab, ItemTouchHelper.RIGHT)
+            )
         )
         itemTouchHelper.attachToRecyclerView(tasksPagerRecyclerView)
     }
@@ -87,12 +88,12 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
         }
         val snackbarTitleColor = Res.color(requireContext(), R.attr.themeTextColorPrimaryInverse)
         val snackbarTitle =
-                Res.string(R.string.snackbar_task_swiped, getSwipedToTabText(homeTab, direction))
-                        .setTextColor(snackbarTitleColor)
+            Res.string(R.string.snackbar_task_swiped, getSwipedToTabText(homeTab, direction))
+                .setTextColor(snackbarTitleColor)
         val swipedSnackbar = Snackbar.make(
-                tasksPagerRecyclerView,
-                snackbarTitle,
-                Snackbar.LENGTH_LONG
+            tasksPagerRecyclerView,
+            snackbarTitle,
+            Snackbar.LENGTH_LONG
         )
         swipedSnackbar.setAction(Res.string(R.string.snackbar_undo)) {
             viewModel.undoSwipe()

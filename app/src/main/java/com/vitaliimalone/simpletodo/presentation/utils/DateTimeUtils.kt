@@ -77,43 +77,43 @@ object DateTimeUtils {
             HomeTab.WEEK -> {
                 if (now.dayOfWeek < DayOfWeek.SUNDAY) {
                     startDate = now.plusDays(1)
-                            .with(LocalTime.MIN)
+                        .with(LocalTime.MIN)
                     endDate = now.with(DayOfWeek.SUNDAY)
-                            .with(LocalTime.MAX)
+                        .with(LocalTime.MAX)
                 } else {
                     startDate = now.plusWeeks(1)
-                            .with(DayOfWeek.MONDAY)
-                            .with(LocalTime.MIN)
+                        .with(DayOfWeek.MONDAY)
+                        .with(LocalTime.MIN)
                     endDate = now.plusWeeks(1)
-                            .with(DayOfWeek.SUNDAY)
-                            .with(LocalTime.MAX)
+                        .with(DayOfWeek.SUNDAY)
+                        .with(LocalTime.MAX)
                 }
             }
             HomeTab.MONTH -> {
                 if (now.dayOfWeek < DayOfWeek.SATURDAY) {
                     startDate = now.with(nextMondayAdjuster)
-                            .with(LocalTime.MIN)
+                        .with(LocalTime.MIN)
                     endDate = now.with(nextMondayAdjuster)
-                            .with(TemporalAdjusters.lastDayOfMonth())
-                            .with(LocalTime.MAX)
+                        .with(TemporalAdjusters.lastDayOfMonth())
+                        .with(LocalTime.MAX)
                 } else {
                     startDate = now.plusWeeks(1)
-                            .with(nextMondayAdjuster)
-                            .with(LocalTime.MIN)
+                        .with(nextMondayAdjuster)
+                        .with(LocalTime.MIN)
                     endDate = now.plusWeeks(1)
-                            .with(nextMondayAdjuster)
-                            .with(TemporalAdjusters.lastDayOfMonth())
-                            .with(LocalTime.MAX)
+                        .with(nextMondayAdjuster)
+                        .with(TemporalAdjusters.lastDayOfMonth())
+                        .with(LocalTime.MAX)
                 }
             }
             HomeTab.TODO -> {
                 startDate = now.plusWeeks(1)
-                        .with(nextMondayAdjuster)
-                        .with(TemporalAdjusters.lastDayOfMonth())
-                        .plusDays(1)
-                        .with(LocalTime.MIN)
+                    .with(nextMondayAdjuster)
+                    .with(TemporalAdjusters.lastDayOfMonth())
+                    .plusDays(1)
+                    .with(LocalTime.MIN)
                 endDate = now.withYear(Constants.MAX_YEAR)
-                        .with(LocalTime.MAX)
+                    .with(LocalTime.MAX)
             }
         }
         return startDate to endDate

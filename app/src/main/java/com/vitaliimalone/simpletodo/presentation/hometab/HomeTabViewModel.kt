@@ -12,8 +12,8 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class HomeTabViewModel(
-        private val getTasksForHomeTabUseCase: GetTasksForHomeTabUseCase,
-        private val updateTaskUseCase: UpdateTaskUseCase
+    private val getTasksForHomeTabUseCase: GetTasksForHomeTabUseCase,
+    private val updateTaskUseCase: UpdateTaskUseCase
 ) : ViewModel() {
     private var lastSwipedTask: Task? = null
     val tasksForHomeTab = MutableLiveData<List<Task>>()

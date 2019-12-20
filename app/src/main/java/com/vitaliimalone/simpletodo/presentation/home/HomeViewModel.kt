@@ -7,7 +7,7 @@ import com.vitaliimalone.simpletodo.domain.usecases.AddTaskUseCase
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
-        private val addTaskUseCase: AddTaskUseCase
+    private val addTaskUseCase: AddTaskUseCase
 ) : ViewModel() {
     fun addNewTask(task: Task) {
         viewModelScope.launch {

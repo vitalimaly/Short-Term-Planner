@@ -45,8 +45,11 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
 
     private fun setupViews() {
         tasksViewPager.isUserInputEnabled = false
-        tasksViewPager.adapter = HomeTabFragmentAdapter(listOf(
-                HomeTab.TODAY, HomeTab.WEEK, HomeTab.MONTH, HomeTab.TODO), this)
+        tasksViewPager.adapter = HomeTabFragmentAdapter(
+            listOf(
+                HomeTab.TODAY, HomeTab.WEEK, HomeTab.MONTH, HomeTab.TODO
+            ), this
+        )
         TabLayoutMediator(tabsTabLayout, tasksViewPager) { tab, position ->
             tab.text = HomeTab.values()[position].title
         }.attach()
@@ -69,20 +72,19 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
             dateRangeTextView.text = DateTimeUtils.getDateForTab(HomeTab.values()[position])
             dateRangeTextView.translationY = if (moveUp) height else -height
             dateRangeTextView.animate()
-                    .setDuration(animationTime / 2)
-                    .translationY(0f)
-                    .alpha(1f)
-                    .start()
+                .setDuration(animationTime / 2)
+                .translationY(0f)
+                .alpha(1f)
+                .start()
         }
         dateRangeTextView.animate()
-                .setDuration(animationTime / 2)
-                .translationY(if (moveUp) -height else height)
-                .alpha(0f)
-                .withEndAction(endAction)
-                .start()
+            .setDuration(animationTime / 2)
+            .translationY(if (moveUp) -height else height)
+            .alpha(0f)
+            .withEndAction(endAction)
+            .start()
     }
 
     private fun setupObservers() {
     }
-
 }

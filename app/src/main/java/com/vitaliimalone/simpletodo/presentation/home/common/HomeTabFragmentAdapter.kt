@@ -6,7 +6,7 @@ import com.vitaliimalone.simpletodo.presentation.hometab.HomeTabFragment
 import com.vitaliimalone.simpletodo.presentation.models.HomeTab
 
 class HomeTabFragmentAdapter(private val fragments: List<HomeTab>, fragment: Fragment) :
-        FragmentStateAdapter(fragment) {
+    FragmentStateAdapter(fragment) {
     override fun createFragment(position: Int): Fragment {
         return HomeTabFragment.newInstance(fragments[position])
     }
