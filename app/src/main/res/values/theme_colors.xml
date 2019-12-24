@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="pale_theme_color_primary">#d8e2dc</color>
+    <color name="pale_theme_color_primary_variant">#B9CAC0</color>
+    <color name="pale_theme_color_secondary">#FFAB91</color>
+    <color name="pale_theme_color_secondary_variant">#CF7F65</color>
+    <color name="pale_theme_color_background">#fff2ed</color>
+    <color name="pale_theme_color_background_secondary">#C7BCBA</color>
+    <color name="pale_theme_color_surface">#FFFAF7</color>
+    <color name="pale_theme_color_error">#E57373</color>
+    <color name="pale_theme_color_checkbox_done">#a3d39c</color>
+
+    <color name="dark_theme_color_primary">#212121</color>
+    <color name="dark_theme_color_primary_variant">#121212</color>
+    <color name="dark_theme_color_secondary">#B2DFDB</color>
+    <color name="dark_theme_color_secondary_variant">#4DB6AC</color>
+    <color name="dark_theme_color_background">#121212</color>
+    <color name="dark_theme_color_background_secondary">#000000</color>
+    <color name="dark_theme_color_surface">#121212</color>
+    <color name="dark_theme_color_error">#9E1616</color>
+    <color name="dark_theme_color_checkbox_done">#416F48</color>
+</resources>

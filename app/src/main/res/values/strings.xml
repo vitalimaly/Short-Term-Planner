@@ -34,4 +34,5 @@
     <string name="settings_rate_title">Rate</string>
     <string name="settings_info_title">About</string>
     <string name="theme_name_pale_green">Pale green</string>
+    <string name="theme_name_dark">Dark</string>
 </resources>
