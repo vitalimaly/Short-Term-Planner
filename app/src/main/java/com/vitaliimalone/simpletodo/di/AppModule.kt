@@ -12,6 +12,7 @@ import com.vitaliimalone.simpletodo.domain.usecases.UpdateTaskUseCase
 import com.vitaliimalone.simpletodo.notifications.Notificator
 import com.vitaliimalone.simpletodo.presentation.home.HomeViewModel
 import com.vitaliimalone.simpletodo.presentation.hometab.HomeTabViewModel
+import com.vitaliimalone.simpletodo.presentation.settings.SettingsViewModel
 import com.vitaliimalone.simpletodo.presentation.taskdetails.TaskDetailsViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -21,6 +22,7 @@ private val presentation = module {
     viewModel { HomeViewModel(get()) }
     viewModel { HomeTabViewModel(get(), get()) }
     viewModel { TaskDetailsViewModel(get(), get()) }
+    viewModel { SettingsViewModel() }
 }
 private val domain = module {
     single { GetTasksUseCase(get()) }

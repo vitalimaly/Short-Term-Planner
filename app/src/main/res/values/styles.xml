@@ -21,6 +21,7 @@
         <item name="themeTextColorTertiaryInverse">@color/white_25</item>
         <item name="themeDoneCheckboxColor">@color/pale_theme_color_checkbox_done</item>
         <item name="themeDividerColor">@color/black_50</item>
+        <item name="android:windowLightStatusBar">true</item>
         <!-- Default theme -->
 
         <!-- Material theming -->
@@ -50,7 +51,6 @@
         <item name="fontFamily">@font/red_hat_display_regular</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:windowLightStatusBar">true</item>
         <item name="android:statusBarColor">?themeColorPrimaryVariant</item>
         <item name="android:windowBackground">?themeColorBackground</item>
         <!-- System settings -->

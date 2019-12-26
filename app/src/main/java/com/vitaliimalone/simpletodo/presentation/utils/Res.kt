@@ -10,6 +10,7 @@ import androidx.annotation.DimenRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.FontRes
 import androidx.annotation.StringRes
+import androidx.annotation.StyleRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import org.koin.core.KoinComponent
@@ -23,8 +24,10 @@ object Res : KoinComponent {
     }
 
     @ColorInt
-    fun color(context: Context, @AttrRes attrResId: Int): Int {
-        val a = context.obtainStyledAttributes(null, intArrayOf(attrResId))
+    fun color(context: Context, @AttrRes attrResId: Int, @StyleRes themeResId: Int = Pref.theme): Int {
+        val theme = context.resources.newTheme()
+        theme.applyStyle(themeResId, false)
+        val a = theme.obtainStyledAttributes(intArrayOf(attrResId))
         return try {
             a.getColor(0, Color.RED) // red to show errors
         } finally {
