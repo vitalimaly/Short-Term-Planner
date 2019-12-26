@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.vitaliimalone.simpletodo.R
-import com.vitaliimalone.simpletodo.presentation.utils.Pref
+import com.vitaliimalone.simpletodo.presentation.utils.Themes
 import kotlinx.android.synthetic.main.pick_theme_dialog.*
 
 class PickThemeDialog(
@@ -15,7 +15,7 @@ class PickThemeDialog(
         setContentView(R.layout.pick_theme_dialog)
         behavior.isHideable = false
         pickThemeRecyclerView.adapter = PickThemeAdapter {
-            Pref.theme = it.resId
+            Themes.setTheme(activity, it.resId)
             activity.recreate()
             dismiss()
         }

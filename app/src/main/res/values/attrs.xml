@@ -19,4 +19,5 @@
     <attr name="themeTextColorTertiaryInverse" format="reference|color" />
     <attr name="themeDoneCheckboxColor" format="reference|color" />
     <attr name="themeDividerColor" format="reference|color" />
+    <attr name="themeIsLight" format="reference|boolean" />
 </resources>

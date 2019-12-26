@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.presentation.utils.Res
 import com.vitaliimalone.simpletodo.presentation.utils.Theme
-import com.vitaliimalone.simpletodo.presentation.utils.ThemesUtils
+import com.vitaliimalone.simpletodo.presentation.utils.Themes
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.pick_theme_dialog_item.*
 
@@ -21,11 +21,11 @@ class PickThemeAdapter(
     }
 
     override fun onBindViewHolder(holder: PickThemeViewHolder, position: Int) {
-        holder.bind(ThemesUtils.themes[position])
+        holder.bind(Themes.themes[position])
     }
 
     override fun getItemCount(): Int {
-        return ThemesUtils.themes.size
+        return Themes.themes.size
     }
 
     inner class PickThemeViewHolder(
@@ -37,25 +37,25 @@ class PickThemeAdapter(
             }
             themeNameTextView.text = item.name
             themeColorPrimaryVariantView.setBackgroundColor(
-                Res.color(itemView.context, R.attr.themeColorPrimaryVariant, item.resId)
+                Res.themeColor(itemView.context, R.attr.themeColorPrimaryVariant, item.resId)
             )
             themeColorPrimaryView.setBackgroundColor(
-                Res.color(itemView.context, R.attr.themeColorPrimary, item.resId)
+                Res.themeColor(itemView.context, R.attr.themeColorPrimary, item.resId)
             )
             themeColorSecondaryVariantView.setBackgroundColor(
-                Res.color(itemView.context, R.attr.themeColorSecondaryVariant, item.resId)
+                Res.themeColor(itemView.context, R.attr.themeColorSecondaryVariant, item.resId)
             )
             themeColorSecondaryView.setBackgroundColor(
-                Res.color(itemView.context, R.attr.themeColorSecondary, item.resId)
+                Res.themeColor(itemView.context, R.attr.themeColorSecondary, item.resId)
             )
             themeTextColorPrimaryView.setBackgroundColor(
-                Res.color(itemView.context, R.attr.themeTextColorPrimary, item.resId)
+                Res.themeColor(itemView.context, R.attr.themeTextColorPrimary, item.resId)
             )
             themeStartRadioButton.supportButtonTintList = ColorStateList.valueOf(
-                Res.color(itemView.context, R.attr.themeTextColorSecondary, item.resId)
+                Res.themeColor(itemView.context, R.attr.themeTextColorSecondary, item.resId)
             )
             themeEndRadioButton.supportButtonTintList = ColorStateList.valueOf(
-                Res.color(itemView.context, R.attr.themeTextColorSecondary, item.resId)
+                Res.themeColor(itemView.context, R.attr.themeTextColorSecondary, item.resId)
             )
         }
     }

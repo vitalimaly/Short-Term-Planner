@@ -1,5 +1,6 @@
 package com.vitaliimalone.simpletodo.presentation.hometab.common
 
+import android.content.Context
 import android.graphics.Canvas
 import android.graphics.drawable.ColorDrawable
 import android.text.TextPaint
@@ -10,14 +11,15 @@ import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.presentation.utils.Res
 
 class TaskTouchHelperCallback(
+    private val context: Context,
     private val onSwipe: ((position: Int, direction: Int) -> Unit),
     private val swipeLeftText: String,
     private val swipeRightText: String,
     @AttrRes private val swipeLeftBackgroundColor: Int,
     @AttrRes private val swipeRightBackgroundColor: Int
 ) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
-    private val swipeLeftIconId = Res.drawable(R.drawable.ic_chevron_left)
-    private val swipeRightIconId = Res.drawable(R.drawable.ic_chevron_right)
+    private val swipeLeftIconId = Res.drawable(context, R.drawable.ic_chevron_left)
+    private val swipeRightIconId = Res.drawable(context, R.drawable.ic_chevron_right)
     private val iconHorizontalMargin = Res.dimen(R.dimen.home_task_item_min_height).toInt() / 4
     private val textSize = Res.dimen(R.dimen.l_text_size)
     private val textFont = Res.font(R.font.red_hat_display_regular)

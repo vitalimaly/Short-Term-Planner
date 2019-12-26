@@ -21,7 +21,7 @@
         <item name="themeTextColorTertiaryInverse">@color/white_25</item>
         <item name="themeDoneCheckboxColor">@color/pale_theme_color_checkbox_done</item>
         <item name="themeDividerColor">@color/black_50</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="themeIsLight">true</item>
     </style>
 
     <style name="AppTheme.Dark">
@@ -44,6 +44,6 @@
         <item name="themeTextColorTertiaryInverse">@color/black_25</item>
         <item name="themeDoneCheckboxColor">@color/dark_theme_color_checkbox_done</item>
         <item name="themeDividerColor">@color/white_50</item>
-        <item name="android:windowLightStatusBar">false</item>
+        <item name="themeIsLight">false</item>
     </style>
 </resources>

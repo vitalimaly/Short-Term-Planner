@@ -69,6 +69,7 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
         )
         val itemTouchHelper = ItemTouchHelper(
             TaskTouchHelperCallback(
+                requireContext(),
                 this::onTabSwipe,
                 getSwipedToTabText(homeTab, ItemTouchHelper.LEFT),
                 getSwipedToTabText(homeTab, ItemTouchHelper.RIGHT),

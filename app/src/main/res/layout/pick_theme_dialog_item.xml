@@ -76,6 +76,6 @@
         app:layout_constraintHorizontal_bias="1"
         app:layout_constraintStart_toEndOf="@id/themeColorPrimaryVariantView"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/settings_theme_subtitle_default" />
+        tools:text="@string/theme_name_pale_green" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
