@@ -108,7 +108,7 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
             if (currentTab == HomeTabType.values().first()) {
                 Res.string(R.string.archive)
             } else {
-                HomeTabs.homeTabFragments[currentTab.ordinal - 1].title // todo
+                HomeTabs.homeTabFragments[currentTab.ordinal - 1].title
             }
         } else if (direction == ItemTouchHelper.RIGHT) {
             if (currentTab == HomeTabType.values().last()) {
