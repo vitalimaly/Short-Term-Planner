@@ -12,7 +12,7 @@ import com.vitaliimalone.simpletodo.presentation.utils.DateTimeUtils
 import com.vitaliimalone.simpletodo.presentation.utils.Dialogs
 import com.vitaliimalone.simpletodo.presentation.utils.Res
 import com.vitaliimalone.simpletodo.presentation.views.DefaultDividerItemDecoration
-import kotlinx.android.synthetic.main.pick_due_date_popup.view.*
+import kotlinx.android.synthetic.main.due_date_popup.view.*
 import org.threeten.bp.OffsetDateTime
 
 class DueDatePopup(
@@ -28,7 +28,7 @@ class DueDatePopup(
         screenPosition[0] += getAdditionalStartPadding(anchorView)
         isFocusable = true
         isOutsideTouchable = false
-        contentView = LayoutInflater.from(context).inflate(R.layout.pick_due_date_popup, null, false)
+        contentView = LayoutInflater.from(context).inflate(R.layout.due_date_popup, null, false)
     }
 
     override fun setContentView(contentView: View?) {

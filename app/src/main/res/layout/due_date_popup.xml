@@ -9,4 +9,4 @@
     android:orientation="vertical"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
     tools:itemCount="4"
-    tools:listitem="@layout/pick_due_date_popup_item" />
+    tools:listitem="@layout/due_date_popup_item" />

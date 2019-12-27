@@ -26,6 +26,7 @@
     <string name="due_date_popup_pick_date">Pick date</string>
     <string name="settings_toolbar_title">Settings</string>
     <string name="settings_theme_title">Theme</string>
+    <string name="settings_language_title">Language</string>
     <string name="settings_overdue_title">Overdue</string>
     <string name="settings_overdue_subtitle">%d overdue tasks</string>
     <string name="settings_archive_title">Archive</string>

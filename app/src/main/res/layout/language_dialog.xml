@@ -2,11 +2,11 @@
 <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/pickThemeRecyclerView"
+    android:id="@+id/languageRecyclerView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?themeColorBackground"
     android:orientation="vertical"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
     tools:itemCount="4"
-    tools:listitem="@layout/pick_theme_dialog_item" />
+    tools:listitem="@layout/theme_dialog_item" />

@@ -1,4 +1,4 @@
-package com.vitaliimalone.simpletodo.presentation.settings.common
+package com.vitaliimalone.simpletodo.presentation.settings.theme
 
 import android.content.res.ColorStateList
 import android.view.LayoutInflater
@@ -10,17 +10,17 @@ import com.vitaliimalone.simpletodo.presentation.utils.Res
 import com.vitaliimalone.simpletodo.presentation.utils.Theme
 import com.vitaliimalone.simpletodo.presentation.utils.Themes
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.pick_theme_dialog_item.*
+import kotlinx.android.synthetic.main.theme_dialog_item.*
 
-class PickThemeAdapter(
+class ThemeAdapter(
     private val onItemClicked: ((Theme) -> Unit)
-) : RecyclerView.Adapter<PickThemeAdapter.PickThemeViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PickThemeViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.pick_theme_dialog_item, parent, false)
-        return PickThemeViewHolder(view)
+) : RecyclerView.Adapter<ThemeAdapter.ThemeViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ThemeViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.theme_dialog_item, parent, false)
+        return ThemeViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: PickThemeViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ThemeViewHolder, position: Int) {
         holder.bind(Themes.themes[position])
     }
 
@@ -28,7 +28,7 @@ class PickThemeAdapter(
         return Themes.themes.size
     }
 
-    inner class PickThemeViewHolder(
+    inner class ThemeViewHolder(
         override val containerView: View
     ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
         fun bind(item: Theme) {

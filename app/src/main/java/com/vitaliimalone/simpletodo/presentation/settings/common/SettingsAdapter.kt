@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.vitaliimalone.simpletodo.R
+import com.vitaliimalone.simpletodo.presentation.utils.Languages
 import com.vitaliimalone.simpletodo.presentation.utils.Res
 import com.vitaliimalone.simpletodo.presentation.utils.Themes
 import kotlinx.android.extensions.LayoutContainer
@@ -21,7 +22,13 @@ class SettingsAdapter(
             SettingsType.THEME,
             Res.drawable(context, R.drawable.ic_theme),
             Res.string(R.string.settings_theme_title),
-            Themes.getCurrentTheme().name
+            Themes.getCurrentTheme(context).name
+        ),
+        Settings(
+            SettingsType.LANGUAGE,
+            Res.drawable(context, R.drawable.ic_language),
+            Res.string(R.string.settings_language_title),
+            Languages.getCurrentLanguage(context).name
         ),
         Settings(
             SettingsType.OVERDUE,

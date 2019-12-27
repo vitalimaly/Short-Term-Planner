@@ -1,5 +1,6 @@
 package com.vitaliimalone.simpletodo.presentation.utils
 
+import android.content.Context
 import android.os.Build
 import android.view.View
 import androidx.annotation.StyleRes
@@ -14,8 +15,8 @@ object Themes {
         Theme(R.style.AppTheme_Dark, Res.string(R.string.theme_name_dark))
     )
 
-    fun setTheme(activity: FragmentActivity, @StyleRes themeResId: Int = Pref.theme) {
-        activity.setTheme(themeResId)
+    fun setTheme(activity: FragmentActivity, theme: Theme = getCurrentTheme(activity)) {
+        activity.setTheme(theme.resId)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (Res.boolean(activity, R.attr.themeIsLight)) {
                 activity.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
@@ -23,10 +24,10 @@ object Themes {
                 activity.window.decorView.systemUiVisibility = 0
             }
         }
-        Pref.theme = themeResId
+        Pref(activity).theme = theme.resId
     }
 
-    fun getCurrentTheme(): Theme {
-        return themes.find { it.resId == Pref.theme } ?: themes[0]
+    fun getCurrentTheme(context: Context): Theme {
+        return themes.find { it.resId == Pref(context).theme } ?: themes[0]
     }
 }
