@@ -11,14 +11,14 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.due_date_popup_item.*
 
 class DueDatePopupAdapter(
-    private val onItemClicked: ((DueDatePopupItem) -> Unit)
+    private val onItemClicked: ((DueDateItem) -> Unit)
 ) : RecyclerView.Adapter<DueDatePopupAdapter.PopupDueDateViewHolder>() {
-    enum class DueDatePopupItem(val text: String) {
-        TODAY(Res.string(R.string.due_date_popup_today)),
-        TOMORROW(Res.string(R.string.due_date_popup_tomorrow)),
-        END_OF_WEEK(DateTimeUtils.getDueDatePopupEndOfWeekDate()),
-        PICK(Res.string(R.string.due_date_popup_pick_date))
-    }
+    private val items = listOf(
+        DueDateItem(DueDateType.TODAY, Res.string(R.string.due_date_popup_today)),
+        DueDateItem(DueDateType.TOMORROW, Res.string(R.string.due_date_popup_tomorrow)),
+        DueDateItem(DueDateType.END_OF_WEEK, DateTimeUtils.getDueDatePopupEndOfWeekDate()),
+        DueDateItem(DueDateType.PICK, Res.string(R.string.due_date_popup_pick_date))
+    )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopupDueDateViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.due_date_popup_item, parent, false)
@@ -26,17 +26,17 @@ class DueDatePopupAdapter(
     }
 
     override fun onBindViewHolder(holder: PopupDueDateViewHolder, position: Int) {
-        holder.bind(DueDatePopupItem.values()[position])
+        holder.bind(items[position])
     }
 
     override fun getItemCount(): Int {
-        return DueDatePopupItem.values().size
+        return items.size
     }
 
     inner class PopupDueDateViewHolder(
         override val containerView: View
     ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
-        fun bind(item: DueDatePopupItem) {
+        fun bind(item: DueDateItem) {
             containerView.setOnClickListener {
                 onItemClicked.invoke(item)
             }

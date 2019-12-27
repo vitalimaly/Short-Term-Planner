@@ -130,4 +130,8 @@ class SubtasksAdapter(
             }
         }
     }
+
+    enum class SubtaskViewType {
+        SUBTASK, ADDNEW
+    }
 }

@@ -7,9 +7,9 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.presentation.base.BaseFragment
 import com.vitaliimalone.simpletodo.presentation.home.common.HomeTabFragmentAdapter
-import com.vitaliimalone.simpletodo.presentation.models.HomeTab
 import com.vitaliimalone.simpletodo.presentation.utils.DateTimeUtils
 import com.vitaliimalone.simpletodo.presentation.utils.Dialogs
+import com.vitaliimalone.simpletodo.presentation.utils.HomeTabs
 import com.vitaliimalone.simpletodo.presentation.utils.hideKeyboard
 import com.vitaliimalone.simpletodo.presentation.utils.showKeyboard
 import kotlinx.android.synthetic.main.home_fragment.*
@@ -30,8 +30,8 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
     private fun setupClickListeners() {
         addFab.setOnClickListener { view ->
             showKeyboard(view)
-            val currentTab = HomeTab.values()[tasksViewPager.currentItem]
-            val defaultDate = DateTimeUtils.getDateForAddNewTask(currentTab)
+            val currentTab = HomeTabs.homeTabFragments[tasksViewPager.currentItem]
+            val defaultDate = DateTimeUtils.getDateForAddNewTask(currentTab.homeTabType)
             Dialogs.showAddNewTaskDialog(requireContext(), defaultDate) {
                 viewModel.addNewTask(it)
                 hideKeyboard()
@@ -45,13 +45,9 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
 
     private fun setupViews() {
         tasksViewPager.isUserInputEnabled = false
-        tasksViewPager.adapter = HomeTabFragmentAdapter(
-            listOf(
-                HomeTab.TODAY, HomeTab.WEEK, HomeTab.MONTH, HomeTab.TODO
-            ), this
-        )
+        tasksViewPager.adapter = HomeTabFragmentAdapter(HomeTabs.homeTabFragments, this)
         TabLayoutMediator(tabsTabLayout, tasksViewPager) { tab, position ->
-            tab.text = HomeTab.values()[position].title
+            tab.text = HomeTabs.homeTabFragments[position].title
         }.attach()
         tasksViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
@@ -62,14 +58,15 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
                 }
             }
         })
-        dateRangeTextView.text = DateTimeUtils.getDateForTab(HomeTab.values()[tasksViewPager.currentItem])
+        dateRangeTextView.text =
+            DateTimeUtils.getDateForTab(HomeTabs.homeTabFragments[tasksViewPager.currentItem].homeTabType)
     }
 
     private fun animatePageChange(position: Int) {
         val height = dateRangeTextView.height.toFloat()
         val moveUp = oldPagePosition < position
         val endAction = {
-            dateRangeTextView.text = DateTimeUtils.getDateForTab(HomeTab.values()[position])
+            dateRangeTextView.text = DateTimeUtils.getDateForTab(HomeTabs.homeTabFragments[position].homeTabType)
             dateRangeTextView.translationY = if (moveUp) height else -height
             dateRangeTextView.animate()
                 .setDuration(animationTime / 2)

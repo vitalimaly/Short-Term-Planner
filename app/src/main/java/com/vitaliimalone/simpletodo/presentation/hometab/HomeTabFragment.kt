@@ -12,7 +12,8 @@ import com.vitaliimalone.simpletodo.presentation.base.BaseFragment
 import com.vitaliimalone.simpletodo.presentation.home.HomeFragmentDirections
 import com.vitaliimalone.simpletodo.presentation.hometab.common.TaskTouchHelperCallback
 import com.vitaliimalone.simpletodo.presentation.hometab.common.TasksAdapter
-import com.vitaliimalone.simpletodo.presentation.models.HomeTab
+import com.vitaliimalone.simpletodo.presentation.utils.HomeTabType
+import com.vitaliimalone.simpletodo.presentation.utils.HomeTabs
 import com.vitaliimalone.simpletodo.presentation.utils.Res
 import com.vitaliimalone.simpletodo.presentation.utils.setTextColor
 import com.vitaliimalone.simpletodo.presentation.views.DefaultDividerItemDecoration
@@ -21,24 +22,24 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
     companion object {
-        private const val ARG_HOME_TAB = "arg_home_tab"
+        private const val ARG_HOME_TAB_TYPE = "arg_home_tab"
 
-        fun newInstance(homeTab: HomeTab): HomeTabFragment {
+        fun newInstance(homeTabType: HomeTabType): HomeTabFragment {
             return HomeTabFragment().apply {
-                arguments = bundleOf(ARG_HOME_TAB to homeTab.name)
+                arguments = bundleOf(ARG_HOME_TAB_TYPE to homeTabType.name)
             }
         }
     }
 
     private val viewModel: HomeTabViewModel by viewModel()
     private val tasksAdapter by lazy { TasksAdapter(::onTaskClicked) }
-    private val homeTab by lazy {
-        HomeTab.valueOf(requireArguments().getString(ARG_HOME_TAB)!!)
+    private val homeTabType by lazy {
+        HomeTabType.valueOf(requireArguments().getString(ARG_HOME_TAB_TYPE)!!)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.fetchTasksForHomeTab(homeTab)
+        viewModel.fetchTasksForHomeTab(homeTabType)
         setupClickListeners()
         setupViews()
         setupObservers()
@@ -71,10 +72,10 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
             TaskTouchHelperCallback(
                 requireContext(),
                 this::onTabSwipe,
-                getSwipedToTabText(homeTab, ItemTouchHelper.LEFT),
-                getSwipedToTabText(homeTab, ItemTouchHelper.RIGHT),
-                getSwipedToTabColor(homeTab, ItemTouchHelper.LEFT),
-                getSwipedToTabColor(homeTab, ItemTouchHelper.RIGHT)
+                getSwipedToTabText(homeTabType, ItemTouchHelper.LEFT),
+                getSwipedToTabText(homeTabType, ItemTouchHelper.RIGHT),
+                getSwipedToTabColor(homeTabType, ItemTouchHelper.LEFT),
+                getSwipedToTabColor(homeTabType, ItemTouchHelper.RIGHT)
             )
         )
         itemTouchHelper.attachToRecyclerView(tasksPagerRecyclerView)
@@ -83,13 +84,13 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
     private fun onTabSwipe(position: Int, direction: Int) {
         val swipedTask = tasksAdapter.tasks[position]
         if (direction == ItemTouchHelper.LEFT) {
-            viewModel.onSwipeLeft(homeTab, swipedTask)
+            viewModel.onSwipeLeft(homeTabType, swipedTask)
         } else if (direction == ItemTouchHelper.RIGHT) {
-            viewModel.onSwipeRight(homeTab, swipedTask)
+            viewModel.onSwipeRight(homeTabType, swipedTask)
         }
         val snackbarTitleColor = Res.color(requireContext(), R.attr.themeTextColorPrimaryInverse)
         val snackbarTitle =
-            Res.string(R.string.snackbar_task_swiped, getSwipedToTabText(homeTab, direction))
+            Res.string(R.string.snackbar_task_swiped, getSwipedToTabText(homeTabType, direction))
                 .setTextColor(snackbarTitleColor)
         val swipedSnackbar = Snackbar.make(
             tasksPagerRecyclerView,
@@ -102,33 +103,33 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
         swipedSnackbar.show()
     }
 
-    private fun getSwipedToTabText(currentTab: HomeTab, direction: Int): String {
+    private fun getSwipedToTabText(currentTab: HomeTabType, direction: Int): String {
         return if (direction == ItemTouchHelper.LEFT) {
-            if (currentTab == HomeTab.values().first()) {
+            if (currentTab == HomeTabType.values().first()) {
                 Res.string(R.string.archive)
             } else {
-                HomeTab.values()[currentTab.ordinal - 1].title
+                HomeTabs.homeTabFragments[currentTab.ordinal - 1].title // todo
             }
         } else if (direction == ItemTouchHelper.RIGHT) {
-            if (currentTab == HomeTab.values().last()) {
+            if (currentTab == HomeTabType.values().last()) {
                 Res.string(R.string.archive)
             } else {
-                HomeTab.values()[currentTab.ordinal + 1].title
+                HomeTabs.homeTabFragments[currentTab.ordinal + 1].title
             }
         } else {
             throw IllegalArgumentException("Should be LEFT or RIGHT")
         }
     }
 
-    private fun getSwipedToTabColor(currentTab: HomeTab, direction: Int): Int {
+    private fun getSwipedToTabColor(currentTab: HomeTabType, direction: Int): Int {
         return if (direction == ItemTouchHelper.LEFT) {
-            if (currentTab == HomeTab.values().first()) {
+            if (currentTab == HomeTabType.values().first()) {
                 Res.color(requireContext(), R.attr.themeColorError)
             } else {
                 Res.color(requireContext(), R.attr.themeColorBackgroundSecondary)
             }
         } else if (direction == ItemTouchHelper.RIGHT) {
-            if (currentTab == HomeTab.values().last()) {
+            if (currentTab == HomeTabType.values().last()) {
                 Res.color(requireContext(), R.attr.themeColorError)
             } else {
                 Res.color(requireContext(), R.attr.themeColorBackgroundSecondary)

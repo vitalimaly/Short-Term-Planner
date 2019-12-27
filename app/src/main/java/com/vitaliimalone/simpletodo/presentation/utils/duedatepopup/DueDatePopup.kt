@@ -7,9 +7,9 @@ import android.view.View
 import android.widget.PopupWindow
 import com.google.android.material.textview.MaterialTextView
 import com.vitaliimalone.simpletodo.R
-import com.vitaliimalone.simpletodo.presentation.models.HomeTab
 import com.vitaliimalone.simpletodo.presentation.utils.DateTimeUtils
 import com.vitaliimalone.simpletodo.presentation.utils.Dialogs
+import com.vitaliimalone.simpletodo.presentation.utils.HomeTabType
 import com.vitaliimalone.simpletodo.presentation.utils.Res
 import com.vitaliimalone.simpletodo.presentation.views.DefaultDividerItemDecoration
 import kotlinx.android.synthetic.main.due_date_popup.view.*
@@ -44,17 +44,17 @@ class DueDatePopup(
                     )
                 )
                 dueDatePopupRecyclerView.adapter = DueDatePopupAdapter { popupItem ->
-                    when (popupItem) {
-                        DueDatePopupAdapter.DueDatePopupItem.TODAY -> {
+                    when (popupItem.type) {
+                        DueDateType.TODAY -> {
                             onDatePicked.invoke(OffsetDateTime.now())
                         }
-                        DueDatePopupAdapter.DueDatePopupItem.TOMORROW -> {
+                        DueDateType.TOMORROW -> {
                             onDatePicked.invoke(OffsetDateTime.now().plusDays(1))
                         }
-                        DueDatePopupAdapter.DueDatePopupItem.END_OF_WEEK -> {
-                            onDatePicked.invoke(DateTimeUtils.getStartEndDateForTab(HomeTab.WEEK).second)
+                        DueDateType.END_OF_WEEK -> {
+                            onDatePicked.invoke(DateTimeUtils.getStartEndDateForTab(HomeTabType.WEEK).second)
                         }
-                        DueDatePopupAdapter.DueDatePopupItem.PICK -> {
+                        DueDateType.PICK -> {
                             Dialogs.showDatePickerDialog(context, currentDate) { date ->
                                 onDatePicked.invoke(date)
                             }
