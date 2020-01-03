@@ -17,7 +17,7 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 
 object Res : KoinComponent {
-    private val context: Context by inject() // todo get rid of it
+    private val context: Context by inject()
 
     fun string(@StringRes stringRes: Int, vararg formatArgs: Any = emptyArray()): String {
         return context.getString(stringRes, *formatArgs)
@@ -34,7 +34,7 @@ object Res : KoinComponent {
     }
 
     @ColorInt
-    fun themeColor(context: Context, @AttrRes attrResId: Int, @StyleRes themeResId: Int = Pref(context).theme): Int {
+    fun themeColor(context: Context, @AttrRes attrResId: Int, @StyleRes themeResId: Int = Pref(context).themeStyleResId): Int {
         val theme = context.resources.newTheme()
         theme.applyStyle(themeResId, false)
         val a = theme.obtainStyledAttributes(intArrayOf(attrResId))
@@ -49,11 +49,11 @@ object Res : KoinComponent {
         return ContextCompat.getDrawable(context, drawableRes)!!
     }
 
-    fun dimen(@DimenRes dimenRes: Int): Float {
+    fun dimen(context: Context, @DimenRes dimenRes: Int): Float {
         return context.resources.getDimension(dimenRes)
     }
 
-    fun font(@FontRes fontRes: Int): Typeface {
+    fun font(context: Context, @FontRes fontRes: Int): Typeface {
         return ResourcesCompat.getFont(context, fontRes)!!
     }
 

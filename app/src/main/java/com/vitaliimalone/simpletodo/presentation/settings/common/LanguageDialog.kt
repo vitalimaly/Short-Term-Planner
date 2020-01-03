@@ -1,10 +1,10 @@
-package com.vitaliimalone.simpletodo.presentation.settings.language
+package com.vitaliimalone.simpletodo.presentation.settings.common
 
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.vitaliimalone.simpletodo.R
-import com.vitaliimalone.simpletodo.presentation.utils.Languages
+import com.vitaliimalone.simpletodo.presentation.utils.LanguageUtils
 import kotlinx.android.synthetic.main.language_dialog.*
 
 class LanguageDialog(
@@ -16,7 +16,7 @@ class LanguageDialog(
         behavior.isHideable = false
         languageRecyclerView.adapter =
             LanguageAdapter {
-                Languages.setLanguage(activity, it)
+                LanguageUtils.setLanguage(activity, it)
                 activity.recreate()
                 dismiss()
             }

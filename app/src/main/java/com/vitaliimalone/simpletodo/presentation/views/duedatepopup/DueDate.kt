@@ -1,4 +1,4 @@
-package com.vitaliimalone.simpletodo.presentation.utils.duedatepopup
+package com.vitaliimalone.simpletodo.presentation.views.duedatepopup
 
 data class DueDateItem(val type: DueDateType, val text: String)
 

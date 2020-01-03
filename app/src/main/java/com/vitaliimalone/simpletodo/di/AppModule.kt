@@ -9,9 +9,9 @@ import com.vitaliimalone.simpletodo.domain.usecases.DeleteTaskUseCase
 import com.vitaliimalone.simpletodo.domain.usecases.GetTasksForHomeTabUseCase
 import com.vitaliimalone.simpletodo.domain.usecases.GetTasksUseCase
 import com.vitaliimalone.simpletodo.domain.usecases.UpdateTaskUseCase
-import com.vitaliimalone.simpletodo.notifications.Notificator
 import com.vitaliimalone.simpletodo.presentation.home.HomeViewModel
 import com.vitaliimalone.simpletodo.presentation.hometab.HomeTabViewModel
+import com.vitaliimalone.simpletodo.presentation.notifications.Notificator
 import com.vitaliimalone.simpletodo.presentation.settings.SettingsViewModel
 import com.vitaliimalone.simpletodo.presentation.taskdetails.TaskDetailsViewModel
 import org.koin.android.ext.koin.androidContext

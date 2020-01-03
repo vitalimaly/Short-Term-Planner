@@ -1,4 +1,4 @@
-package com.vitaliimalone.simpletodo.presentation.utils.duedatepopup
+package com.vitaliimalone.simpletodo.presentation.views.duedatepopup
 
 import android.content.Context
 import android.view.Gravity
@@ -7,9 +7,9 @@ import android.view.View
 import android.widget.PopupWindow
 import com.google.android.material.textview.MaterialTextView
 import com.vitaliimalone.simpletodo.R
+import com.vitaliimalone.simpletodo.presentation.models.HomeTab
 import com.vitaliimalone.simpletodo.presentation.utils.DateTimeUtils
-import com.vitaliimalone.simpletodo.presentation.utils.Dialogs
-import com.vitaliimalone.simpletodo.presentation.utils.HomeTabType
+import com.vitaliimalone.simpletodo.presentation.utils.DialogUtils
 import com.vitaliimalone.simpletodo.presentation.utils.Res
 import com.vitaliimalone.simpletodo.presentation.views.DefaultDividerItemDecoration
 import kotlinx.android.synthetic.main.due_date_popup.view.*
@@ -39,8 +39,8 @@ class DueDatePopup(
                 dueDatePopupRecyclerView.addItemDecoration(
                     DefaultDividerItemDecoration(
                         context,
-                        marginLeft = Res.dimen(R.dimen.m_spacing),
-                        marginRight = Res.dimen(R.dimen.m_spacing)
+                        marginLeft = Res.dimen(context, R.dimen.m_spacing),
+                        marginRight = Res.dimen(context, R.dimen.m_spacing)
                     )
                 )
                 dueDatePopupRecyclerView.adapter = DueDatePopupAdapter { popupItem ->
@@ -52,10 +52,10 @@ class DueDatePopup(
                             onDatePicked.invoke(OffsetDateTime.now().plusDays(1))
                         }
                         DueDateType.END_OF_WEEK -> {
-                            onDatePicked.invoke(DateTimeUtils.getStartEndDateForTab(HomeTabType.WEEK).second)
+                            onDatePicked.invoke(DateTimeUtils.getStartEndDateForTab(HomeTab.WEEK).second)
                         }
                         DueDateType.PICK -> {
-                            Dialogs.showDatePickerDialog(context, currentDate) { date ->
+                            DialogUtils.showDatePickerDialog(context, currentDate) { date ->
                                 onDatePicked.invoke(date)
                             }
                         }

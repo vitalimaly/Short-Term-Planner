@@ -13,11 +13,11 @@ import com.vitaliimalone.simpletodo.domain.models.Task
 import com.vitaliimalone.simpletodo.presentation.base.BaseFragment
 import com.vitaliimalone.simpletodo.presentation.taskdetails.common.SubtasksAdapter
 import com.vitaliimalone.simpletodo.presentation.utils.DateTimeUtils
-import com.vitaliimalone.simpletodo.presentation.utils.Dialogs
+import com.vitaliimalone.simpletodo.presentation.utils.DialogUtils
 import com.vitaliimalone.simpletodo.presentation.utils.Res
-import com.vitaliimalone.simpletodo.presentation.utils.clearFocusOnDoneClick
-import com.vitaliimalone.simpletodo.presentation.utils.duedatepopup.DueDatePopup
-import com.vitaliimalone.simpletodo.presentation.utils.trimmed
+import com.vitaliimalone.simpletodo.presentation.utils.extensions.clearFocusOnDoneClick
+import com.vitaliimalone.simpletodo.presentation.utils.extensions.trimmed
+import com.vitaliimalone.simpletodo.presentation.views.duedatepopup.DueDatePopup
 import kotlinx.android.synthetic.main.task_details_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.threeten.bp.OffsetDateTime
@@ -36,7 +36,7 @@ class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
 
     private fun setupClickListeners() {
         deleteImageView.setOnClickListener {
-            Dialogs.showDeleteTaskDialog(requireContext()) {
+            DialogUtils.showDeleteTaskDialog(requireContext()) {
                 viewModel.deleteTask(task)
                 saveAndFinish()
             }
@@ -52,13 +52,16 @@ class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
     }
 
     private fun setupViews() {
+        toolbar.title = Res.string(R.string.task_details_toolbar_title)
         subtasksRecyclerView.adapter = SubtasksAdapter(task) {
             drawSubtasksBotLine()
             viewModel.updateTask(task)
         }
         taskTitleEditText.setRawInputType(InputType.TYPE_CLASS_TEXT)
         taskTitleEditText.setText(task.title)
+        taskTitleEditText.hint = Res.string(R.string.add_task_dialog_title_hint)
         noteEditText.setText(task.description)
+        noteEditText.hint = Res.string(R.string.task_details_note_hint)
         updateTaskDueDate(task.dueTo)
         createdOnTextView.text = Res.string(
             R.string.task_details_created,

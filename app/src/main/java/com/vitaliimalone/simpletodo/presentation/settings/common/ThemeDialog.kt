@@ -1,10 +1,10 @@
-package com.vitaliimalone.simpletodo.presentation.settings.theme
+package com.vitaliimalone.simpletodo.presentation.settings.common
 
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.vitaliimalone.simpletodo.R
-import com.vitaliimalone.simpletodo.presentation.utils.Themes
+import com.vitaliimalone.simpletodo.presentation.utils.ThemeUtils
 import kotlinx.android.synthetic.main.theme_dialog.*
 
 class ThemeDialog(
@@ -16,7 +16,7 @@ class ThemeDialog(
         behavior.isHideable = false
         themeRecyclerView.adapter =
             ThemeAdapter {
-                Themes.setTheme(activity, it)
+                ThemeUtils.setTheme(activity, it)
                 activity.recreate()
                 dismiss()
             }

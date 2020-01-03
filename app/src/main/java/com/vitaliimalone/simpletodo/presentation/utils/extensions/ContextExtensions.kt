@@ -1,4 +1,4 @@
-package com.vitaliimalone.simpletodo.presentation.utils
+package com.vitaliimalone.simpletodo.presentation.utils.extensions
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity

@@ -1,4 +1,4 @@
-package com.vitaliimalone.simpletodo.notifications
+package com.vitaliimalone.simpletodo.presentation.notifications
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

@@ -11,9 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.domain.models.Subtask
 import com.vitaliimalone.simpletodo.domain.models.Task
-import com.vitaliimalone.simpletodo.presentation.utils.clearFocusOnDoneClick
-import com.vitaliimalone.simpletodo.presentation.utils.showKeyboard
-import com.vitaliimalone.simpletodo.presentation.utils.trimmed
+import com.vitaliimalone.simpletodo.presentation.utils.Res
+import com.vitaliimalone.simpletodo.presentation.utils.extensions.clearFocusOnDoneClick
+import com.vitaliimalone.simpletodo.presentation.utils.extensions.showKeyboard
+import com.vitaliimalone.simpletodo.presentation.utils.extensions.trimmed
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.task_details_add_new_subtasks_list_item.*
 import kotlinx.android.synthetic.main.task_details_subtasks_list_item.*
@@ -99,6 +100,7 @@ class SubtasksAdapter(
         fun bind(subtaskListItem: SubtaskListItem, position: Int) {
             subtaskTitleEditText.setRawInputType(InputType.TYPE_CLASS_TEXT)
             subtaskTitleEditText.setText(subtaskListItem.subtask.title)
+            subtaskTitleEditText.hint = Res.string(R.string.add_subtask_hint)
             if (subtaskListItem.isFocused) {
                 subtaskTitleEditText.post {
                     subtaskTitleEditText.requestFocus()
@@ -128,6 +130,7 @@ class SubtasksAdapter(
             addSubtaskContainer.setOnClickListener {
                 addSubtask()
             }
+            addSubtaskTextView.hint = Res.string(R.string.add_subtask_hint)
         }
     }
 

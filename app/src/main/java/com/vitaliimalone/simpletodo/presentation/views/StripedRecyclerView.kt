@@ -14,10 +14,10 @@ class StripedRecyclerView @JvmOverloads constructor(
 ) : RecyclerView(context, attrs, defStyleAttr) {
     private val paint = Paint().apply {
         color = Res.color(context, R.attr.themeDividerColor)
-        strokeWidth = round(Res.dimen(R.dimen.default_divider_height))
+        strokeWidth = round(Res.dimen(context, R.dimen.default_divider_height))
     }
-    private val defaultItemHeight = (Res.dimen(R.dimen.home_task_item_min_height))
-    private val dividerMargin = Res.dimen(R.dimen.home_divider_margin)
+    private val defaultItemHeight = (Res.dimen(context, R.dimen.home_task_item_min_height))
+    private val dividerMargin = Res.dimen(context, R.dimen.home_divider_margin)
 
     override fun onDraw(canvas: Canvas) {
         var y = computeVerticalScrollRange() + defaultItemHeight

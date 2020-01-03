@@ -9,14 +9,20 @@ import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.domain.models.Task
-import com.vitaliimalone.simpletodo.presentation.utils.duedatepopup.DueDatePopup
+import com.vitaliimalone.simpletodo.presentation.utils.extensions.fragmentManager
+import com.vitaliimalone.simpletodo.presentation.utils.extensions.hideKeyboard
+import com.vitaliimalone.simpletodo.presentation.utils.extensions.setEnabledWithAlpha
+import com.vitaliimalone.simpletodo.presentation.utils.extensions.trimmed
+import com.vitaliimalone.simpletodo.presentation.views.duedatepopup.DueDatePopup
 import kotlinx.android.synthetic.main.add_new_task_dialog.view.*
 import kotlinx.android.synthetic.main.delete_task_dialog.view.*
 import org.threeten.bp.Instant
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.ZoneOffset
 
-object Dialogs {
+object DialogUtils {
+    const val DATE_PICKER_TAG = "DATE_PICKER_TAG"
+
     fun showAddNewTaskDialog(context: Context, date: OffsetDateTime, onAddClick: ((Task) -> Unit)) {
         val task = Task(dueTo = date)
         val dialogView = LayoutInflater.from(context).inflate(R.layout.add_new_task_dialog, null, false)
@@ -28,6 +34,7 @@ object Dialogs {
                 dialog.dismiss()
             }
             addImageView.setEnabledWithAlpha(false)
+            titleEditText.hint = Res.string(R.string.add_task_dialog_title_hint)
             titleEditText.addTextChangedListener(onTextChanged = { text, _, _, _ ->
                 addImageView.setEnabledWithAlpha(text.trimmed.isNotEmpty())
                 task.title = text.trimmed
@@ -72,7 +79,7 @@ object Dialogs {
             onDateSet.invoke(pickedDate)
         }
         context.fragmentManager?.let {
-            datePicker.show(it, Constants.DATE_PICKER_TAG)
+            datePicker.show(it, DATE_PICKER_TAG)
         }
     }
 
@@ -81,6 +88,9 @@ object Dialogs {
         val dialog = BottomSheetDialog(context, R.style.TransparentBottomSheet)
         dialog.setContentView(dialogView)
         dialogView.apply {
+            titleTextView.text = Res.string(R.string.delete_task_dialog_title)
+            positiveButton.text = Res.string(R.string.cancel)
+            negativeButton.text = Res.string(R.string.yes)
             positiveButton.setOnClickListener {
                 onPositiveClick.invoke()
                 dialog.dismiss()

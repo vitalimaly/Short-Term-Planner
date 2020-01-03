@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/m_spacing"
         android:layout_marginTop="@dimen/s_spacing"
-        android:hint="@string/add_task_dialog_title_hint"
         android:imeOptions="actionDone"
         android:inputType="textCapSentences"
         android:maxLines="4"

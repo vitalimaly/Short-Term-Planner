@@ -1,4 +1,4 @@
-package com.vitaliimalone.simpletodo.presentation.utils.duedatepopup
+package com.vitaliimalone.simpletodo.presentation.views.duedatepopup
 
 import android.view.LayoutInflater
 import android.view.View

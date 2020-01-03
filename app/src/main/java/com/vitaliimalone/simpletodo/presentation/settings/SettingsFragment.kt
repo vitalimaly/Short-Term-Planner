@@ -3,11 +3,12 @@ package com.vitaliimalone.simpletodo.presentation.settings
 import android.os.Bundle
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.presentation.base.BaseFragment
+import com.vitaliimalone.simpletodo.presentation.settings.common.LanguageDialog
 import com.vitaliimalone.simpletodo.presentation.settings.common.Settings
 import com.vitaliimalone.simpletodo.presentation.settings.common.SettingsAdapter
 import com.vitaliimalone.simpletodo.presentation.settings.common.SettingsType
-import com.vitaliimalone.simpletodo.presentation.settings.language.LanguageDialog
-import com.vitaliimalone.simpletodo.presentation.settings.theme.ThemeDialog
+import com.vitaliimalone.simpletodo.presentation.settings.common.ThemeDialog
+import com.vitaliimalone.simpletodo.presentation.utils.Res
 import kotlinx.android.synthetic.main.settings_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -31,6 +32,7 @@ class SettingsFragment : BaseFragment(R.layout.settings_fragment) {
     }
 
     private fun setupViews() {
+        toolbar.title = Res.string(R.string.settings_toolbar_title)
         settingsRecyclerView.adapter = settingsAdapter
     }
 

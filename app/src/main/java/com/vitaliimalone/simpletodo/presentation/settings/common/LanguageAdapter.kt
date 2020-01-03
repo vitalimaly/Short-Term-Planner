@@ -1,12 +1,11 @@
-package com.vitaliimalone.simpletodo.presentation.settings.language
+package com.vitaliimalone.simpletodo.presentation.settings.common
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.vitaliimalone.simpletodo.R
-import com.vitaliimalone.simpletodo.presentation.utils.Language
-import com.vitaliimalone.simpletodo.presentation.utils.Languages
+import com.vitaliimalone.simpletodo.presentation.models.Language
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.language_dialog_item.*
 
@@ -19,11 +18,11 @@ class LanguageAdapter(
     }
 
     override fun onBindViewHolder(holder: LanguageViewHolder, position: Int) {
-        holder.bind(Languages.languages[position])
+        holder.bind(Language.values()[position])
     }
 
     override fun getItemCount(): Int {
-        return Languages.languages.size
+        return Language.values().size
     }
 
     inner class LanguageViewHolder(
@@ -33,7 +32,7 @@ class LanguageAdapter(
             containerView.setOnClickListener {
                 onItemClicked.invoke(item)
             }
-            languageDialogItemTextView.text = item.name
+            languageDialogItemTextView.text = item.title
         }
     }
 }

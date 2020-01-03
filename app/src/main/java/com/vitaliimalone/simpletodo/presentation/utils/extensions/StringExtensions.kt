@@ -1,4 +1,4 @@
-package com.vitaliimalone.simpletodo.presentation.utils
+package com.vitaliimalone.simpletodo.presentation.utils.extensions
 
 import android.text.Editable
 import android.text.SpannableString

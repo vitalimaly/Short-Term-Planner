@@ -17,8 +17,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:navigationIcon="@drawable/ic_arrow_back"
-            app:title="@string/task_details_toolbar_title">
+            app:navigationIcon="@drawable/ic_arrow_back">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/deleteImageView"
@@ -63,7 +62,6 @@
                 android:layout_marginStart="@dimen/m_spacing"
                 android:layout_marginTop="@dimen/details_title_margin_top"
                 android:layout_marginEnd="@dimen/s_spacing"
-                android:hint="@string/add_task_dialog_title_hint"
                 android:imeOptions="actionDone"
                 android:inputType="textMultiLine|textCapSentences"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -148,7 +146,6 @@
                 android:layout_marginEnd="@dimen/s_spacing"
                 android:background="@android:color/transparent"
                 android:gravity="top"
-                android:hint="@string/task_details_note_hint"
                 android:overScrollMode="always"
                 android:paddingStart="@dimen/xs_spacing"
                 android:paddingTop="@dimen/s_spacing"

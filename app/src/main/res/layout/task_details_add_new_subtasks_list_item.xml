@@ -26,7 +26,6 @@
         android:layout_marginTop="@dimen/s_spacing"
         android:layout_marginEnd="@dimen/s_spacing"
         android:layout_marginBottom="@dimen/s_spacing"
-        android:hint="@string/add_subtask_hint"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/addSubtaskImageView"

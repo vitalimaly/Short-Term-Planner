@@ -49,7 +49,6 @@
         android:layout_marginStart="@dimen/m_spacing"
         android:layout_marginTop="@dimen/s_spacing"
         android:layout_marginBottom="@dimen/s_spacing"
-        android:hint="@string/add_subtask_hint"
         android:imeOptions="actionDone"
         android:inputType="textMultiLine|textCapSentences"
         app:layout_constraintBottom_toBottomOf="parent"

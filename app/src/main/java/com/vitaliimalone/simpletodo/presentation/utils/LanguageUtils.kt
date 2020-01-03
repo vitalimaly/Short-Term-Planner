@@ -2,28 +2,22 @@ package com.vitaliimalone.simpletodo.presentation.utils
 
 import android.content.Context
 import android.content.res.Configuration
-import android.graphics.drawable.Drawable
+import com.vitaliimalone.simpletodo.presentation.models.Language
 import java.util.Locale
 
-data class Language(val localeLanguage: String, val name: String, val icon: Drawable? = null)
-
 // https://medium.com/ironsource-tech-blog/conversion-by-translation-changing-your-android-app-language-at-runtime-5c9daebf9771
-object Languages {
-    val languages = listOf(
-        Language(Constants.ENGLISH_LOCALE_LANGUAGE, Constants.ENGLISH_LANGUAGE_NAME),
-        Language(Constants.RUSSIAN_LOCALE_LANGUAGE, Constants.RUSSIAN_LANGUAGE_NAME)
-    )
-
+object LanguageUtils {
     fun wrapContext(context: Context): Context {
-        val savedLocale = Locale(Pref(context).localeLanguage)
+        val savedLocale = Locale(Pref(context).localeCode)
         Locale.setDefault(savedLocale)
         val newConfig = Configuration()
         newConfig.setLocale(savedLocale)
         return context.createConfigurationContext(newConfig)
     }
 
+    @Suppress("DEPRECATION")
     fun overrideLocale(context: Context) {
-        val savedLocale = Locale(Pref(context).localeLanguage)
+        val savedLocale = Locale(Pref(context).localeCode)
         Locale.setDefault(savedLocale)
         val newConfig = Configuration()
         newConfig.setLocale(savedLocale)
@@ -33,12 +27,12 @@ object Languages {
         }
     }
 
-    fun getCurrentLanguage(context: Context): Language {
-        return languages.find { it.localeLanguage == Pref(context).localeLanguage } ?: languages[0]
+    fun setLanguage(context: Context, language: Language) {
+        Pref(context).localeCode = language.localeCode
+        overrideLocale(context)
     }
 
-    fun setLanguage(context: Context, language: Language) {
-        Pref(context).localeLanguage = language.localeLanguage
-        overrideLocale(context)
+    fun getCurrentLanguage(context: Context): Language {
+        return Language.values().find { it.localeCode == Pref(context).localeCode } ?: Language.ENGLISH
     }
 }
