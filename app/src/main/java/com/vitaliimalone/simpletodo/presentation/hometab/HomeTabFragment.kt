@@ -32,9 +32,7 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
 
     private val viewModel: HomeTabViewModel by viewModel()
     private val tasksAdapter by lazy { TasksAdapter(::onTaskClicked) }
-    private val homeTabType by lazy {
-        HomeTab.valueOf(requireArguments().getString(ARG_HOME_TAB_TYPE)!!)
-    }
+    private val homeTabType by lazy { HomeTab.valueOf(requireArguments().getString(ARG_HOME_TAB_TYPE)!!) }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

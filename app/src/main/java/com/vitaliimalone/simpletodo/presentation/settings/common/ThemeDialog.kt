@@ -14,11 +14,10 @@ class ThemeDialog(
         super.onCreate(savedInstanceState)
         setContentView(R.layout.theme_dialog)
         behavior.isHideable = false
-        themeRecyclerView.adapter =
-            ThemeAdapter {
-                ThemeUtils.setTheme(activity, it)
-                activity.recreate()
-                dismiss()
-            }
+        themeRecyclerView.adapter = ThemeAdapter {
+            ThemeUtils.setTheme(activity, it)
+            activity.recreate()
+            dismiss()
+        }
     }
 }

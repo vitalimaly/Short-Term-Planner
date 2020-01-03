@@ -26,9 +26,7 @@ class SettingsFragment : BaseFragment(R.layout.settings_fragment) {
     }
 
     private fun setupClickListeners() {
-        toolbar.setNavigationOnClickListener {
-            requireActivity().onBackPressed()
-        }
+        toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
     }
 
     private fun setupViews() {
