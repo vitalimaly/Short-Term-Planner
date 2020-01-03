@@ -59,14 +59,14 @@ object Dialogs {
 
     fun showDatePickerDialog(context: Context, currentDate: OffsetDateTime, onDateSet: ((OffsetDateTime) -> Unit)) {
         val calendarConstraints = CalendarConstraints.Builder()
-                .setStart(OffsetDateTime.now().toInstant().toEpochMilli())
-                .setOpenAt(currentDate.toInstant().toEpochMilli())
-                .build()
+            .setStart(OffsetDateTime.now().toInstant().toEpochMilli())
+            .setOpenAt(currentDate.toInstant().toEpochMilli())
+            .build()
         val datePicker = MaterialDatePicker.Builder
-                .datePicker()
-                .setCalendarConstraints(calendarConstraints)
-                .setSelection(currentDate.toInstant().toEpochMilli())
-                .build()
+            .datePicker()
+            .setCalendarConstraints(calendarConstraints)
+            .setSelection(currentDate.toInstant().toEpochMilli())
+            .build()
         datePicker.addOnPositiveButtonClickListener {
             val pickedDate = OffsetDateTime.ofInstant(Instant.ofEpochMilli(it), ZoneOffset.UTC)
             onDateSet.invoke(pickedDate)

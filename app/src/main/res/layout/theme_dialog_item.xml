@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/s_spacing">
+
+    <View
+        android:id="@+id/themeColorPrimaryVariantView"
+        android:layout_width="@dimen/settings_theme_color_square_size"
+        android:layout_height="@dimen/settings_theme_color_square_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="?themeColorPrimaryVariant" />
+
+    <View
+        android:id="@+id/themeColorPrimaryView"
+        android:layout_width="@dimen/settings_theme_color_square_size"
+        android:layout_height="@dimen/settings_theme_color_square_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/themeColorPrimaryVariantView"
+        tools:background="?themeColorPrimary" />
+
+    <View
+        android:id="@+id/themeColorSecondaryVariantView"
+        android:layout_width="@dimen/settings_theme_color_square_size"
+        android:layout_height="@dimen/settings_theme_color_square_size"
+        app:layout_constraintStart_toEndOf="@id/themeColorPrimaryView"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="?themeColorSecondaryVariant" />
+
+    <View
+        android:id="@+id/themeColorSecondaryView"
+        android:layout_width="@dimen/settings_theme_color_square_size"
+        android:layout_height="@dimen/settings_theme_color_square_size"
+        app:layout_constraintStart_toEndOf="@id/themeColorPrimaryVariantView"
+        app:layout_constraintTop_toBottomOf="@id/themeColorSecondaryVariantView"
+        tools:background="?themeColorSecondary" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/themeTextColorPrimaryView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/settings_theme_text_placeholder_margin"
+        android:background="@drawable/settings_theme_text_placeholder"
+        app:layout_constraintBottom_toBottomOf="@id/themeColorPrimaryView"
+        app:layout_constraintEnd_toEndOf="@id/themeColorSecondaryView"
+        app:layout_constraintStart_toStartOf="@id/themeColorPrimaryView"
+        app:layout_constraintTop_toTopOf="@id/themeColorPrimaryView"
+        tools:backgroundTint="?themeTextColorPrimary" />
+
+    <com.google.android.material.radiobutton.MaterialRadioButton
+        android:id="@+id/themeStartRadioButton"
+        android:layout_width="@dimen/settings_theme_color_square_size"
+        android:layout_height="@dimen/settings_theme_color_square_size"
+        app:layout_constraintStart_toStartOf="@id/themeColorPrimaryVariantView"
+        app:layout_constraintTop_toTopOf="@id/themeColorPrimaryVariantView" />
+
+    <com.google.android.material.radiobutton.MaterialRadioButton
+        android:id="@+id/themeEndRadioButton"
+        android:layout_width="@dimen/settings_theme_color_square_size"
+        android:layout_height="@dimen/settings_theme_color_square_size"
+        app:layout_constraintStart_toStartOf="@id/themeColorSecondaryVariantView"
+        app:layout_constraintTop_toTopOf="@id/themeColorSecondaryVariantView" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/themeNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/m_spacing"
+        android:gravity="center"
+        android:textSize="@dimen/l_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toEndOf="@id/themeColorPrimaryVariantView"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/theme_name_pale_green" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,7 @@ import com.vitaliimalone.simpletodo.domain.mappers.TaskEntityMapper
 import com.vitaliimalone.simpletodo.domain.models.Task
 
 class AddTaskUseCase(
-        private val taskRepository: TaskRepository
+    private val taskRepository: TaskRepository
 ) {
     suspend fun addTask(task: Task) {
         taskRepository.addTask(TaskEntityMapper.map(task))

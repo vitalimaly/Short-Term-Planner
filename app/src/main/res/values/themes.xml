@@ -2,16 +2,16 @@
 <resources>
 
     <style name="AppTheme.PaleGreen">
-        <item name="themeColorPrimary">@color/pale_green</item>
-        <item name="themeColorPrimaryVariant">@color/pale_dark_green</item>
+        <item name="themeColorPrimary">@color/pale_theme_color_primary</item>
+        <item name="themeColorPrimaryVariant">@color/pale_theme_color_primary_variant</item>
         <item name="themeColorOnPrimary">?themeTextColorPrimary</item>
-        <item name="themeColorSecondary">@color/pale_orange</item>
-        <item name="themeColorSecondaryVariant">@color/pale_orange_dark</item>
+        <item name="themeColorSecondary">@color/pale_theme_color_secondary</item>
+        <item name="themeColorSecondaryVariant">@color/pale_theme_color_secondary_variant</item>
         <item name="themeColorOnSecondary">?themeTextColorPrimaryInverse</item>
-        <item name="themeColorBackground">@color/pale_background_color</item>
-        <item name="themeColorBackgroundSecondary">@color/pale_background_color_dark</item>
-        <item name="themeColorSurface">@color/pale_background_color_light</item>
-        <item name="themeColorError">@color/pale_red</item>
+        <item name="themeColorBackground">@color/pale_theme_color_background</item>
+        <item name="themeColorBackgroundSecondary">@color/pale_theme_color_background_secondary</item>
+        <item name="themeColorSurface">@color/pale_theme_color_surface</item>
+        <item name="themeColorError">@color/pale_theme_color_error</item>
         <item name="themeColorOnError">?themeTextColorPrimaryInverse</item>
         <item name="themeTextColorPrimary">@color/black_75</item>
         <item name="themeTextColorSecondary">@color/black_50</item>
@@ -19,7 +19,31 @@
         <item name="themeTextColorPrimaryInverse">@color/white_75</item>
         <item name="themeTextColorSecondaryInverse">@color/white_50</item>
         <item name="themeTextColorTertiaryInverse">@color/white_25</item>
-        <item name="themeDoneCheckboxColor">@color/done_checkbox_green</item>
+        <item name="themeDoneCheckboxColor">@color/pale_theme_color_checkbox_done</item>
         <item name="themeDividerColor">@color/black_50</item>
+        <item name="themeIsLight">true</item>
+    </style>
+
+    <style name="AppTheme.Dark">
+        <item name="themeColorPrimary">@color/dark_theme_color_primary</item>
+        <item name="themeColorPrimaryVariant">@color/dark_theme_color_primary_variant</item>
+        <item name="themeColorOnPrimary">?themeTextColorPrimary</item>
+        <item name="themeColorSecondary">@color/dark_theme_color_secondary</item>
+        <item name="themeColorSecondaryVariant">@color/dark_theme_color_secondary_variant</item>
+        <item name="themeColorOnSecondary">?themeTextColorPrimaryInverse</item>
+        <item name="themeColorBackground">@color/dark_theme_color_background</item>
+        <item name="themeColorBackgroundSecondary">@color/dark_theme_color_background_secondary</item>
+        <item name="themeColorSurface">@color/dark_theme_color_surface</item>
+        <item name="themeColorError">@color/dark_theme_color_error</item>
+        <item name="themeColorOnError">?themeTextColorPrimaryInverse</item>
+        <item name="themeTextColorPrimary">@color/white_75</item>
+        <item name="themeTextColorSecondary">@color/white_50</item>
+        <item name="themeTextColorTertiary">@color/white_25</item>
+        <item name="themeTextColorPrimaryInverse">@color/black_75</item>
+        <item name="themeTextColorSecondaryInverse">@color/black_50</item>
+        <item name="themeTextColorTertiaryInverse">@color/black_25</item>
+        <item name="themeDoneCheckboxColor">@color/dark_theme_color_checkbox_done</item>
+        <item name="themeDividerColor">@color/white_50</item>
+        <item name="themeIsLight">false</item>
     </style>
 </resources>

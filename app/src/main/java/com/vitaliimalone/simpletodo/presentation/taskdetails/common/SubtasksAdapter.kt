@@ -19,8 +19,8 @@ import kotlinx.android.synthetic.main.task_details_add_new_subtasks_list_item.*
 import kotlinx.android.synthetic.main.task_details_subtasks_list_item.*
 
 class SubtasksAdapter(
-        private val task: Task,
-        private val updateTask: () -> Unit
+    private val task: Task,
+    private val updateTask: () -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var subtaskListItems = task.subtasks.map { SubtaskListItem(it) }.toMutableList()
         set(value) {
@@ -94,7 +94,7 @@ class SubtasksAdapter(
     }
 
     inner class TaskViewHolder(
-            override val containerView: View
+        override val containerView: View
     ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
         fun bind(subtaskListItem: SubtaskListItem, position: Int) {
             subtaskTitleEditText.setRawInputType(InputType.TYPE_CLASS_TEXT)
@@ -122,12 +122,16 @@ class SubtasksAdapter(
     }
 
     inner class AddNewTaskViewHolder(
-            override val containerView: View
+        override val containerView: View
     ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
         fun bind() {
             addSubtaskContainer.setOnClickListener {
                 addSubtask()
             }
         }
+    }
+
+    enum class SubtaskViewType {
+        SUBTASK, ADDNEW
     }
 }

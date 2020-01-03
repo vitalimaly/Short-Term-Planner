@@ -32,7 +32,7 @@ class TasksAdapter(private val onTaskClicked: ((Task) -> Unit)) : RecyclerView.A
     }
 
     inner class TaskViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),
-            LayoutContainer {
+        LayoutContainer {
         fun bind(task: Task) {
             titleTextView.text = task.title
             doneCheckBox.isChecked = task.isDone

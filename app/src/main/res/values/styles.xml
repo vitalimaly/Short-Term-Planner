@@ -28,13 +28,14 @@
         <item name="fontFamily">@font/red_hat_display_regular</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightStatusBar">?themeIsLight</item>
         <item name="android:statusBarColor">?themeColorPrimaryVariant</item>
         <item name="android:windowBackground">?themeColorBackground</item>
         <!-- System settings -->
     </style>
 
     <style name="TransparentBottomSheet" parent="Theme.MaterialComponents.BottomSheetDialog">
+        <item name="android:colorBackground">@android:color/transparent</item>
         <item name="android:windowIsFloating">false</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowSoftInputMode">adjustResize</item>
@@ -74,5 +75,15 @@
     <style name="ThemeMaterialCalendarTextButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog.Flush">
         <item name="android:textColor">?themeTextColorPrimary</item>
         <item name="iconTint">?themeTextColorPrimary</item>
+    </style>
+
+    <style name="SettingsItemTextView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/m_spacing</item>
+        <item name="android:layout_marginEnd">@dimen/m_spacing</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:maxLines">1</item>
     </style>
 </resources>

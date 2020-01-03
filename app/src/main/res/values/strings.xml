@@ -12,6 +12,7 @@
     <string name="snackbar_task_swiped">Moved to %s</string>
     <string name="archive">Archive</string>
     <string name="add_subtask_hint">Add subtask</string>
+    <string name="task_details_toolbar_title">Edit Task</string>
     <string name="task_details_created">Created on %s</string>
     <string name="task_details_modified">Last modified on %s</string>
     <string name="task_details_note_hint">Add note</string>
@@ -23,4 +24,15 @@
     <string name="due_date_popup_this_saturday">This Sunday</string>
     <string name="due_date_popup_next_saturday">Next Sunday</string>
     <string name="due_date_popup_pick_date">Pick date</string>
+    <string name="settings_toolbar_title">Settings</string>
+    <string name="settings_theme_title">Theme</string>
+    <string name="settings_language_title">Language</string>
+    <string name="settings_overdue_title">Overdue</string>
+    <string name="settings_overdue_subtitle">%d overdue tasks</string>
+    <string name="settings_archive_title">Archive</string>
+    <string name="settings_archive_subtitle">%d archived tasks</string>
+    <string name="settings_rate_title">Rate</string>
+    <string name="settings_info_title">About</string>
+    <string name="theme_name_pale_green">Pale green</string>
+    <string name="theme_name_dark">Dark</string>
 </resources>

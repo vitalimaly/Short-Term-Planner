@@ -42,4 +42,9 @@
     <dimen name="subtask_line_horizontal_width">30dp</dimen>
     <dimen name="subtask_checkbox_margin_top">11dp</dimen>
     <dimen name="task_details_delete_image_padding">20dp</dimen>
+
+    <dimen name="settings_item_height">60dp</dimen>
+    <dimen name="settings_theme_color_square_size">30dp</dimen>
+    <dimen name="settings_theme_text_placeholder_corner_radius">3dp</dimen>
+    <dimen name="settings_theme_text_placeholder_margin">10dp</dimen>
 </resources>

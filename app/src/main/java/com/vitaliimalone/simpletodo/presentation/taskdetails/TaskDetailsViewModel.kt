@@ -8,8 +8,8 @@ import com.vitaliimalone.simpletodo.domain.usecases.UpdateTaskUseCase
 import kotlinx.coroutines.launch
 
 class TaskDetailsViewModel(
-        private val deleteTaskUseCase: DeleteTaskUseCase,
-        private val updateTaskUseCase: UpdateTaskUseCase
+    private val deleteTaskUseCase: DeleteTaskUseCase,
+    private val updateTaskUseCase: UpdateTaskUseCase
 ) : ViewModel() {
     fun deleteTask(task: Task) {
         viewModelScope.launch {
@@ -22,5 +22,4 @@ class TaskDetailsViewModel(
             updateTaskUseCase.updateTask(task)
         }
     }
-
 }

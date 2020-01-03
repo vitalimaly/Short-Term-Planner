@@ -2,8 +2,6 @@ package com.vitaliimalone.simpletodo.presentation.utils
 
 import android.content.Context
 import android.content.SharedPreferences
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 import kotlin.reflect.KProperty
 
 /**
@@ -13,8 +11,7 @@ import kotlin.reflect.KProperty
 // Allow unchecked casts - we can blindly trust that data we read is the same type we saved it as..
 // https://gist.github.com/davidwhitman/b83e1744e8435a2c8cba262c1179f1a8
 @Suppress("UNCHECKED_CAST", "unused")
-abstract class Preferences(private val name: String? = null) : KoinComponent {
-    private val context: Context by inject()
+abstract class Preferences(context: Context, private val name: String? = null) {
     private val prefs: SharedPreferences by lazy {
         context.getSharedPreferences(name ?: javaClass.simpleName, Context.MODE_PRIVATE)
     }

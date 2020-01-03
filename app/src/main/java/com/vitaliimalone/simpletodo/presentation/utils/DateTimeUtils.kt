@@ -1,7 +1,6 @@
 package com.vitaliimalone.simpletodo.presentation.utils
 
 import com.vitaliimalone.simpletodo.R
-import com.vitaliimalone.simpletodo.presentation.models.HomeTab
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalTime
@@ -13,32 +12,32 @@ object DateTimeUtils {
     private const val FULL_DAY_MONTH_FORMAT = "EEEE, MMMM d"
     private const val SHORT_DAY_MONTH_FORMAT = "EEE, MMM d"
 
-    fun getDateForTab(homeTab: HomeTab): String {
+    fun getDateForTab(homeTab: HomeTabType): String {
         val (startDate, endDate) = getStartEndDateForTab(homeTab)
         return when (homeTab) {
-            HomeTab.TODAY -> {
+            HomeTabType.TODAY -> {
                 startDate.format(DateTimeFormatter.ofPattern(FULL_DAY_MONTH_FORMAT))
             }
-            HomeTab.WEEK, HomeTab.MONTH -> {
+            HomeTabType.WEEK, HomeTabType.MONTH -> {
                 val start = startDate.format(DateTimeFormatter.ofPattern(SHORT_DAY_MONTH_FORMAT))
                 val end = endDate.format(DateTimeFormatter.ofPattern(SHORT_DAY_MONTH_FORMAT))
                 "$start - $end"
             }
-            HomeTab.TODO -> {
+            HomeTabType.TODO -> {
                 val start = startDate.format(DateTimeFormatter.ofPattern(SHORT_DAY_MONTH_FORMAT))
                 "${Res.string(R.string.from_date)} $start"
             }
         }
     }
 
-    fun getDateForAddNewTask(homeTab: HomeTab): OffsetDateTime {
+    fun getDateForAddNewTask(homeTab: HomeTabType): OffsetDateTime {
         val (startDate, endDate) = getStartEndDateForTab(homeTab)
         val currentTime = LocalTime.now()
         return when (homeTab) {
-            HomeTab.TODAY, HomeTab.WEEK, HomeTab.MONTH -> {
+            HomeTabType.TODAY, HomeTabType.WEEK, HomeTabType.MONTH -> {
                 endDate.with(currentTime)
             }
-            HomeTab.TODO -> {
+            HomeTabType.TODO -> {
                 startDate.with(TemporalAdjusters.lastDayOfYear()).with(currentTime)
             }
         }
@@ -64,56 +63,56 @@ object DateTimeUtils {
         }
     }
 
-    fun getStartEndDateForTab(homeTab: HomeTab): Pair<OffsetDateTime, OffsetDateTime> {
+    fun getStartEndDateForTab(homeTab: HomeTabType): Pair<OffsetDateTime, OffsetDateTime> {
         val now = OffsetDateTime.now()
         val startDate: OffsetDateTime
         val endDate: OffsetDateTime
         val nextMondayAdjuster = TemporalAdjusters.next(DayOfWeek.MONDAY)
         when (homeTab) {
-            HomeTab.TODAY -> {
+            HomeTabType.TODAY -> {
                 startDate = now.with(LocalTime.MIN)
                 endDate = now.with(LocalTime.MAX)
             }
-            HomeTab.WEEK -> {
+            HomeTabType.WEEK -> {
                 if (now.dayOfWeek < DayOfWeek.SUNDAY) {
                     startDate = now.plusDays(1)
-                            .with(LocalTime.MIN)
+                        .with(LocalTime.MIN)
                     endDate = now.with(DayOfWeek.SUNDAY)
-                            .with(LocalTime.MAX)
+                        .with(LocalTime.MAX)
                 } else {
                     startDate = now.plusWeeks(1)
-                            .with(DayOfWeek.MONDAY)
-                            .with(LocalTime.MIN)
+                        .with(DayOfWeek.MONDAY)
+                        .with(LocalTime.MIN)
                     endDate = now.plusWeeks(1)
-                            .with(DayOfWeek.SUNDAY)
-                            .with(LocalTime.MAX)
+                        .with(DayOfWeek.SUNDAY)
+                        .with(LocalTime.MAX)
                 }
             }
-            HomeTab.MONTH -> {
+            HomeTabType.MONTH -> {
                 if (now.dayOfWeek < DayOfWeek.SATURDAY) {
                     startDate = now.with(nextMondayAdjuster)
-                            .with(LocalTime.MIN)
+                        .with(LocalTime.MIN)
                     endDate = now.with(nextMondayAdjuster)
-                            .with(TemporalAdjusters.lastDayOfMonth())
-                            .with(LocalTime.MAX)
+                        .with(TemporalAdjusters.lastDayOfMonth())
+                        .with(LocalTime.MAX)
                 } else {
                     startDate = now.plusWeeks(1)
-                            .with(nextMondayAdjuster)
-                            .with(LocalTime.MIN)
+                        .with(nextMondayAdjuster)
+                        .with(LocalTime.MIN)
                     endDate = now.plusWeeks(1)
-                            .with(nextMondayAdjuster)
-                            .with(TemporalAdjusters.lastDayOfMonth())
-                            .with(LocalTime.MAX)
-                }
-            }
-            HomeTab.TODO -> {
-                startDate = now.plusWeeks(1)
                         .with(nextMondayAdjuster)
                         .with(TemporalAdjusters.lastDayOfMonth())
-                        .plusDays(1)
-                        .with(LocalTime.MIN)
-                endDate = now.withYear(Constants.MAX_YEAR)
                         .with(LocalTime.MAX)
+                }
+            }
+            HomeTabType.TODO -> {
+                startDate = now.plusWeeks(1)
+                    .with(nextMondayAdjuster)
+                    .with(TemporalAdjusters.lastDayOfMonth())
+                    .plusDays(1)
+                    .with(LocalTime.MIN)
+                endDate = now.withYear(Constants.MAX_YEAR)
+                    .with(LocalTime.MAX)
             }
         }
         return startDate to endDate

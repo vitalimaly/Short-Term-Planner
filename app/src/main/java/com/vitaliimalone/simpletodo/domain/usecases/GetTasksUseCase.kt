@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 class GetTasksUseCase(
-        private val taskRepository: TaskRepository
+    private val taskRepository: TaskRepository
 ) {
     suspend fun getTasks(): Flow<List<Task>> {
         return taskRepository.getAllTasks().map { it.map(TaskMapper::map) }

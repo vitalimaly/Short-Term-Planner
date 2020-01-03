@@ -10,7 +10,7 @@ import com.vitaliimalone.simpletodo.presentation.utils.Res
 import kotlin.math.round
 
 class StripedRecyclerView @JvmOverloads constructor(
-        context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : RecyclerView(context, attrs, defStyleAttr) {
     private val paint = Paint().apply {
         color = Res.color(context, R.attr.themeDividerColor)

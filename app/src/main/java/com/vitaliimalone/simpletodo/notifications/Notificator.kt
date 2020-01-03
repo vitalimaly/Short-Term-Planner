@@ -22,23 +22,27 @@ class Notificator(private val context: Context) {
 
     private fun createNotificationChannel(notificationManager: NotificationManagerCompat) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(MESSAGES_CHANNEL_ID,
-                    MESSAGES_CHANNEL_NAME,
-                    NotificationManager.IMPORTANCE_DEFAULT)
+            val channel = NotificationChannel(
+                MESSAGES_CHANNEL_ID,
+                MESSAGES_CHANNEL_NAME,
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
             channel.description = "channel.description"
             notificationManager.createNotificationChannel(channel)
         }
     }
 
     fun showMessageNotification() {
-        val notification = NotificationCompat.Builder(context,
-                MESSAGES_CHANNEL_ID)
-                .setSmallIcon(R.mipmap.ic_launcher_round)
-                .setContentTitle("Title")
-                .setContentText("Text")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setAutoCancel(true)
-                .build()
+        val notification = NotificationCompat.Builder(
+            context,
+            MESSAGES_CHANNEL_ID
+        )
+            .setSmallIcon(R.mipmap.ic_launcher_round)
+            .setContentTitle("Title")
+            .setContentText("Text")
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setAutoCancel(true)
+            .build()
         notificationManager.notify(0, notification)
     }
 }
