@@ -34,7 +34,7 @@ object Res : KoinComponent {
     }
 
     @ColorInt
-    fun themeColor(context: Context, @AttrRes attrResId: Int, @StyleRes themeResId: Int = Pref(context).themeStyleResId): Int {
+    fun themeColor(context: Context, @AttrRes attrResId: Int, @StyleRes themeResId: Int = Pref.themeStyleResId): Int {
         val theme = context.resources.newTheme()
         theme.applyStyle(themeResId, false)
         val a = theme.obtainStyledAttributes(intArrayOf(attrResId))

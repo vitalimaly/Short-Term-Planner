@@ -8,7 +8,7 @@ import java.util.Locale
 // https://medium.com/ironsource-tech-blog/conversion-by-translation-changing-your-android-app-language-at-runtime-5c9daebf9771
 object LanguageUtils {
     fun wrapContext(context: Context): Context {
-        val savedLocale = Locale(Pref(context).localeCode)
+        val savedLocale = Locale(getLocaleCode(context))
         Locale.setDefault(savedLocale)
         val newConfig = Configuration()
         newConfig.setLocale(savedLocale)
@@ -17,7 +17,7 @@ object LanguageUtils {
 
     @Suppress("DEPRECATION")
     fun overrideLocale(context: Context) {
-        val savedLocale = Locale(Pref(context).localeCode)
+        val savedLocale = Locale(getLocaleCode(context))
         Locale.setDefault(savedLocale)
         val newConfig = Configuration()
         newConfig.setLocale(savedLocale)
@@ -28,11 +28,16 @@ object LanguageUtils {
     }
 
     fun setLanguage(context: Context, language: Language) {
-        Pref(context).localeCode = language.localeCode
+        Pref.localeCode = language.localeCode
         overrideLocale(context)
     }
 
-    fun getCurrentLanguage(context: Context): Language {
-        return Language.values().find { it.localeCode == Pref(context).localeCode } ?: Language.ENGLISH
+    fun getCurrentLanguage(): Language {
+        return Language.values().find { it.localeCode == Pref.localeCode } ?: Language.ENGLISH
+    }
+
+    private fun getLocaleCode(context: Context): String { // just for locale in order to keep Prefs.kt clean
+        return context.getSharedPreferences(Constants.PREFERENCES_NAME, Context.MODE_PRIVATE)
+            .getString(Pref.LOCALE_CODE_KEY, Language.ENGLISH.localeCode) ?: Language.ENGLISH.localeCode
     }
 }

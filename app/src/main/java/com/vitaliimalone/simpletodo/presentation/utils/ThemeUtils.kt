@@ -1,6 +1,5 @@
 package com.vitaliimalone.simpletodo.presentation.utils
 
-import android.content.Context
 import android.os.Build
 import android.view.View
 import androidx.fragment.app.FragmentActivity
@@ -8,7 +7,7 @@ import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.presentation.models.Theme
 
 object ThemeUtils {
-    fun setTheme(activity: FragmentActivity, theme: Theme = getCurrentTheme(activity)) {
+    fun setTheme(activity: FragmentActivity, theme: Theme = getCurrentTheme()) {
         activity.setTheme(theme.styleResId)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (Res.boolean(activity, R.attr.themeIsLight)) {
@@ -17,10 +16,10 @@ object ThemeUtils {
                 activity.window.decorView.systemUiVisibility = 0
             }
         }
-        Pref(activity).themeStyleResId = theme.styleResId
+        Pref.themeStyleResId = theme.styleResId
     }
 
-    fun getCurrentTheme(context: Context): Theme {
-        return Theme.values().find { it.styleResId == Pref(context).themeStyleResId } ?: Theme.PALE_GREEN
+    fun getCurrentTheme(): Theme {
+        return Theme.values().find { it.styleResId == Pref.themeStyleResId } ?: Theme.PALE_GREEN
     }
 }

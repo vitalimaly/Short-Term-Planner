@@ -22,13 +22,13 @@ class SettingsAdapter(
             SettingsType.THEME,
             Res.drawable(context, R.drawable.ic_theme),
             Res.string(R.string.settings_theme_title),
-            ThemeUtils.getCurrentTheme(context).title
+            ThemeUtils.getCurrentTheme().title
         ),
         Settings(
             SettingsType.LANGUAGE,
             Res.drawable(context, R.drawable.ic_language),
             Res.string(R.string.settings_language_title),
-            LanguageUtils.getCurrentLanguage(context).title
+            LanguageUtils.getCurrentLanguage().title
         ),
         Settings(
             SettingsType.OVERDUE,
