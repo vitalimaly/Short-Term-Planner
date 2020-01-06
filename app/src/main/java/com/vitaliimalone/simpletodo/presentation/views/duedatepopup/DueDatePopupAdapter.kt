@@ -16,7 +16,7 @@ class DueDatePopupAdapter(
     private val items = listOf(
         DueDateItem(DueDateType.TODAY, Res.string(R.string.due_date_popup_today)),
         DueDateItem(DueDateType.TOMORROW, Res.string(R.string.due_date_popup_tomorrow)),
-        DueDateItem(DueDateType.END_OF_WEEK, DateTimeUtils.getDueDatePopupEndOfWeekDate()),
+        DueDateItem(DueDateType.END_OF_WEEK, DateTimeUtils.getDueDatePopupEndOfWeekDateText()),
         DueDateItem(DueDateType.PICK, Res.string(R.string.due_date_popup_pick_date))
     )
 

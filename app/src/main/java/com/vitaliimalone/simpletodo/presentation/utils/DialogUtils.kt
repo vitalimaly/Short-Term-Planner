@@ -52,11 +52,12 @@ object DialogUtils {
                     false
                 }
             }
-            dueDateTextView.text = Res.string(R.string.due_to_date, DateTimeUtils.getTaskDueDate(task.dueTo))
+            dueDateTextView.text = Res.string(R.string.due_to_date, DateTimeUtils.getTaskDueDateText(task.dueTo))
             dueDateTextView.setOnClickListener {
                 DueDatePopup(context, it, task.dueTo) { pickedDate ->
                     task.dueTo = pickedDate
-                    dueDateTextView.text = Res.string(R.string.due_to_date, DateTimeUtils.getTaskDueDate(task.dueTo))
+                    dueDateTextView.text =
+                        Res.string(R.string.due_to_date, DateTimeUtils.getTaskDueDateText(task.dueTo))
                 }
             }
         }

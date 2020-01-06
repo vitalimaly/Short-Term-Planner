@@ -1,6 +1,7 @@
 package com.vitaliimalone.simpletodo.presentation.settings
 
 import android.os.Bundle
+import androidx.navigation.fragment.findNavController
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.presentation.base.BaseFragment
 import com.vitaliimalone.simpletodo.presentation.settings.common.LanguageDialog
@@ -46,6 +47,8 @@ class SettingsFragment : BaseFragment(R.layout.settings_fragment) {
                 languageDialog.show()
             }
             SettingsType.OVERDUE -> {
+                val action = SettingsFragmentDirections.actionSettingsFragmentToOverdueFragment()
+                findNavController().navigate(action)
             }
             SettingsType.ARCHIVE -> {
             }

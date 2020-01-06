@@ -18,7 +18,7 @@ class HomeTabViewModel(
     private var lastSwipedTask: Task? = null
     val tasksForHomeTab = MutableLiveData<List<Task>>()
 
-    fun fetchTasksForHomeTab(homeTab: HomeTab) {
+    fun getTasksForHomeTab(homeTab: HomeTab) {
         viewModelScope.launch {
             getTasksForHomeTabUseCase.getTasksForTab(homeTab).collect {
                 tasksForHomeTab.value = it
@@ -33,13 +33,13 @@ class HomeTabViewModel(
                 task.isArchived = true
             }
             HomeTab.WEEK -> {
-                task.dueTo = DateTimeUtils.getDateForAddNewTask(HomeTab.TODAY)
+                task.dueTo = DateTimeUtils.getAddNewTaskDate(HomeTab.TODAY)
             }
             HomeTab.MONTH -> {
-                task.dueTo = DateTimeUtils.getDateForAddNewTask(HomeTab.WEEK)
+                task.dueTo = DateTimeUtils.getAddNewTaskDate(HomeTab.WEEK)
             }
             HomeTab.TODO -> {
-                task.dueTo = DateTimeUtils.getDateForAddNewTask(HomeTab.MONTH)
+                task.dueTo = DateTimeUtils.getAddNewTaskDate(HomeTab.MONTH)
             }
         }
         updateTask(task)
@@ -49,13 +49,13 @@ class HomeTabViewModel(
         lastSwipedTask = task.copy()
         when (homeTab) {
             HomeTab.TODAY -> {
-                task.dueTo = DateTimeUtils.getDateForAddNewTask(HomeTab.WEEK)
+                task.dueTo = DateTimeUtils.getAddNewTaskDate(HomeTab.WEEK)
             }
             HomeTab.WEEK -> {
-                task.dueTo = DateTimeUtils.getDateForAddNewTask(HomeTab.MONTH)
+                task.dueTo = DateTimeUtils.getAddNewTaskDate(HomeTab.MONTH)
             }
             HomeTab.MONTH -> {
-                task.dueTo = DateTimeUtils.getDateForAddNewTask(HomeTab.TODO)
+                task.dueTo = DateTimeUtils.getAddNewTaskDate(HomeTab.TODO)
             }
             HomeTab.TODO -> {
                 task.isArchived = true

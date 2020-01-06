@@ -4,7 +4,7 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.drawable.ColorDrawable
 import android.text.TextPaint
-import androidx.annotation.AttrRes
+import androidx.annotation.ColorInt
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.vitaliimalone.simpletodo.R
@@ -15,8 +15,8 @@ class TaskTouchHelperCallback(
     private val onSwipe: ((position: Int, direction: Int) -> Unit),
     private val swipeLeftText: String,
     private val swipeRightText: String,
-    @AttrRes private val swipeLeftBackgroundColor: Int,
-    @AttrRes private val swipeRightBackgroundColor: Int
+    @ColorInt private val swipeLeftBackgroundColor: Int,
+    @ColorInt private val swipeRightBackgroundColor: Int
 ) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
     private val swipeLeftIconId = Res.drawable(context, R.drawable.ic_chevron_left)
     private val swipeRightIconId = Res.drawable(context, R.drawable.ic_chevron_right)

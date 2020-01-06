@@ -65,11 +65,11 @@ class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
         updateTaskDueDate(task.dueTo)
         createdOnTextView.text = Res.string(
             R.string.task_details_created,
-            DateTimeUtils.getShortDayMonthDate(task.createdAt)
+            DateTimeUtils.getShortDayMonthDateText(task.createdAt)
         )
         modifiedOnTextView.text = Res.string(
             R.string.task_details_modified,
-            DateTimeUtils.getShortDayMonthDate(task.modifiedAt)
+            DateTimeUtils.getShortDayMonthDateText(task.modifiedAt)
         )
         taskTitleEditText.clearFocusOnDoneClick()
         noteEditText.setOnTouchListener { v, event ->
@@ -105,7 +105,7 @@ class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
     }
 
     private fun updateTaskDueDate(offsetDateTime: OffsetDateTime) {
-        dueTextView.text = Res.string(R.string.due_to_date, DateTimeUtils.getTaskDueDateFull(offsetDateTime))
+        dueTextView.text = Res.string(R.string.due_to_date, DateTimeUtils.getTaskDueDateFullText(offsetDateTime))
     }
 
     private fun setupObservers() {

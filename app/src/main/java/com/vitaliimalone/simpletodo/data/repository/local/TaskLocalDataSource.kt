@@ -11,10 +11,6 @@ class TaskLocalDataSource(
         return taskDao.getAllTasks()
     }
 
-    suspend fun getTasks(isArchived: Boolean): Flow<List<TaskEntity>> {
-        return taskDao.getTasks(isArchived)
-    }
-
     suspend fun getUnarchivedTasksForPeriod(startDate: String, endDate: String): Flow<List<TaskEntity>> {
         return taskDao.getUnarchivedTasksForPeriod(startDate, endDate)
     }

@@ -31,7 +31,7 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
         addFab.setOnClickListener { view ->
             showKeyboard(view)
             val currentTab = HomeTab.values()[tasksViewPager.currentItem]
-            val defaultDate = DateTimeUtils.getDateForAddNewTask(currentTab)
+            val defaultDate = DateTimeUtils.getAddNewTaskDate(currentTab)
             DialogUtils.showAddNewTaskDialog(requireContext(), defaultDate) {
                 viewModel.addNewTask(it)
                 hideKeyboard()
@@ -59,14 +59,14 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
             }
         })
         dateRangeTextView.text =
-            DateTimeUtils.getDateForTab(HomeTab.values()[tasksViewPager.currentItem])
+            DateTimeUtils.getTabStartEndDateText(HomeTab.values()[tasksViewPager.currentItem])
     }
 
     private fun animatePageChange(position: Int) {
         val height = dateRangeTextView.height.toFloat()
         val moveUp = oldPagePosition < position
         val endAction = {
-            dateRangeTextView.text = DateTimeUtils.getDateForTab(HomeTab.values()[position])
+            dateRangeTextView.text = DateTimeUtils.getTabStartEndDateText(HomeTab.values()[position])
             dateRangeTextView.translationY = if (moveUp) height else -height
             dateRangeTextView.animate()
                 .setDuration(animationTime / 2)

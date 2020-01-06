@@ -30,5 +30,18 @@
         android:id="@+id/settingsFragment"
         android:name="com.vitaliimalone.simpletodo.presentation.settings.SettingsFragment"
         android:label="SettingsFragment"
-        tools:layout="@layout/task_details_fragment" />
+        tools:layout="@layout/settings_fragment">
+        <action
+            android:id="@+id/action_settingsFragment_to_overdueFragment"
+            app:destination="@id/overdueFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/overdueFragment"
+        android:name="com.vitaliimalone.simpletodo.presentation.overdue.OverdueFragment"
+        android:label="OverdueFragment"
+        tools:layout="@layout/overdue_fragment">
+        <action
+            android:id="@+id/action_overdueFragment_to_taskDetailsFragment"
+            app:destination="@id/taskDetailsFragment" />
+    </fragment>
 </navigation>

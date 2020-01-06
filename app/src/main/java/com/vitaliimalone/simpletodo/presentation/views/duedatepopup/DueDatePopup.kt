@@ -52,7 +52,7 @@ class DueDatePopup(
                             onDatePicked.invoke(OffsetDateTime.now().plusDays(1))
                         }
                         DueDateType.END_OF_WEEK -> {
-                            onDatePicked.invoke(DateTimeUtils.getStartEndDateForTab(HomeTab.WEEK).second)
+                            onDatePicked.invoke(DateTimeUtils.getTabStartEndDate(HomeTab.WEEK).second)
                         }
                         DueDateType.PICK -> {
                             DialogUtils.showDatePickerDialog(context, currentDate) { date ->
