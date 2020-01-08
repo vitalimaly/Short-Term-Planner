@@ -37,4 +37,5 @@
     <string name="theme_name_dark">Dark</string>
     <string name="delete">Delete</string>
     <string name="overdue_toolbar_title">Overdue</string>
+    <string name="snackbar_task_deleted">Task deleted</string>
 </resources>

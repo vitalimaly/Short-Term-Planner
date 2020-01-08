@@ -4,19 +4,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vitaliimalone.simpletodo.domain.models.Task
+import com.vitaliimalone.simpletodo.domain.usecases.AddTaskUseCase
 import com.vitaliimalone.simpletodo.domain.usecases.DeleteTaskUseCase
 import com.vitaliimalone.simpletodo.domain.usecases.GetOverdueTasksUseCase
-import com.vitaliimalone.simpletodo.domain.usecases.UpdateTaskUseCase
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class OverdueViewModel(
     private val getOverdueTasksUseCase: GetOverdueTasksUseCase,
-    private val updateTaskUseCase: UpdateTaskUseCase,
+    private val addTaskUseCase: AddTaskUseCase,
     private val deleteTaskUseCase: DeleteTaskUseCase
 ) : ViewModel() {
-    private var lastSwipedTask: Task? = null
     val overdueTasks = MutableLiveData<List<Task>>()
+    private var lastSwipedTask: Task? = null
 
     init {
         getOverdueTasks()
@@ -37,10 +37,10 @@ class OverdueViewModel(
         }
     }
 
-    fun undoSwipe() {
+    fun undoDelete() {
         lastSwipedTask?.let {
             viewModelScope.launch {
-                updateTaskUseCase.updateTask(it)
+                addTaskUseCase.addTask(it)
             }
         }
     }

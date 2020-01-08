@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
+import com.google.android.material.snackbar.Snackbar
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.domain.models.Task
 import com.vitaliimalone.simpletodo.presentation.base.BaseFragment
@@ -51,6 +52,16 @@ class OverdueFragment : BaseFragment(R.layout.overdue_fragment) {
     private fun onTabSwipe(position: Int) {
         val swipedTask = tasksAdapter.tasks[position]
         viewModel.deleteTask(swipedTask)
+        val swipedSnackbar = Snackbar.make(
+            overdueRecyclerView,
+            Res.string(R.string.snackbar_task_deleted),
+            Snackbar.LENGTH_LONG
+        )
+        swipedSnackbar.setAction(Res.string(R.string.snackbar_undo)) {
+            viewModel.undoDelete()
+        }
+        swipedSnackbar.show()
+
     }
 
     private fun setupClickListeners() {
