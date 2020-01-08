@@ -26,4 +26,8 @@ class TaskLocalDataSource(
     suspend fun deleteTask(taskEntity: TaskEntity) {
         taskDao.deleteTask(taskEntity)
     }
+
+    suspend fun getTasksCountForPeriod(startDate: String, endDate: String): Flow<Int> {
+        return taskDao.getTasksCountForPeriod(startDate, endDate)
+    }
 }

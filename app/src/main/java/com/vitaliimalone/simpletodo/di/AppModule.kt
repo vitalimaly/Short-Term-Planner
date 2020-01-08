@@ -6,6 +6,7 @@ import com.vitaliimalone.simpletodo.data.repository.local.TaskLocalDataSource
 import com.vitaliimalone.simpletodo.data.repository.local.database.TasksDatabase
 import com.vitaliimalone.simpletodo.domain.usecases.AddTaskUseCase
 import com.vitaliimalone.simpletodo.domain.usecases.DeleteTaskUseCase
+import com.vitaliimalone.simpletodo.domain.usecases.GetOverdueTasksCountUseCase
 import com.vitaliimalone.simpletodo.domain.usecases.GetOverdueTasksUseCase
 import com.vitaliimalone.simpletodo.domain.usecases.GetTasksForHomeTabUseCase
 import com.vitaliimalone.simpletodo.domain.usecases.UpdateTaskUseCase
@@ -23,7 +24,7 @@ private val presentation = module {
     viewModel { HomeViewModel(get()) }
     viewModel { HomeTabViewModel(get(), get()) }
     viewModel { TaskDetailsViewModel(get(), get()) }
-    viewModel { SettingsViewModel() }
+    viewModel { SettingsViewModel(get()) }
     viewModel { OverdueViewModel(get(), get(), get()) }
 }
 private val domain = module {
@@ -32,6 +33,7 @@ private val domain = module {
     single { GetTasksForHomeTabUseCase(get()) }
     single { DeleteTaskUseCase(get()) }
     single { GetOverdueTasksUseCase(get()) }
+    single { GetOverdueTasksCountUseCase(get()) }
 }
 private val data = module {
     single { TaskRepository(get()) }

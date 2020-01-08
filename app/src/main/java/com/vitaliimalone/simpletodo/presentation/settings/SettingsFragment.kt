@@ -1,6 +1,7 @@
 package com.vitaliimalone.simpletodo.presentation.settings
 
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.presentation.base.BaseFragment
@@ -36,6 +37,9 @@ class SettingsFragment : BaseFragment(R.layout.settings_fragment) {
     }
 
     private fun setupObservers() {
+        viewModel.overdueTasksCount.observe(viewLifecycleOwner, Observer {
+            // todo update count
+        })
     }
 
     private fun onSettingsClick(settings: Settings) {
