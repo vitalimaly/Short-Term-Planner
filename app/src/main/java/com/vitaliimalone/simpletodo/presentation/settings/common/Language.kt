@@ -5,24 +5,18 @@ import java.util.Locale
 
 enum class Language {
     ENGLISH {
-        override val localeCode: String
-            get() = Locale.ENGLISH.language
-        override val title: String
-            get() = Locale.ENGLISH.displayLanguage.capitalize()
-        override val icon: Drawable?
-            get() = null
+        override fun getLocaleCode(): String = Locale.ENGLISH.language
+        override fun getTitle() = Locale.ENGLISH.displayLanguage.capitalize()
+        override fun getIcon(): Drawable? = null
     },
 
     RUSSIAN {
-        override val localeCode: String
-            get() = Locale("ru").language
-        override val title: String
-            get() = Locale("ru").displayLanguage.capitalize()
-        override val icon: Drawable?
-            get() = null
+        override fun getLocaleCode(): String = Locale("ru").language
+        override fun getTitle() = Locale("ru").displayLanguage.capitalize()
+        override fun getIcon(): Drawable? = null
     };
 
-    abstract val localeCode: String
-    abstract val title: String
-    abstract val icon: Drawable?
+    abstract fun getLocaleCode(): String
+    abstract fun getTitle(): String
+    abstract fun getIcon(): Drawable? // todo
 }

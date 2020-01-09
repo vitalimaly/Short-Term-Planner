@@ -15,13 +15,13 @@ sealed class Settings {
     object Theme : Settings() {
         override fun getTitle() = Res.string(R.string.settings_theme_title)
         override fun getIcon(context: Context) = Res.drawable(context, R.drawable.ic_theme)
-        override fun getSubtitle(): String = ThemeUtils.getCurrentTheme().title
+        override fun getSubtitle(): String = ThemeUtils.getCurrentTheme().getTitle()
     }
 
     object Language : Settings() {
         override fun getTitle() = Res.string(R.string.settings_language_title)
         override fun getIcon(context: Context) = Res.drawable(context, R.drawable.ic_language)
-        override fun getSubtitle() = LanguageUtils.getCurrentLanguage().title
+        override fun getSubtitle() = LanguageUtils.getCurrentLanguage().getTitle()
     }
 
     object Overdue : Settings() {

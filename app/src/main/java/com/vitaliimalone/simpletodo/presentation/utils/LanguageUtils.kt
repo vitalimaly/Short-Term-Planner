@@ -28,16 +28,16 @@ object LanguageUtils {
     }
 
     fun setLanguage(context: Context, language: Language) {
-        Pref.localeCode = language.localeCode
+        Pref.localeCode = language.getLocaleCode()
         overrideLocale(context)
     }
 
     fun getCurrentLanguage(): Language {
-        return Language.values().find { it.localeCode == Pref.localeCode } ?: Language.ENGLISH
+        return Language.values().find { it.getLocaleCode() == Pref.localeCode } ?: Language.ENGLISH
     }
 
     private fun getLocaleCode(context: Context): String { // just for locale in order to keep Prefs.kt clean
         return context.getSharedPreferences(Constants.PREFERENCES_NAME, Context.MODE_PRIVATE)
-            .getString(Pref.LOCALE_CODE_KEY, Language.ENGLISH.localeCode) ?: Language.ENGLISH.localeCode
+            .getString(Pref.LOCALE_CODE_KEY, Language.ENGLISH.getLocaleCode()) ?: Language.ENGLISH.getLocaleCode()
     }
 }

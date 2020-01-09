@@ -47,7 +47,7 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
         tasksViewPager.isUserInputEnabled = false
         tasksViewPager.adapter = HomeTabFragmentAdapter(HomeTab.values(), this)
         TabLayoutMediator(tabsTabLayout, tasksViewPager) { tab, position ->
-            tab.text = HomeTab.values()[position].title
+            tab.text = HomeTab.values()[position].getTitle()
         }.attach()
         tasksViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {

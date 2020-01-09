@@ -104,13 +104,13 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
             if (currentTab == HomeTab.values().first()) {
                 Res.string(R.string.archive)
             } else {
-                HomeTab.values()[currentTab.ordinal - 1].title
+                HomeTab.values()[currentTab.ordinal - 1].getTitle()
             }
         } else if (direction == ItemTouchHelper.RIGHT) {
             if (currentTab == HomeTab.values().last()) {
                 Res.string(R.string.archive)
             } else {
-                HomeTab.values()[currentTab.ordinal + 1].title
+                HomeTab.values()[currentTab.ordinal + 1].getTitle()
             }
         } else {
             throw IllegalArgumentException("Should be LEFT or RIGHT")

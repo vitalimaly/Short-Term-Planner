@@ -31,7 +31,7 @@ class LanguageAdapter(
             containerView.setOnClickListener {
                 onItemClicked.invoke(item)
             }
-            languageDialogItemTextView.text = item.title
+            languageDialogItemTextView.text = item.getTitle()
         }
     }
 }
