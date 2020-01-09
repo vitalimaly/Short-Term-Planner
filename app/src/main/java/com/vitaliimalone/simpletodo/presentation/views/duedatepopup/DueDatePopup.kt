@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.PopupWindow
 import com.google.android.material.textview.MaterialTextView
 import com.vitaliimalone.simpletodo.R
-import com.vitaliimalone.simpletodo.presentation.models.HomeTab
+import com.vitaliimalone.simpletodo.presentation.home.common.HomeTab
 import com.vitaliimalone.simpletodo.presentation.utils.DateTimeUtils
 import com.vitaliimalone.simpletodo.presentation.utils.DialogUtils
 import com.vitaliimalone.simpletodo.presentation.utils.Res

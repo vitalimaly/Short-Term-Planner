@@ -1,7 +1,7 @@
 package com.vitaliimalone.simpletodo.presentation.utils
 
 import com.vitaliimalone.simpletodo.R
-import com.vitaliimalone.simpletodo.presentation.models.HomeTab
+import com.vitaliimalone.simpletodo.presentation.home.common.HomeTab
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.Instant
 import org.threeten.bp.LocalDate

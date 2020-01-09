@@ -1,4 +1,4 @@
-package com.vitaliimalone.simpletodo.presentation.models
+package com.vitaliimalone.simpletodo.presentation.settings.common
 
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.presentation.utils.Res

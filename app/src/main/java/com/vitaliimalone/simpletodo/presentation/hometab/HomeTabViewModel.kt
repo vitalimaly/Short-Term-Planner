@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.vitaliimalone.simpletodo.domain.models.Task
 import com.vitaliimalone.simpletodo.domain.usecases.GetTasksForHomeTabUseCase
 import com.vitaliimalone.simpletodo.domain.usecases.UpdateTaskUseCase
-import com.vitaliimalone.simpletodo.presentation.models.HomeTab
+import com.vitaliimalone.simpletodo.presentation.home.common.HomeTab
 import com.vitaliimalone.simpletodo.presentation.utils.DateTimeUtils
 import kotlinx.coroutines.launch
 

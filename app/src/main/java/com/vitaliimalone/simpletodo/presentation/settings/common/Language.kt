@@ -1,4 +1,4 @@
-package com.vitaliimalone.simpletodo.presentation.models
+package com.vitaliimalone.simpletodo.presentation.settings.common
 
 import android.graphics.drawable.Drawable
 import java.util.Locale

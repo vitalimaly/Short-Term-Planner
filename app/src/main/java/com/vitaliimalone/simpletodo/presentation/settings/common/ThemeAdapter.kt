@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.vitaliimalone.simpletodo.R
-import com.vitaliimalone.simpletodo.presentation.models.Theme
 import com.vitaliimalone.simpletodo.presentation.utils.Res
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.theme_dialog_item.*

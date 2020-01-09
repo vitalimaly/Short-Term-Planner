@@ -4,7 +4,7 @@ import android.os.Build
 import android.view.View
 import androidx.fragment.app.FragmentActivity
 import com.vitaliimalone.simpletodo.R
-import com.vitaliimalone.simpletodo.presentation.models.Theme
+import com.vitaliimalone.simpletodo.presentation.settings.common.Theme
 
 object ThemeUtils {
     fun setTheme(activity: FragmentActivity, theme: Theme = getCurrentTheme()) {
