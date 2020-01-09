@@ -24,5 +24,11 @@ interface TaskDao {
     suspend fun deleteTask(task: TaskEntity)
 
     @Query("SELECT COUNT(id) FROM taskentity WHERE isArchived = 0 AND dueTo BETWEEN :startDate AND :endDate")
-    fun getTasksCountForPeriod(startDate: String, endDate: String): Flow<Int>
+    fun getUnarchivedTasksCountForPeriod(startDate: String, endDate: String): Flow<Int>
+
+    @Query("SELECT COUNT(id) FROM taskentity WHERE isArchived = 1")
+    fun getArchivedTasksCount(): Flow<Int>
+
+    @Query("SELECT * FROM taskentity WHERE isArchived = 1")
+    fun getArchivedTasks(): Flow<List<TaskEntity>>
 }

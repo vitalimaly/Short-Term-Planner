@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_settingsFragment_to_overdueFragment"
             app:destination="@id/overdueFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_archiveFragment"
+            app:destination="@id/archiveFragment" />
     </fragment>
     <fragment
         android:id="@+id/overdueFragment"
@@ -42,6 +45,15 @@
         tools:layout="@layout/overdue_fragment">
         <action
             android:id="@+id/action_overdueFragment_to_taskDetailsFragment"
+            app:destination="@id/taskDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/archiveFragment"
+        android:name="com.vitaliimalone.simpletodo.presentation.archive.ArchiveFragment"
+        android:label="ArchiveFragment"
+        tools:layout="@layout/archive_fragment">
+        <action
+            android:id="@+id/action_archiveFragment_to_taskDetailsFragment"
             app:destination="@id/taskDetailsFragment" />
     </fragment>
 </navigation>

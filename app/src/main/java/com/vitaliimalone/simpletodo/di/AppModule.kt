@@ -6,10 +6,13 @@ import com.vitaliimalone.simpletodo.data.repository.local.TaskLocalDataSource
 import com.vitaliimalone.simpletodo.data.repository.local.database.TasksDatabase
 import com.vitaliimalone.simpletodo.domain.usecases.AddTaskUseCase
 import com.vitaliimalone.simpletodo.domain.usecases.DeleteTaskUseCase
-import com.vitaliimalone.simpletodo.domain.usecases.GetOverdueTasksCountUseCase
+import com.vitaliimalone.simpletodo.domain.usecases.GetArchivedTasksCountUseCase
+import com.vitaliimalone.simpletodo.domain.usecases.GetArchivedTasksUseCase
 import com.vitaliimalone.simpletodo.domain.usecases.GetOverdueTasksUseCase
 import com.vitaliimalone.simpletodo.domain.usecases.GetTasksForHomeTabUseCase
+import com.vitaliimalone.simpletodo.domain.usecases.GetUnarchivedOverdueTasksCountUseCase
 import com.vitaliimalone.simpletodo.domain.usecases.UpdateTaskUseCase
+import com.vitaliimalone.simpletodo.presentation.archive.ArchiveViewModel
 import com.vitaliimalone.simpletodo.presentation.home.HomeViewModel
 import com.vitaliimalone.simpletodo.presentation.hometab.HomeTabViewModel
 import com.vitaliimalone.simpletodo.presentation.notifications.Notificator
@@ -24,8 +27,9 @@ private val presentation = module {
     viewModel { HomeViewModel(get()) }
     viewModel { HomeTabViewModel(get(), get()) }
     viewModel { TaskDetailsViewModel(get(), get()) }
-    viewModel { SettingsViewModel(get()) }
+    viewModel { SettingsViewModel(get(), get()) }
     viewModel { OverdueViewModel(get(), get(), get()) }
+    viewModel { ArchiveViewModel(get(), get(), get()) }
 }
 private val domain = module {
     single { AddTaskUseCase(get()) }
@@ -33,7 +37,9 @@ private val domain = module {
     single { GetTasksForHomeTabUseCase(get()) }
     single { DeleteTaskUseCase(get()) }
     single { GetOverdueTasksUseCase(get()) }
-    single { GetOverdueTasksCountUseCase(get()) }
+    single { GetUnarchivedOverdueTasksCountUseCase(get()) }
+    single { GetArchivedTasksUseCase(get()) }
+    single { GetArchivedTasksCountUseCase(get()) }
 }
 private val data = module {
     single { TaskRepository(get()) }

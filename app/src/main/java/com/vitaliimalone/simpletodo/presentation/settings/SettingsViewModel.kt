@@ -2,10 +2,13 @@ package com.vitaliimalone.simpletodo.presentation.settings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.vitaliimalone.simpletodo.domain.usecases.GetOverdueTasksCountUseCase
+import com.vitaliimalone.simpletodo.domain.usecases.GetArchivedTasksCountUseCase
+import com.vitaliimalone.simpletodo.domain.usecases.GetUnarchivedOverdueTasksCountUseCase
 
 class SettingsViewModel(
-    getOverdueTasksCountUseCase: GetOverdueTasksCountUseCase
+    getUnarchivedOverdueTasksCountUseCase: GetUnarchivedOverdueTasksCountUseCase,
+    getArchivedTasksCountUseCase: GetArchivedTasksCountUseCase
 ) : ViewModel() {
-    val overdueTasksCount = getOverdueTasksCountUseCase.getOverdueTasksCount().asLiveData()
+    val overdueTasksCount = getUnarchivedOverdueTasksCountUseCase.getUnarchivedOverdueTasksCount().asLiveData()
+    val archivedTasksCount = getArchivedTasksCountUseCase.getArchivedTasksCount().asLiveData()
 }
