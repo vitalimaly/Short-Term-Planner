@@ -10,15 +10,15 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.settings_list_item.*
 
 class SettingsAdapter(
-    private val onItemClick: ((Settings) -> Unit)
+    private val onItemClick: ((Setting) -> Unit)
 ) : RecyclerView.Adapter<SettingsAdapter.SettingsViewHolder>() {
     val settings = listOf(
-        Settings.Theme,
-        Settings.Language,
-        Settings.Overdue,
-        Settings.Archive,
-        Settings.Rate,
-        Settings.Info
+        Setting.Theme,
+        Setting.Language,
+        Setting.Overdue,
+        Setting.Archive,
+        Setting.Rate,
+        Setting.Info
     )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SettingsViewHolder {
@@ -37,7 +37,7 @@ class SettingsAdapter(
     inner class SettingsViewHolder(
         override val containerView: View
     ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
-        fun bind(item: Settings) {
+        fun bind(item: Setting) {
             containerView.setOnClickListener {
                 onItemClick.invoke(item)
             }

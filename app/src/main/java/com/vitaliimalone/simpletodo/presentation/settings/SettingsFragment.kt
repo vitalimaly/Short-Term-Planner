@@ -6,7 +6,7 @@ import androidx.navigation.fragment.findNavController
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.presentation.base.BaseFragment
 import com.vitaliimalone.simpletodo.presentation.settings.common.LanguageDialog
-import com.vitaliimalone.simpletodo.presentation.settings.common.Settings
+import com.vitaliimalone.simpletodo.presentation.settings.common.Setting
 import com.vitaliimalone.simpletodo.presentation.settings.common.SettingsAdapter
 import com.vitaliimalone.simpletodo.presentation.settings.common.ThemeDialog
 import com.vitaliimalone.simpletodo.presentation.utils.Res
@@ -37,29 +37,29 @@ class SettingsFragment : BaseFragment(R.layout.settings_fragment) {
 
     private fun setupObservers() {
         viewModel.overdueTasksCount.observe(viewLifecycleOwner, Observer { count ->
-            val overdue = settingsAdapter.settings.find { it is Settings.Overdue } as Settings.Overdue
+            val overdue = settingsAdapter.settings.find { it is Setting.Overdue } as Setting.Overdue
             overdue.count = count
             settingsAdapter.notifyDataSetChanged()
         })
     }
 
-    private fun onSettingsClick(settings: Settings) {
-        when (settings) {
-            is Settings.Theme -> {
+    private fun onSettingsClick(setting: Setting) {
+        when (setting) {
+            is Setting.Theme -> {
                 themeDialog.show()
             }
-            is Settings.Language -> {
+            is Setting.Language -> {
                 languageDialog.show()
             }
-            is Settings.Overdue -> {
+            is Setting.Overdue -> {
                 val action = SettingsFragmentDirections.actionSettingsFragmentToOverdueFragment()
                 findNavController().navigate(action)
             }
-            is Settings.Archive -> {
+            is Setting.Archive -> {
             }
-            is Settings.Rate -> {
+            is Setting.Rate -> {
             }
-            is Settings.Info -> {
+            is Setting.Info -> {
             }
         }
     }

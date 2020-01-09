@@ -7,24 +7,24 @@ import com.vitaliimalone.simpletodo.presentation.utils.LanguageUtils
 import com.vitaliimalone.simpletodo.presentation.utils.Res
 import com.vitaliimalone.simpletodo.presentation.utils.ThemeUtils
 
-sealed class Settings {
+sealed class Setting {
     abstract fun getTitle(): String
     abstract fun getIcon(context: Context): Drawable
     open fun getSubtitle() = ""
 
-    object Theme : Settings() {
+    object Theme : Setting() {
         override fun getTitle() = Res.string(R.string.settings_theme_title)
         override fun getIcon(context: Context) = Res.drawable(context, R.drawable.ic_theme)
         override fun getSubtitle(): String = ThemeUtils.getCurrentTheme().getTitle()
     }
 
-    object Language : Settings() {
+    object Language : Setting() {
         override fun getTitle() = Res.string(R.string.settings_language_title)
         override fun getIcon(context: Context) = Res.drawable(context, R.drawable.ic_language)
         override fun getSubtitle() = LanguageUtils.getCurrentLanguage().getTitle()
     }
 
-    object Overdue : Settings() {
+    object Overdue : Setting() {
         var count = 0
 
         override fun getTitle() = Res.string(R.string.settings_overdue_title)
@@ -32,7 +32,7 @@ sealed class Settings {
         override fun getSubtitle() = Res.string(R.string.settings_overdue_subtitle, count)
     }
 
-    object Archive : Settings() {
+    object Archive : Setting() {
         var count = 0
 
         override fun getTitle() = Res.string(R.string.settings_archive_title)
@@ -40,12 +40,12 @@ sealed class Settings {
         override fun getSubtitle() = Res.string(R.string.settings_archive_subtitle, count)
     }
 
-    object Rate : Settings() {
+    object Rate : Setting() {
         override fun getTitle() = Res.string(R.string.settings_rate_title)
         override fun getIcon(context: Context) = Res.drawable(context, R.drawable.ic_star)
     }
 
-    object Info : Settings() {
+    object Info : Setting() {
         override fun getTitle() = Res.string(R.string.settings_info_title)
         override fun getIcon(context: Context) = Res.drawable(context, R.drawable.ic_info)
     }
