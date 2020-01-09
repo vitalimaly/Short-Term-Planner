@@ -43,18 +43,18 @@ class DueDatePopup(
                         marginRight = Res.dimen(context, R.dimen.m_spacing)
                     )
                 )
-                dueDatePopupRecyclerView.adapter = DueDatePopupAdapter { popupItem ->
-                    when (popupItem.type) {
-                        DueDateType.TODAY -> {
+                dueDatePopupRecyclerView.adapter = DueDatePopupAdapter { dueDate ->
+                    when (dueDate) {
+                        DueDate.TODAY -> {
                             onDatePicked.invoke(OffsetDateTime.now())
                         }
-                        DueDateType.TOMORROW -> {
+                        DueDate.TOMORROW -> {
                             onDatePicked.invoke(OffsetDateTime.now().plusDays(1))
                         }
-                        DueDateType.END_OF_WEEK -> {
+                        DueDate.END_OF_WEEK -> {
                             onDatePicked.invoke(DateTimeUtils.getTabStartEndDate(HomeTab.WEEK).second)
                         }
-                        DueDateType.PICK -> {
+                        DueDate.PICK -> {
                             DialogUtils.showDatePickerDialog(context, currentDate) { date ->
                                 onDatePicked.invoke(date)
                             }
