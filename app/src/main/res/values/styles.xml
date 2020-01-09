@@ -1,6 +1,29 @@
 <resources>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light">
+        <!-- Default theme -->
+        <item name="themeColorPrimary">@color/pale_theme_color_primary</item>
+        <item name="themeColorPrimaryVariant">@color/pale_theme_color_primary_variant</item>
+        <item name="themeColorOnPrimary">?themeTextColorPrimary</item>
+        <item name="themeColorSecondary">@color/pale_theme_color_secondary</item>
+        <item name="themeColorSecondaryVariant">@color/pale_theme_color_secondary_variant</item>
+        <item name="themeColorOnSecondary">?themeTextColorPrimaryInverse</item>
+        <item name="themeColorBackground">@color/pale_theme_color_background</item>
+        <item name="themeColorBackgroundSecondary">@color/pale_theme_color_background_secondary</item>
+        <item name="themeColorSurface">@color/pale_theme_color_surface</item>
+        <item name="themeColorError">@color/pale_theme_color_error</item>
+        <item name="themeColorOnError">?themeTextColorPrimaryInverse</item>
+        <item name="themeTextColorPrimary">@color/black_75</item>
+        <item name="themeTextColorSecondary">@color/black_50</item>
+        <item name="themeTextColorTertiary">@color/black_25</item>
+        <item name="themeTextColorPrimaryInverse">@color/white_75</item>
+        <item name="themeTextColorSecondaryInverse">@color/white_50</item>
+        <item name="themeTextColorTertiaryInverse">@color/white_25</item>
+        <item name="themeDoneCheckboxColor">@color/pale_theme_color_checkbox_done</item>
+        <item name="themeDividerColor">@color/black_50</item>
+        <item name="themeIsLight">true</item>
+        <!-- Default theme -->
+
         <!-- Material theming -->
         <item name="colorPrimary">?themeColorPrimary</item>
         <item name="colorPrimaryVariant">?themeColorPrimaryVariant</item>

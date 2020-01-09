@@ -1,11 +1,13 @@
 package com.vitaliimalone.simpletodo.presentation.utils
 
 import com.vitaliimalone.simpletodo.R
-import com.vitaliimalone.simpletodo.presentation.models.HomeTab
+import com.vitaliimalone.simpletodo.presentation.home.common.HomeTab
 import org.threeten.bp.DayOfWeek
+import org.threeten.bp.Instant
 import org.threeten.bp.LocalDate
 import org.threeten.bp.LocalTime
 import org.threeten.bp.OffsetDateTime
+import org.threeten.bp.ZoneOffset
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.temporal.TemporalAdjusters
 
@@ -13,8 +15,8 @@ object DateTimeUtils {
     private const val FULL_DAY_MONTH_FORMAT = "EEEE, MMMM d"
     private const val SHORT_DAY_MONTH_FORMAT = "EEE, MMM d"
 
-    fun getDateForTab(homeTab: HomeTab): String {
-        val (startDate, endDate) = getStartEndDateForTab(homeTab)
+    fun getTabStartEndDateText(homeTab: HomeTab): String {
+        val (startDate, endDate) = getTabStartEndDate(homeTab)
         return when (homeTab) {
             HomeTab.TODAY -> {
                 startDate.format(DateTimeFormatter.ofPattern(FULL_DAY_MONTH_FORMAT))
@@ -31,8 +33,8 @@ object DateTimeUtils {
         }
     }
 
-    fun getDateForAddNewTask(homeTab: HomeTab): OffsetDateTime {
-        val (startDate, endDate) = getStartEndDateForTab(homeTab)
+    fun getAddNewTaskDate(homeTab: HomeTab): OffsetDateTime {
+        val (startDate, endDate) = getTabStartEndDate(homeTab)
         val currentTime = LocalTime.now()
         return when (homeTab) {
             HomeTab.TODAY, HomeTab.WEEK, HomeTab.MONTH -> {
@@ -44,7 +46,7 @@ object DateTimeUtils {
         }
     }
 
-    fun getTaskDueDate(dueDate: OffsetDateTime): String {
+    fun getTaskDueDateText(dueDate: OffsetDateTime): String {
         val today = LocalDate.now()
         val localDueDate = dueDate.toLocalDate()
         return when {
@@ -54,7 +56,7 @@ object DateTimeUtils {
         }
     }
 
-    fun getTaskDueDateFull(dueDate: OffsetDateTime): String {
+    fun getTaskDueDateFullText(dueDate: OffsetDateTime): String {
         val today = LocalDate.now()
         val localDueDate = dueDate.toLocalDate()
         return when {
@@ -64,7 +66,7 @@ object DateTimeUtils {
         }
     }
 
-    fun getStartEndDateForTab(homeTab: HomeTab): Pair<OffsetDateTime, OffsetDateTime> {
+    fun getTabStartEndDate(homeTab: HomeTab): Pair<OffsetDateTime, OffsetDateTime> {
         val now = OffsetDateTime.now()
         val startDate: OffsetDateTime
         val endDate: OffsetDateTime
@@ -119,15 +121,20 @@ object DateTimeUtils {
         return startDate to endDate
     }
 
-    fun getShortDayMonthDate(offsetDateTime: OffsetDateTime): String {
+    fun getShortDayMonthDateText(offsetDateTime: OffsetDateTime): String {
         return offsetDateTime.format(DateTimeFormatter.ofPattern(SHORT_DAY_MONTH_FORMAT))
     }
 
-    fun getDueDatePopupEndOfWeekDate(): String {
+    fun getDueDatePopupEndOfWeekDateText(): String {
         return if (OffsetDateTime.now().dayOfWeek < DayOfWeek.SATURDAY) {
             Res.string(R.string.due_date_popup_this_saturday)
         } else {
             Res.string(R.string.due_date_popup_next_saturday)
         }
+    }
+
+    fun getMinDate(): OffsetDateTime {
+        val minInstant = Instant.ofEpochMilli(Long.MIN_VALUE)
+        return OffsetDateTime.ofInstant(minInstant, ZoneOffset.UTC)
     }
 }

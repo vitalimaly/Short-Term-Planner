@@ -36,7 +36,7 @@ class TasksAdapter(private val onTaskClicked: ((Task) -> Unit)) : RecyclerView.A
         fun bind(task: Task) {
             titleTextView.text = task.title
             doneCheckBox.isChecked = task.isDone
-            dueDateTextView.text = DateTimeUtils.getTaskDueDate(task.dueTo)
+            dueDateTextView.text = DateTimeUtils.getTaskDueDateText(task.dueTo)
             tagsTextView.isVisible = task.tags.isNotEmpty()
             tagsTextView.text = task.tags.joinToString()
             containerView.setOnClickListener {

@@ -7,15 +7,7 @@ import kotlinx.coroutines.flow.Flow
 class TaskLocalDataSource(
     private val taskDao: TaskDao
 ) {
-    suspend fun getAllTasks(): Flow<List<TaskEntity>> {
-        return taskDao.getAllTasks()
-    }
-
-    suspend fun getTasks(isArchived: Boolean): Flow<List<TaskEntity>> {
-        return taskDao.getTasks(isArchived)
-    }
-
-    suspend fun getUnarchivedTasksForPeriod(startDate: String, endDate: String): Flow<List<TaskEntity>> {
+    fun getUnarchivedTasksForPeriod(startDate: String, endDate: String): Flow<List<TaskEntity>> {
         return taskDao.getUnarchivedTasksForPeriod(startDate, endDate)
     }
 
@@ -29,5 +21,9 @@ class TaskLocalDataSource(
 
     suspend fun deleteTask(taskEntity: TaskEntity) {
         taskDao.deleteTask(taskEntity)
+    }
+
+    fun getTasksCountForPeriod(startDate: String, endDate: String): Flow<Int> {
+        return taskDao.getTasksCountForPeriod(startDate, endDate)
     }
 }

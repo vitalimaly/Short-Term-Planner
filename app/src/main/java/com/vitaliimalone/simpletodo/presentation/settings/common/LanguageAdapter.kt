@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.vitaliimalone.simpletodo.R
-import com.vitaliimalone.simpletodo.presentation.models.Language
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.language_dialog_item.*
 
@@ -32,7 +31,7 @@ class LanguageAdapter(
             containerView.setOnClickListener {
                 onItemClicked.invoke(item)
             }
-            languageDialogItemTextView.text = item.title
+            languageDialogItemTextView.text = item.getTitle()
         }
     }
 }

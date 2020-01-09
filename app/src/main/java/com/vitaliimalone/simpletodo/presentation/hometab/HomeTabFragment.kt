@@ -10,9 +10,9 @@ import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.domain.models.Task
 import com.vitaliimalone.simpletodo.presentation.base.BaseFragment
 import com.vitaliimalone.simpletodo.presentation.home.HomeFragmentDirections
+import com.vitaliimalone.simpletodo.presentation.home.common.HomeTab
 import com.vitaliimalone.simpletodo.presentation.hometab.common.TaskTouchHelperCallback
 import com.vitaliimalone.simpletodo.presentation.hometab.common.TasksAdapter
-import com.vitaliimalone.simpletodo.presentation.models.HomeTab
 import com.vitaliimalone.simpletodo.presentation.utils.Res
 import com.vitaliimalone.simpletodo.presentation.utils.extensions.setTextColor
 import com.vitaliimalone.simpletodo.presentation.views.DefaultDividerItemDecoration
@@ -36,14 +36,13 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.fetchTasksForHomeTab(homeTabType)
         setupClickListeners()
         setupViews()
         setupObservers()
     }
 
     private fun setupObservers() {
-        viewModel.tasksForHomeTab.observe(viewLifecycleOwner, Observer {
+        viewModel.getTasksForHomeTab(homeTabType).observe(viewLifecycleOwner, Observer {
             tasksAdapter.tasks = it
         })
     }
@@ -105,13 +104,13 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
             if (currentTab == HomeTab.values().first()) {
                 Res.string(R.string.archive)
             } else {
-                HomeTab.values()[currentTab.ordinal - 1].title
+                HomeTab.values()[currentTab.ordinal - 1].getTitle()
             }
         } else if (direction == ItemTouchHelper.RIGHT) {
             if (currentTab == HomeTab.values().last()) {
                 Res.string(R.string.archive)
             } else {
-                HomeTab.values()[currentTab.ordinal + 1].title
+                HomeTab.values()[currentTab.ordinal + 1].getTitle()
             }
         } else {
             throw IllegalArgumentException("Should be LEFT or RIGHT")

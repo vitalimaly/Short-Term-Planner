@@ -35,4 +35,7 @@
     <string name="settings_info_title">About</string>
     <string name="theme_name_pale_green">Pale green</string>
     <string name="theme_name_dark">Dark</string>
+    <string name="delete">Delete</string>
+    <string name="overdue_toolbar_title">Overdue</string>
+    <string name="snackbar_task_deleted">Task deleted</string>
 </resources>

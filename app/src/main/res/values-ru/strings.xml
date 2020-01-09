@@ -35,4 +35,7 @@
     <string name="settings_info_title">Инфо</string>
     <string name="theme_name_pale_green">Светло-зеленый</string>
     <string name="theme_name_dark">Темный</string>
+    <string name="delete">Удалить</string>
+    <string name="overdue_toolbar_title">Просроченные</string>
+    <string name="snackbar_task_deleted">Задача удалена</string>
 </resources>

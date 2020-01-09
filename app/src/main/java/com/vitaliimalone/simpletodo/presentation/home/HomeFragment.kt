@@ -6,8 +6,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.presentation.base.BaseFragment
+import com.vitaliimalone.simpletodo.presentation.home.common.HomeTab
 import com.vitaliimalone.simpletodo.presentation.home.common.HomeTabFragmentAdapter
-import com.vitaliimalone.simpletodo.presentation.models.HomeTab
 import com.vitaliimalone.simpletodo.presentation.utils.DateTimeUtils
 import com.vitaliimalone.simpletodo.presentation.utils.DialogUtils
 import com.vitaliimalone.simpletodo.presentation.utils.extensions.hideKeyboard
@@ -31,7 +31,7 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
         addFab.setOnClickListener { view ->
             showKeyboard(view)
             val currentTab = HomeTab.values()[tasksViewPager.currentItem]
-            val defaultDate = DateTimeUtils.getDateForAddNewTask(currentTab)
+            val defaultDate = DateTimeUtils.getAddNewTaskDate(currentTab)
             DialogUtils.showAddNewTaskDialog(requireContext(), defaultDate) {
                 viewModel.addNewTask(it)
                 hideKeyboard()
@@ -47,7 +47,7 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
         tasksViewPager.isUserInputEnabled = false
         tasksViewPager.adapter = HomeTabFragmentAdapter(HomeTab.values(), this)
         TabLayoutMediator(tabsTabLayout, tasksViewPager) { tab, position ->
-            tab.text = HomeTab.values()[position].title
+            tab.text = HomeTab.values()[position].getTitle()
         }.attach()
         tasksViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
@@ -59,14 +59,14 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
             }
         })
         dateRangeTextView.text =
-            DateTimeUtils.getDateForTab(HomeTab.values()[tasksViewPager.currentItem])
+            DateTimeUtils.getTabStartEndDateText(HomeTab.values()[tasksViewPager.currentItem])
     }
 
     private fun animatePageChange(position: Int) {
         val height = dateRangeTextView.height.toFloat()
         val moveUp = oldPagePosition < position
         val endAction = {
-            dateRangeTextView.text = DateTimeUtils.getDateForTab(HomeTab.values()[position])
+            dateRangeTextView.text = DateTimeUtils.getTabStartEndDateText(HomeTab.values()[position])
             dateRangeTextView.translationY = if (moveUp) height else -height
             dateRangeTextView.animate()
                 .setDuration(animationTime / 2)
