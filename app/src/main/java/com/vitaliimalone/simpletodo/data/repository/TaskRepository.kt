@@ -23,7 +23,15 @@ class TaskRepository(
         taskLocalDataSource.deleteTask(task)
     }
 
-    fun getTasksCountForPeriod(startDate: String, endDate: String): Flow<Int> {
-        return taskLocalDataSource.getTasksCountForPeriod(startDate, endDate)
+    fun getUnarchivedTasksCountForPeriod(startDate: String, endDate: String): Flow<Int> {
+        return taskLocalDataSource.getUnarchivedTasksCountForPeriod(startDate, endDate)
+    }
+
+    fun getArchivedTasksCount(): Flow<Int> {
+        return taskLocalDataSource.getArchivedTasksCount()
+    }
+
+    fun getArchivedTasks(): Flow<List<TaskEntity>> {
+        return taskLocalDataSource.getArchivedTasks()
     }
 }

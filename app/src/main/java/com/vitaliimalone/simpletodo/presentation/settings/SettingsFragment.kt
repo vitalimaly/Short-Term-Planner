@@ -41,6 +41,11 @@ class SettingsFragment : BaseFragment(R.layout.settings_fragment) {
             overdue.count = count
             settingsAdapter.notifyDataSetChanged()
         })
+        viewModel.archivedTasksCount.observe(viewLifecycleOwner, Observer { count ->
+            val archived = settingsAdapter.settings.find { it is Setting.Archive } as Setting.Archive
+            archived.count = count
+            settingsAdapter.notifyDataSetChanged()
+        })
     }
 
     private fun onSettingsClick(setting: Setting) {
@@ -56,6 +61,8 @@ class SettingsFragment : BaseFragment(R.layout.settings_fragment) {
                 findNavController().navigate(action)
             }
             is Setting.Archive -> {
+                val action = SettingsFragmentDirections.actionSettingsFragmentToArchiveFragment()
+                findNavController().navigate(action)
             }
             is Setting.Rate -> {
             }

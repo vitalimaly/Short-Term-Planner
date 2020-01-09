@@ -23,7 +23,15 @@ class TaskLocalDataSource(
         taskDao.deleteTask(taskEntity)
     }
 
-    fun getTasksCountForPeriod(startDate: String, endDate: String): Flow<Int> {
-        return taskDao.getTasksCountForPeriod(startDate, endDate)
+    fun getUnarchivedTasksCountForPeriod(startDate: String, endDate: String): Flow<Int> {
+        return taskDao.getUnarchivedTasksCountForPeriod(startDate, endDate)
+    }
+
+    fun getArchivedTasksCount(): Flow<Int> {
+        return taskDao.getArchivedTasksCount()
+    }
+
+    fun getArchivedTasks(): Flow<List<TaskEntity>> {
+        return taskDao.getArchivedTasks()
     }
 }

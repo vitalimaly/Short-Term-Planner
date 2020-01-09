@@ -6,13 +6,13 @@ import kotlinx.coroutines.flow.Flow
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.format.DateTimeFormatter
 
-class GetOverdueTasksCountUseCase(
+class GetUnarchivedOverdueTasksCountUseCase(
     private val taskRepository: TaskRepository
 ) {
-    fun getOverdueTasksCount(): Flow<Int> {
+    fun getUnarchivedOverdueTasksCount(): Flow<Int> {
         val (startDate, endDate) = DateTimeUtils.getMinDate() to OffsetDateTime.now()
         val startDateString = startDate.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
         val endDateString = endDate.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
-        return taskRepository.getTasksCountForPeriod(startDateString, endDateString)
+        return taskRepository.getUnarchivedTasksCountForPeriod(startDateString, endDateString)
     }
 }
