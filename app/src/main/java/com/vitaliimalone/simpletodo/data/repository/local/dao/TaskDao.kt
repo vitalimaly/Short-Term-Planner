@@ -11,9 +11,6 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TaskDao {
-    @Query("SELECT * FROM taskentity")
-    fun getAllTasks(): Flow<List<TaskEntity>>
-
     @Query("SELECT * FROM taskentity WHERE isArchived = 0 AND dueTo BETWEEN :startDate AND :endDate")
     fun getUnarchivedTasksForPeriod(startDate: String, endDate: String): Flow<List<TaskEntity>>
 

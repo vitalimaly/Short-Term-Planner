@@ -12,7 +12,7 @@ import org.threeten.bp.format.DateTimeFormatter
 class GetTasksForHomeTabUseCase(
     private val taskRepository: TaskRepository
 ) {
-    suspend fun getTasksForTab(homeTab: HomeTab): Flow<List<Task>> {
+    fun getTasksForTab(homeTab: HomeTab): Flow<List<Task>> {
         val (startDate, endDate) = DateTimeUtils.getTabStartEndDate(homeTab)
         val startDateString = startDate.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
         val endDateString = endDate.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)

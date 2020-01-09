@@ -12,7 +12,7 @@ import org.threeten.bp.format.DateTimeFormatter
 class GetOverdueTasksUseCase(
     private val taskRepository: TaskRepository
 ) {
-    suspend fun getOverdueTasks(): Flow<List<Task>> {
+    fun getOverdueTasks(): Flow<List<Task>> {
         val (startDate, endDate) = DateTimeUtils.getMinDate() to OffsetDateTime.now()
         val startDateString = startDate.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
         val endDateString = endDate.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
