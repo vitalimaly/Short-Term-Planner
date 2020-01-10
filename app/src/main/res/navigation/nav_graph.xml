@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_settingsFragment_to_archiveFragment"
             app:destination="@id/archiveFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_appPlayStorePage"
+            app:destination="@id/appPlayStorePage" />
     </fragment>
     <fragment
         android:id="@+id/overdueFragment"
@@ -56,4 +59,8 @@
             android:id="@+id/action_archiveFragment_to_taskDetailsFragment"
             app:destination="@id/taskDetailsFragment" />
     </fragment>
+    <activity
+        android:id="@+id/appPlayStorePage"
+        app:action="android.intent.action.VIEW"
+        app:data="@string/app_play_store_url" />
 </navigation>
