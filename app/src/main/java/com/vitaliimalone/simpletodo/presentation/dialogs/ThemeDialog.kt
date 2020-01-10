@@ -1,9 +1,10 @@
-package com.vitaliimalone.simpletodo.presentation.settings.common
+package com.vitaliimalone.simpletodo.presentation.dialogs
 
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.vitaliimalone.simpletodo.R
+import com.vitaliimalone.simpletodo.presentation.settings.common.ThemeAdapter
 import com.vitaliimalone.simpletodo.presentation.utils.ThemeUtils
 import kotlinx.android.synthetic.main.theme_dialog.*
 
