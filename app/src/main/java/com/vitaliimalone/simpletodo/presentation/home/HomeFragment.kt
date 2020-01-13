@@ -20,6 +20,14 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
     private var oldPagePosition = -1
     private val animationTime = 100L
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (isShowRateDialog()) {
+            val action = HomeFragmentDirections.actionHomeFragmentToRateDialog()
+            findNavController().navigate(action)
+        }
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupClickListeners()
@@ -83,5 +91,9 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
     }
 
     private fun setupObservers() {
+    }
+
+    private fun isShowRateDialog(): Boolean {
+        return true
     }
 }

@@ -8,4 +8,7 @@ object Pref : Preferences(Constants.PREFERENCES_NAME) {
 
     var localeCode by stringPref(defaultValue = Language.ENGLISH.getLocaleCode(), prefKey = LOCALE_CODE_KEY)
     var themeStyleResId by intPref(defaultValue = R.style.AppTheme_PaleGreen)
+    var rateAppLaunchCount by intPref()
+    var rateAppLaunchDate by stringPref()
+    var rateAppDontShow by booleanPref()
 }

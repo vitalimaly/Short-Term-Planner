@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/rounded_dialog_background"
@@ -12,7 +13,8 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/l_spacing"
         android:textSize="@dimen/l_text_size"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/rate_dialog_title" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/negativeButton"
@@ -20,7 +22,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleTextView" />
+        app:layout_constraintTop_toBottomOf="@id/titleTextView"
+        tools:text="@string/rate_dialog_negative" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/positiveButton"
@@ -28,7 +31,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleTextView" />
+        app:layout_constraintTop_toBottomOf="@id/titleTextView"
+        tools:text="@string/rate_dialog_positive" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/neutralButton"
@@ -36,6 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toStartOf="@id/positiveButton"
-        app:layout_constraintTop_toBottomOf="@id/titleTextView" />
+        app:layout_constraintTop_toBottomOf="@id/titleTextView"
+        tools:text="@string/rate_dialog_neutral" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

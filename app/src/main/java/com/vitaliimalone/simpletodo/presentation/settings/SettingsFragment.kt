@@ -3,7 +3,6 @@ package com.vitaliimalone.simpletodo.presentation.settings
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.vitaliimalone.simpletodo.NavGraphDirections
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.presentation.base.BaseFragment
 import com.vitaliimalone.simpletodo.presentation.dialogs.LanguageDialog
@@ -66,7 +65,7 @@ class SettingsFragment : BaseFragment(R.layout.settings_fragment) {
                 findNavController().navigate(action)
             }
             is Setting.Rate -> {
-                val action = NavGraphDirections.actionGlobalAppPlayStorePage()
+                val action = SettingsFragmentDirections.actionSettingsFragmentToAppPlayStorePage()
                 findNavController().navigate(action)
             }
             is Setting.Info -> {
