@@ -39,4 +39,8 @@
     <string name="overdue_toolbar_title">Overdue</string>
     <string name="snackbar_task_deleted">Task deleted</string>
     <string name="archive_toolbar_title">Archive</string>
+    <string name="rate_dialog_title">Are you enjoying our app? Please give us a review</string>
+    <string name="rate_dialog_positive">OK</string>
+    <string name="rate_dialog_negative">Never</string>
+    <string name="rate_dialog_neutral">Not now</string>
 </resources>

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/rounded_dialog_background">
+    android:background="@drawable/rounded_dialog_background"
+    android:paddingBottom="@dimen/s_spacing">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/titleTextView"
