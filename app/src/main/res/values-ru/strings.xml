@@ -39,4 +39,8 @@
     <string name="overdue_toolbar_title">Просроченные</string>
     <string name="snackbar_task_deleted">Задача удалена</string>
     <string name="archive_toolbar_title">Архив</string>
+    <string name="rate_dialog_title">Вам нравится наше приложение? Пожалуйста, оставьте свой отзыв</string>
+    <string name="rate_dialog_positive">ОК</string>
+    <string name="rate_dialog_negative">Никогда</string>
+    <string name="rate_dialog_neutral">Не сейчас</string>
 </resources>

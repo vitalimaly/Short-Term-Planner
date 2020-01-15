@@ -5,10 +5,10 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.presentation.base.BaseFragment
-import com.vitaliimalone.simpletodo.presentation.settings.common.LanguageDialog
+import com.vitaliimalone.simpletodo.presentation.dialogs.LanguageDialog
+import com.vitaliimalone.simpletodo.presentation.dialogs.ThemeDialog
 import com.vitaliimalone.simpletodo.presentation.settings.common.Setting
 import com.vitaliimalone.simpletodo.presentation.settings.common.SettingsAdapter
-import com.vitaliimalone.simpletodo.presentation.settings.common.ThemeDialog
 import com.vitaliimalone.simpletodo.presentation.utils.Res
 import kotlinx.android.synthetic.main.settings_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -65,6 +65,8 @@ class SettingsFragment : BaseFragment(R.layout.settings_fragment) {
                 findNavController().navigate(action)
             }
             is Setting.Rate -> {
+                val action = SettingsFragmentDirections.actionSettingsFragmentToAppPlayStorePage()
+                findNavController().navigate(action)
             }
             is Setting.Info -> {
             }

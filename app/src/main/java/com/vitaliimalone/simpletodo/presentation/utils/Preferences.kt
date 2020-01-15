@@ -2,8 +2,11 @@ package com.vitaliimalone.simpletodo.presentation.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.vitaliimalone.simpletodo.presentation.utils.extensions.toIsoDateTimeString
+import com.vitaliimalone.simpletodo.presentation.utils.extensions.toOffsetDateTime
 import org.koin.core.KoinComponent
 import org.koin.core.inject
+import org.threeten.bp.OffsetDateTime
 import kotlin.reflect.KProperty
 
 /**
@@ -40,21 +43,21 @@ abstract class Preferences(private val name: String? = null) : KoinComponent {
 
     fun clearListeners() = listeners.clear()
 
-    enum class StorableType {
+    protected enum class StorableType {
         String,
         Int,
         Float,
         Boolean,
         Long,
-        StringSet
+        StringSet,
+        OffsetDateTime
     }
 
-    inner class GenericPrefDelegate<T>(
+    protected inner class GenericPrefDelegate<T>(
         prefKey: String? = null,
         private val defaultValue: T,
-        val type: StorableType
-    ) :
-        PrefDelegate<T?>(prefKey) {
+        private val type: StorableType
+    ) : PrefDelegate<T?>(prefKey) {
         override fun getValue(thisRef: Any?, property: KProperty<*>): T =
             when (type) {
                 StorableType.String ->
@@ -69,6 +72,11 @@ abstract class Preferences(private val name: String? = null) : KoinComponent {
                     prefs.getLong(prefKey ?: property.name, defaultValue as Long) as T
                 StorableType.StringSet ->
                     prefs.getStringSet(prefKey ?: property.name, defaultValue as Set<String>) as T
+                StorableType.OffsetDateTime ->
+                    prefs.getString(
+                        prefKey ?: property.name,
+                        (defaultValue as OffsetDateTime).toIsoDateTimeString()
+                    )!!.toOffsetDateTime() as T
             }
 
         override fun setValue(thisRef: Any?, property: KProperty<*>, value: T?) {
@@ -94,7 +102,11 @@ abstract class Preferences(private val name: String? = null) : KoinComponent {
                     onPrefChanged(property)
                 }
                 StorableType.StringSet -> {
-                    prefs.edit().putStringSet(prefKey ?: property.name, value as Set<String>)
+                    prefs.edit().putStringSet(prefKey ?: property.name, value as Set<String>).apply()
+                    onPrefChanged(property)
+                }
+                StorableType.OffsetDateTime -> {
+                    prefs.edit().putString(prefKey ?: property.name, (value as OffsetDateTime).toIsoDateTimeString())
                         .apply()
                     onPrefChanged(property)
                 }
@@ -102,23 +114,26 @@ abstract class Preferences(private val name: String? = null) : KoinComponent {
         }
     }
 
-    fun stringPref(prefKey: String? = null, defaultValue: String = "") =
+    protected fun stringPref(prefKey: String? = null, defaultValue: String = "") =
         GenericPrefDelegate(prefKey, defaultValue, StorableType.String)
 
-    fun intPref(prefKey: String? = null, defaultValue: Int = 0) =
+    protected fun intPref(prefKey: String? = null, defaultValue: Int = 0) =
         GenericPrefDelegate(prefKey, defaultValue, StorableType.Int)
 
-    fun floatPref(prefKey: String? = null, defaultValue: Float = 0f) =
+    protected fun floatPref(prefKey: String? = null, defaultValue: Float = 0f) =
         GenericPrefDelegate(prefKey, defaultValue, StorableType.Float)
 
-    fun booleanPref(prefKey: String? = null, defaultValue: Boolean = false) =
+    protected fun booleanPref(prefKey: String? = null, defaultValue: Boolean = false) =
         GenericPrefDelegate(prefKey, defaultValue, StorableType.Boolean)
 
-    fun longPref(prefKey: String? = null, defaultValue: Long = 0L) =
+    protected fun longPref(prefKey: String? = null, defaultValue: Long = 0L) =
         GenericPrefDelegate(prefKey, defaultValue, StorableType.Long)
 
-    fun stringSetPref(prefKey: String? = null, defaultValue: Set<String> = HashSet()) =
+    protected fun stringSetPref(prefKey: String? = null, defaultValue: Set<String> = HashSet()) =
         GenericPrefDelegate(prefKey, defaultValue, StorableType.StringSet)
+
+    protected fun offsetDateTimePref(prefKey: String? = null, defaultValue: OffsetDateTime = OffsetDateTime.now()) =
+        GenericPrefDelegate(prefKey, defaultValue, StorableType.OffsetDateTime)
 
     private fun onPrefChanged(property: KProperty<*>) {
         listeners.forEach { it.onSharedPrefChanged(property) }
