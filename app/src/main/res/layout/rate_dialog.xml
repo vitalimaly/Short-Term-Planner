@@ -17,7 +17,7 @@
         tools:text="@string/rate_dialog_title" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/negativeButton"
+        android:id="@+id/neverButton"
         style="@style/BorderlessDialogButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
         tools:text="@string/rate_dialog_positive" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/neutralButton"
+        android:id="@+id/laterButton"
         style="@style/BorderlessDialogButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -1,6 +1,7 @@
 package com.vitaliimalone.simpletodo.presentation.home
 
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
@@ -22,10 +23,7 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (isShowRateDialog()) {
-            val action = HomeFragmentDirections.actionHomeFragmentToRateDialog()
-            findNavController().navigate(action)
-        }
+        viewModel.checkRateDialog()
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -91,9 +89,9 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
     }
 
     private fun setupObservers() {
-    }
-
-    private fun isShowRateDialog(): Boolean {
-        return true
+        viewModel.showRateDialogEvent.observe(viewLifecycleOwner, Observer {
+            val action = HomeFragmentDirections.actionHomeFragmentToRateDialog()
+            findNavController().navigate(action)
+        })
     }
 }

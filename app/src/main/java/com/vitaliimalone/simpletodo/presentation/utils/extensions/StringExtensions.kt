@@ -1,10 +1,11 @@
 package com.vitaliimalone.simpletodo.presentation.utils.extensions
 
-import android.text.Editable
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import androidx.annotation.ColorInt
+import org.threeten.bp.OffsetDateTime
+import org.threeten.bp.format.DateTimeFormatter
 
 fun String.setTextColor(@ColorInt color: Int): SpannableString {
     return SpannableString(this).apply {
@@ -17,7 +18,6 @@ val CharSequence?.trimmed: String
         return this?.trim()?.toString() ?: ""
     }
 
-val Editable?.trimmed: String
-    get() {
-        return this?.trim()?.toString() ?: ""
-    }
+fun String.toOffsetDateTime(): OffsetDateTime {
+    return DateTimeFormatter.ISO_OFFSET_DATE_TIME.parse(this, OffsetDateTime::from)
+}

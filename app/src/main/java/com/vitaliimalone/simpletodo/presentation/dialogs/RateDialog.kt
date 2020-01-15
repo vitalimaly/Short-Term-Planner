@@ -6,30 +6,33 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.vitaliimalone.simpletodo.R
+import com.vitaliimalone.simpletodo.presentation.utils.Pref
 import com.vitaliimalone.simpletodo.presentation.utils.Res
 import kotlinx.android.synthetic.main.rate_dialog.view.*
+import org.threeten.bp.OffsetDateTime
 
 class RateDialog : BottomSheetDialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        isCancelable = false
         return BottomSheetDialog(requireContext(), R.style.TransparentBottomSheet).apply {
-            behavior.isHideable = false
-            setCancelable(false)
             layoutInflater.inflate(R.layout.rate_dialog, null, false).apply {
                 titleTextView.text = Res.string(R.string.rate_dialog_title)
                 positiveButton.text = Res.string(R.string.rate_dialog_positive)
-                negativeButton.text = Res.string(R.string.rate_dialog_negative)
-                neutralButton.text = Res.string(R.string.rate_dialog_neutral)
+                neverButton.text = Res.string(R.string.rate_dialog_negative)
+                laterButton.text = Res.string(R.string.rate_dialog_neutral)
                 positiveButton.setOnClickListener {
+                    Pref.rateAppDontShow = true
                     val action = RateDialogDirections.actionRateDialogToAppPlayStorePage()
                     findNavController().navigate(action)
                     findNavController().popBackStack()
                 }
-                negativeButton.setOnClickListener {
-
+                neverButton.setOnClickListener {
+                    Pref.rateAppDontShow = true
                     findNavController().popBackStack()
                 }
-                neutralButton.setOnClickListener {
-
+                laterButton.setOnClickListener {
+                    Pref.rateAppLaunchCount = 0
+                    Pref.rateAppLaunchDateTime = OffsetDateTime.now()
                     findNavController().popBackStack()
                 }
                 setContentView(this)
