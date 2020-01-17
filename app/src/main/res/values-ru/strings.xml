@@ -32,7 +32,7 @@
     <string name="settings_archive_title">Архив</string>
     <string name="settings_archive_subtitle">%d архивированных задач</string>
     <string name="settings_rate_title">Оценить</string>
-    <string name="settings_info_title">Инфо</string>
+    <string name="settings_about_title">Инфо</string>
     <string name="theme_name_pale_green">Светло-зеленый</string>
     <string name="theme_name_dark">Темный</string>
     <string name="delete">Удалить</string>
@@ -43,4 +43,8 @@
     <string name="rate_dialog_positive">ОК</string>
     <string name="rate_dialog_negative">Никогда</string>
     <string name="rate_dialog_neutral">Не сейчас</string>
+    <string name="about_title">О приложении</string>
+    <string name="about_version">Версия %s</string>
+    <string name="about_contact">Электронная почта app@example.com</string>
+    <string name="about_privacy_policy">Политика конфиденциальности</string>
 </resources>

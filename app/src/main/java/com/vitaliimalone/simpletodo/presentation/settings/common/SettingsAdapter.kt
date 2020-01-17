@@ -18,7 +18,7 @@ class SettingsAdapter(
         Setting.Overdue,
         Setting.Archive,
         Setting.Rate,
-        Setting.Info
+        Setting.About
     )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SettingsViewHolder {
