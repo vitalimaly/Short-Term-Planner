@@ -32,7 +32,7 @@
     <string name="settings_archive_title">Archive</string>
     <string name="settings_archive_subtitle">%d archived tasks</string>
     <string name="settings_rate_title">Rate</string>
-    <string name="settings_info_title">About</string>
+    <string name="settings_about_title">About</string>
     <string name="theme_name_pale_green">Pale green</string>
     <string name="theme_name_dark">Dark</string>
     <string name="delete">Delete</string>
@@ -43,4 +43,8 @@
     <string name="rate_dialog_positive">OK</string>
     <string name="rate_dialog_negative">Never</string>
     <string name="rate_dialog_neutral">Not now</string>
+    <string name="about_title">About</string>
+    <string name="about_version">Version %s</string>
+    <string name="about_contact">Contact email app@example.com</string>
+    <string name="about_privacy_policy">Privacy policy</string>
 </resources>

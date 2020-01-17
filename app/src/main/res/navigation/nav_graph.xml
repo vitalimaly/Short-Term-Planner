@@ -7,7 +7,6 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.vitaliimalone.simpletodo.presentation.home.HomeFragment"
-        android:label="HomeFragment"
         tools:layout="@layout/home_fragment">
         <action
             android:id="@+id/action_homeFragment_to_taskDetailsFragment"
@@ -22,7 +21,6 @@
     <fragment
         android:id="@+id/taskDetailsFragment"
         android:name="com.vitaliimalone.simpletodo.presentation.taskdetails.TaskDetailsFragment"
-        android:label="TaskDetailsFragment"
         tools:layout="@layout/task_details_fragment">
         <argument
             android:name="task"
@@ -31,7 +29,6 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.vitaliimalone.simpletodo.presentation.settings.SettingsFragment"
-        android:label="SettingsFragment"
         tools:layout="@layout/settings_fragment">
         <action
             android:id="@+id/action_settingsFragment_to_overdueFragment"
@@ -42,11 +39,13 @@
         <action
             android:id="@+id/action_settingsFragment_to_appPlayStorePage"
             app:destination="@id/appPlayStorePage" />
+        <action
+            android:id="@+id/action_settingsFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
     </fragment>
     <fragment
         android:id="@+id/overdueFragment"
         android:name="com.vitaliimalone.simpletodo.presentation.overdue.OverdueFragment"
-        android:label="OverdueFragment"
         tools:layout="@layout/overdue_fragment">
         <action
             android:id="@+id/action_overdueFragment_to_taskDetailsFragment"
@@ -55,7 +54,6 @@
     <fragment
         android:id="@+id/archiveFragment"
         android:name="com.vitaliimalone.simpletodo.presentation.archive.ArchiveFragment"
-        android:label="ArchiveFragment"
         tools:layout="@layout/archive_fragment">
         <action
             android:id="@+id/action_archiveFragment_to_taskDetailsFragment"
@@ -68,11 +66,13 @@
     <dialog
         android:id="@+id/rateDialog"
         android:name="com.vitaliimalone.simpletodo.presentation.dialogs.RateDialog"
-        android:label="RateDialog"
         tools:layout="@layout/rate_dialog">
         <action
             android:id="@+id/action_rateDialog_to_appPlayStorePage"
             app:destination="@id/appPlayStorePage" />
     </dialog>
-
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.vitaliimalone.simpletodo.presentation.about.AboutFragment"
+        tools:layout="@layout/about_fragment" />
 </navigation>

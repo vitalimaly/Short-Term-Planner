@@ -45,8 +45,8 @@ sealed class Setting {
         override fun getIcon(context: Context) = Res.drawable(context, R.drawable.ic_star)
     }
 
-    object Info : Setting() {
-        override fun getTitle() = Res.string(R.string.settings_info_title)
-        override fun getIcon(context: Context) = Res.drawable(context, R.drawable.ic_info)
+    object About : Setting() {
+        override fun getTitle() = Res.string(R.string.settings_about_title)
+        override fun getIcon(context: Context) = Res.drawable(context, R.drawable.ic_about)
     }
 }

@@ -68,7 +68,9 @@ class SettingsFragment : BaseFragment(R.layout.settings_fragment) {
                 val action = SettingsFragmentDirections.actionSettingsFragmentToAppPlayStorePage()
                 findNavController().navigate(action)
             }
-            is Setting.Info -> {
+            is Setting.About -> {
+                val action = SettingsFragmentDirections.actionSettingsFragmentToAboutFragment()
+                findNavController().navigate(action)
             }
         }
     }
