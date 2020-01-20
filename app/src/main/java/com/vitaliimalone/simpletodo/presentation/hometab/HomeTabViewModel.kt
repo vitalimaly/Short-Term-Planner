@@ -9,6 +9,7 @@ import com.vitaliimalone.simpletodo.domain.usecases.UpdateTaskUseCase
 import com.vitaliimalone.simpletodo.presentation.home.common.HomeTab
 import com.vitaliimalone.simpletodo.presentation.utils.DateTimeUtils
 import kotlinx.coroutines.launch
+import org.threeten.bp.OffsetDateTime
 
 class HomeTabViewModel(
     private val getTasksForHomeTabUseCase: GetTasksForHomeTabUseCase,
@@ -66,5 +67,10 @@ class HomeTabViewModel(
         lastSwipedTask?.let {
             updateTask(it)
         }
+    }
+
+    fun updateTaskDueDate(task: Task, dueDate: OffsetDateTime) {
+        task.dueTo = dueDate
+        updateTask(task)
     }
 }

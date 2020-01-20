@@ -1,4 +1,4 @@
-package com.vitaliimalone.simpletodo.presentation.views.duedatepopup
+package com.vitaliimalone.simpletodo.presentation.popups.duedatepopup
 
 import android.content.Context
 import android.view.Gravity

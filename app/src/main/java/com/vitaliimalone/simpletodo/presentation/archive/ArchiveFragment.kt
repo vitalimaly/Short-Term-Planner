@@ -1,6 +1,7 @@
 package com.vitaliimalone.simpletodo.presentation.archive
 
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -10,6 +11,7 @@ import com.vitaliimalone.simpletodo.domain.models.Task
 import com.vitaliimalone.simpletodo.presentation.base.BaseFragment
 import com.vitaliimalone.simpletodo.presentation.hometab.common.TaskTouchHelperCallback
 import com.vitaliimalone.simpletodo.presentation.hometab.common.TasksAdapter
+import com.vitaliimalone.simpletodo.presentation.popups.duedatepopup.DueDatePopup
 import com.vitaliimalone.simpletodo.presentation.utils.Res
 import com.vitaliimalone.simpletodo.presentation.views.DefaultDividerItemDecoration
 import kotlinx.android.synthetic.main.archive_fragment.*
@@ -17,7 +19,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ArchiveFragment : BaseFragment(R.layout.archive_fragment) {
     private val viewModel: ArchiveViewModel by viewModel()
-    private val tasksAdapter by lazy { TasksAdapter(::onTaskClicked) }
+    private val tasksAdapter by lazy { TasksAdapter(::onTaskClicked, ::onTaskLongClick) }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -76,5 +78,11 @@ class ArchiveFragment : BaseFragment(R.layout.archive_fragment) {
     private fun onTaskClicked(task: Task) {
         val action = ArchiveFragmentDirections.actionArchiveFragmentToTaskDetailsFragment(task)
         findNavController().navigate(action)
+    }
+
+    private fun onTaskLongClick(task: Task, anchorView: View) {
+        DueDatePopup(requireContext(), anchorView, task.dueTo) { pickedDate ->
+            viewModel.updateTaskDueDate(task, pickedDate)
+        }
     }
 }

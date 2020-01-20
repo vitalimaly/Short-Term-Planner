@@ -9,11 +9,11 @@ import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.domain.models.Task
+import com.vitaliimalone.simpletodo.presentation.popups.duedatepopup.DueDatePopup
 import com.vitaliimalone.simpletodo.presentation.utils.extensions.fragmentManager
 import com.vitaliimalone.simpletodo.presentation.utils.extensions.hideKeyboard
 import com.vitaliimalone.simpletodo.presentation.utils.extensions.setEnabledWithAlpha
 import com.vitaliimalone.simpletodo.presentation.utils.extensions.trimmed
-import com.vitaliimalone.simpletodo.presentation.views.duedatepopup.DueDatePopup
 import kotlinx.android.synthetic.main.add_new_task_dialog.view.*
 import kotlinx.android.synthetic.main.delete_task_dialog.view.*
 import org.threeten.bp.Instant

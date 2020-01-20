@@ -1,4 +1,4 @@
-package com.vitaliimalone.simpletodo.presentation.views.duedatepopup
+package com.vitaliimalone.simpletodo.presentation.popups.duedatepopup
 
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.presentation.utils.DateTimeUtils

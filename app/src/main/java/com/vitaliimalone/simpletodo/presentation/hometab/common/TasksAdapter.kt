@@ -11,7 +11,10 @@ import com.vitaliimalone.simpletodo.presentation.utils.DateTimeUtils
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.tasks_list_item.*
 
-class TasksAdapter(private val onTaskClicked: ((Task) -> Unit)) : RecyclerView.Adapter<TasksAdapter.TaskViewHolder>() {
+class TasksAdapter(
+    private val onTaskClick: ((Task) -> Unit),
+    private val onTaskLongClick: ((Task, View) -> Unit)
+) : RecyclerView.Adapter<TasksAdapter.TaskViewHolder>() {
     var tasks = listOf<Task>()
         set(value) {
             field = value
@@ -40,7 +43,11 @@ class TasksAdapter(private val onTaskClicked: ((Task) -> Unit)) : RecyclerView.A
             tagsTextView.isVisible = task.tags.isNotEmpty()
             tagsTextView.text = task.tags.joinToString()
             containerView.setOnClickListener {
-                onTaskClicked.invoke(task)
+                onTaskClick.invoke(task)
+            }
+            containerView.setOnLongClickListener {
+                onTaskLongClick.invoke(task, it)
+                true
             }
         }
     }
