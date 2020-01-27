@@ -1,6 +1,7 @@
 package com.vitaliimalone.simpletodo.presentation.utils
 
 import android.content.Context
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.inputmethod.EditorInfo
 import androidx.core.widget.addTextChangedListener
@@ -13,6 +14,7 @@ import com.vitaliimalone.simpletodo.presentation.popups.duedatepopup.DueDatePopu
 import com.vitaliimalone.simpletodo.presentation.utils.extensions.fragmentManager
 import com.vitaliimalone.simpletodo.presentation.utils.extensions.hideKeyboard
 import com.vitaliimalone.simpletodo.presentation.utils.extensions.setEnabledWithAlpha
+import com.vitaliimalone.simpletodo.presentation.utils.extensions.setOnClickListenerWithPoint
 import com.vitaliimalone.simpletodo.presentation.utils.extensions.trimmed
 import kotlinx.android.synthetic.main.add_new_task_dialog.view.*
 import kotlinx.android.synthetic.main.delete_task_dialog.view.*
@@ -53,11 +55,13 @@ object DialogUtils {
                 }
             }
             dueDateTextView.text = Res.string(R.string.due_to_date, DateTimeUtils.getTaskDueDateText(task.dueTo))
-            dueDateTextView.setOnClickListener {
-                DueDatePopup(context, it, task.dueTo) { pickedDate ->
+            dueDateTextView.setOnClickListenerWithPoint {
+                DueDatePopup(context, task.dueTo) { pickedDate ->
                     task.dueTo = pickedDate
                     dueDateTextView.text =
                         Res.string(R.string.due_to_date, DateTimeUtils.getTaskDueDateText(task.dueTo))
+                }.run {
+                    showAtLocation(dueDateTextView, Gravity.NO_GRAVITY, it.x, it.y)
                 }
             }
         }

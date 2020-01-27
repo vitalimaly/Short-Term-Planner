@@ -1,7 +1,8 @@
 package com.vitaliimalone.simpletodo.presentation.overdue
 
+import android.graphics.Point
 import android.os.Bundle
-import android.view.View
+import android.view.Gravity
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -81,9 +82,11 @@ class OverdueFragment : BaseFragment(R.layout.overdue_fragment) {
         findNavController().navigate(action)
     }
 
-    private fun onTaskLongClick(task: Task, anchorView: View) {
-        DueDatePopup(requireContext(), anchorView, task.dueTo) { pickedDate ->
+    private fun onTaskLongClick(task: Task, coordinates: Point) {
+        DueDatePopup(requireContext(), task.dueTo) { pickedDate ->
             viewModel.updateTaskDueDate(task, pickedDate)
+        }.run {
+            showAtLocation(requireView(), Gravity.NO_GRAVITY, coordinates.x, coordinates.y)
         }
     }
 }

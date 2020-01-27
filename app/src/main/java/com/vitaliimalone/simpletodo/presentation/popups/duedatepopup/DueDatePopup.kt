@@ -1,11 +1,10 @@
 package com.vitaliimalone.simpletodo.presentation.popups.duedatepopup
 
 import android.content.Context
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.view.WindowManager
 import android.widget.PopupWindow
-import com.google.android.material.textview.MaterialTextView
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.presentation.home.common.HomeTab
 import com.vitaliimalone.simpletodo.presentation.utils.DateTimeUtils
@@ -17,18 +16,17 @@ import org.threeten.bp.OffsetDateTime
 
 class DueDatePopup(
     context: Context,
-    private val anchorView: View,
     private val currentDate: OffsetDateTime,
     private val onDatePicked: ((OffsetDateTime) -> Unit)
-) : PopupWindow(context) {
-    private val screenPosition = IntArray(2)
-
+) : PopupWindow(
+    LayoutInflater.from(context).inflate(R.layout.due_date_popup, null, false),
+    WindowManager.LayoutParams.WRAP_CONTENT,
+    WindowManager.LayoutParams.WRAP_CONTENT,
+    true
+) {
     init {
-        anchorView.getLocationOnScreen(screenPosition)
-        screenPosition[0] += getAdditionalStartPadding(anchorView)
-        isFocusable = true
         isOutsideTouchable = false
-        contentView = LayoutInflater.from(context).inflate(R.layout.due_date_popup, null, false)
+        elevation = Res.dimen(context, R.dimen.default_popup_window_elevation)
     }
 
     override fun setContentView(contentView: View?) {
@@ -64,14 +62,5 @@ class DueDatePopup(
                 }
             }
         }
-        showAtLocation(anchorView, Gravity.NO_GRAVITY, screenPosition[0], screenPosition[1])
-    }
-
-    private fun getAdditionalStartPadding(anchorView: View): Int {
-        var drawableWidth = 0
-        if (anchorView is MaterialTextView) {
-            drawableWidth = anchorView.compoundDrawables[0]?.intrinsicWidth ?: 0 + anchorView.compoundDrawablePadding
-        }
-        return drawableWidth + anchorView.paddingStart
     }
 }

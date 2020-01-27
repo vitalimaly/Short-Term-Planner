@@ -1,7 +1,8 @@
 package com.vitaliimalone.simpletodo.presentation.hometab
 
+import android.graphics.Point
 import android.os.Bundle
-import android.view.View
+import android.view.Gravity
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -57,9 +58,11 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
         findNavController().navigate(action)
     }
 
-    private fun onTaskLongClick(task: Task, anchorView: View) {
-        DueDatePopup(requireContext(), anchorView, task.dueTo) { pickedDate ->
+    private fun onTaskLongClick(task: Task, coordinates: Point) {
+        DueDatePopup(requireContext(), task.dueTo) { pickedDate ->
             viewModel.updateTaskDueDate(task, pickedDate)
+        }.run {
+            showAtLocation(requireView(), Gravity.NO_GRAVITY, coordinates.x, coordinates.y)
         }
     }
 

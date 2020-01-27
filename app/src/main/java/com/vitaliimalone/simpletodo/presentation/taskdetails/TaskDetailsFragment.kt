@@ -2,6 +2,7 @@ package com.vitaliimalone.simpletodo.presentation.taskdetails
 
 import android.os.Bundle
 import android.text.InputType
+import android.view.Gravity
 import android.view.MotionEvent
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
@@ -17,6 +18,7 @@ import com.vitaliimalone.simpletodo.presentation.utils.DateTimeUtils
 import com.vitaliimalone.simpletodo.presentation.utils.DialogUtils
 import com.vitaliimalone.simpletodo.presentation.utils.Res
 import com.vitaliimalone.simpletodo.presentation.utils.extensions.clearFocusOnDoneClick
+import com.vitaliimalone.simpletodo.presentation.utils.extensions.setOnClickListenerWithPoint
 import com.vitaliimalone.simpletodo.presentation.utils.extensions.trimmed
 import kotlinx.android.synthetic.main.task_details_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -87,10 +89,12 @@ class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
         noteEditText.addTextChangedListener {
             task.description = it.trimmed
         }
-        dueClickableView.setOnClickListener {
-            DueDatePopup(requireContext(), dueTextView, task.dueTo) {
+        dueClickableView.setOnClickListenerWithPoint {
+            DueDatePopup(requireContext(), task.dueTo) {
                 task.dueTo = it
                 updateTaskDueDate(it)
+            }.run {
+                showAtLocation(dueClickableView, Gravity.NO_GRAVITY, it.x, it.y)
             }
         }
         drawSubtasksBotLine()

@@ -16,14 +16,19 @@ class StripedRecyclerView @JvmOverloads constructor(
         color = Res.color(context, R.attr.themeDividerColor)
         strokeWidth = round(Res.dimen(context, R.dimen.default_divider_height))
     }
-    private val defaultItemHeight = (Res.dimen(context, R.dimen.home_task_item_min_height))
+    private val defaultItemHeight = Res.dimen(context, R.dimen.home_task_item_min_height)
     private val dividerMargin = Res.dimen(context, R.dimen.home_divider_margin)
 
-    override fun onDraw(canvas: Canvas) {
-        var y = computeVerticalScrollRange() + defaultItemHeight
-        while (y < height) {
-            canvas.drawLine(dividerMargin, y, width - dividerMargin, y, paint)
+    override fun onDraw(canvas: Canvas?) {
+        var y = computeVerticalScrollRange().toFloat()
+        if (childCount == 0) {
             y += defaultItemHeight
+        }
+        while (y < height) {
+            canvas?.let {
+                it.drawLine(dividerMargin, y, width - dividerMargin, y, paint)
+                y += defaultItemHeight
+            }
         }
         super.onDraw(canvas)
     }
