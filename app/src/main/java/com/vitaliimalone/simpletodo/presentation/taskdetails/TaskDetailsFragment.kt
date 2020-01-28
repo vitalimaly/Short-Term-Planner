@@ -2,6 +2,7 @@ package com.vitaliimalone.simpletodo.presentation.taskdetails
 
 import android.os.Bundle
 import android.text.InputType
+import android.view.Gravity
 import android.view.MotionEvent
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
@@ -11,13 +12,14 @@ import androidx.navigation.fragment.navArgs
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.domain.models.Task
 import com.vitaliimalone.simpletodo.presentation.base.BaseFragment
+import com.vitaliimalone.simpletodo.presentation.popups.duedatepopup.DueDatePopup
 import com.vitaliimalone.simpletodo.presentation.taskdetails.common.SubtasksAdapter
 import com.vitaliimalone.simpletodo.presentation.utils.DateTimeUtils
 import com.vitaliimalone.simpletodo.presentation.utils.DialogUtils
 import com.vitaliimalone.simpletodo.presentation.utils.Res
 import com.vitaliimalone.simpletodo.presentation.utils.extensions.clearFocusOnDoneClick
+import com.vitaliimalone.simpletodo.presentation.utils.extensions.setOnClickListenerWithPoint
 import com.vitaliimalone.simpletodo.presentation.utils.extensions.trimmed
-import com.vitaliimalone.simpletodo.presentation.views.duedatepopup.DueDatePopup
 import kotlinx.android.synthetic.main.task_details_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.threeten.bp.OffsetDateTime
@@ -87,10 +89,12 @@ class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
         noteEditText.addTextChangedListener {
             task.description = it.trimmed
         }
-        dueClickableView.setOnClickListener {
-            DueDatePopup(requireContext(), dueTextView, task.dueTo) {
+        dueClickableView.setOnClickListenerWithPoint {
+            DueDatePopup(requireContext(), task.dueTo) {
                 task.dueTo = it
                 updateTaskDueDate(it)
+            }.run {
+                showAtLocation(dueClickableView, Gravity.NO_GRAVITY, it.x, it.y)
             }
         }
         drawSubtasksBotLine()

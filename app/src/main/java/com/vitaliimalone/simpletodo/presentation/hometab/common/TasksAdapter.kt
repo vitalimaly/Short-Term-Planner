@@ -1,5 +1,6 @@
 package com.vitaliimalone.simpletodo.presentation.hometab.common
 
+import android.graphics.Point
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,10 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.domain.models.Task
 import com.vitaliimalone.simpletodo.presentation.utils.DateTimeUtils
+import com.vitaliimalone.simpletodo.presentation.utils.extensions.setOnLongClickListenerWithPoint
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.tasks_list_item.*
 
-class TasksAdapter(private val onTaskClicked: ((Task) -> Unit)) : RecyclerView.Adapter<TasksAdapter.TaskViewHolder>() {
+class TasksAdapter(
+    private val onTaskClick: ((Task) -> Unit),
+    private val onTaskLongClick: ((Task, Point) -> Unit)
+) : RecyclerView.Adapter<TasksAdapter.TaskViewHolder>() {
     var tasks = listOf<Task>()
         set(value) {
             field = value
@@ -31,8 +36,9 @@ class TasksAdapter(private val onTaskClicked: ((Task) -> Unit)) : RecyclerView.A
         return tasks.size
     }
 
-    inner class TaskViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView),
-        LayoutContainer {
+    inner class TaskViewHolder(
+        override val containerView: View
+    ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
         fun bind(task: Task) {
             titleTextView.text = task.title
             doneCheckBox.isChecked = task.isDone
@@ -40,7 +46,10 @@ class TasksAdapter(private val onTaskClicked: ((Task) -> Unit)) : RecyclerView.A
             tagsTextView.isVisible = task.tags.isNotEmpty()
             tagsTextView.text = task.tags.joinToString()
             containerView.setOnClickListener {
-                onTaskClicked.invoke(task)
+                onTaskClick.invoke(task)
+            }
+            containerView.setOnLongClickListenerWithPoint {
+                onTaskLongClick.invoke(task, it)
             }
         }
     }

@@ -1,6 +1,8 @@
 package com.vitaliimalone.simpletodo.presentation.hometab
 
+import android.graphics.Point
 import android.os.Bundle
+import android.view.Gravity
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -13,6 +15,7 @@ import com.vitaliimalone.simpletodo.presentation.home.HomeFragmentDirections
 import com.vitaliimalone.simpletodo.presentation.home.common.HomeTab
 import com.vitaliimalone.simpletodo.presentation.hometab.common.TaskTouchHelperCallback
 import com.vitaliimalone.simpletodo.presentation.hometab.common.TasksAdapter
+import com.vitaliimalone.simpletodo.presentation.popups.duedatepopup.DueDatePopup
 import com.vitaliimalone.simpletodo.presentation.utils.Res
 import com.vitaliimalone.simpletodo.presentation.utils.extensions.setTextColor
 import com.vitaliimalone.simpletodo.presentation.views.DefaultDividerItemDecoration
@@ -31,7 +34,7 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
     }
 
     private val viewModel: HomeTabViewModel by viewModel()
-    private val tasksAdapter by lazy { TasksAdapter(::onTaskClicked) }
+    private val tasksAdapter by lazy { TasksAdapter(::onTaskClick, ::onTaskLongClick) }
     private val homeTabType by lazy { HomeTab.valueOf(requireArguments().getString(ARG_HOME_TAB_TYPE)!!) }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -50,9 +53,17 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
     private fun setupClickListeners() {
     }
 
-    private fun onTaskClicked(task: Task) {
+    private fun onTaskClick(task: Task) {
         val action = HomeFragmentDirections.actionHomeFragmentToTaskDetailsFragment(task)
         findNavController().navigate(action)
+    }
+
+    private fun onTaskLongClick(task: Task, coordinates: Point) {
+        DueDatePopup(requireContext(), task.dueTo) { pickedDate ->
+            viewModel.updateTaskDueDate(task, pickedDate)
+        }.run {
+            showAtLocation(requireView(), Gravity.NO_GRAVITY, coordinates.x, coordinates.y)
+        }
     }
 
     private fun setupViews() {

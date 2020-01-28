@@ -47,4 +47,6 @@
     <dimen name="settings_theme_color_square_size">30dp</dimen>
     <dimen name="settings_theme_text_placeholder_corner_radius">3dp</dimen>
     <dimen name="settings_theme_text_placeholder_margin">10dp</dimen>
+
+    <dimen name="default_popup_window_elevation">8dp</dimen>
 </resources>
