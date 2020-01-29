@@ -31,4 +31,7 @@ interface TaskDao {
 
     @Query("SELECT * FROM taskentity WHERE isArchived = 1")
     fun getArchivedTasks(): Flow<List<TaskEntity>>
+
+    @Query("DELETE FROM taskentity WHERE isArchived = 1")
+    suspend fun deleteArchivedTasks()
 }

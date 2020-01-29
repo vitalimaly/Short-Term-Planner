@@ -47,4 +47,5 @@
     <string name="about_version">Версия %s</string>
     <string name="about_contact">Электронная почта app@example.com</string>
     <string name="about_privacy_policy">Политика конфиденциальности</string>
+    <string name="clear_all">Очистить всё</string>
 </resources>

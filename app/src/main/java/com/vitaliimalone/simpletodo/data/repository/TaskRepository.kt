@@ -34,4 +34,8 @@ class TaskRepository(
     fun getArchivedTasks(): Flow<List<TaskEntity>> {
         return taskLocalDataSource.getArchivedTasks()
     }
+
+    suspend fun deleteArchivedTasks() {
+        taskLocalDataSource.deleteArchivedTasks()
+    }
 }

@@ -34,4 +34,8 @@ class TaskLocalDataSource(
     fun getArchivedTasks(): Flow<List<TaskEntity>> {
         return taskDao.getArchivedTasks()
     }
+
+    suspend fun deleteArchivedTasks() {
+        taskDao.deleteArchivedTasks()
+    }
 }
