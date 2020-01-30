@@ -54,6 +54,8 @@
         android:id="@+id/themeStartRadioButton"
         android:layout_width="@dimen/settings_theme_color_square_size"
         android:layout_height="@dimen/settings_theme_color_square_size"
+        android:clickable="false"
+        android:focusable="false"
         app:layout_constraintStart_toStartOf="@id/themeColorPrimaryVariantView"
         app:layout_constraintTop_toTopOf="@id/themeColorPrimaryVariantView" />
 
@@ -61,6 +63,8 @@
         android:id="@+id/themeEndRadioButton"
         android:layout_width="@dimen/settings_theme_color_square_size"
         android:layout_height="@dimen/settings_theme_color_square_size"
+        android:clickable="false"
+        android:focusable="false"
         app:layout_constraintStart_toStartOf="@id/themeColorSecondaryVariantView"
         app:layout_constraintTop_toTopOf="@id/themeColorSecondaryVariantView" />
 
