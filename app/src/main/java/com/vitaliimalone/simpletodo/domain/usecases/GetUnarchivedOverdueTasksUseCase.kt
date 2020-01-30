@@ -6,14 +6,13 @@ import com.vitaliimalone.simpletodo.domain.models.Task
 import com.vitaliimalone.simpletodo.presentation.utils.DateTimeUtils
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.format.DateTimeFormatter
 
-class GetOverdueTasksUseCase(
+class GetUnarchivedOverdueTasksUseCase(
     private val taskRepository: TaskRepository
 ) {
-    fun getOverdueTasks(): Flow<List<Task>> {
-        val (startDate, endDate) = DateTimeUtils.getMinDate() to OffsetDateTime.now()
+    fun getUnarchivedOverdueTasks(): Flow<List<Task>> {
+        val (startDate, endDate) = DateTimeUtils.getMinDate() to DateTimeUtils.getPreviousDayEndDate()
         val startDateString = startDate.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
         val endDateString = endDate.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME)
         return taskRepository.getUnarchivedTasksForPeriod(startDateString, endDateString)

@@ -31,6 +31,7 @@ class ArchiveFragment : BaseFragment(R.layout.archive_fragment) {
 
     private fun setupViews() {
         toolbar.title = Res.string(R.string.archive_toolbar_title)
+        clearAllTextView.text = Res.string(R.string.clear_all)
         archiveRecyclerView.adapter = tasksAdapter
         archiveRecyclerView.addItemDecoration(
             DefaultDividerItemDecoration(
@@ -68,6 +69,7 @@ class ArchiveFragment : BaseFragment(R.layout.archive_fragment) {
 
     private fun setupClickListeners() {
         toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
+        clearAllTextView.setOnClickListener { viewModel.deleteAllArchivedTasks() }
     }
 
     private fun setupObservers() {
