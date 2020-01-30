@@ -37,6 +37,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/subtask_checkbox_margin_top"
         android:button="@drawable/selector_done"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
         app:layout_constraintStart_toEndOf="@id/horizontalLineView"
         app:layout_constraintTop_toTopOf="parent"
         app:useMaterialThemeColors="false" />
