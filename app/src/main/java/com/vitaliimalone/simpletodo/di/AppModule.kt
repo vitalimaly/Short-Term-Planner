@@ -30,7 +30,7 @@ private val presentation = module {
     viewModel { HomeTabViewModel(get(), get()) }
     viewModel { TaskDetailsViewModel(get(), get()) }
     viewModel { SettingsViewModel(get(), get()) }
-    viewModel { OverdueViewModel(get(), get(), get(), get(), get()) }
+    viewModel { OverdueViewModel(get(), get(), get()) }
     viewModel { ArchiveViewModel(get(), get(), get(), get(), get()) }
 }
 private val domain = module {
