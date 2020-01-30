@@ -44,8 +44,8 @@ class OverdueFragment : BaseFragment(R.layout.overdue_fragment) {
             TaskTouchHelperCallback(
                 requireContext(),
                 { position, _ -> onTabSwipe(position) },
-                Res.string(R.string.delete),
-                Res.string(R.string.delete),
+                Res.string(R.string.archive),
+                Res.string(R.string.archive),
                 Res.color(requireContext(), R.attr.themeColorError),
                 Res.color(requireContext(), R.attr.themeColorError)
             )
@@ -55,14 +55,14 @@ class OverdueFragment : BaseFragment(R.layout.overdue_fragment) {
 
     private fun onTabSwipe(position: Int) {
         val swipedTask = tasksAdapter.tasks[position]
-        viewModel.deleteTask(swipedTask)
+        viewModel.archiveTask(swipedTask)
         val swipedSnackbar = Snackbar.make(
             overdueRecyclerView,
-            Res.string(R.string.snackbar_task_deleted),
+            Res.string(R.string.snackbar_task_archived),
             Snackbar.LENGTH_LONG
         )
         swipedSnackbar.setAction(Res.string(R.string.snackbar_undo)) {
-            viewModel.undoDelete()
+            viewModel.undoArchive()
         }
         swipedSnackbar.show()
 
