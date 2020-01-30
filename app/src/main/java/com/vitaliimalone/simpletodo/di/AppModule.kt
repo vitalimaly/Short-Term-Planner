@@ -6,12 +6,13 @@ import com.vitaliimalone.simpletodo.data.repository.local.TaskLocalDataSource
 import com.vitaliimalone.simpletodo.data.repository.local.database.TasksDatabase
 import com.vitaliimalone.simpletodo.domain.usecases.AddTaskUseCase
 import com.vitaliimalone.simpletodo.domain.usecases.DeleteArchivedTasksUseCase
+import com.vitaliimalone.simpletodo.domain.usecases.DeleteOverdueTasksUseCase
 import com.vitaliimalone.simpletodo.domain.usecases.DeleteTaskUseCase
 import com.vitaliimalone.simpletodo.domain.usecases.GetArchivedTasksCountUseCase
 import com.vitaliimalone.simpletodo.domain.usecases.GetArchivedTasksUseCase
-import com.vitaliimalone.simpletodo.domain.usecases.GetOverdueTasksUseCase
 import com.vitaliimalone.simpletodo.domain.usecases.GetTasksForHomeTabUseCase
 import com.vitaliimalone.simpletodo.domain.usecases.GetUnarchivedOverdueTasksCountUseCase
+import com.vitaliimalone.simpletodo.domain.usecases.GetUnarchivedOverdueTasksUseCase
 import com.vitaliimalone.simpletodo.domain.usecases.UpdateTaskUseCase
 import com.vitaliimalone.simpletodo.presentation.archive.ArchiveViewModel
 import com.vitaliimalone.simpletodo.presentation.home.HomeViewModel
@@ -29,7 +30,7 @@ private val presentation = module {
     viewModel { HomeTabViewModel(get(), get()) }
     viewModel { TaskDetailsViewModel(get(), get()) }
     viewModel { SettingsViewModel(get(), get()) }
-    viewModel { OverdueViewModel(get(), get(), get(), get()) }
+    viewModel { OverdueViewModel(get(), get(), get(), get(), get()) }
     viewModel { ArchiveViewModel(get(), get(), get(), get(), get()) }
 }
 private val domain = module {
@@ -37,11 +38,12 @@ private val domain = module {
     single { UpdateTaskUseCase(get()) }
     single { GetTasksForHomeTabUseCase(get()) }
     single { DeleteTaskUseCase(get()) }
-    single { GetOverdueTasksUseCase(get()) }
+    single { GetUnarchivedOverdueTasksUseCase(get()) }
     single { GetUnarchivedOverdueTasksCountUseCase(get()) }
     single { GetArchivedTasksUseCase(get()) }
     single { GetArchivedTasksCountUseCase(get()) }
     single { DeleteArchivedTasksUseCase(get()) }
+    single { DeleteOverdueTasksUseCase(get()) }
 }
 private val data = module {
     single { TaskRepository(get()) }

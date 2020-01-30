@@ -38,4 +38,8 @@ class TaskLocalDataSource(
     suspend fun deleteArchivedTasks() {
         taskDao.deleteArchivedTasks()
     }
+
+    suspend fun deleteUnarchivedTasksForPeriod(startDate: String, endDate: String) {
+        taskDao.deleteUnarchivedTasksForPeriod(startDate, endDate)
+    }
 }

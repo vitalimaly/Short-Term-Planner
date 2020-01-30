@@ -137,4 +137,8 @@ object DateTimeUtils {
         val minInstant = Instant.ofEpochMilli(Long.MIN_VALUE)
         return OffsetDateTime.ofInstant(minInstant, ZoneOffset.UTC)
     }
+
+    fun getPreviousDayEndDate(): OffsetDateTime {
+        return OffsetDateTime.now().minusDays(1).with(LocalTime.MAX)
+    }
 }
