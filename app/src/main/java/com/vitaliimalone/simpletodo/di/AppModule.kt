@@ -15,6 +15,7 @@ import com.vitaliimalone.simpletodo.domain.usecases.GetUnarchivedOverdueTasksCou
 import com.vitaliimalone.simpletodo.domain.usecases.GetUnarchivedOverdueTasksUseCase
 import com.vitaliimalone.simpletodo.domain.usecases.UpdateTaskUseCase
 import com.vitaliimalone.simpletodo.presentation.archive.ArchiveViewModel
+import com.vitaliimalone.simpletodo.presentation.dialogs.AddNewTaskViewModel
 import com.vitaliimalone.simpletodo.presentation.home.HomeViewModel
 import com.vitaliimalone.simpletodo.presentation.hometab.HomeTabViewModel
 import com.vitaliimalone.simpletodo.presentation.notifications.Notificator
@@ -32,6 +33,7 @@ private val presentation = module {
     viewModel { SettingsViewModel(get(), get()) }
     viewModel { OverdueViewModel(get(), get(), get()) }
     viewModel { ArchiveViewModel(get(), get(), get(), get(), get()) }
+    viewModel { AddNewTaskViewModel(get()) }
 }
 private val domain = module {
     single { AddTaskUseCase(get()) }

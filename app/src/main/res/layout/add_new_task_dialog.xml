@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/rounded_dialog_background">
-
+    android:layout_height="match_parent"
+    android:background="@drawable/rounded_dialog_background"
+    android:paddingBottom="@dimen/s_spacing">
+    <!-- todo: fix text color -->
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/titleEditText"
         style="@style/BorderlessTaskEditText"

@@ -27,7 +27,7 @@ import org.threeten.bp.OffsetDateTime
 class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
     private val viewModel: TaskDetailsViewModel by viewModel()
     private val args: TaskDetailsFragmentArgs by navArgs()
-    private val task: Task by lazy { args.task }
+    private val task: Task by lazy { args.task } // todo bug?
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

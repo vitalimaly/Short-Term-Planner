@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_homeFragment_to_rateDialog"
             app:destination="@id/rateDialog" />
+        <action
+            android:id="@+id/action_homeFragment_to_addNewTaskDialog"
+            app:destination="@id/addNewTaskDialog" />
     </fragment>
     <fragment
         android:id="@+id/taskDetailsFragment"
@@ -89,4 +92,12 @@
         android:id="@+id/themeDialog"
         android:name="com.vitaliimalone.simpletodo.presentation.dialogs.ThemeDialog"
         tools:layout="@layout/rate_dialog" />
+    <dialog
+        android:id="@+id/addNewTaskDialog"
+        android:name="com.vitaliimalone.simpletodo.presentation.dialogs.AddNewTaskDialog"
+        android:label="AddNewTaskDialog">
+        <argument
+            android:name="HomeTab"
+            app:argType="com.vitaliimalone.simpletodo.presentation.home.common.HomeTab" />
+    </dialog>
 </navigation>

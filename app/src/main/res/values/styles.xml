@@ -45,6 +45,12 @@
         <item name="android:textColorSecondaryInverse">?themeTextColorSecondaryInverse</item>
         <item name="android:textColorTertiaryInverse">?themeTextColorTertiaryInverse</item>
         <item name="materialCalendarTheme">@style/ThemeMaterialCalendar</item>
+        <!-- todo ??? -->
+        <item name="editTextStyle">@style/Widget.MaterialComponents.TextInputEditText.FilledBox</item>
+        <item name="editTextColor">?themeColorError</item>
+        <item name="android:editTextColor">?themeColorError</item>
+
+        <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.FilledBox</item>
         <!-- Material theming -->
 
         <!-- System settings -->
