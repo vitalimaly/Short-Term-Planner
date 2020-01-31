@@ -5,8 +5,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.presentation.base.BaseFragment
-import com.vitaliimalone.simpletodo.presentation.dialogs.LanguageDialog
-import com.vitaliimalone.simpletodo.presentation.dialogs.ThemeDialog
 import com.vitaliimalone.simpletodo.presentation.settings.common.Setting
 import com.vitaliimalone.simpletodo.presentation.settings.common.SettingsAdapter
 import com.vitaliimalone.simpletodo.presentation.utils.Res
@@ -16,8 +14,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class SettingsFragment : BaseFragment(R.layout.settings_fragment) {
     private val viewModel: SettingsViewModel by viewModel()
     private val settingsAdapter by lazy { SettingsAdapter(this::onSettingsClick) }
-    private val themeDialog by lazy { ThemeDialog(requireActivity()) }
-    private val languageDialog by lazy { LanguageDialog(requireActivity()) }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -51,10 +47,12 @@ class SettingsFragment : BaseFragment(R.layout.settings_fragment) {
     private fun onSettingsClick(setting: Setting) {
         when (setting) {
             is Setting.Theme -> {
-                themeDialog.show()
+                val action = SettingsFragmentDirections.actionSettingsFragmentToThemeDialog()
+                findNavController().navigate(action)
             }
             is Setting.Language -> {
-                languageDialog.show()
+                val action = SettingsFragmentDirections.actionSettingsFragmentToLanguageDialog()
+                findNavController().navigate(action)
             }
             is Setting.Overdue -> {
                 val action = SettingsFragmentDirections.actionSettingsFragmentToOverdueFragment()
