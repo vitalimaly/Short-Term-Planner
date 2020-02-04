@@ -1,22 +1,12 @@
 package com.vitaliimalone.simpletodo.presentation.utils
 
 import android.content.Context
-import android.view.Gravity
 import android.view.LayoutInflater
-import android.view.inputmethod.EditorInfo
-import androidx.core.widget.addTextChangedListener
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.vitaliimalone.simpletodo.R
-import com.vitaliimalone.simpletodo.domain.models.Task
-import com.vitaliimalone.simpletodo.presentation.popups.duedatepopup.DueDatePopup
 import com.vitaliimalone.simpletodo.presentation.utils.extensions.fragmentManager
-import com.vitaliimalone.simpletodo.presentation.utils.extensions.hideKeyboard
-import com.vitaliimalone.simpletodo.presentation.utils.extensions.setEnabledWithAlpha
-import com.vitaliimalone.simpletodo.presentation.utils.extensions.setOnClickListenerWithPoint
-import com.vitaliimalone.simpletodo.presentation.utils.extensions.trimmed
-import kotlinx.android.synthetic.main.add_new_task_dialog.view.*
 import kotlinx.android.synthetic.main.delete_task_dialog.view.*
 import org.threeten.bp.Instant
 import org.threeten.bp.OffsetDateTime
@@ -24,50 +14,6 @@ import org.threeten.bp.ZoneOffset
 
 object DialogUtils {
     const val DATE_PICKER_TAG = "DATE_PICKER_TAG"
-
-    fun showAddNewTaskDialog(context: Context, date: OffsetDateTime, onAddClick: ((Task) -> Unit)) {
-        val task = Task(dueTo = date)
-        val dialogView = LayoutInflater.from(context).inflate(R.layout.add_new_task_dialog, null, false)
-        val dialog = BottomSheetDialog(context, R.style.TransparentBottomSheet)
-        dialog.setContentView(dialogView)
-        dialogView.apply {
-            addImageView.setOnClickListener {
-                onAddClick.invoke(task)
-                dialog.dismiss()
-            }
-            addImageView.setEnabledWithAlpha(false)
-            titleEditText.hint = Res.string(R.string.add_task_dialog_title_hint)
-            titleEditText.addTextChangedListener(onTextChanged = { text, _, _, _ ->
-                addImageView.setEnabledWithAlpha(text.trimmed.isNotEmpty())
-                task.title = text.trimmed
-            })
-            titleEditText.setOnEditorActionListener { v, actionId, _ ->
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    if (titleEditText.text.trimmed.isNotEmpty()) {
-                        v.clearFocus()
-                        v.hideKeyboard()
-                        onAddClick.invoke(task)
-                        dialog.dismiss()
-                    }
-                    true
-                } else {
-                    false
-                }
-            }
-            dueDateTextView.text = Res.string(R.string.due_to_date, DateTimeUtils.getTaskDueDateText(task.dueTo))
-            dueDateTextView.setOnClickListenerWithPoint {
-                DueDatePopup(context, task.dueTo) { pickedDate ->
-                    task.dueTo = pickedDate
-                    dueDateTextView.text =
-                        Res.string(R.string.due_to_date, DateTimeUtils.getTaskDueDateText(task.dueTo))
-                }.run {
-                    showAtLocation(dueDateTextView, Gravity.NO_GRAVITY, it.x, it.y)
-                }
-            }
-        }
-        dialog.behavior.isHideable = false
-        dialog.show()
-    }
 
     fun showDatePickerDialog(context: Context, currentDate: OffsetDateTime, onDateSet: ((OffsetDateTime) -> Unit)) {
         val calendarConstraints = CalendarConstraints.Builder()

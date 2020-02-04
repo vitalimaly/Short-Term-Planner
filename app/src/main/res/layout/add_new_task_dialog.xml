@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/rounded_dialog_background"
     android:paddingBottom="@dimen/s_spacing">
-    <!-- todo: fix text color -->
+
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/titleEditText"
         style="@style/BorderlessTaskEditText"
@@ -15,7 +15,7 @@
         android:layout_marginStart="@dimen/m_spacing"
         android:layout_marginTop="@dimen/s_spacing"
         android:imeOptions="actionDone"
-        android:inputType="textCapSentences"
+        android:inputType="textCapSentences|textMultiLine"
         android:maxLines="4"
         android:scrollbars="vertical"
         app:layout_constraintEnd_toStartOf="@id/addImageView"

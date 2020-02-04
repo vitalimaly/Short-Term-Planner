@@ -116,7 +116,7 @@
                 app:layout_constraintStart_toEndOf="@id/dueImageView"
                 app:layout_constraintTop_toBottomOf="@id/subtasksRecyclerView"
                 tools:text="Due Friday, October 11" />
-            <!-- todo fix -->
+
             <View
                 android:id="@+id/dueClickableView"
                 android:layout_width="match_parent"
