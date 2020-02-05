@@ -90,7 +90,7 @@ class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
             task.description = it.trimmed
         }
         dueClickableView.setOnClickListenerWithPoint {
-            DueDatePopup(requireContext(), task.dueTo) {
+            DueDatePopup(requireContext(), childFragmentManager, task.dueTo) {
                 task.dueTo = it
                 updateTaskDueDate(it)
             }.run {

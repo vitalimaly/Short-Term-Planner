@@ -50,7 +50,7 @@ class AddNewTaskDialog : BaseBottomSheetDialogFragment(R.layout.add_new_task_dia
             }
             dueDateTextView.text = Res.string(R.string.due_to_date, DateTimeUtils.getTaskDueDateText(task.dueTo))
             dueDateTextView.setOnClickListenerWithPoint {
-                DueDatePopup(context, task.dueTo) { pickedDate ->
+                DueDatePopup(context, childFragmentManager, task.dueTo) { pickedDate ->
                     task.dueTo = pickedDate
                     dueDateTextView.text =
                         Res.string(R.string.due_to_date, DateTimeUtils.getTaskDueDateText(task.dueTo))

@@ -59,7 +59,7 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
     }
 
     private fun onTaskLongClick(task: Task, coordinates: Point) {
-        DueDatePopup(requireContext(), task.dueTo) { pickedDate ->
+        DueDatePopup(requireContext(), childFragmentManager, task.dueTo) { pickedDate ->
             viewModel.updateTaskDueDate(task, pickedDate)
         }.run {
             showAtLocation(requireView(), Gravity.NO_GRAVITY, coordinates.x, coordinates.y)

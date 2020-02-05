@@ -5,10 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
 import android.widget.PopupWindow
+import androidx.fragment.app.FragmentManager
 import com.vitaliimalone.simpletodo.R
+import com.vitaliimalone.simpletodo.presentation.dialogs.DatePickerDialog
 import com.vitaliimalone.simpletodo.presentation.home.common.HomeTab
 import com.vitaliimalone.simpletodo.presentation.utils.DateTimeUtils
-import com.vitaliimalone.simpletodo.presentation.utils.DialogUtils
 import com.vitaliimalone.simpletodo.presentation.utils.Res
 import com.vitaliimalone.simpletodo.presentation.views.DefaultDividerItemDecoration
 import kotlinx.android.synthetic.main.due_date_popup.view.*
@@ -16,6 +17,7 @@ import org.threeten.bp.OffsetDateTime
 
 class DueDatePopup(
     context: Context,
+    private val fragmentManager: FragmentManager,
     private val currentDate: OffsetDateTime,
     private val onDatePicked: ((OffsetDateTime) -> Unit)
 ) : PopupWindow(
@@ -53,7 +55,7 @@ class DueDatePopup(
                             onDatePicked.invoke(DateTimeUtils.getTabStartEndDate(HomeTab.WEEK).second)
                         }
                         DueDate.PICK -> {
-                            DialogUtils.showDatePickerDialog(context, currentDate) { date ->
+                            DatePickerDialog.show(fragmentManager, currentDate) { date ->
                                 onDatePicked.invoke(date)
                             }
                         }
