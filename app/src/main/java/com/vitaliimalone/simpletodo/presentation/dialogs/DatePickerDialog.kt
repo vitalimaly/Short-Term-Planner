@@ -22,6 +22,6 @@ object DatePickerDialog {
             val pickedDate = OffsetDateTime.ofInstant(Instant.ofEpochMilli(it), ZoneOffset.UTC)
             onDateSet.invoke(pickedDate)
         }
-        datePicker.show(fragmentManager, null)
+        datePicker.show(fragmentManager, this.javaClass.simpleName)
     }
 }
