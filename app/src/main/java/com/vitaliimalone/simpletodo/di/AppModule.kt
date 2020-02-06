@@ -16,6 +16,7 @@ import com.vitaliimalone.simpletodo.domain.usecases.GetUnarchivedOverdueTasksUse
 import com.vitaliimalone.simpletodo.domain.usecases.UpdateTaskUseCase
 import com.vitaliimalone.simpletodo.presentation.archive.ArchiveViewModel
 import com.vitaliimalone.simpletodo.presentation.dialogs.AddNewTaskViewModel
+import com.vitaliimalone.simpletodo.presentation.dialogs.DeleteTaskViewModel
 import com.vitaliimalone.simpletodo.presentation.home.HomeViewModel
 import com.vitaliimalone.simpletodo.presentation.hometab.HomeTabViewModel
 import com.vitaliimalone.simpletodo.presentation.notifications.Notificator
@@ -29,11 +30,12 @@ import org.koin.dsl.module
 private val presentation = module {
     viewModel { HomeViewModel(get()) }
     viewModel { HomeTabViewModel(get(), get()) }
-    viewModel { TaskDetailsViewModel(get(), get()) }
+    viewModel { TaskDetailsViewModel(get()) }
     viewModel { SettingsViewModel(get(), get()) }
     viewModel { OverdueViewModel(get(), get(), get()) }
     viewModel { ArchiveViewModel(get(), get(), get(), get(), get()) }
     viewModel { AddNewTaskViewModel(get()) }
+    viewModel { DeleteTaskViewModel(get()) }
 }
 private val domain = module {
     single { AddTaskUseCase(get()) }

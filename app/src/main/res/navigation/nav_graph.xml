@@ -28,6 +28,9 @@
         <argument
             android:name="task"
             app:argType="com.vitaliimalone.simpletodo.domain.models.Task" />
+        <action
+            android:id="@+id/action_taskDetailsFragment_to_deleteTaskDialog"
+            app:destination="@id/deleteTaskDialog" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -95,9 +98,17 @@
     <dialog
         android:id="@+id/addNewTaskDialog"
         android:name="com.vitaliimalone.simpletodo.presentation.dialogs.AddNewTaskDialog"
-        android:label="AddNewTaskDialog">
+        tools:layout="@layout/add_new_task_dialog">
         <argument
             android:name="HomeTab"
             app:argType="com.vitaliimalone.simpletodo.presentation.home.common.HomeTab" />
+    </dialog>
+    <dialog
+        android:id="@+id/deleteTaskDialog"
+        android:name="com.vitaliimalone.simpletodo.presentation.dialogs.DeleteTaskDialog"
+        tools:layout="@layout/delete_task_dialog">
+        <argument
+            android:name="task"
+            app:argType="com.vitaliimalone.simpletodo.domain.models.Task" />
     </dialog>
 </navigation>

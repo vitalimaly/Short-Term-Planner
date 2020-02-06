@@ -3,6 +3,7 @@ package com.vitaliimalone.simpletodo.presentation.dialogs
 import android.view.Gravity
 import android.view.inputmethod.EditorInfo
 import androidx.core.widget.addTextChangedListener
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.vitaliimalone.simpletodo.R
@@ -27,7 +28,7 @@ class AddNewTaskDialog : BaseBottomSheetDialogFragment(R.layout.add_new_task_dia
         dialog.apply {
             addImageView.setOnClickListener {
                 viewModel.addNewTask(task)
-                dialog.dismiss()
+                findNavController().popBackStack()
             }
             addImageView.setEnabledWithAlpha(false)
             titleEditText.hint = Res.string(R.string.add_task_dialog_title_hint)
@@ -41,7 +42,7 @@ class AddNewTaskDialog : BaseBottomSheetDialogFragment(R.layout.add_new_task_dia
                         v.clearFocus()
                         v.hideKeyboard()
                         viewModel.addNewTask(task)
-                        dialog.dismiss()
+                        findNavController().popBackStack()
                     }
                     true
                 } else {
