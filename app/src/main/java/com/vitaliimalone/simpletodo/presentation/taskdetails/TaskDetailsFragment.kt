@@ -7,6 +7,7 @@ import android.view.MotionEvent
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.vitaliimalone.simpletodo.R
@@ -15,17 +16,16 @@ import com.vitaliimalone.simpletodo.presentation.base.BaseFragment
 import com.vitaliimalone.simpletodo.presentation.popups.duedatepopup.DueDatePopup
 import com.vitaliimalone.simpletodo.presentation.taskdetails.common.SubtasksAdapter
 import com.vitaliimalone.simpletodo.presentation.utils.DateTimeUtils
-import com.vitaliimalone.simpletodo.presentation.utils.DialogUtils
 import com.vitaliimalone.simpletodo.presentation.utils.Res
 import com.vitaliimalone.simpletodo.presentation.utils.extensions.clearFocusOnDoneClick
 import com.vitaliimalone.simpletodo.presentation.utils.extensions.setOnClickListenerWithPoint
 import com.vitaliimalone.simpletodo.presentation.utils.extensions.trimmed
 import kotlinx.android.synthetic.main.task_details_fragment.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.threeten.bp.OffsetDateTime
 
 class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
-    private val viewModel: TaskDetailsViewModel by viewModel()
+    private val viewModel: TaskDetailsViewModel by sharedViewModel()
     private val args: TaskDetailsFragmentArgs by navArgs()
     private val task: Task by lazy { args.task }
 
@@ -38,19 +38,17 @@ class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
 
     private fun setupClickListeners() {
         deleteImageView.setOnClickListener {
-            DialogUtils.showDeleteTaskDialog(requireContext()) {
-                viewModel.deleteTask(task)
-                saveAndFinish()
-            }
+            val action = TaskDetailsFragmentDirections.actionTaskDetailsFragmentToDeleteTaskDialog(task)
+            findNavController().navigate(action)
         }
         toolbar.setNavigationOnClickListener {
-            saveAndFinish()
+            findNavController().popBackStack()
         }
     }
 
-    private fun saveAndFinish() {
+    override fun onPause() {
+        super.onPause()
         viewModel.updateTask(task)
-        findNavController().popBackStack()
     }
 
     private fun setupViews() {
@@ -90,7 +88,7 @@ class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
             task.description = it.trimmed
         }
         dueClickableView.setOnClickListenerWithPoint {
-            DueDatePopup(requireContext(), task.dueTo) {
+            DueDatePopup(requireContext(), childFragmentManager, task.dueTo) {
                 task.dueTo = it
                 updateTaskDueDate(it)
             }.run {
@@ -113,5 +111,8 @@ class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
     }
 
     private fun setupObservers() {
+        viewModel.taskDeletedEvent.observe(viewLifecycleOwner, Observer {
+            findNavController().popBackStack()
+        })
     }
 }

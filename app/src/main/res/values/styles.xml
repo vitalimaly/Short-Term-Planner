@@ -62,6 +62,14 @@
         <item name="android:windowIsFloating">false</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowSoftInputMode">adjustResize</item>
+        <item name="colorPrimary">?themeColorPrimary</item>
+        <item name="colorPrimaryDark">?themeColorPrimaryVariant</item>
+        <item name="colorSecondary">?themeColorSecondary</item>
+        <item name="colorAccent">?themeColorSecondary</item>
+        <item name="colorError">?themeColorError</item>
+        <item name="android:textColor">?themeTextColorPrimary</item>
+        <item name="android:textColorPrimary">?themeTextColorPrimary</item>
+        <item name="android:textColorHint">?themeTextColorTertiary</item>
     </style>
 
     <style name="HomeTabTextAppearance" parent="TextAppearance.Design.Tab">

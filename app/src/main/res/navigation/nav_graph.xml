@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_homeFragment_to_rateDialog"
             app:destination="@id/rateDialog" />
+        <action
+            android:id="@+id/action_homeFragment_to_addNewTaskDialog"
+            app:destination="@id/addNewTaskDialog" />
     </fragment>
     <fragment
         android:id="@+id/taskDetailsFragment"
@@ -25,6 +28,9 @@
         <argument
             android:name="task"
             app:argType="com.vitaliimalone.simpletodo.domain.models.Task" />
+        <action
+            android:id="@+id/action_taskDetailsFragment_to_deleteTaskDialog"
+            app:destination="@id/deleteTaskDialog" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -42,6 +48,12 @@
         <action
             android:id="@+id/action_settingsFragment_to_aboutFragment"
             app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_themeDialog"
+            app:destination="@id/themeDialog" />
+        <action
+            android:id="@+id/action_settingsFragment_to_languageDialog"
+            app:destination="@id/languageDialog" />
     </fragment>
     <fragment
         android:id="@+id/overdueFragment"
@@ -63,6 +75,10 @@
         android:id="@+id/appPlayStorePage"
         app:action="android.intent.action.VIEW"
         app:data="@string/app_play_store_url" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.vitaliimalone.simpletodo.presentation.about.AboutFragment"
+        tools:layout="@layout/about_fragment" />
     <dialog
         android:id="@+id/rateDialog"
         android:name="com.vitaliimalone.simpletodo.presentation.dialogs.RateDialog"
@@ -71,8 +87,28 @@
             android:id="@+id/action_rateDialog_to_appPlayStorePage"
             app:destination="@id/appPlayStorePage" />
     </dialog>
-    <fragment
-        android:id="@+id/aboutFragment"
-        android:name="com.vitaliimalone.simpletodo.presentation.about.AboutFragment"
-        tools:layout="@layout/about_fragment" />
+    <dialog
+        android:id="@+id/languageDialog"
+        android:name="com.vitaliimalone.simpletodo.presentation.dialogs.LanguageDialog"
+        tools:layout="@layout/rate_dialog" />
+    <dialog
+        android:id="@+id/themeDialog"
+        android:name="com.vitaliimalone.simpletodo.presentation.dialogs.ThemeDialog"
+        tools:layout="@layout/rate_dialog" />
+    <dialog
+        android:id="@+id/addNewTaskDialog"
+        android:name="com.vitaliimalone.simpletodo.presentation.dialogs.AddNewTaskDialog"
+        tools:layout="@layout/add_new_task_dialog">
+        <argument
+            android:name="HomeTab"
+            app:argType="com.vitaliimalone.simpletodo.presentation.home.common.HomeTab" />
+    </dialog>
+    <dialog
+        android:id="@+id/deleteTaskDialog"
+        android:name="com.vitaliimalone.simpletodo.presentation.dialogs.DeleteTaskDialog"
+        tools:layout="@layout/delete_task_dialog">
+        <argument
+            android:name="task"
+            app:argType="com.vitaliimalone.simpletodo.domain.models.Task" />
+    </dialog>
 </navigation>

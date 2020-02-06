@@ -65,7 +65,6 @@ class OverdueFragment : BaseFragment(R.layout.overdue_fragment) {
             viewModel.undoArchive()
         }
         swipedSnackbar.show()
-
     }
 
     private fun setupClickListeners() {
@@ -85,7 +84,7 @@ class OverdueFragment : BaseFragment(R.layout.overdue_fragment) {
     }
 
     private fun onTaskLongClick(task: Task, coordinates: Point) {
-        DueDatePopup(requireContext(), task.dueTo) { pickedDate ->
+        DueDatePopup(requireContext(), childFragmentManager, task.dueTo) { pickedDate ->
             viewModel.updateTaskDueDate(task, pickedDate)
         }.run {
             showAtLocation(requireView(), Gravity.NO_GRAVITY, coordinates.x, coordinates.y)

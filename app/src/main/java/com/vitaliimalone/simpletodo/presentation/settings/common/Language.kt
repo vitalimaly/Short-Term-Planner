@@ -18,5 +18,5 @@ enum class Language {
 
     abstract fun getLocaleCode(): String
     abstract fun getTitle(): String
-    abstract fun getIcon(): Drawable? // todo
+    abstract fun getIcon(): Drawable?
 }

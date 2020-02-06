@@ -3,8 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/rounded_dialog_background">
+    android:layout_height="match_parent"
+    android:background="@drawable/rounded_dialog_background"
+    android:paddingBottom="@dimen/s_spacing">
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/titleEditText"
@@ -14,12 +15,13 @@
         android:layout_marginStart="@dimen/m_spacing"
         android:layout_marginTop="@dimen/s_spacing"
         android:imeOptions="actionDone"
-        android:inputType="textCapSentences"
+        android:inputType="textCapSentences|textMultiLine"
         android:maxLines="4"
         android:scrollbars="vertical"
         app:layout_constraintEnd_toStartOf="@id/addImageView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:hint="@string/add_task_dialog_title_hint" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/addImageView"

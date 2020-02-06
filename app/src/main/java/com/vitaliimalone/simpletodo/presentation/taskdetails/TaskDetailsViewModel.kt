@@ -3,19 +3,14 @@ package com.vitaliimalone.simpletodo.presentation.taskdetails
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vitaliimalone.simpletodo.domain.models.Task
-import com.vitaliimalone.simpletodo.domain.usecases.DeleteTaskUseCase
 import com.vitaliimalone.simpletodo.domain.usecases.UpdateTaskUseCase
+import com.vitaliimalone.simpletodo.presentation.utils.SingleLiveEvent
 import kotlinx.coroutines.launch
 
 class TaskDetailsViewModel(
-    private val deleteTaskUseCase: DeleteTaskUseCase,
     private val updateTaskUseCase: UpdateTaskUseCase
 ) : ViewModel() {
-    fun deleteTask(task: Task) {
-        viewModelScope.launch {
-            deleteTaskUseCase.deleteTask(task)
-        }
-    }
+    val taskDeletedEvent = SingleLiveEvent<Unit>()
 
     fun updateTask(task: Task) {
         viewModelScope.launch {

@@ -10,8 +10,6 @@ import com.vitaliimalone.simpletodo.presentation.base.BaseFragment
 import com.vitaliimalone.simpletodo.presentation.home.common.HomeTab
 import com.vitaliimalone.simpletodo.presentation.home.common.HomeTabFragmentAdapter
 import com.vitaliimalone.simpletodo.presentation.utils.DateTimeUtils
-import com.vitaliimalone.simpletodo.presentation.utils.DialogUtils
-import com.vitaliimalone.simpletodo.presentation.utils.extensions.hideKeyboard
 import com.vitaliimalone.simpletodo.presentation.utils.extensions.showKeyboard
 import kotlinx.android.synthetic.main.home_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -37,11 +35,8 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
         addFab.setOnClickListener { view ->
             showKeyboard(view)
             val currentTab = HomeTab.values()[tasksViewPager.currentItem]
-            val defaultDate = DateTimeUtils.getAddNewTaskDate(currentTab)
-            DialogUtils.showAddNewTaskDialog(requireContext(), defaultDate) {
-                viewModel.addNewTask(it)
-                hideKeyboard()
-            }
+            val action = HomeFragmentDirections.actionHomeFragmentToAddNewTaskDialog(currentTab)
+            findNavController().navigate(action)
         }
         settingsImageView.setOnClickListener {
             val action = HomeFragmentDirections.actionHomeFragmentToSettingsFragment()
