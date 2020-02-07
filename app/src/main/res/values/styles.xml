@@ -44,6 +44,7 @@
         <item name="android:textColorPrimaryInverse">?themeTextColorPrimaryInverse</item>
         <item name="android:textColorSecondaryInverse">?themeTextColorSecondaryInverse</item>
         <item name="android:textColorTertiaryInverse">?themeTextColorTertiaryInverse</item>
+        <item name="android:textColorHint">?themeTextColorTertiary</item>
         <item name="materialCalendarTheme">@style/ThemeMaterialCalendar</item>
         <!-- Material theming -->
 
