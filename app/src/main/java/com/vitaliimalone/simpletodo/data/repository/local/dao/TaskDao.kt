@@ -35,6 +35,6 @@ interface TaskDao {
     @Query("DELETE FROM taskentity WHERE isArchived = 1")
     suspend fun deleteArchivedTasks()
 
-    @Query("DELETE FROM taskentity WHERE isArchived = 0 AND dueTo BETWEEN :startDate AND :endDate")
-    suspend fun deleteUnarchivedTasksForPeriod(startDate: String, endDate: String)
+    @Query("UPDATE taskentity SET isArchived = 1 WHERE isArchived = 0 AND dueTo BETWEEN :startDate AND :endDate")
+    suspend fun archiveUnarchivedOverdueTasksForPeriod(startDate: String, endDate: String)
 }

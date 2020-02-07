@@ -31,7 +31,7 @@ class OverdueFragment : BaseFragment(R.layout.overdue_fragment) {
 
     private fun setupViews() {
         toolbar.title = Res.string(R.string.overdue_toolbar_title)
-        clearAllTextView.text = Res.string(R.string.clear_all)
+        archiveAllTextView.text = Res.string(R.string.archive_all)
         overdueRecyclerView.adapter = tasksAdapter
         overdueRecyclerView.addItemDecoration(
             DefaultDividerItemDecoration(
@@ -69,7 +69,7 @@ class OverdueFragment : BaseFragment(R.layout.overdue_fragment) {
 
     private fun setupClickListeners() {
         toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
-        clearAllTextView.setOnClickListener { viewModel.deleteAllOverdueTasks() }
+        archiveAllTextView.setOnClickListener { viewModel.archiveAllOverdueTasks() }
     }
 
     private fun setupObservers() {

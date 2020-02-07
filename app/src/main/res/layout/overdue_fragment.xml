@@ -23,7 +23,7 @@
                 app:navigationIcon="@drawable/ic_arrow_back" />
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/clearAllTextView"
+                android:id="@+id/archiveAllTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_gravity="end"
@@ -34,7 +34,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="@string/clear_all" />
+                tools:text="@string/archive_all" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.AppBarLayout>

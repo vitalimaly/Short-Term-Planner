@@ -39,7 +39,7 @@ class TaskRepository(
         taskLocalDataSource.deleteArchivedTasks()
     }
 
-    suspend fun deleteUnarchivedTasksForPeriod(startDate: String, endDate: String) {
-        taskLocalDataSource.deleteUnarchivedTasksForPeriod(startDate, endDate)
+    suspend fun archiveUnarchivedOverdueTasksForPeriod(startDate: String, endDate: String) {
+        taskLocalDataSource.archiveUnarchivedOverdueTasksForPeriod(startDate, endDate)
     }
 }

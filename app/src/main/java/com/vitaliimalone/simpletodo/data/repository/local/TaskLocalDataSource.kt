@@ -39,7 +39,7 @@ class TaskLocalDataSource(
         taskDao.deleteArchivedTasks()
     }
 
-    suspend fun deleteUnarchivedTasksForPeriod(startDate: String, endDate: String) {
-        taskDao.deleteUnarchivedTasksForPeriod(startDate, endDate)
+    suspend fun archiveUnarchivedOverdueTasksForPeriod(startDate: String, endDate: String) {
+        taskDao.archiveUnarchivedOverdueTasksForPeriod(startDate, endDate)
     }
 }
