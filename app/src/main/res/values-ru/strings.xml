@@ -50,4 +50,5 @@
     <string name="about_privacy_policy">Политика конфиденциальности</string>
     <string name="clear_all">Очистить всё</string>
     <string name="archive_all">Архивировать всё</string>
+    <string name="snackbar_tasks_archived">Задачи архивированны</string>
 </resources>

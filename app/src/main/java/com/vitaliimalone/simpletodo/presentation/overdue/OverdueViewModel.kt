@@ -15,7 +15,7 @@ class OverdueViewModel(
 ) : ViewModel() {
     val unarchivedOverdueTasks = getUnarchivedOverdueTasksUseCase.getUnarchivedOverdueTasks().asLiveData()
     private var lastSwipedTask: Task? = null
-    private val lastArchivedTasks = mutableListOf<Task>()
+    private var lastArchivedTasks = mutableListOf<Task>()
 
     fun archiveTask(task: Task) {
         lastSwipedTask = task.copy()
@@ -45,7 +45,7 @@ class OverdueViewModel(
             lastArchivedTasks.clear()
             val tasksToArchive = unarchivedOverdueTasks.value
             tasksToArchive?.let {
-                lastArchivedTasks.addAll(it)
+                lastArchivedTasks = it.toMutableList() // todo fix
                 tasksToArchive.map { task -> task.isArchived = true }
                 updateTaskUseCase.updateTasks(tasksToArchive)
             }
