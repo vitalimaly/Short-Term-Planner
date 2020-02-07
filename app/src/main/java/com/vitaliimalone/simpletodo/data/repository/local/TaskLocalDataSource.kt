@@ -11,16 +11,16 @@ class TaskLocalDataSource(
         return taskDao.getUnarchivedTasksForPeriod(startDate, endDate)
     }
 
-    suspend fun addTask(taskEntity: TaskEntity) {
-        taskDao.addTask(taskEntity)
+    suspend fun addTasks(taskEntities: List<TaskEntity>) {
+        taskDao.addTasks(taskEntities)
     }
 
-    suspend fun updateTask(taskEntity: TaskEntity) {
-        taskDao.updateTask(taskEntity)
+    suspend fun updateTasks(taskEntities: List<TaskEntity>) {
+        taskDao.updateTasks(taskEntities)
     }
 
-    suspend fun deleteTask(taskEntity: TaskEntity) {
-        taskDao.deleteTask(taskEntity)
+    suspend fun deleteTasks(taskEntities: List<TaskEntity>) {
+        taskDao.deleteTasks(taskEntities)
     }
 
     fun getUnarchivedTasksCountForPeriod(startDate: String, endDate: String): Flow<Int> {
@@ -37,9 +37,5 @@ class TaskLocalDataSource(
 
     suspend fun deleteArchivedTasks() {
         taskDao.deleteArchivedTasks()
-    }
-
-    suspend fun archiveUnarchivedOverdueTasksForPeriod(startDate: String, endDate: String) {
-        taskDao.archiveUnarchivedOverdueTasksForPeriod(startDate, endDate)
     }
 }

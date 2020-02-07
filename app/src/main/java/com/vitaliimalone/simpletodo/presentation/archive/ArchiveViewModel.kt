@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.vitaliimalone.simpletodo.domain.models.Task
-import com.vitaliimalone.simpletodo.domain.usecases.AddTaskUseCase
+import com.vitaliimalone.simpletodo.domain.usecases.AddTasksUseCase
 import com.vitaliimalone.simpletodo.domain.usecases.DeleteArchivedTasksUseCase
 import com.vitaliimalone.simpletodo.domain.usecases.DeleteTaskUseCase
 import com.vitaliimalone.simpletodo.domain.usecases.GetArchivedTasksUseCase
@@ -14,7 +14,7 @@ import org.threeten.bp.OffsetDateTime
 
 class ArchiveViewModel(
     getArchivedTasksUseCase: GetArchivedTasksUseCase,
-    private val addTaskUseCase: AddTaskUseCase,
+    private val addTasksUseCase: AddTasksUseCase,
     private val deleteTaskUseCase: DeleteTaskUseCase,
     private val updateTaskUseCase: UpdateTaskUseCase,
     private val deleteArchivedTasksUseCase: DeleteArchivedTasksUseCase
@@ -25,14 +25,14 @@ class ArchiveViewModel(
     fun deleteTask(task: Task) {
         lastSwipedTask = task.copy()
         viewModelScope.launch {
-            deleteTaskUseCase.deleteTask(task)
+            deleteTaskUseCase.deleteTask(listOf(task))
         }
     }
 
     fun undoDelete() {
         lastSwipedTask?.let {
             viewModelScope.launch {
-                addTaskUseCase.addTask(it)
+                addTasksUseCase.addTask(listOf(it))
             }
         }
     }
@@ -40,7 +40,7 @@ class ArchiveViewModel(
     fun updateTaskDueDate(task: Task, dueDate: OffsetDateTime) {
         task.dueTo = dueDate
         viewModelScope.launch {
-            updateTaskUseCase.updateTask(task)
+            updateTaskUseCase.updateTasks(listOf(task))
         }
     }
 

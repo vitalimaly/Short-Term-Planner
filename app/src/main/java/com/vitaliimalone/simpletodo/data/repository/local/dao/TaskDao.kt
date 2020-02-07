@@ -5,23 +5,28 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import androidx.room.Update
 import com.vitaliimalone.simpletodo.data.repository.local.models.TaskEntity
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 
 @Dao
 interface TaskDao {
-    @Query("SELECT * FROM taskentity WHERE isArchived = 0 AND dueTo BETWEEN :startDate AND :endDate")
-    fun getUnarchivedTasksForPeriod(startDate: String, endDate: String): Flow<List<TaskEntity>>
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addTask(taskEntity: TaskEntity)
+    @JvmSuppressWildcards
+    suspend fun addTasks(taskEntities: List<TaskEntity>)
 
     @Update
-    suspend fun updateTask(task: TaskEntity)
+    @JvmSuppressWildcards
+    suspend fun updateTasks(taskEntities: List<TaskEntity>)
 
     @Delete
-    suspend fun deleteTask(task: TaskEntity)
+    @JvmSuppressWildcards
+    suspend fun deleteTasks(taskEntities: List<TaskEntity>)
+
+    @Query("SELECT * FROM taskentity WHERE isArchived = 0 AND dueTo BETWEEN :startDate AND :endDate")
+    fun getUnarchivedTasksForPeriod(startDate: String, endDate: String): Flow<List<TaskEntity>>
 
     @Query("SELECT COUNT(id) FROM taskentity WHERE isArchived = 0 AND dueTo BETWEEN :startDate AND :endDate")
     fun getUnarchivedTasksCountForPeriod(startDate: String, endDate: String): Flow<Int>
@@ -32,9 +37,9 @@ interface TaskDao {
     @Query("SELECT * FROM taskentity WHERE isArchived = 1")
     fun getArchivedTasks(): Flow<List<TaskEntity>>
 
-    @Query("DELETE FROM taskentity WHERE isArchived = 1")
-    suspend fun deleteArchivedTasks()
-
-    @Query("UPDATE taskentity SET isArchived = 1 WHERE isArchived = 0 AND dueTo BETWEEN :startDate AND :endDate")
-    suspend fun archiveUnarchivedOverdueTasksForPeriod(startDate: String, endDate: String)
+    @Transaction
+    suspend fun deleteArchivedTasks() {
+        val archivedTasks = getArchivedTasks().first()
+        deleteTasks(archivedTasks)
+    }
 }

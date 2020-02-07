@@ -4,10 +4,11 @@ import com.vitaliimalone.simpletodo.data.repository.TaskRepository
 import com.vitaliimalone.simpletodo.domain.mappers.TaskEntityMapper
 import com.vitaliimalone.simpletodo.domain.models.Task
 
-class AddTaskUseCase(
+class AddTasksUseCase(
     private val taskRepository: TaskRepository
 ) {
-    suspend fun addTask(task: Task) {
-        taskRepository.addTask(TaskEntityMapper.map(task))
+    suspend fun addTask(tasks: List<Task>) {
+        val taskEntities = tasks.map(TaskEntityMapper::map)
+        taskRepository.addTasks(taskEntities)
     }
 }

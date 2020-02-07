@@ -8,8 +8,9 @@ import org.threeten.bp.OffsetDateTime
 class UpdateTaskUseCase(
     private val taskRepository: TaskRepository
 ) {
-    suspend fun updateTask(task: Task) {
-        task.modifiedAt = OffsetDateTime.now()
-        taskRepository.updateTask(TaskEntityMapper.map(task))
+    suspend fun updateTasks(tasks: List<Task>) {
+        tasks.forEach { it.modifiedAt = OffsetDateTime.now() }
+        val taskEntities = tasks.map(TaskEntityMapper::map)
+        taskRepository.updateTasks(taskEntities)
     }
 }

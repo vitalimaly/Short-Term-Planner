@@ -7,7 +7,8 @@ import com.vitaliimalone.simpletodo.domain.models.Task
 class DeleteTaskUseCase(
     private val taskRepository: TaskRepository
 ) {
-    suspend fun deleteTask(task: Task) {
-        taskRepository.deleteTask(TaskEntityMapper.map(task))
+    suspend fun deleteTask(tasks: List<Task>) {
+        val taskEntities = tasks.map(TaskEntityMapper::map)
+        taskRepository.deleteTasks(taskEntities)
     }
 }
