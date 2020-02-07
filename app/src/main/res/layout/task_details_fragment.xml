@@ -171,7 +171,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:padding="@dimen/details_footer_text_padding"
-                android:textColor="?android:attr/textColorSecondary"
+                android:textColor="?themeTextColorSecondary"
                 android:textSize="@dimen/s_text_size"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/modifiedOnTextView"
