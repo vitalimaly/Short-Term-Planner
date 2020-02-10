@@ -11,16 +11,16 @@ class TaskRepository(
         return taskLocalDataSource.getUnarchivedTasksForPeriod(startDate, endDate)
     }
 
-    suspend fun addTask(task: TaskEntity) {
-        taskLocalDataSource.addTask(task)
+    suspend fun addTasks(taskEntities: List<TaskEntity>) {
+        taskLocalDataSource.addTasks(taskEntities)
     }
 
-    suspend fun updateTask(task: TaskEntity) {
-        taskLocalDataSource.updateTask(task)
+    suspend fun updateTasks(taskEntities: List<TaskEntity>) {
+        taskLocalDataSource.updateTasks(taskEntities)
     }
 
-    suspend fun deleteTask(task: TaskEntity) {
-        taskLocalDataSource.deleteTask(task)
+    suspend fun deleteTasks(taskEntities: List<TaskEntity>) {
+        taskLocalDataSource.deleteTasks(taskEntities)
     }
 
     fun getUnarchivedTasksCountForPeriod(startDate: String, endDate: String): Flow<Int> {
@@ -37,9 +37,5 @@ class TaskRepository(
 
     suspend fun deleteArchivedTasks() {
         taskLocalDataSource.deleteArchivedTasks()
-    }
-
-    suspend fun deleteUnarchivedTasksForPeriod(startDate: String, endDate: String) {
-        taskLocalDataSource.deleteUnarchivedTasksForPeriod(startDate, endDate)
     }
 }

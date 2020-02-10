@@ -14,7 +14,7 @@ class TaskDetailsViewModel(
 
     fun updateTask(task: Task) {
         viewModelScope.launch {
-            updateTaskUseCase.updateTask(task)
+            updateTaskUseCase.updateTasks(listOf(task))
         }
     }
 }

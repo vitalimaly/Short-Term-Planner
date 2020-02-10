@@ -49,4 +49,7 @@
     <string name="about_contact">Contact email app@example.com</string>
     <string name="about_privacy_policy">Privacy policy</string>
     <string name="clear_all">Clear All</string>
+    <string name="archive_all">Archive All</string>
+    <string name="snackbar_tasks_archived">Tasks archived</string>
+    <string name="snackbar_tasks_deleted">Tasks deleted</string>
 </resources>

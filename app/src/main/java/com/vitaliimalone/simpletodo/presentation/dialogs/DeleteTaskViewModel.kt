@@ -11,7 +11,7 @@ class DeleteTaskViewModel(
 ) : ViewModel() {
     fun deleteTask(task: Task) {
         viewModelScope.launch {
-            deleteTaskUseCase.deleteTask(task)
+            deleteTaskUseCase.deleteTask(listOf(task))
         }
     }
 }

@@ -6,7 +6,6 @@ import android.view.Gravity
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
-import com.google.android.material.snackbar.Snackbar
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.domain.models.Task
 import com.vitaliimalone.simpletodo.presentation.base.BaseFragment
@@ -31,7 +30,7 @@ class OverdueFragment : BaseFragment(R.layout.overdue_fragment) {
 
     private fun setupViews() {
         toolbar.title = Res.string(R.string.overdue_toolbar_title)
-        clearAllTextView.text = Res.string(R.string.clear_all)
+        archiveAllTextView.text = Res.string(R.string.archive_all)
         overdueRecyclerView.adapter = tasksAdapter
         overdueRecyclerView.addItemDecoration(
             DefaultDividerItemDecoration(
@@ -56,20 +55,21 @@ class OverdueFragment : BaseFragment(R.layout.overdue_fragment) {
     private fun onTabSwipe(position: Int) {
         val swipedTask = tasksAdapter.tasks[position]
         viewModel.archiveTask(swipedTask)
-        val swipedSnackbar = Snackbar.make(
-            overdueRecyclerView,
+        showSnackbar(
             Res.string(R.string.snackbar_task_archived),
-            Snackbar.LENGTH_LONG
-        )
-        swipedSnackbar.setAction(Res.string(R.string.snackbar_undo)) {
-            viewModel.undoArchive()
-        }
-        swipedSnackbar.show()
+            Res.string(R.string.snackbar_undo),
+            { viewModel.undoArchive() })
     }
 
     private fun setupClickListeners() {
         toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
-        clearAllTextView.setOnClickListener { viewModel.deleteAllOverdueTasks() }
+        archiveAllTextView.setOnClickListener {
+            viewModel.archiveAllOverdueTasks()
+            showSnackbar(
+                Res.string(R.string.snackbar_tasks_archived),
+                Res.string(R.string.snackbar_undo),
+                { viewModel.undoArchiveAllOverdueTasks() })
+        }
     }
 
     private fun setupObservers() {

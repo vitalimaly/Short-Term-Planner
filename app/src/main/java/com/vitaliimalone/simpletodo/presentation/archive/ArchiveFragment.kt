@@ -69,7 +69,13 @@ class ArchiveFragment : BaseFragment(R.layout.archive_fragment) {
 
     private fun setupClickListeners() {
         toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
-        clearAllTextView.setOnClickListener { viewModel.deleteAllArchivedTasks() }
+        clearAllTextView.setOnClickListener {
+            viewModel.deleteAllArchivedTasks()
+            showSnackbar(
+                Res.string(R.string.snackbar_tasks_deleted),
+                Res.string(R.string.snackbar_undo),
+                { viewModel.undoDeleteAllArchivedTasks() })
+        }
     }
 
     private fun setupObservers() {

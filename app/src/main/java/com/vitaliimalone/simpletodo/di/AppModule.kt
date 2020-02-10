@@ -4,9 +4,8 @@ import androidx.room.Room
 import com.vitaliimalone.simpletodo.data.repository.TaskRepository
 import com.vitaliimalone.simpletodo.data.repository.local.TaskLocalDataSource
 import com.vitaliimalone.simpletodo.data.repository.local.database.TasksDatabase
-import com.vitaliimalone.simpletodo.domain.usecases.AddTaskUseCase
+import com.vitaliimalone.simpletodo.domain.usecases.AddTasksUseCase
 import com.vitaliimalone.simpletodo.domain.usecases.DeleteArchivedTasksUseCase
-import com.vitaliimalone.simpletodo.domain.usecases.DeleteOverdueTasksUseCase
 import com.vitaliimalone.simpletodo.domain.usecases.DeleteTaskUseCase
 import com.vitaliimalone.simpletodo.domain.usecases.GetArchivedTasksCountUseCase
 import com.vitaliimalone.simpletodo.domain.usecases.GetArchivedTasksUseCase
@@ -28,17 +27,17 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 private val presentation = module {
-    viewModel { HomeViewModel(get()) }
+    viewModel { HomeViewModel() }
     viewModel { HomeTabViewModel(get(), get()) }
     viewModel { TaskDetailsViewModel(get()) }
     viewModel { SettingsViewModel(get(), get()) }
-    viewModel { OverdueViewModel(get(), get(), get()) }
+    viewModel { OverdueViewModel(get(), get()) }
     viewModel { ArchiveViewModel(get(), get(), get(), get(), get()) }
     viewModel { AddNewTaskViewModel(get()) }
     viewModel { DeleteTaskViewModel(get()) }
 }
 private val domain = module {
-    single { AddTaskUseCase(get()) }
+    single { AddTasksUseCase(get()) }
     single { UpdateTaskUseCase(get()) }
     single { GetTasksForHomeTabUseCase(get()) }
     single { DeleteTaskUseCase(get()) }
@@ -47,7 +46,6 @@ private val domain = module {
     single { GetArchivedTasksUseCase(get()) }
     single { GetArchivedTasksCountUseCase(get()) }
     single { DeleteArchivedTasksUseCase(get()) }
-    single { DeleteOverdueTasksUseCase(get()) }
 }
 private val data = module {
     single { TaskRepository(get()) }

@@ -1,25 +1,13 @@
 package com.vitaliimalone.simpletodo.presentation.home
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.vitaliimalone.simpletodo.domain.models.Task
-import com.vitaliimalone.simpletodo.domain.usecases.AddTaskUseCase
 import com.vitaliimalone.simpletodo.presentation.utils.Constants
 import com.vitaliimalone.simpletodo.presentation.utils.Pref
 import com.vitaliimalone.simpletodo.presentation.utils.SingleLiveEvent
-import kotlinx.coroutines.launch
 import org.threeten.bp.OffsetDateTime
 
-class HomeViewModel(
-    private val addTaskUseCase: AddTaskUseCase
-) : ViewModel() {
+class HomeViewModel : ViewModel() {
     val showRateDialogEvent = SingleLiveEvent<Unit>()
-
-    fun addNewTask(task: Task) {
-        viewModelScope.launch {
-            addTaskUseCase.addTask(task)
-        }
-    }
 
     fun checkRateDialog() {
         Pref.rateAppLaunchCount += 1

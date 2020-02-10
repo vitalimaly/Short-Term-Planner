@@ -11,17 +11,20 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TaskDao {
-    @Query("SELECT * FROM taskentity WHERE isArchived = 0 AND dueTo BETWEEN :startDate AND :endDate")
-    fun getUnarchivedTasksForPeriod(startDate: String, endDate: String): Flow<List<TaskEntity>>
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addTask(taskEntity: TaskEntity)
+    @JvmSuppressWildcards
+    suspend fun addTasks(taskEntities: List<TaskEntity>)
 
     @Update
-    suspend fun updateTask(task: TaskEntity)
+    @JvmSuppressWildcards
+    suspend fun updateTasks(taskEntities: List<TaskEntity>)
 
     @Delete
-    suspend fun deleteTask(task: TaskEntity)
+    @JvmSuppressWildcards
+    suspend fun deleteTasks(taskEntities: List<TaskEntity>)
+
+    @Query("SELECT * FROM taskentity WHERE isArchived = 0 AND dueTo BETWEEN :startDate AND :endDate")
+    fun getUnarchivedTasksForPeriod(startDate: String, endDate: String): Flow<List<TaskEntity>>
 
     @Query("SELECT COUNT(id) FROM taskentity WHERE isArchived = 0 AND dueTo BETWEEN :startDate AND :endDate")
     fun getUnarchivedTasksCountForPeriod(startDate: String, endDate: String): Flow<Int>
@@ -34,7 +37,4 @@ interface TaskDao {
 
     @Query("DELETE FROM taskentity WHERE isArchived = 1")
     suspend fun deleteArchivedTasks()
-
-    @Query("DELETE FROM taskentity WHERE isArchived = 0 AND dueTo BETWEEN :startDate AND :endDate")
-    suspend fun deleteUnarchivedTasksForPeriod(startDate: String, endDate: String)
 }
