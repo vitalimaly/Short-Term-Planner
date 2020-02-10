@@ -69,7 +69,6 @@ class OverdueFragment : BaseFragment(R.layout.overdue_fragment) {
                 Res.string(R.string.snackbar_tasks_archived),
                 Res.string(R.string.snackbar_undo),
                 { viewModel.undoArchiveAllOverdueTasks() })
-
         }
     }
 

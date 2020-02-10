@@ -5,11 +5,9 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Transaction
 import androidx.room.Update
 import com.vitaliimalone.simpletodo.data.repository.local.models.TaskEntity
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 
 @Dao
 interface TaskDao {
@@ -37,9 +35,6 @@ interface TaskDao {
     @Query("SELECT * FROM taskentity WHERE isArchived = 1")
     fun getArchivedTasks(): Flow<List<TaskEntity>>
 
-    @Transaction
-    suspend fun deleteArchivedTasks() {
-        val archivedTasks = getArchivedTasks().first()
-        deleteTasks(archivedTasks)
-    }
+    @Query("DELETE FROM taskentity WHERE isArchived = 1")
+    suspend fun deleteArchivedTasks()
 }

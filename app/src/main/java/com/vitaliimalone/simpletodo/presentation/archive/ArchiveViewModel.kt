@@ -21,6 +21,7 @@ class ArchiveViewModel(
 ) : ViewModel() {
     val archivedTasks = getArchivedTasksUseCase.getArchivedTasks().asLiveData()
     private var lastSwipedTask: Task? = null
+    private var lastDeletedTasks = listOf<Task>()
 
     fun deleteTask(task: Task) {
         lastSwipedTask = task.copy()
@@ -46,7 +47,17 @@ class ArchiveViewModel(
 
     fun deleteAllArchivedTasks() {
         viewModelScope.launch {
+            val tasksToDelete = archivedTasks.value
+            tasksToDelete?.let {
+                lastDeletedTasks = it.map { task -> task.copy() }
+            }
             deleteArchivedTasksUseCase.deleteArchivedTasks()
+        }
+    }
+
+    fun undoDeleteAllArchivedTasks() {
+        viewModelScope.launch {
+            addTasksUseCase.addTask(lastDeletedTasks)
         }
     }
 }
