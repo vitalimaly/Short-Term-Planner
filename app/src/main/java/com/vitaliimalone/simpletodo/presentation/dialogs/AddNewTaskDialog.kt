@@ -1,5 +1,6 @@
 package com.vitaliimalone.simpletodo.presentation.dialogs
 
+import android.text.InputType
 import android.view.Gravity
 import android.view.inputmethod.EditorInfo
 import androidx.core.widget.addTextChangedListener
@@ -49,6 +50,11 @@ class AddNewTaskDialog : BaseBottomSheetDialogFragment(R.layout.add_new_task_dia
                     false
                 }
             }
+            titleEditText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
+            titleEditText.isSingleLine = true
+            titleEditText.maxLines = 4
+            titleEditText.setHorizontallyScrolling(false)
+            titleEditText.imeOptions = EditorInfo.IME_ACTION_DONE
             dueDateTextView.text = Res.string(R.string.due_to_date, DateTimeUtils.getTaskDueDateText(task.dueTo))
             dueDateTextView.setOnClickListenerWithPoint {
                 DueDatePopup(context, childFragmentManager, task.dueTo) { pickedDate ->
