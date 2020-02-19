@@ -35,7 +35,7 @@ class LanguageAdapter(
             }
             languageDialogItemTextView.text = item.getTitle()
             iconImageView.setImageDrawable(item.getIcon(containerView.context))
-            checkedImageView.isVisible = item == LanguageUtils.getCurrentLanguage()
+            checkmarkImageView.isVisible = item == LanguageUtils.getCurrentLanguage()
         }
     }
 }

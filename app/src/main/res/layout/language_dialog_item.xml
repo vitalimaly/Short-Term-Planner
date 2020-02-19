@@ -27,15 +27,14 @@
         android:layout_marginStart="@dimen/m_spacing"
         android:layout_marginEnd="@dimen/m_spacing"
         android:textSize="@dimen/m_text_size"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/checkedImageView"
+        app:layout_constraintEnd_toStartOf="@id/checkmarkImageView"
         app:layout_constraintStart_toEndOf="@id/iconImageView"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Today" />
+        tools:text="English" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/checkedImageView"
+        android:id="@+id/checkmarkImageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="@dimen/m_spacing"
@@ -45,4 +44,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_done" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

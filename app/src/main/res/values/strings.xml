@@ -52,4 +52,5 @@
     <string name="archive_all">Archive All</string>
     <string name="snackbar_tasks_archived">Tasks archived</string>
     <string name="snackbar_tasks_deleted">Tasks deleted</string>
+    <string name="text">Text</string>
 </resources>
