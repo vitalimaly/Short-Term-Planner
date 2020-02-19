@@ -13,9 +13,8 @@ class HomeViewModel : ViewModel() {
         Pref.rateAppLaunchCount += 1
         val isThreeDaysAfterFirstLaunchPassed = OffsetDateTime.now()
             .isAfter(Pref.rateAppLaunchDateTime.plusDays(Constants.DAYS_PASSED_UNTIL_RATE_DIALOG))
-        val showRateDialog = !Pref.rateAppDontShowClicked
-            || Pref.rateAppLaunchCount >= Constants.LAUNCHES_UNTIL_RATE_DIALOG
-            || isThreeDaysAfterFirstLaunchPassed
+        val showRateDialog = !Pref.rateAppNeverShowClicked
+            && (Pref.rateAppLaunchCount >= Constants.LAUNCHES_UNTIL_RATE_DIALOG || isThreeDaysAfterFirstLaunchPassed)
         if (showRateDialog) {
             showRateDialogEvent.call()
         }
