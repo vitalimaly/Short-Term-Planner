@@ -12,8 +12,6 @@ fun String.setTextColor(@ColorInt color: Int) = SpannableString(this).apply {
 }
 
 val CharSequence?.trimmed: String
-    get() {
-        return this?.trim()?.toString() ?: ""
-    }
+    get() = this?.trim()?.toString() ?: ""
 
 fun String.toOffsetDateTime(): OffsetDateTime = DateTimeFormatter.ISO_OFFSET_DATE_TIME.parse(this, OffsetDateTime::from)
