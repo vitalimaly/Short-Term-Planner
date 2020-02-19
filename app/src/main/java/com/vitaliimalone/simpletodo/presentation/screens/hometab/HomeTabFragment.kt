@@ -35,7 +35,6 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setupClickListeners()
         setupViews()
         setupObservers()
     }
@@ -44,9 +43,6 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
         viewModel.getTasksForHomeTab(homeTabType).observe(viewLifecycleOwner, Observer {
             tasksAdapter.tasks = it
         })
-    }
-
-    private fun setupClickListeners() {
     }
 
     private fun onTaskClick(task: Task) {

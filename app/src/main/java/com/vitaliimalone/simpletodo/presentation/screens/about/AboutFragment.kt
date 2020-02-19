@@ -16,9 +16,6 @@ class AboutFragment : BaseFragment(R.layout.about_fragment) {
 
     private fun setupClickListeners() {
         toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
-        privacyTextView.setOnClickListener {
-
-        }
     }
 
     private fun setupViews() {

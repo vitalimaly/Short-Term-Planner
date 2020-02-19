@@ -47,11 +47,7 @@ class SubtasksAdapter(
         else -> throw IllegalArgumentException()
     }
 
-    override fun getItemCount() = if (subtaskListItems.isEmpty()) {
-        1
-    } else {
-        subtaskListItems.size + 1
-    }
+    override fun getItemCount() = subtaskListItems.size + 1
 
     override fun getItemViewType(position: Int) = when (position) {
         subtaskListItems.size -> SubtaskViewType.ADDNEW.ordinal
