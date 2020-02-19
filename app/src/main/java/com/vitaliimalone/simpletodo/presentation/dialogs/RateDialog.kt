@@ -17,13 +17,13 @@ class RateDialog : BaseBottomSheetDialogFragment(R.layout.rate_dialog, false) {
             neverButton.text = Res.string(R.string.rate_dialog_negative)
             laterButton.text = Res.string(R.string.rate_dialog_neutral)
             positiveButton.setOnClickListener {
-                Pref.rateAppDontShowClicked = true
+                Pref.rateAppNeverShowClicked = true
                 val action = RateDialogDirections.actionRateDialogToAppPlayStorePage()
                 findNavController().navigate(action)
                 findNavController().popBackStack()
             }
             neverButton.setOnClickListener {
-                Pref.rateAppDontShowClicked = true
+                Pref.rateAppNeverShowClicked = true
                 findNavController().popBackStack()
             }
             laterButton.setOnClickListener {

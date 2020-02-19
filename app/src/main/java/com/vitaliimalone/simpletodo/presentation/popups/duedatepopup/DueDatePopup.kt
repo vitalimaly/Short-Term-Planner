@@ -8,7 +8,7 @@ import android.widget.PopupWindow
 import androidx.fragment.app.FragmentManager
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.presentation.dialogs.DatePickerDialog
-import com.vitaliimalone.simpletodo.presentation.home.common.HomeTab
+import com.vitaliimalone.simpletodo.presentation.screens.home.common.HomeTab
 import com.vitaliimalone.simpletodo.presentation.utils.DateTimeUtils
 import com.vitaliimalone.simpletodo.presentation.utils.Res
 import com.vitaliimalone.simpletodo.presentation.views.DefaultDividerItemDecoration

@@ -1,7 +1,7 @@
 package com.vitaliimalone.simpletodo.presentation.utils
 
 import com.vitaliimalone.simpletodo.R
-import com.vitaliimalone.simpletodo.presentation.settings.common.Language
+import com.vitaliimalone.simpletodo.presentation.screens.settings.common.Language
 
 object Pref : Preferences(Constants.PREFERENCES_NAME) {
     const val LOCALE_LANGUAGE_KEY = "localeLanguage"
@@ -13,5 +13,5 @@ object Pref : Preferences(Constants.PREFERENCES_NAME) {
     var themeStyleResId by intPref(defaultValue = R.style.AppTheme_PaleGreen)
     var rateAppLaunchCount by intPref()
     var rateAppLaunchDateTime by offsetDateTimePref()
-    var rateAppDontShowClicked by booleanPref()
+    var rateAppNeverShowClicked by booleanPref()
 }

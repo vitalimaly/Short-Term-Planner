@@ -16,13 +16,10 @@ class DueDatePopupAdapter(
         return PopupDueDateViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: PopupDueDateViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PopupDueDateViewHolder, position: Int) =
         holder.bind(DueDate.values()[position])
-    }
 
-    override fun getItemCount(): Int {
-        return DueDate.values().size
-    }
+    override fun getItemCount() = DueDate.values().size
 
     inner class PopupDueDateViewHolder(
         override val containerView: View

@@ -1,7 +1,7 @@
 package com.vitaliimalone.simpletodo.presentation.utils
 
 import com.vitaliimalone.simpletodo.R
-import com.vitaliimalone.simpletodo.presentation.home.common.HomeTab
+import com.vitaliimalone.simpletodo.presentation.screens.home.common.HomeTab
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.Instant
 import org.threeten.bp.LocalDate
@@ -121,16 +121,13 @@ object DateTimeUtils {
         return startDate to endDate
     }
 
-    fun getShortDayMonthDateText(offsetDateTime: OffsetDateTime): String {
-        return offsetDateTime.format(DateTimeFormatter.ofPattern(SHORT_DAY_MONTH_FORMAT))
-    }
+    fun getShortDayMonthDateText(offsetDateTime: OffsetDateTime): String =
+        offsetDateTime.format(DateTimeFormatter.ofPattern(SHORT_DAY_MONTH_FORMAT))
 
-    fun getDueDatePopupEndOfWeekDateText(): String {
-        return if (OffsetDateTime.now().dayOfWeek < DayOfWeek.SATURDAY) {
-            Res.string(R.string.due_date_popup_this_saturday)
-        } else {
-            Res.string(R.string.due_date_popup_next_saturday)
-        }
+    fun getDueDatePopupEndOfWeekDateText() = if (OffsetDateTime.now().dayOfWeek < DayOfWeek.SATURDAY) {
+        Res.string(R.string.due_date_popup_this_saturday)
+    } else {
+        Res.string(R.string.due_date_popup_next_saturday)
     }
 
     fun getMinDate(): OffsetDateTime {
@@ -138,7 +135,5 @@ object DateTimeUtils {
         return OffsetDateTime.ofInstant(minInstant, ZoneOffset.UTC)
     }
 
-    fun getPreviousDayEndDate(): OffsetDateTime {
-        return OffsetDateTime.now().minusDays(1).with(LocalTime.MAX)
-    }
+    fun getPreviousDayEndDate(): OffsetDateTime = OffsetDateTime.now().minusDays(1).with(LocalTime.MAX)
 }

@@ -2,7 +2,7 @@ package com.vitaliimalone.simpletodo.presentation.utils
 
 import android.content.Context
 import android.content.res.Configuration
-import com.vitaliimalone.simpletodo.presentation.settings.common.Language
+import com.vitaliimalone.simpletodo.presentation.screens.settings.common.Language
 import java.util.Locale
 
 // https://medium.com/ironsource-tech-blog/conversion-by-translation-changing-your-android-app-language-at-runtime-5c9daebf9771
@@ -32,13 +32,11 @@ object LanguageUtils {
         overrideLocale(context)
     }
 
-    fun getCurrentLanguage(): Language {
-        return Language.values().find { it.getLocale().language == Pref.localeLanguage } ?: Language.ENGLISH
-    }
+    fun getCurrentLanguage() =
+        Language.values().find { it.getLocale().language == Pref.localeLanguage } ?: Language.ENGLISH
 
-    private fun getLocaleCode(context: Context): String { // just for locale in order to keep Prefs.kt clean
-        return context.getSharedPreferences(Constants.PREFERENCES_NAME, Context.MODE_PRIVATE)
+    private fun getLocaleCode(context: Context) = // just for locale in order to keep Prefs.kt clean
+        context.getSharedPreferences(Constants.PREFERENCES_NAME, Context.MODE_PRIVATE)
             .getString(Pref.LOCALE_LANGUAGE_KEY, Language.ENGLISH.getLocale().language)
             ?: Language.ENGLISH.getLocale().language
-    }
 }

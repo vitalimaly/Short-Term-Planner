@@ -58,58 +58,55 @@ abstract class Preferences(private val name: String? = null) : KoinComponent {
         private val defaultValue: T,
         private val type: StorableType
     ) : PrefDelegate<T?>(prefKey) {
-        override fun getValue(thisRef: Any?, property: KProperty<*>): T =
-            when (type) {
-                StorableType.String ->
-                    prefs.getString(prefKey ?: property.name, defaultValue as String) as T
-                StorableType.Int ->
-                    prefs.getInt(prefKey ?: property.name, defaultValue as Int) as T
-                StorableType.Float ->
-                    prefs.getFloat(prefKey ?: property.name, defaultValue as Float) as T
-                StorableType.Boolean ->
-                    prefs.getBoolean(prefKey ?: property.name, defaultValue as Boolean) as T
-                StorableType.Long ->
-                    prefs.getLong(prefKey ?: property.name, defaultValue as Long) as T
-                StorableType.StringSet ->
-                    prefs.getStringSet(prefKey ?: property.name, defaultValue as Set<String>) as T
-                StorableType.OffsetDateTime ->
-                    prefs.getString(
-                        prefKey ?: property.name,
-                        (defaultValue as OffsetDateTime).toIsoDateTimeString()
-                    )!!.toOffsetDateTime() as T
-            }
+        override fun getValue(thisRef: Any?, property: KProperty<*>): T = when (type) {
+            StorableType.String ->
+                prefs.getString(prefKey ?: property.name, defaultValue as String) as T
+            StorableType.Int ->
+                prefs.getInt(prefKey ?: property.name, defaultValue as Int) as T
+            StorableType.Float ->
+                prefs.getFloat(prefKey ?: property.name, defaultValue as Float) as T
+            StorableType.Boolean ->
+                prefs.getBoolean(prefKey ?: property.name, defaultValue as Boolean) as T
+            StorableType.Long ->
+                prefs.getLong(prefKey ?: property.name, defaultValue as Long) as T
+            StorableType.StringSet ->
+                prefs.getStringSet(prefKey ?: property.name, defaultValue as Set<String>) as T
+            StorableType.OffsetDateTime ->
+                prefs.getString(
+                    prefKey ?: property.name,
+                    (defaultValue as OffsetDateTime).toIsoDateTimeString()
+                )?.toOffsetDateTime() as T
+        }
 
-        override fun setValue(thisRef: Any?, property: KProperty<*>, value: T?) {
-            when (type) {
-                StorableType.String -> {
-                    prefs.edit().putString(prefKey ?: property.name, value as String?).apply()
-                    onPrefChanged(property)
-                }
-                StorableType.Int -> {
-                    prefs.edit().putInt(prefKey ?: property.name, value as Int).apply()
-                    onPrefChanged(property)
-                }
-                StorableType.Float -> {
-                    prefs.edit().putFloat(prefKey ?: property.name, value as Float).apply()
-                    onPrefChanged(property)
-                }
-                StorableType.Boolean -> {
-                    prefs.edit().putBoolean(prefKey ?: property.name, value as Boolean).apply()
-                    onPrefChanged(property)
-                }
-                StorableType.Long -> {
-                    prefs.edit().putLong(prefKey ?: property.name, value as Long).apply()
-                    onPrefChanged(property)
-                }
-                StorableType.StringSet -> {
-                    prefs.edit().putStringSet(prefKey ?: property.name, value as Set<String>).apply()
-                    onPrefChanged(property)
-                }
-                StorableType.OffsetDateTime -> {
-                    prefs.edit().putString(prefKey ?: property.name, (value as OffsetDateTime).toIsoDateTimeString())
-                        .apply()
-                    onPrefChanged(property)
-                }
+        override fun setValue(thisRef: Any?, property: KProperty<*>, value: T?) = when (type) {
+            StorableType.String -> {
+                prefs.edit().putString(prefKey ?: property.name, value as String?).apply()
+                onPrefChanged(property)
+            }
+            StorableType.Int -> {
+                prefs.edit().putInt(prefKey ?: property.name, value as Int).apply()
+                onPrefChanged(property)
+            }
+            StorableType.Float -> {
+                prefs.edit().putFloat(prefKey ?: property.name, value as Float).apply()
+                onPrefChanged(property)
+            }
+            StorableType.Boolean -> {
+                prefs.edit().putBoolean(prefKey ?: property.name, value as Boolean).apply()
+                onPrefChanged(property)
+            }
+            StorableType.Long -> {
+                prefs.edit().putLong(prefKey ?: property.name, value as Long).apply()
+                onPrefChanged(property)
+            }
+            StorableType.StringSet -> {
+                prefs.edit().putStringSet(prefKey ?: property.name, value as Set<String>).apply()
+                onPrefChanged(property)
+            }
+            StorableType.OffsetDateTime -> {
+                prefs.edit().putString(prefKey ?: property.name, (value as OffsetDateTime).toIsoDateTimeString())
+                    .apply()
+                onPrefChanged(property)
             }
         }
     }
@@ -135,7 +132,5 @@ abstract class Preferences(private val name: String? = null) : KoinComponent {
     protected fun offsetDateTimePref(prefKey: String? = null, defaultValue: OffsetDateTime = OffsetDateTime.now()) =
         GenericPrefDelegate(prefKey, defaultValue, StorableType.OffsetDateTime)
 
-    private fun onPrefChanged(property: KProperty<*>) {
-        listeners.forEach { it.onSharedPrefChanged(property) }
-    }
+    private fun onPrefChanged(property: KProperty<*>) = listeners.forEach { it.onSharedPrefChanged(property) }
 }
