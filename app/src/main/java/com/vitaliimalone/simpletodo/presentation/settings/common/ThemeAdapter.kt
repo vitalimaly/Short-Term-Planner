@@ -4,9 +4,11 @@ import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.presentation.utils.Res
+import com.vitaliimalone.simpletodo.presentation.utils.ThemeUtils
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.theme_dialog_item.*
 
@@ -34,6 +36,7 @@ class ThemeAdapter(
                 onItemClicked.invoke(item)
             }
             themeNameTextView.text = item.getTitle()
+            themeTextColorPrimaryTextView.text = Res.string(R.string.text)
             themeColorPrimaryVariantView.setBackgroundColor(
                 Res.themeColor(itemView.context, R.attr.themeColorPrimaryVariant, item.getStyleResId())
             )
@@ -46,7 +49,7 @@ class ThemeAdapter(
             themeColorSecondaryView.setBackgroundColor(
                 Res.themeColor(itemView.context, R.attr.themeColorSecondary, item.getStyleResId())
             )
-            themeTextColorPrimaryView.setBackgroundColor(
+            themeTextColorPrimaryTextView.setTextColor(
                 Res.themeColor(itemView.context, R.attr.themeTextColorPrimary, item.getStyleResId())
             )
             themeStartRadioButton.supportButtonTintList = ColorStateList.valueOf(
@@ -55,6 +58,7 @@ class ThemeAdapter(
             themeEndRadioButton.supportButtonTintList = ColorStateList.valueOf(
                 Res.themeColor(itemView.context, R.attr.themeTextColorSecondary, item.getStyleResId())
             )
+            checkmarkImageView.isVisible = item == ThemeUtils.getCurrentTheme()
         }
     }
 }
