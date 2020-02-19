@@ -1,7 +1,7 @@
 package com.vitaliimalone.simpletodo.presentation.utils
 
 import com.vitaliimalone.simpletodo.R
-import com.vitaliimalone.simpletodo.presentation.settings.common.Language
+import com.vitaliimalone.simpletodo.presentation.screens.settings.common.Language
 
 object Pref : Preferences(Constants.PREFERENCES_NAME) {
     const val LOCALE_LANGUAGE_KEY = "localeLanguage"

@@ -5,7 +5,7 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.presentation.base.BaseBottomSheetDialogFragment
-import com.vitaliimalone.simpletodo.presentation.taskdetails.TaskDetailsViewModel
+import com.vitaliimalone.simpletodo.presentation.screens.taskdetails.TaskDetailsViewModel
 import com.vitaliimalone.simpletodo.presentation.utils.Res
 import kotlinx.android.synthetic.main.delete_task_dialog.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel

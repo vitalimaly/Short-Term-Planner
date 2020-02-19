@@ -2,7 +2,7 @@ package com.vitaliimalone.simpletodo.presentation.utils
 
 import android.content.Context
 import android.content.res.Configuration
-import com.vitaliimalone.simpletodo.presentation.settings.common.Language
+import com.vitaliimalone.simpletodo.presentation.screens.settings.common.Language
 import java.util.Locale
 
 // https://medium.com/ironsource-tech-blog/conversion-by-translation-changing-your-android-app-language-at-runtime-5c9daebf9771
