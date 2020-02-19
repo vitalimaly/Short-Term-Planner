@@ -7,7 +7,6 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
-import com.google.android.material.snackbar.Snackbar
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.domain.models.Task
 import com.vitaliimalone.simpletodo.presentation.base.BaseFragment
@@ -17,7 +16,6 @@ import com.vitaliimalone.simpletodo.presentation.screens.home.common.HomeTab
 import com.vitaliimalone.simpletodo.presentation.screens.hometab.common.TaskTouchHelperCallback
 import com.vitaliimalone.simpletodo.presentation.screens.hometab.common.TasksAdapter
 import com.vitaliimalone.simpletodo.presentation.utils.Res
-import com.vitaliimalone.simpletodo.presentation.utils.extensions.setTextColor
 import com.vitaliimalone.simpletodo.presentation.views.DefaultDividerItemDecoration
 import kotlinx.android.synthetic.main.tasks_pager_item.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -93,19 +91,12 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
         } else if (direction == ItemTouchHelper.RIGHT) {
             viewModel.onSwipeRight(homeTabType, swipedTask)
         }
-        val snackbarTitleColor = Res.color(requireContext(), R.attr.themeTextColorPrimaryInverse)
-        val snackbarTitle =
-            Res.string(R.string.snackbar_task_swiped, getSwipedToTabText(homeTabType, direction))
-                .setTextColor(snackbarTitleColor)
-        val swipedSnackbar = Snackbar.make(
-            tasksPagerRecyclerView,
+        val snackbarTitle = Res.string(R.string.snackbar_task_swiped, getSwipedToTabText(homeTabType, direction))
+        showSnackbar(
             snackbarTitle,
-            Snackbar.LENGTH_LONG
+            Res.string(R.string.snackbar_undo),
+            { viewModel.undoSwipe() }
         )
-        swipedSnackbar.setAction(Res.string(R.string.snackbar_undo)) {
-            viewModel.undoSwipe()
-        }
-        swipedSnackbar.show()
     }
 
     private fun getSwipedToTabText(currentTab: HomeTab, direction: Int): String {

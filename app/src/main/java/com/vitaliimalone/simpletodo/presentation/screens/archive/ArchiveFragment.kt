@@ -6,7 +6,6 @@ import android.view.Gravity
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
-import com.google.android.material.snackbar.Snackbar
 import com.vitaliimalone.simpletodo.R
 import com.vitaliimalone.simpletodo.domain.models.Task
 import com.vitaliimalone.simpletodo.presentation.base.BaseFragment
@@ -56,15 +55,11 @@ class ArchiveFragment : BaseFragment(R.layout.archive_fragment) {
     private fun onTabSwipe(position: Int) {
         val swipedTask = tasksAdapter.tasks[position]
         viewModel.deleteTask(swipedTask)
-        val swipedSnackbar = Snackbar.make(
-            archiveRecyclerView,
+        showSnackbar(
             Res.string(R.string.snackbar_task_deleted),
-            Snackbar.LENGTH_LONG
+            Res.string(R.string.snackbar_undo),
+            { viewModel.undoDelete() }
         )
-        swipedSnackbar.setAction(Res.string(R.string.snackbar_undo)) {
-            viewModel.undoDelete()
-        }
-        swipedSnackbar.show()
     }
 
     private fun setupClickListeners() {
