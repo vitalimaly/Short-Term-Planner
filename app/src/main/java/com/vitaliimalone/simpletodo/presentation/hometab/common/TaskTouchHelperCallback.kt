@@ -52,17 +52,20 @@ class TaskTouchHelperCallback(
             // background
 
             // icon
-            val icon = swipeRightIconId
-            val iconSize = icon.intrinsicHeight
-            val halfIcon = iconSize / 2
-            val top = viewHolder.itemView.top + ((viewHolder.itemView.bottom - viewHolder.itemView.top) / 2 - halfIcon)
-            icon.setBounds(
-                viewHolder.itemView.left + iconHorizontalMargin, top,
-                viewHolder.itemView.left + iconHorizontalMargin + icon.intrinsicWidth,
-                top + icon.intrinsicHeight
-            )
-            icon.setTint(tintColor)
-            icon.draw(c)
+            var iconSize = 0
+            swipeRightIconId?.let {
+                iconSize = it.intrinsicHeight
+                val halfIcon = iconSize / 2
+                val top =
+                    viewHolder.itemView.top + ((viewHolder.itemView.bottom - viewHolder.itemView.top) / 2 - halfIcon)
+                it.setBounds(
+                    viewHolder.itemView.left + iconHorizontalMargin, top,
+                    viewHolder.itemView.left + iconHorizontalMargin + it.intrinsicWidth,
+                    top + it.intrinsicHeight
+                )
+                it.setTint(tintColor)
+                it.draw(c)
+            }
             // icon
 
             // text
@@ -90,15 +93,18 @@ class TaskTouchHelperCallback(
             // background
 
             // icon
-            val icon = swipeLeftIconId
-            val iconSize = icon.intrinsicHeight
-            val halfIcon = iconSize / 2
-            val top = viewHolder.itemView.top + ((viewHolder.itemView.bottom - viewHolder.itemView.top) / 2 - halfIcon)
-            val imgLeft = viewHolder.itemView.right - iconHorizontalMargin - halfIcon * 2
-            icon.setBounds(imgLeft, top, viewHolder.itemView.right - iconHorizontalMargin, top + icon.intrinsicHeight)
-            icon.setTint(tintColor)
-            icon.draw(c)
-            // icon
+            var imgLeft = 0
+            swipeLeftIconId?.let {
+                val iconSize = it.intrinsicHeight
+                val halfIcon = iconSize / 2
+                val top =
+                    viewHolder.itemView.top + ((viewHolder.itemView.bottom - viewHolder.itemView.top) / 2 - halfIcon)
+                imgLeft = viewHolder.itemView.right - iconHorizontalMargin - halfIcon * 2
+                it.setBounds(imgLeft, top, viewHolder.itemView.right - iconHorizontalMargin, top + it.intrinsicHeight)
+                it.setTint(tintColor)
+                it.draw(c)
+                // icon
+            }
 
             // text
             textPaint.isAntiAlias = true

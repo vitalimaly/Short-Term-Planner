@@ -27,13 +27,13 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
         private const val ARG_HOME_TAB_TYPE = "arg_home_tab"
 
         fun newInstance(homeTab: HomeTab) = HomeTabFragment().apply {
-            arguments = bundleOf(ARG_HOME_TAB_TYPE to homeTab.name)
+            arguments = bundleOf(ARG_HOME_TAB_TYPE to homeTab)
         }
     }
 
     private val viewModel: HomeTabViewModel by viewModel()
     private val tasksAdapter by lazy { TasksAdapter(::onTaskClick, ::onTaskLongClick) }
-    private val homeTabType by lazy { HomeTab.valueOf(requireArguments().getString(ARG_HOME_TAB_TYPE)!!) }
+    private val homeTabType by lazy { requireArguments().getSerializable(ARG_HOME_TAB_TYPE) as HomeTab }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

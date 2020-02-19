@@ -9,7 +9,7 @@ import com.vitaliimalone.simpletodo.presentation.utils.ThemeUtils
 
 sealed class Setting {
     abstract fun getTitle(): String
-    abstract fun getIcon(context: Context): Drawable
+    abstract fun getIcon(context: Context): Drawable?
     open fun getSubtitle() = ""
 
     object Theme : Setting() {

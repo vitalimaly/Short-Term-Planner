@@ -2,8 +2,6 @@ package com.vitaliimalone.simpletodo.presentation.utils
 
 import android.content.Context
 import android.graphics.Color
-import android.graphics.Typeface
-import android.graphics.drawable.Drawable
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.DimenRes
@@ -44,15 +42,11 @@ object Res : KoinComponent {
         }
     }
 
-    fun drawable(context: Context, @DrawableRes drawableRes: Int): Drawable {
-        return ContextCompat.getDrawable(context, drawableRes)!! // todo add image error placeholder
-    }
+    fun drawable(context: Context, @DrawableRes drawableRes: Int) = ContextCompat.getDrawable(context, drawableRes)
 
     fun dimen(context: Context, @DimenRes dimenRes: Int) = context.resources.getDimension(dimenRes)
 
-    fun font(context: Context, @FontRes fontRes: Int): Typeface {
-        return ResourcesCompat.getFont(context, fontRes)!! // todo add default typeface fallback
-    }
+    fun font(context: Context, @FontRes fontRes: Int) = ResourcesCompat.getFont(context, fontRes)
 
     fun boolean(context: Context, @AttrRes attrResId: Int): Boolean {
         val a = context.obtainStyledAttributes(null, intArrayOf(attrResId))

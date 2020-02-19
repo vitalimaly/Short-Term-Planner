@@ -10,16 +10,16 @@ enum class Language {
     ENGLISH {
         override fun getLocale(): Locale = Locale.ENGLISH
         override fun getTitle() = Locale.ENGLISH.displayLanguage.capitalize()
-        override fun getIcon(context: Context): Drawable = Res.drawable(context, R.drawable.ic_country_flag_gb)
+        override fun getIcon(context: Context): Drawable? = Res.drawable(context, R.drawable.ic_country_flag_gb)
     },
 
     RUSSIAN {
         override fun getLocale(): Locale = Locale("ru")
         override fun getTitle() = Locale("ru").displayLanguage.capitalize()
-        override fun getIcon(context: Context): Drawable = Res.drawable(context, R.drawable.ic_country_flag_ru)
+        override fun getIcon(context: Context): Drawable? = Res.drawable(context, R.drawable.ic_country_flag_ru)
     };
 
     abstract fun getLocale(): Locale
     abstract fun getTitle(): String
-    abstract fun getIcon(context: Context): Drawable
+    abstract fun getIcon(context: Context): Drawable?
 }
