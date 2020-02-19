@@ -1,4 +1,4 @@
-package com.vitaliimalone.simpletodo.presentation.dialogs
+package com.vitaliimalone.simpletodo.presentation.dialogs.addnewtask
 
 import android.text.InputType
 import android.view.Gravity

@@ -18,13 +18,9 @@ class LanguageAdapter(
         return LanguageViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: LanguageViewHolder, position: Int) {
-        holder.bind(Language.values()[position])
-    }
+    override fun onBindViewHolder(holder: LanguageViewHolder, position: Int) = holder.bind(Language.values()[position])
 
-    override fun getItemCount(): Int {
-        return Language.values().size
-    }
+    override fun getItemCount() = Language.values().size
 
     inner class LanguageViewHolder(
         override val containerView: View

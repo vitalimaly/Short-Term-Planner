@@ -26,13 +26,9 @@ class SettingsAdapter(
         return SettingsViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: SettingsViewHolder, position: Int) {
-        holder.bind(settings[position])
-    }
+    override fun onBindViewHolder(holder: SettingsViewHolder, position: Int) = holder.bind(settings[position])
 
-    override fun getItemCount(): Int {
-        return settings.size
-    }
+    override fun getItemCount() = settings.size
 
     inner class SettingsViewHolder(
         override val containerView: View

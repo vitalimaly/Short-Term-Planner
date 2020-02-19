@@ -28,13 +28,9 @@ class TasksAdapter(
         return TaskViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        holder.bind(tasks[position])
-    }
+    override fun onBindViewHolder(holder: TaskViewHolder, position: Int) = holder.bind(tasks[position])
 
-    override fun getItemCount(): Int {
-        return tasks.size
-    }
+    override fun getItemCount() = tasks.size
 
     inner class TaskViewHolder(
         override val containerView: View

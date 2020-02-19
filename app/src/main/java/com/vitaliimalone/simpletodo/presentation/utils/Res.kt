@@ -19,9 +19,8 @@ import org.koin.core.inject
 object Res : KoinComponent {
     private val context: Context by inject()
 
-    fun string(@StringRes stringRes: Int, vararg formatArgs: Any = emptyArray()): String {
-        return context.getString(stringRes, *formatArgs)
-    }
+    fun string(@StringRes stringRes: Int, vararg formatArgs: Any = emptyArray()) =
+        context.getString(stringRes, *formatArgs)
 
     @ColorInt
     fun color(context: Context, @AttrRes attrResId: Int): Int {
@@ -46,15 +45,13 @@ object Res : KoinComponent {
     }
 
     fun drawable(context: Context, @DrawableRes drawableRes: Int): Drawable {
-        return ContextCompat.getDrawable(context, drawableRes)!!
+        return ContextCompat.getDrawable(context, drawableRes)!! // todo add image error placeholder
     }
 
-    fun dimen(context: Context, @DimenRes dimenRes: Int): Float {
-        return context.resources.getDimension(dimenRes)
-    }
+    fun dimen(context: Context, @DimenRes dimenRes: Int) = context.resources.getDimension(dimenRes)
 
     fun font(context: Context, @FontRes fontRes: Int): Typeface {
-        return ResourcesCompat.getFont(context, fontRes)!!
+        return ResourcesCompat.getFont(context, fontRes)!! // todo add default typeface fallback
     }
 
     fun boolean(context: Context, @AttrRes attrResId: Int): Boolean {

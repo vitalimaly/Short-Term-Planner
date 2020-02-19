@@ -26,10 +26,8 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
     companion object {
         private const val ARG_HOME_TAB_TYPE = "arg_home_tab"
 
-        fun newInstance(homeTab: HomeTab): HomeTabFragment {
-            return HomeTabFragment().apply {
-                arguments = bundleOf(ARG_HOME_TAB_TYPE to homeTab.name)
-            }
+        fun newInstance(homeTab: HomeTab) = HomeTabFragment().apply {
+            arguments = bundleOf(ARG_HOME_TAB_TYPE to homeTab.name)
         }
     }
 

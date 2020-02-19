@@ -97,7 +97,7 @@
         tools:layout="@layout/rate_dialog" />
     <dialog
         android:id="@+id/addNewTaskDialog"
-        android:name="com.vitaliimalone.simpletodo.presentation.dialogs.AddNewTaskDialog"
+        android:name="com.vitaliimalone.simpletodo.presentation.dialogs.addnewtask.AddNewTaskDialog"
         tools:layout="@layout/add_new_task_dialog">
         <argument
             android:name="HomeTab"

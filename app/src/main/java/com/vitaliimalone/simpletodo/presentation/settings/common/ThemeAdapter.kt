@@ -20,13 +20,9 @@ class ThemeAdapter(
         return ThemeViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ThemeViewHolder, position: Int) {
-        holder.bind(Theme.values()[position])
-    }
+    override fun onBindViewHolder(holder: ThemeViewHolder, position: Int) = holder.bind(Theme.values()[position])
 
-    override fun getItemCount(): Int {
-        return Theme.values().size
-    }
+    override fun getItemCount() = Theme.values().size
 
     inner class ThemeViewHolder(
         override val containerView: View

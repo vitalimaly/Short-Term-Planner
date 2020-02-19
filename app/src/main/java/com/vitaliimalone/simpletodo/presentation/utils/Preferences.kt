@@ -135,7 +135,5 @@ abstract class Preferences(private val name: String? = null) : KoinComponent {
     protected fun offsetDateTimePref(prefKey: String? = null, defaultValue: OffsetDateTime = OffsetDateTime.now()) =
         GenericPrefDelegate(prefKey, defaultValue, StorableType.OffsetDateTime)
 
-    private fun onPrefChanged(property: KProperty<*>) {
-        listeners.forEach { it.onSharedPrefChanged(property) }
-    }
+    private fun onPrefChanged(property: KProperty<*>) = listeners.forEach { it.onSharedPrefChanged(property) }
 }

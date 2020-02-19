@@ -15,7 +15,7 @@ sealed class Setting {
     object Theme : Setting() {
         override fun getTitle() = Res.string(R.string.settings_theme_title)
         override fun getIcon(context: Context) = Res.drawable(context, R.drawable.ic_theme)
-        override fun getSubtitle(): String = ThemeUtils.getCurrentTheme().getTitle()
+        override fun getSubtitle() = ThemeUtils.getCurrentTheme().getTitle()
     }
 
     object Language : Setting() {

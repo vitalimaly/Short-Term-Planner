@@ -19,7 +19,6 @@ object ThemeUtils {
         Pref.themeStyleResId = theme.getStyleResId()
     }
 
-    fun getCurrentTheme(): Theme {
-        return Theme.values().find { it.getStyleResId() == Pref.themeStyleResId } ?: Theme.PALE_GREEN
-    }
+    fun getCurrentTheme() =
+        Theme.values().find { it.getStyleResId() == Pref.themeStyleResId } ?: Theme.PALE_GREEN
 }

@@ -7,10 +7,8 @@ import androidx.annotation.ColorInt
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.format.DateTimeFormatter
 
-fun String.setTextColor(@ColorInt color: Int): SpannableString {
-    return SpannableString(this).apply {
-        setSpan(ForegroundColorSpan(color), 0, this.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-    }
+fun String.setTextColor(@ColorInt color: Int) = SpannableString(this).apply {
+    setSpan(ForegroundColorSpan(color), 0, this.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 }
 
 val CharSequence?.trimmed: String
@@ -18,6 +16,4 @@ val CharSequence?.trimmed: String
         return this?.trim()?.toString() ?: ""
     }
 
-fun String.toOffsetDateTime(): OffsetDateTime {
-    return DateTimeFormatter.ISO_OFFSET_DATE_TIME.parse(this, OffsetDateTime::from)
-}
+fun String.toOffsetDateTime(): OffsetDateTime = DateTimeFormatter.ISO_OFFSET_DATE_TIME.parse(this, OffsetDateTime::from)

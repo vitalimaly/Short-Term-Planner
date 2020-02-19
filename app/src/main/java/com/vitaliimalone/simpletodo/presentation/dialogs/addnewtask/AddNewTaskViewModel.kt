@@ -1,4 +1,4 @@
-package com.vitaliimalone.simpletodo.presentation.dialogs
+package com.vitaliimalone.simpletodo.presentation.dialogs.addnewtask
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

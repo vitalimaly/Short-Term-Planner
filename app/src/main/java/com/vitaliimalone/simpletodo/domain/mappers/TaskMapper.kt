@@ -10,18 +10,16 @@ import com.vitaliimalone.simpletodo.presentation.utils.extensions.toOffsetDateTi
 object TaskMapper {
     private val gson by lazy { Gson() }
 
-    fun map(input: TaskEntity): Task {
-        return Task(
-            input.id,
-            input.title,
-            input.description,
-            input.createdAt.toOffsetDateTime(),
-            input.modifiedAt.toOffsetDateTime(),
-            input.dueTo.toOffsetDateTime(),
-            input.isDone,
-            input.isArchived,
-            gson.fromJson<MutableList<String>>(input.tags, object : TypeToken<Collection<String>>() {}.type),
-            gson.fromJson<MutableList<Subtask>>(input.subtasks, object : TypeToken<Collection<Subtask>>() {}.type)
-        )
-    }
+    fun map(input: TaskEntity) = Task(
+        input.id,
+        input.title,
+        input.description,
+        input.createdAt.toOffsetDateTime(),
+        input.modifiedAt.toOffsetDateTime(),
+        input.dueTo.toOffsetDateTime(),
+        input.isDone,
+        input.isArchived,
+        gson.fromJson<MutableList<String>>(input.tags, object : TypeToken<Collection<String>>() {}.type),
+        gson.fromJson<MutableList<Subtask>>(input.subtasks, object : TypeToken<Collection<Subtask>>() {}.type)
+    )
 }

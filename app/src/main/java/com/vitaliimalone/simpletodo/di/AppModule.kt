@@ -14,8 +14,8 @@ import com.vitaliimalone.simpletodo.domain.usecases.GetUnarchivedOverdueTasksCou
 import com.vitaliimalone.simpletodo.domain.usecases.GetUnarchivedOverdueTasksUseCase
 import com.vitaliimalone.simpletodo.domain.usecases.UpdateTaskUseCase
 import com.vitaliimalone.simpletodo.presentation.archive.ArchiveViewModel
-import com.vitaliimalone.simpletodo.presentation.dialogs.AddNewTaskViewModel
 import com.vitaliimalone.simpletodo.presentation.dialogs.DeleteTaskViewModel
+import com.vitaliimalone.simpletodo.presentation.dialogs.addnewtask.AddNewTaskViewModel
 import com.vitaliimalone.simpletodo.presentation.home.HomeViewModel
 import com.vitaliimalone.simpletodo.presentation.hometab.HomeTabViewModel
 import com.vitaliimalone.simpletodo.presentation.notifications.Notificator

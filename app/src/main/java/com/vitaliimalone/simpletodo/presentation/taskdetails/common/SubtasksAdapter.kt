@@ -29,46 +29,37 @@ class SubtasksAdapter(
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when (viewType) {
-            SubtaskViewType.SUBTASK.ordinal -> {
-                TaskViewHolder(inflateView(R.layout.task_details_subtasks_list_item, parent))
-            }
-            SubtaskViewType.ADDNEW.ordinal -> {
-                AddNewTaskViewHolder(inflateView(R.layout.task_details_add_new_subtasks_list_item, parent))
-            }
-            else -> {
-                throw IllegalArgumentException()
-            }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder = when (viewType) {
+        SubtaskViewType.SUBTASK.ordinal -> {
+            TaskViewHolder(inflateView(R.layout.task_details_subtasks_list_item, parent))
+        }
+        SubtaskViewType.ADDNEW.ordinal -> {
+            AddNewTaskViewHolder(inflateView(R.layout.task_details_add_new_subtasks_list_item, parent))
+        }
+        else -> {
+            throw IllegalArgumentException()
         }
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (holder) {
-            is TaskViewHolder -> holder.bind(subtaskListItems[position], position)
-            is AddNewTaskViewHolder -> holder.bind()
-            else -> throw IllegalArgumentException()
-        }
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) = when (holder) {
+        is TaskViewHolder -> holder.bind(subtaskListItems[position], position)
+        is AddNewTaskViewHolder -> holder.bind()
+        else -> throw IllegalArgumentException()
     }
 
-    override fun getItemCount(): Int {
-        return if (subtaskListItems.isEmpty()) {
-            1
-        } else {
-            subtaskListItems.size + 1
-        }
+    override fun getItemCount() = if (subtaskListItems.isEmpty()) {
+        1
+    } else {
+        subtaskListItems.size + 1
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return when (position) {
-            subtaskListItems.size -> SubtaskViewType.ADDNEW.ordinal
-            else -> SubtaskViewType.SUBTASK.ordinal
-        }
+    override fun getItemViewType(position: Int) = when (position) {
+        subtaskListItems.size -> SubtaskViewType.ADDNEW.ordinal
+        else -> SubtaskViewType.SUBTASK.ordinal
     }
 
-    private fun inflateView(@LayoutRes resource: Int, parent: ViewGroup): View {
-        return LayoutInflater.from(parent.context).inflate(resource, parent, false)
-    }
+    private fun inflateView(@LayoutRes resource: Int, parent: ViewGroup) =
+        LayoutInflater.from(parent.context).inflate(resource, parent, false)
 
     private fun addSubtask() {
         subtaskListItems.forEach { it.isFocused = false }
