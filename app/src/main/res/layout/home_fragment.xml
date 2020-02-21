@@ -40,6 +40,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/home_date_range_text_view_margin_start"
             android:textSize="@dimen/xl_text_size"
+            android:ellipsize="end"
+            android:maxLines="2"
             app:layout_constraintBottom_toBottomOf="@id/settingsImageView"
             app:layout_constraintEnd_toStartOf="@id/settingsImageView"
             app:layout_constraintHorizontal_bias="0"
