@@ -5,7 +5,7 @@
     <string name="home_tab_todo">Сделать</string>
     <string name="today_date">Сегодня</string>
     <string name="tomorrow_date">Завтра</string>
-    <string name="from_date">С</string>
+    <string name="from_date">Начиная с %s</string>
     <string name="add_task_dialog_title_hint">Добавить задачу</string>
     <string name="due_to_date">До %s</string>
     <string name="snackbar_undo">Отменить</string>
