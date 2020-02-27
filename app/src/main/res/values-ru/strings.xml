@@ -53,4 +53,5 @@
     <string name="snackbar_tasks_archived">Задачи архивированны</string>
     <string name="snackbar_tasks_deleted">Задачи удалены</string>
     <string name="text">Текст</string>
+    <string name="date_picker_dialog_title">Выберите дату</string>
 </resources>

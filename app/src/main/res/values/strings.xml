@@ -53,4 +53,5 @@
     <string name="snackbar_tasks_archived">Tasks archived</string>
     <string name="snackbar_tasks_deleted">Tasks deleted</string>
     <string name="text">Text</string>
+    <string name="date_picker_dialog_title">Select a Date</string>
 </resources>
