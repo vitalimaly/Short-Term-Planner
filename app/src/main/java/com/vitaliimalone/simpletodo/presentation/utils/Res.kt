@@ -7,6 +7,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.DimenRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.FontRes
+import androidx.annotation.Px
 import androidx.annotation.StringRes
 import androidx.annotation.StyleRes
 import androidx.core.content.ContextCompat
@@ -44,6 +45,7 @@ object Res : KoinComponent {
 
     fun drawable(context: Context, @DrawableRes drawableRes: Int) = ContextCompat.getDrawable(context, drawableRes)
 
+    @Px
     fun dimen(context: Context, @DimenRes dimenRes: Int) = context.resources.getDimension(dimenRes)
 
     fun font(context: Context, @FontRes fontRes: Int) = ResourcesCompat.getFont(context, fontRes)
