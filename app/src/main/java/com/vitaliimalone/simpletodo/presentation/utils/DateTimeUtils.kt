@@ -28,7 +28,7 @@ object DateTimeUtils {
             }
             HomeTab.TODO -> {
                 val start = startDate.format(DateTimeFormatter.ofPattern(SHORT_DAY_MONTH_FORMAT))
-                "${Res.string(R.string.from_date)} $start"
+                Res.string(R.string.from_date, start)
             }
         }
     }

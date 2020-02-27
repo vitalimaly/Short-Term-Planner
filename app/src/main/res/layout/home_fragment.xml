@@ -19,6 +19,7 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabsTabLayout"
+            android:theme="@style/HomeTabLayoutTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="?themeColorPrimary"
@@ -39,6 +40,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/home_date_range_text_view_margin_start"
+            android:ellipsize="end"
+            android:maxLines="2"
             android:textSize="@dimen/xl_text_size"
             app:layout_constraintBottom_toBottomOf="@id/settingsImageView"
             app:layout_constraintEnd_toStartOf="@id/settingsImageView"

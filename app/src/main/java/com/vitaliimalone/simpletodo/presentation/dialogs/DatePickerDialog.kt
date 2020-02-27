@@ -3,6 +3,8 @@ package com.vitaliimalone.simpletodo.presentation.dialogs
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.vitaliimalone.simpletodo.R
+import com.vitaliimalone.simpletodo.presentation.utils.Res
 import org.threeten.bp.Instant
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.ZoneOffset
@@ -15,6 +17,7 @@ object DatePickerDialog {
             .build()
         val datePicker = MaterialDatePicker.Builder
             .datePicker()
+            .setTitleText(Res.string(R.string.date_picker_dialog_title))
             .setCalendarConstraints(calendarConstraints)
             .setSelection(currentDate.toInstant().toEpochMilli())
             .build()
