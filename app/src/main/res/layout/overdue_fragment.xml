@@ -39,7 +39,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.vitaliimalone.simpletodo.presentation.views.StripedRecyclerView
+    <com.vitaliimalone.shorttermplanner.presentation.views.StripedRecyclerView
         android:id="@+id/overdueRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"

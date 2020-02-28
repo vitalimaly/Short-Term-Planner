@@ -1,0 +1,136 @@
+package com.vitaliimalone.shorttermplanner.presentation.utils
+
+import android.content.Context
+import android.content.SharedPreferences
+import com.vitaliimalone.shorttermplanner.presentation.utils.extensions.toIsoDateTimeString
+import com.vitaliimalone.shorttermplanner.presentation.utils.extensions.toOffsetDateTime
+import org.koin.core.KoinComponent
+import org.koin.core.inject
+import org.threeten.bp.OffsetDateTime
+import kotlin.reflect.KProperty
+
+/**
+ * Represents a single [SharedPreferences] file.
+ */
+// Ignore unused warning. This class needs to handle all data types, regardless of whether the method is used.
+// Allow unchecked casts - we can blindly trust that data we read is the same type we saved it as..
+// https://gist.github.com/davidwhitman/b83e1744e8435a2c8cba262c1179f1a8
+@Suppress("UNCHECKED_CAST", "unused")
+abstract class Preferences(private val name: String? = null) : KoinComponent {
+    private val context: Context by inject()
+    private val prefs: SharedPreferences by lazy {
+        context.getSharedPreferences(name ?: javaClass.simpleName, Context.MODE_PRIVATE)
+    }
+
+    private val listeners = mutableListOf<SharedPrefsListener>()
+
+    abstract class PrefDelegate<T>(val prefKey: String?) {
+        abstract operator fun getValue(thisRef: Any?, property: KProperty<*>): T
+        abstract operator fun setValue(thisRef: Any?, property: KProperty<*>, value: T)
+    }
+
+    interface SharedPrefsListener {
+        fun onSharedPrefChanged(property: KProperty<*>)
+    }
+
+    fun addListener(sharedPrefsListener: SharedPrefsListener) {
+        listeners.add(sharedPrefsListener)
+    }
+
+    fun removeListener(sharedPrefsListener: SharedPrefsListener) {
+        listeners.remove(sharedPrefsListener)
+    }
+
+    fun clearListeners() = listeners.clear()
+
+    protected enum class StorableType {
+        String,
+        Int,
+        Float,
+        Boolean,
+        Long,
+        StringSet,
+        OffsetDateTime
+    }
+
+    protected inner class GenericPrefDelegate<T>(
+        prefKey: String? = null,
+        private val defaultValue: T,
+        private val type: StorableType
+    ) : PrefDelegate<T?>(prefKey) {
+        override fun getValue(thisRef: Any?, property: KProperty<*>): T = when (type) {
+            StorableType.String ->
+                prefs.getString(prefKey ?: property.name, defaultValue as String) as T
+            StorableType.Int ->
+                prefs.getInt(prefKey ?: property.name, defaultValue as Int) as T
+            StorableType.Float ->
+                prefs.getFloat(prefKey ?: property.name, defaultValue as Float) as T
+            StorableType.Boolean ->
+                prefs.getBoolean(prefKey ?: property.name, defaultValue as Boolean) as T
+            StorableType.Long ->
+                prefs.getLong(prefKey ?: property.name, defaultValue as Long) as T
+            StorableType.StringSet ->
+                prefs.getStringSet(prefKey ?: property.name, defaultValue as Set<String>) as T
+            StorableType.OffsetDateTime ->
+                prefs.getString(
+                    prefKey ?: property.name,
+                    (defaultValue as OffsetDateTime).toIsoDateTimeString()
+                )?.toOffsetDateTime() as T
+        }
+
+        override fun setValue(thisRef: Any?, property: KProperty<*>, value: T?) = when (type) {
+            StorableType.String -> {
+                prefs.edit().putString(prefKey ?: property.name, value as String?).apply()
+                onPrefChanged(property)
+            }
+            StorableType.Int -> {
+                prefs.edit().putInt(prefKey ?: property.name, value as Int).apply()
+                onPrefChanged(property)
+            }
+            StorableType.Float -> {
+                prefs.edit().putFloat(prefKey ?: property.name, value as Float).apply()
+                onPrefChanged(property)
+            }
+            StorableType.Boolean -> {
+                prefs.edit().putBoolean(prefKey ?: property.name, value as Boolean).apply()
+                onPrefChanged(property)
+            }
+            StorableType.Long -> {
+                prefs.edit().putLong(prefKey ?: property.name, value as Long).apply()
+                onPrefChanged(property)
+            }
+            StorableType.StringSet -> {
+                prefs.edit().putStringSet(prefKey ?: property.name, value as Set<String>).apply()
+                onPrefChanged(property)
+            }
+            StorableType.OffsetDateTime -> {
+                prefs.edit().putString(prefKey ?: property.name, (value as OffsetDateTime).toIsoDateTimeString())
+                    .apply()
+                onPrefChanged(property)
+            }
+        }
+    }
+
+    protected fun stringPref(prefKey: String? = null, defaultValue: String = "") =
+        GenericPrefDelegate(prefKey, defaultValue, StorableType.String)
+
+    protected fun intPref(prefKey: String? = null, defaultValue: Int = 0) =
+        GenericPrefDelegate(prefKey, defaultValue, StorableType.Int)
+
+    protected fun floatPref(prefKey: String? = null, defaultValue: Float = 0f) =
+        GenericPrefDelegate(prefKey, defaultValue, StorableType.Float)
+
+    protected fun booleanPref(prefKey: String? = null, defaultValue: Boolean = false) =
+        GenericPrefDelegate(prefKey, defaultValue, StorableType.Boolean)
+
+    protected fun longPref(prefKey: String? = null, defaultValue: Long = 0L) =
+        GenericPrefDelegate(prefKey, defaultValue, StorableType.Long)
+
+    protected fun stringSetPref(prefKey: String? = null, defaultValue: Set<String> = HashSet()) =
+        GenericPrefDelegate(prefKey, defaultValue, StorableType.StringSet)
+
+    protected fun offsetDateTimePref(prefKey: String? = null, defaultValue: OffsetDateTime = OffsetDateTime.now()) =
+        GenericPrefDelegate(prefKey, defaultValue, StorableType.OffsetDateTime)
+
+    private fun onPrefChanged(property: KProperty<*>) = listeners.forEach { it.onSharedPrefChanged(property) }
+}
