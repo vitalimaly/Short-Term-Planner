@@ -54,6 +54,8 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowLightStatusBar">?themeIsLight</item>
         <item name="android:statusBarColor">?themeColorPrimaryVariant</item>
+        <item name="android:windowLightNavigationBar">?themeIsLight</item>
+        <item name="android:navigationBarColor">?themeColorPrimaryVariant</item>
         <item name="android:windowBackground">?themeColorBackground</item>
         <!-- System settings -->
     </style>
