@@ -6,6 +6,14 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
+def appName = 'Short Plan'
+
+static def buildTime() {
+    def df = new SimpleDateFormat("yyyy-MM-dd")
+    df.setTimeZone(TimeZone.getTimeZone("UTC"))
+    return df.format(new Date())
+}
+
 android {
     compileSdkVersion 29
     defaultConfig {
@@ -19,14 +27,13 @@ android {
     buildTypes {
         debug {
             minifyEnabled false
-            versionNameSuffix "-SNAPSHOT"
-            resValue("string", "app_name", "Short-Term Planner(Debug)")
+            resValue("string", "app_name", "${appName} (Debug)")
         }
         release {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            resValue("string", "app_name", "Short-Term Planner")
+            resValue("string", "app_name", "${appName}")
         }
     }
     compileOptions {
@@ -38,19 +45,13 @@ android {
     }
     android.applicationVariants.all { variant ->
         variant.outputs.all {
-            outputFileName = "${variant.name}-${variant.versionName}-${buildTime()}.apk"
+            outputFileName = "${appName} ${variant.versionName} ${variant.name} ${buildTime()}.apk"
         }
     }
 }
 
 androidExtensions {
     experimental = true
-}
-
-static def buildTime() {
-    def df = new SimpleDateFormat("yyyy-MM-dd")
-    df.setTimeZone(TimeZone.getTimeZone("UTC"))
-    return df.format(new Date())
 }
 
 dependencies {
