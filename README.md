@@ -1,1 +1,1 @@
-# Simple To-Do
+# Short-Term Planner
