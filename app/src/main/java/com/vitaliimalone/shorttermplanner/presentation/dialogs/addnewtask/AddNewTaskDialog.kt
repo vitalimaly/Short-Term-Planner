@@ -32,29 +32,31 @@ class AddNewTaskDialog : BaseBottomSheetDialogFragment(R.layout.add_new_task_dia
                 findNavController().popBackStack()
             }
             addImageView.setEnabledWithAlpha(false)
-            titleEditText.hint = Res.string(R.string.add_task_dialog_title_hint)
-            titleEditText.addTextChangedListener(onTextChanged = { text, _, _, _ ->
-                addImageView.setEnabledWithAlpha(text.trimmed.isNotEmpty())
-                task.title = text.trimmed
-            })
-            titleEditText.setOnEditorActionListener { v, actionId, _ ->
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    if (titleEditText.text.trimmed.isNotEmpty()) {
-                        v.clearFocus()
-                        v.hideKeyboard()
-                        viewModel.addNewTask(task)
-                        findNavController().popBackStack()
+            titleEditText.apply {
+                hint = Res.string(R.string.add_task_dialog_title_hint)
+                addTextChangedListener(onTextChanged = { text, _, _, _ ->
+                    addImageView.setEnabledWithAlpha(text.trimmed.isNotEmpty())
+                    task.title = text.trimmed
+                })
+                setOnEditorActionListener { v, actionId, _ ->
+                    if (actionId == EditorInfo.IME_ACTION_DONE) {
+                        if (text.trimmed.isNotEmpty()) {
+                            v.clearFocus()
+                            v.hideKeyboard()
+                            viewModel.addNewTask(task)
+                            findNavController().popBackStack()
+                        }
+                        true
+                    } else {
+                        false
                     }
-                    true
-                } else {
-                    false
                 }
+                inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
+                isSingleLine = true
+                maxLines = 4
+                setHorizontallyScrolling(false)
+                imeOptions = EditorInfo.IME_ACTION_DONE
             }
-            titleEditText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
-            titleEditText.isSingleLine = true
-            titleEditText.maxLines = 4
-            titleEditText.setHorizontallyScrolling(false)
-            titleEditText.imeOptions = EditorInfo.IME_ACTION_DONE
             dueDateTextView.text = Res.string(R.string.due_to_date, DateTimeUtils.getTaskDueDateText(task.dueTo))
             dueDateTextView.setOnClickListenerWithPoint {
                 DueDatePopup(context, childFragmentManager, task.dueTo) { pickedDate ->
