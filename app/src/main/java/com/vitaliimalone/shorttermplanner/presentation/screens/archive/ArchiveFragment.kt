@@ -13,6 +13,7 @@ import com.vitaliimalone.shorttermplanner.presentation.popups.duedatepopup.DueDa
 import com.vitaliimalone.shorttermplanner.presentation.screens.hometab.common.TaskTouchHelperCallback
 import com.vitaliimalone.shorttermplanner.presentation.screens.hometab.common.TasksAdapter
 import com.vitaliimalone.shorttermplanner.presentation.utils.Res
+import com.vitaliimalone.shorttermplanner.presentation.utils.extensions.setEnabledWithAlpha
 import com.vitaliimalone.shorttermplanner.presentation.views.DefaultDividerItemDecoration
 import kotlinx.android.synthetic.main.archive_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -31,6 +32,7 @@ class ArchiveFragment : BaseFragment(R.layout.archive_fragment) {
     private fun setupViews() {
         toolbar.title = Res.string(R.string.archive_toolbar_title)
         clearAllTextView.text = Res.string(R.string.clear_all)
+        clearAllTextView.setEnabledWithAlpha(false)
         archiveRecyclerView.adapter = tasksAdapter
         archiveRecyclerView.addItemDecoration(
             DefaultDividerItemDecoration(
@@ -75,6 +77,7 @@ class ArchiveFragment : BaseFragment(R.layout.archive_fragment) {
 
     private fun setupObservers() {
         viewModel.archivedTasks.observe(viewLifecycleOwner, Observer {
+            clearAllTextView.setEnabledWithAlpha(it.isNotEmpty())
             tasksAdapter.tasks = it
         })
     }

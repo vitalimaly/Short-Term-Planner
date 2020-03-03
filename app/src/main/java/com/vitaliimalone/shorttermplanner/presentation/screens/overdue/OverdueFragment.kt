@@ -13,6 +13,7 @@ import com.vitaliimalone.shorttermplanner.presentation.popups.duedatepopup.DueDa
 import com.vitaliimalone.shorttermplanner.presentation.screens.hometab.common.TaskTouchHelperCallback
 import com.vitaliimalone.shorttermplanner.presentation.screens.hometab.common.TasksAdapter
 import com.vitaliimalone.shorttermplanner.presentation.utils.Res
+import com.vitaliimalone.shorttermplanner.presentation.utils.extensions.setEnabledWithAlpha
 import com.vitaliimalone.shorttermplanner.presentation.views.DefaultDividerItemDecoration
 import kotlinx.android.synthetic.main.overdue_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -31,6 +32,7 @@ class OverdueFragment : BaseFragment(R.layout.overdue_fragment) {
     private fun setupViews() {
         toolbar.title = Res.string(R.string.overdue_toolbar_title)
         archiveAllTextView.text = Res.string(R.string.archive_all)
+        archiveAllTextView.setEnabledWithAlpha(false)
         overdueRecyclerView.adapter = tasksAdapter
         overdueRecyclerView.addItemDecoration(
             DefaultDividerItemDecoration(
@@ -74,6 +76,7 @@ class OverdueFragment : BaseFragment(R.layout.overdue_fragment) {
 
     private fun setupObservers() {
         viewModel.unarchivedOverdueTasks.observe(viewLifecycleOwner, Observer {
+            archiveAllTextView.setEnabledWithAlpha(it.isNotEmpty())
             tasksAdapter.tasks = it
         })
     }
