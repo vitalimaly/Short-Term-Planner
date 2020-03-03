@@ -3,6 +3,7 @@ package com.vitaliimalone.shorttermplanner.presentation.screens.overdue
 import android.graphics.Point
 import android.os.Bundle
 import android.view.Gravity
+import androidx.appcompat.widget.TooltipCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -31,8 +32,8 @@ class OverdueFragment : BaseFragment(R.layout.overdue_fragment) {
 
     private fun setupViews() {
         toolbar.title = Res.string(R.string.overdue_toolbar_title)
-        archiveAllTextView.text = Res.string(R.string.archive_all)
-        archiveAllTextView.setEnabledWithAlpha(false)
+        TooltipCompat.setTooltipText(archiveAllImageView, Res.string(R.string.archive_all))
+        archiveAllImageView.setEnabledWithAlpha(false)
         overdueRecyclerView.adapter = tasksAdapter
         overdueRecyclerView.addItemDecoration(
             DefaultDividerItemDecoration(
@@ -65,7 +66,7 @@ class OverdueFragment : BaseFragment(R.layout.overdue_fragment) {
 
     private fun setupClickListeners() {
         toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
-        archiveAllTextView.setOnClickListener {
+        archiveAllImageView.setOnClickListener {
             viewModel.archiveAllOverdueTasks()
             showSnackbar(
                 Res.string(R.string.snackbar_tasks_archived),
@@ -76,7 +77,7 @@ class OverdueFragment : BaseFragment(R.layout.overdue_fragment) {
 
     private fun setupObservers() {
         viewModel.unarchivedOverdueTasks.observe(viewLifecycleOwner, Observer {
-            archiveAllTextView.setEnabledWithAlpha(it.isNotEmpty())
+            archiveAllImageView.setEnabledWithAlpha(it.isNotEmpty())
             tasksAdapter.tasks = it
         })
     }

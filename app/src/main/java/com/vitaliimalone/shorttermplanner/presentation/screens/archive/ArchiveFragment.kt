@@ -3,6 +3,7 @@ package com.vitaliimalone.shorttermplanner.presentation.screens.archive
 import android.graphics.Point
 import android.os.Bundle
 import android.view.Gravity
+import androidx.appcompat.widget.TooltipCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -31,8 +32,8 @@ class ArchiveFragment : BaseFragment(R.layout.archive_fragment) {
 
     private fun setupViews() {
         toolbar.title = Res.string(R.string.archive_toolbar_title)
-        clearAllTextView.text = Res.string(R.string.clear_all)
-        clearAllTextView.setEnabledWithAlpha(false)
+        TooltipCompat.setTooltipText(clearAllImageView, Res.string(R.string.clear_all))
+        clearAllImageView.setEnabledWithAlpha(false)
         archiveRecyclerView.adapter = tasksAdapter
         archiveRecyclerView.addItemDecoration(
             DefaultDividerItemDecoration(
@@ -66,7 +67,7 @@ class ArchiveFragment : BaseFragment(R.layout.archive_fragment) {
 
     private fun setupClickListeners() {
         toolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
-        clearAllTextView.setOnClickListener {
+        clearAllImageView.setOnClickListener {
             viewModel.deleteAllArchivedTasks()
             showSnackbar(
                 Res.string(R.string.snackbar_tasks_deleted),
@@ -77,7 +78,7 @@ class ArchiveFragment : BaseFragment(R.layout.archive_fragment) {
 
     private fun setupObservers() {
         viewModel.archivedTasks.observe(viewLifecycleOwner, Observer {
-            clearAllTextView.setEnabledWithAlpha(it.isNotEmpty())
+            clearAllImageView.setEnabledWithAlpha(it.isNotEmpty())
             tasksAdapter.tasks = it
         })
     }
