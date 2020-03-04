@@ -27,6 +27,7 @@ class AddNewTaskDialog : BaseBottomSheetDialogFragment(R.layout.add_new_task_dia
     override fun onDialogCreated(dialog: BottomSheetDialog) {
         val task = Task(dueTo = DateTimeUtils.getAddNewTaskDate(args.HomeTab))
         dialog.apply {
+            titleEditText.requestFocus()
             addImageView.setOnClickListener {
                 viewModel.addNewTask(task)
                 findNavController().popBackStack()
