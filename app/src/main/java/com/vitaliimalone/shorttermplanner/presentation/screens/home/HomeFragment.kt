@@ -10,7 +10,6 @@ import com.vitaliimalone.shorttermplanner.presentation.base.BaseFragment
 import com.vitaliimalone.shorttermplanner.presentation.screens.home.common.HomeTab
 import com.vitaliimalone.shorttermplanner.presentation.screens.home.common.HomeTabFragmentAdapter
 import com.vitaliimalone.shorttermplanner.presentation.utils.DateTimeUtils
-import com.vitaliimalone.shorttermplanner.presentation.utils.extensions.showKeyboard
 import kotlinx.android.synthetic.main.home_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -32,8 +31,7 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
     }
 
     private fun setupClickListeners() {
-        addFab.setOnClickListener { view ->
-            showKeyboard(view)
+        addFab.setOnClickListener {
             val currentTab = HomeTab.values()[tasksViewPager.currentItem]
             val action = HomeFragmentDirections.actionHomeFragmentToAddNewTaskDialog(currentTab)
             findNavController().navigate(action)
