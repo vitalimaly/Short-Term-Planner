@@ -107,7 +107,7 @@ class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
     }
 
     private fun updateTaskDueDate(offsetDateTime: OffsetDateTime) {
-        dueTextView.text = Res.string(R.string.due_to_date, DateTimeUtils.getTaskDueDateFullText(offsetDateTime))
+        dueTextView.text = Res.string(R.string.due_to_date, DateTimeUtils.getTaskDueDateLongText(offsetDateTime))
     }
 
     private fun setupObservers() {
