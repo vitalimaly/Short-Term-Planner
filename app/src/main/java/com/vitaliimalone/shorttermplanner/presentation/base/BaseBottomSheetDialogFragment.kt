@@ -1,6 +1,7 @@
 package com.vitaliimalone.shorttermplanner.presentation.base
 
 import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,6 +12,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.vitaliimalone.shorttermplanner.R
+import com.vitaliimalone.shorttermplanner.presentation.utils.extensions.hideKeyboard
 
 abstract class BaseBottomSheetDialogFragment(
     @LayoutRes
@@ -36,6 +38,11 @@ abstract class BaseBottomSheetDialogFragment(
     override fun setupDialog(dialog: Dialog, style: Int) {
         super.setupDialog(dialog, style)
         onDialogCreated(dialog as BottomSheetDialog)
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        hideKeyboard()
     }
 
     // might need to change with custom BottomSheetBehavior
