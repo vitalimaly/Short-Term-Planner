@@ -40,6 +40,10 @@ class ArchiveViewModel(
 
     fun updateTaskDueDate(task: Task, dueDate: OffsetDateTime) {
         task.dueTo = dueDate
+        updateTask(task)
+    }
+
+    private fun updateTask(task: Task) {
         viewModelScope.launch {
             updateTaskUseCase.updateTasks(listOf(task))
         }
@@ -59,5 +63,10 @@ class ArchiveViewModel(
         viewModelScope.launch {
             addTasksUseCase.addTask(lastDeletedTasks)
         }
+    }
+
+    fun updateTaskIsDone(task: Task, isDone: Boolean) {
+        task.isDone = isDone
+        updateTask(task)
     }
 }

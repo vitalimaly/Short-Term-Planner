@@ -95,6 +95,10 @@ class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
                 showAtLocation(dueClickableView, Gravity.NO_GRAVITY, it.x, it.y)
             }
         }
+        doneCheckBox.isChecked = task.isDone
+        doneCheckBox.setOnCheckedChangeListener { _, isChecked ->
+            task.isDone = isChecked
+        }
         drawSubtasksBotLine()
     }
 

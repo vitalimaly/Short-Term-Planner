@@ -15,7 +15,8 @@ import kotlinx.android.synthetic.main.tasks_list_item.*
 
 class TasksAdapter(
     private val onTaskClick: ((Task) -> Unit),
-    private val onTaskLongClick: ((Task, Point) -> Unit)
+    private val onTaskLongClick: ((Task, Point) -> Unit),
+    private val onTaskDoneClick: ((Task, Boolean) -> Unit)
 ) : RecyclerView.Adapter<TasksAdapter.TaskViewHolder>() {
     var tasks = listOf<Task>()
         set(value) {
@@ -41,11 +42,14 @@ class TasksAdapter(
             dueDateTextView.text = DateTimeUtils.getTaskDueDateText(task.dueTo)
             tagsTextView.isVisible = task.tags.isNotEmpty()
             tagsTextView.text = task.tags.joinToString()
+            doneCheckBox.setOnCheckedChangeListener { _, isChecked ->
+                onTaskDoneClick(task, isChecked)
+            }
             containerView.setOnClickListener {
-                onTaskClick.invoke(task)
+                onTaskClick(task)
             }
             containerView.setOnLongClickListenerWithPoint {
-                onTaskLongClick.invoke(task, it)
+                onTaskLongClick(task, it)
             }
         }
     }

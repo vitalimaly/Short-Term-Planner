@@ -73,4 +73,9 @@ class HomeTabViewModel(
         task.dueTo = dueDate
         updateTask(task)
     }
+
+    fun updateTaskIsDone(task: Task, isDone: Boolean) {
+        task.isDone = isDone
+        updateTask(task)
+    }
 }

@@ -20,9 +20,7 @@ class OverdueViewModel(
     fun archiveTask(task: Task) {
         lastSwipedTask = task.copy()
         task.isArchived = true
-        viewModelScope.launch {
-            updateTaskUseCase.updateTasks(listOf(task))
-        }
+        updateTask(task)
     }
 
     fun undoArchive() {
@@ -35,6 +33,10 @@ class OverdueViewModel(
 
     fun updateTaskDueDate(task: Task, dueDate: OffsetDateTime) {
         task.dueTo = dueDate
+        updateTask(task)
+    }
+
+    private fun updateTask(task: Task) {
         viewModelScope.launch {
             updateTaskUseCase.updateTasks(listOf(task))
         }
@@ -55,5 +57,10 @@ class OverdueViewModel(
         viewModelScope.launch {
             updateTaskUseCase.updateTasks(lastArchivedTasks)
         }
+    }
+
+    fun updateTaskIsDone(task: Task, isDone: Boolean) {
+        task.isDone = isDone
+        updateTask(task)
     }
 }
