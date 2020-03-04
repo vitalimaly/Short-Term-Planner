@@ -2,6 +2,7 @@ package com.vitaliimalone.shorttermplanner.presentation.utils
 
 import com.vitaliimalone.shorttermplanner.R
 import com.vitaliimalone.shorttermplanner.presentation.screens.home.common.HomeTab
+import com.vitaliimalone.shorttermplanner.presentation.screens.settings.common.Language
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.Instant
 import org.threeten.bp.LocalDate
@@ -12,22 +13,49 @@ import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.temporal.TemporalAdjusters
 
 object DateTimeUtils {
-    private const val FULL_DAY_MONTH_FORMAT = "EEEE, MMMM d"
-    private const val SHORT_DAY_MONTH_FORMAT = "EEE, MMM d"
+    private fun getDateNumbersLongFormat() = when (LanguageUtils.getCurrentLanguage()) {
+        Language.ENGLISH -> "MM/dd/yyyy"
+        Language.RUSSIAN -> "d.M.yyyy"
+    }
+
+    private fun getDateNumbersShortFormat() = when (LanguageUtils.getCurrentLanguage()) {
+        Language.ENGLISH -> "M/d/yyyy"
+        Language.RUSSIAN -> "d.M.yyyy"
+    }
+
+    private fun getDateNumbersTimeNumbersLongFormat() = when (LanguageUtils.getCurrentLanguage()) {
+        Language.ENGLISH -> "MM/dd/yyyy hh:mm a"
+        Language.RUSSIAN -> "dd.MM.yyyy HH:mm"
+    }
+
+    private fun getDateNumbersTimeNumbersShortFormat() = when (LanguageUtils.getCurrentLanguage()) {
+        Language.ENGLISH -> "M/d/yyyy h:m a"
+        Language.RUSSIAN -> "d.M.yyyy H:m"
+    }
+
+    private fun getDayOfWeekTextDateTextLongFormat() = when (LanguageUtils.getCurrentLanguage()) {
+        Language.ENGLISH -> "EEEE, MMMM d"
+        Language.RUSSIAN -> "EEEE,  d MMMM"
+    }
+
+    private fun getDayOfWeekTextDateTextShortFormat() = when (LanguageUtils.getCurrentLanguage()) {
+        Language.ENGLISH -> "EEE, MMM d"
+        Language.RUSSIAN -> "EEE,  d MMM"
+    }
 
     fun getTabStartEndDateText(homeTab: HomeTab): String {
         val (startDate, endDate) = getTabStartEndDate(homeTab)
         return when (homeTab) {
             HomeTab.TODAY -> {
-                startDate.format(DateTimeFormatter.ofPattern(FULL_DAY_MONTH_FORMAT))
+                startDate.format(DateTimeFormatter.ofPattern(getDayOfWeekTextDateTextLongFormat()))
             }
             HomeTab.WEEK, HomeTab.MONTH -> {
-                val start = startDate.format(DateTimeFormatter.ofPattern(SHORT_DAY_MONTH_FORMAT))
-                val end = endDate.format(DateTimeFormatter.ofPattern(SHORT_DAY_MONTH_FORMAT))
+                val start = startDate.format(DateTimeFormatter.ofPattern(getDayOfWeekTextDateTextShortFormat()))
+                val end = endDate.format(DateTimeFormatter.ofPattern(getDayOfWeekTextDateTextShortFormat()))
                 "$start - $end"
             }
             HomeTab.TODO -> {
-                val start = startDate.format(DateTimeFormatter.ofPattern(SHORT_DAY_MONTH_FORMAT))
+                val start = startDate.format(DateTimeFormatter.ofPattern(getDayOfWeekTextDateTextShortFormat()))
                 Res.string(R.string.from_date, start)
             }
         }
@@ -52,17 +80,17 @@ object DateTimeUtils {
         return when {
             today == localDueDate -> Res.string(R.string.today_date)
             today.plusDays(1) == localDueDate -> Res.string(R.string.tomorrow_date)
-            else -> dueDate.format(DateTimeFormatter.ofPattern(SHORT_DAY_MONTH_FORMAT))
+            else -> dueDate.format(DateTimeFormatter.ofPattern(getDayOfWeekTextDateTextShortFormat()))
         }
     }
 
-    fun getTaskDueDateFullText(dueDate: OffsetDateTime): String {
+    fun getTaskDueDateLongText(dueDate: OffsetDateTime): String {
         val today = LocalDate.now()
         val localDueDate = dueDate.toLocalDate()
         return when {
             today == localDueDate -> Res.string(R.string.today_date)
             today.plusDays(1) == localDueDate -> Res.string(R.string.tomorrow_date)
-            else -> dueDate.format(DateTimeFormatter.ofPattern(FULL_DAY_MONTH_FORMAT))
+            else -> dueDate.format(DateTimeFormatter.ofPattern(getDayOfWeekTextDateTextLongFormat()))
         }
     }
 
@@ -122,7 +150,7 @@ object DateTimeUtils {
     }
 
     fun getShortDayMonthDateText(offsetDateTime: OffsetDateTime): String =
-        offsetDateTime.format(DateTimeFormatter.ofPattern(SHORT_DAY_MONTH_FORMAT))
+        offsetDateTime.format(DateTimeFormatter.ofPattern(getDayOfWeekTextDateTextShortFormat()))
 
     fun getDueDatePopupEndOfWeekDateText() = if (OffsetDateTime.now().dayOfWeek < DayOfWeek.SATURDAY) {
         Res.string(R.string.due_date_popup_this_saturday)
