@@ -21,7 +21,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OverdueFragment : BaseFragment(R.layout.overdue_fragment) {
     private val viewModel: OverdueViewModel by viewModel()
-    private val tasksAdapter by lazy { TasksAdapter(::onTaskClicked, ::onTaskLongClick) }
+    private val tasksAdapter by lazy { TasksAdapter(::onTaskClicked, ::onTaskLongClick, ::onTaskDoneClick) }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -93,5 +93,9 @@ class OverdueFragment : BaseFragment(R.layout.overdue_fragment) {
         }.run {
             showAtLocation(requireView(), Gravity.NO_GRAVITY, coordinates.x, coordinates.y)
         }
+    }
+
+    private fun onTaskDoneClick(task: Task, isDone: Boolean) {
+        viewModel.updateTaskIsDone(task, isDone)
     }
 }

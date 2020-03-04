@@ -21,7 +21,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ArchiveFragment : BaseFragment(R.layout.archive_fragment) {
     private val viewModel: ArchiveViewModel by viewModel()
-    private val tasksAdapter by lazy { TasksAdapter(::onTaskClicked, ::onTaskLongClick) }
+    private val tasksAdapter by lazy { TasksAdapter(::onTaskClicked, ::onTaskLongClick, ::onTaskDoneClick) }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -94,5 +94,9 @@ class ArchiveFragment : BaseFragment(R.layout.archive_fragment) {
         }.run {
             showAtLocation(requireView(), Gravity.NO_GRAVITY, coordinates.x, coordinates.y)
         }
+    }
+
+    private fun onTaskDoneClick(task: Task, isDone: Boolean) {
+        viewModel.updateTaskIsDone(task, isDone)
     }
 }

@@ -30,7 +30,7 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
     }
 
     private val viewModel: HomeTabViewModel by viewModel()
-    private val tasksAdapter by lazy { TasksAdapter(::onTaskClick, ::onTaskLongClick) }
+    private val tasksAdapter by lazy { TasksAdapter(::onTaskClick, ::onTaskLongClick, ::onTaskDoneClick) }
     private val homeTabType by lazy { requireArguments().getSerializable(ARG_HOME_TAB_TYPE) as HomeTab }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -56,6 +56,10 @@ class HomeTabFragment : BaseFragment(R.layout.tasks_pager_item) {
         }.run {
             showAtLocation(requireView(), Gravity.NO_GRAVITY, coordinates.x, coordinates.y)
         }
+    }
+
+    private fun onTaskDoneClick(task: Task, isDone: Boolean) {
+        viewModel.updateTaskIsDone(task, isDone)
     }
 
     private fun setupViews() {

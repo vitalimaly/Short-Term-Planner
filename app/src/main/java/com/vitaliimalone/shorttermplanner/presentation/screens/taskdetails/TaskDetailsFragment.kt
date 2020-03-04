@@ -19,6 +19,7 @@ import com.vitaliimalone.shorttermplanner.presentation.utils.DateTimeUtils
 import com.vitaliimalone.shorttermplanner.presentation.utils.Res
 import com.vitaliimalone.shorttermplanner.presentation.utils.extensions.clearFocusOnDoneClick
 import com.vitaliimalone.shorttermplanner.presentation.utils.extensions.setOnClickListenerWithPoint
+import com.vitaliimalone.shorttermplanner.presentation.utils.extensions.showStrikeThrough
 import com.vitaliimalone.shorttermplanner.presentation.utils.extensions.trimmed
 import kotlinx.android.synthetic.main.task_details_fragment.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -59,6 +60,7 @@ class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
         }
         taskTitleEditText.setRawInputType(InputType.TYPE_CLASS_TEXT)
         taskTitleEditText.setText(task.title)
+        taskTitleEditText.showStrikeThrough(task.isDone)
         taskTitleEditText.hint = Res.string(R.string.add_task_dialog_title_hint)
         noteEditText.setText(task.description)
         noteEditText.hint = Res.string(R.string.task_details_note_hint)
@@ -94,6 +96,11 @@ class TaskDetailsFragment : BaseFragment(R.layout.task_details_fragment) {
             }.run {
                 showAtLocation(dueClickableView, Gravity.NO_GRAVITY, it.x, it.y)
             }
+        }
+        doneCheckBox.isChecked = task.isDone
+        doneCheckBox.setOnCheckedChangeListener { _, isChecked ->
+            task.isDone = isChecked
+            taskTitleEditText.showStrikeThrough(isChecked)
         }
         drawSubtasksBotLine()
     }

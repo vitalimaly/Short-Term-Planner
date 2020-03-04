@@ -14,6 +14,7 @@ import com.vitaliimalone.shorttermplanner.domain.models.Task
 import com.vitaliimalone.shorttermplanner.presentation.utils.Res
 import com.vitaliimalone.shorttermplanner.presentation.utils.extensions.clearFocusOnDoneClick
 import com.vitaliimalone.shorttermplanner.presentation.utils.extensions.showKeyboard
+import com.vitaliimalone.shorttermplanner.presentation.utils.extensions.showStrikeThrough
 import com.vitaliimalone.shorttermplanner.presentation.utils.extensions.trimmed
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.task_details_add_new_subtasks_list_item.*
@@ -88,6 +89,7 @@ class SubtasksAdapter(
             subtaskTitleEditText.setRawInputType(InputType.TYPE_CLASS_TEXT)
             subtaskTitleEditText.setText(subtaskListItem.subtask.title)
             subtaskTitleEditText.hint = Res.string(R.string.add_subtask_hint)
+            subtaskTitleEditText.showStrikeThrough(subtaskListItem.subtask.isDone)
             if (subtaskListItem.isFocused) {
                 subtaskTitleEditText.post {
                     subtaskTitleEditText.requestFocus()
@@ -101,6 +103,7 @@ class SubtasksAdapter(
             doneCheckBox.isChecked = subtaskListItem.subtask.isDone
             doneCheckBox.setOnCheckedChangeListener { _, isChecked ->
                 subtaskListItem.subtask.isDone = isChecked
+                subtaskTitleEditText.showStrikeThrough(isChecked)
             }
             botLineView.isVisible = subtaskListItems.lastIndex != position
             deleteImageView.setOnClickListener {
