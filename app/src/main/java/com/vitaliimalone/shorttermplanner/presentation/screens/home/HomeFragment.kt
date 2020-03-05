@@ -1,6 +1,7 @@
 package com.vitaliimalone.shorttermplanner.presentation.screens.home
 
 import android.os.Bundle
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
@@ -57,6 +58,14 @@ class HomeFragment : BaseFragment(R.layout.home_fragment) {
                 }
             }
         })
+        dateRangeTextView.addTextChangedListener { text ->
+            if (!text.isNullOrBlank() && dateRangeTextView.lineCount > 1
+                && text.contains(DateTimeUtils.TAB_START_END_DATE_SEPARATOR) && !text.contains("\n")
+            ) {
+                val indexOf = text.indexOf(DateTimeUtils.TAB_START_END_DATE_SEPARATOR) + 1
+                text.replace(indexOf, indexOf + 1, "\n")
+            }
+        }
         dateRangeTextView.text =
             DateTimeUtils.getTabStartEndDateText(HomeTab.values()[tasksViewPager.currentItem])
     }
