@@ -11,7 +11,7 @@
     <string name="snackbar_undo">Отменить</string>
     <string name="snackbar_task_swiped">Перемещено в %s</string>
     <string name="archive">Архив</string>
-    <string name="add_subtask_hint">Добавить подзадачу</string>
+    <string name="add_subtask_hint">Подзадача</string>
     <string name="task_details_toolbar_title">Редактировать задачу</string>
     <string name="task_details_created">Создано %s</string>
     <string name="task_details_modified">Изменено %s</string>
