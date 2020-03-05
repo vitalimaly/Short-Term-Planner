@@ -13,6 +13,8 @@ import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.temporal.TemporalAdjusters
 
 object DateTimeUtils {
+    const val TAB_START_END_DATE_SEPARATOR = "—"
+
     private fun getDateNumbersLongFormat() = when (LanguageUtils.getCurrentLanguage()) {
         Language.ENGLISH -> "MM/dd/yyyy"
         Language.RUSSIAN -> "d.M.yyyy"
@@ -52,7 +54,7 @@ object DateTimeUtils {
             HomeTab.WEEK, HomeTab.MONTH -> {
                 val start = startDate.format(DateTimeFormatter.ofPattern(getDayOfWeekTextDateTextShortFormat()))
                 val end = endDate.format(DateTimeFormatter.ofPattern(getDayOfWeekTextDateTextShortFormat()))
-                "$start - $end"
+                "$start $TAB_START_END_DATE_SEPARATOR $end"
             }
             HomeTab.TODO -> {
                 val start = startDate.format(DateTimeFormatter.ofPattern(getDayOfWeekTextDateTextShortFormat()))
