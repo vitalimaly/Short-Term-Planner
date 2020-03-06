@@ -5,11 +5,11 @@ import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import com.vitaliimalone.shorttermplanner.presentation.utils.LanguageUtils
-import com.vitaliimalone.shorttermplanner.presentation.utils.ThemeUtils
+import com.vitaliimalone.shorttermplanner.presentation.utils.Pref
 
 abstract class BaseActivity(@LayoutRes contentLayoutId: Int) : AppCompatActivity(contentLayoutId) {
     override fun onCreate(savedInstanceState: Bundle?) {
-        ThemeUtils.setTheme(this)
+        setTheme(Pref.themeStyleResId)
         super.onCreate(savedInstanceState)
     }
 
